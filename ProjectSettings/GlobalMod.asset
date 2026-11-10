@@ -1,0 +1,232 @@
+{
+  "_tag": {
+    "type": "ff.global",
+    "resourceId": "Global"
+  },
+  "_entityId": "O3njKQof",
+  "children": [],
+  "prefabVariant": null,
+  "activeValue": {
+    "selfValue": true,
+    "valueTag": "activeValue"
+  },
+  "unlockedValue": {
+    "selfValue": true,
+    "valueTag": "unlockedValue"
+  },
+  "editorLockValue": false,
+  "editorVisibleValue": true,
+  "modId": 39,
+  "DisableReconnect": false,
+  "RecommendStartGameNumber": 9,
+  "EnableHalfwayJoin": false,
+  "EnableHalfwayJoinEffectTime": true,
+  "HalfwayJoinEffectTime": 120,
+  "HalfwayJoinNumber": 5,
+  "HalfwayJoinNumberLimit": true,
+  "EnableFreeQuit": false,
+  "PriorityFullStartMatch": true,
+  "AllowHangUpTime": 20,
+  "EnableRuntimeDynamicNavMesh": false,
+  "EnableHackCheck": false,
+  "modOpen": true,
+  "ecaProps": {
+    "Global": {
+      "PlayerRoundRankingRuleScoreType": [],
+      "PlayerRoundRankingRuleSortType": [],
+      "TeamRoundRankingRuleScoreType": [],
+      "TeamRoundRankingRuleSortType": [],
+      "MVPRuleScoreType": [],
+      "MVPRuleScoreWeight": [],
+      "RoundRankToScoreMap": [],
+      "ScoreTypeToShowResult": [],
+      "TeamRankAccumulateScoreType": 0,
+      "TeamRankAccumulateScoreOrder": 0,
+      "PlayerRankAccumulateScoreType": 0,
+      "PlayerRankAccumulateScoreOrder": 0,
+      "EcoRoundMoney": 0,
+      "EcoKillMoney": 0,
+      "EcoWinMoney": 0,
+      "CoinHudShow": false,
+      "SkyboxEnv": null,
+      "PROP_14790330": null
+    },
+    "Entity": {},
+    "Component": {}
+  },
+  "globalGraphs": [
+    {
+      "fileId": "cnavcxlqlx8-me2ceqp9-72xaicvqnzj",
+      "filePath": "Assets\\Scripts\\Global\\GlobalData\\PlayersShopIcon.fcg",
+      "_tag": {
+        "type": "GFileRefer"
+      },
+      "fileType": "ugcscript"
+    },
+    {
+      "fileId": "1fmiavpxggz-me2b0nyo-5tc30wio6wm",
+      "filePath": "Assets\\Scripts\\Global\\GlobalData\\SpawnPoints.fcg",
+      "_tag": {
+        "type": "GFileRefer"
+      },
+      "fileType": "ugcscript"
+    },
+    {
+      "fileId": "nsusd6o2c5-me2aw50x-2ig8hx43rkg",
+      "filePath": "Assets\\Scripts\\Global\\GlobalData\\TeamPoints.fcg",
+      "_tag": {
+        "type": "GFileRefer"
+      },
+      "fileType": "ugcscript"
+    },
+    {
+      "fileId": "x3acsvan9b-me2akzg0-y6yqrdplgxk",
+      "filePath": "Assets\\Scripts\\Global\\GlobalData\\TeamsAlive.fcg",
+      "_tag": {
+        "type": "GFileRefer"
+      },
+      "fileType": "ugcscript"
+    },
+    {
+      "fileId": "jfx5n6u9w-me2g5xbz-tpa3c0uww8",
+      "filePath": "Assets\\Scripts\\Global\\GlobalManager\\GlobalGameManager.fcg",
+      "_tag": {
+        "type": "GFileRefer"
+      },
+      "fileType": "ugcscript"
+    },
+    {
+      "fileId": "rm7hbd00za-me2j6qtx-baf7xcr3ois",
+      "filePath": "Assets\\Scripts\\Global\\GlobalData\\PlayersWallets.fcg",
+      "_tag": {
+        "type": "GFileRefer"
+      },
+      "fileType": "ugcscript"
+    },
+    {
+      "fileId": "wuejhutkrqa-me2kwv9d-np0e8hv7o5m",
+      "filePath": "Assets\\Scripts\\Global\\GlobalManager\\GlobalPreparationPhaseManager.fcg",
+      "_tag": {
+        "type": "GFileRefer"
+      },
+      "fileType": "ugcscript"
+    },
+    {
+      "fileId": "gfx3sfnn84n-me2nd6ur-y17ei7n6ru",
+      "filePath": "Assets\\Scripts\\Global\\GlobalManager\\GlobalCombatManager.fcg",
+      "_tag": {
+        "type": "GFileRefer"
+      },
+      "fileType": "ugcscript"
+    },
+    {
+      "fileId": "0rapooqlaqr-me6n70q4-24bi9d7g6l0h",
+      "filePath": "Assets\\Scripts\\Global\\GlobalData\\CombatRoundCounter.fcg",
+      "_tag": {
+        "type": "GFileRefer"
+      },
+      "fileType": "ugcscript"
+    },
+    {
+      "fileId": "r7fwtygqdla-me6hwd2h-umai379vxk",
+      "filePath": "Assets\\Scripts\\Global\\GlobalManager\\GlobalUIManager.fcg",
+      "_tag": {
+        "type": "GFileRefer"
+      },
+      "fileType": "ugcscript"
+    },
+    {
+      "fileId": "etv3l5pszri-me85ja3i-1dty3o89iqm",
+      "filePath": "Assets\\Scripts\\Global\\GlobalData\\TeamData.fcg",
+      "_tag": {
+        "type": "GFileRefer"
+      },
+      "fileType": "ugcscript"
+    },
+    {
+      "fileId": "qjrnou8du5-meb1u4p9-vnnbdsdlds",
+      "filePath": "Assets\\Scripts\\Global\\GlobalData\\GlobalSafeZones.fcg",
+      "_tag": {
+        "type": "GFileRefer"
+      },
+      "fileType": "ugcscript"
+    },
+    {
+      "fileId": "l4hvpb8myn-mecccit2-gvl3ozweyse",
+      "filePath": "Assets\\Scripts\\Global\\GlobalData\\TargetAndCombatTimer.fcg",
+      "_tag": {
+        "type": "GFileRefer"
+      },
+      "fileType": "ugcscript"
+    },
+    {
+      "fileId": "gb0jp0fnhpp-megs5lbf-5lq8231omf6",
+      "filePath": "Assets\\Scripts\\Global\\GlobalData\\PlayersTutorial.fcg",
+      "_tag": {
+        "type": "GFileRefer"
+      },
+      "fileType": "ugcscript"
+    },
+    {
+      "fileId": "nb8xp5x38vc-mejszjtm-f4ka2obqlsd",
+      "filePath": "Assets\\Scripts\\Global\\GlobalManager\\GlobalSoundManager.fcg",
+      "_tag": {
+        "type": "GFileRefer"
+      },
+      "fileType": "ugcscript"
+    },
+    {
+      "fileId": "k1sv4g29fd-memoc0k1-uqat5bahjo",
+      "filePath": "Assets\\Scripts\\Global\\GlobalManager\\GlobalAnimationManager.fcg",
+      "_tag": {
+        "type": "GFileRefer"
+      },
+      "fileType": "ugcscript"
+    },
+    {
+      "fileId": "iatnhag320e-meqzuj0p-dr0g5tr1b7j",
+      "filePath": "Assets\\Scripts\\Global\\GlobalData\\PlayerData.fcg",
+      "_tag": {
+        "type": "GFileRefer"
+      },
+      "fileType": "ugcscript"
+    },
+    {
+      "fileId": "9whfpoly9mv-mdzp477p-hmfd0qmcftp",
+      "filePath": "Assets\\Scripts\\Shop\\ShopIconHUD.fcg",
+      "_tag": {
+        "type": "GFileRefer"
+      },
+      "fileType": "ugcscript"
+    },
+    {
+      "fileId": "9s7hfnckuq5-mgua64e2-mf3t4rro7wg",
+      "filePath": "Assets\\Scripts\\Global\\GlobalConfig.fcg",
+      "_tag": {
+        "type": "GFileRefer"
+      },
+      "fileType": "ugcscript"
+    },
+    {
+      "fileId": "ax5nzjfrh6-mh00yfd9-yj9003he08o",
+      "filePath": "Assets\\Scripts\\Global\\GlobalManager\\GlobalLeaderboard.fcg",
+      "_tag": {
+        "type": "GFileRefer"
+      },
+      "fileType": "ugcscript"
+    },
+    {
+      "fileId": "c5pg7l5gsfw-me6yh0jh-ne3z37r2ig",
+      "filePath": "Assets\\Scripts\\Test.eca",
+      "_tag": {
+        "type": "GFileRefer"
+      },
+      "fileType": "eca"
+    }
+  ],
+  "_entityName": "T_43_YU_WS_MODULE_GLOBAL",
+  "ReduceLogicFrame": true,
+  "CustomMatchResult": true,
+  "showSwitch": false
+}
+//"{FE:{"v":"1.14.3883376","c":{"FF":5001},"s":100}

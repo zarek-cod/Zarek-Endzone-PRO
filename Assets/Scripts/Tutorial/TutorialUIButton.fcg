@@ -1,0 +1,11 @@
+import "StdLibrary.fcc" as StdLib
+import "EditorGenLib.fcc" as EditorLib
+import "Hud.fcc" as Hud
+import "../Global/GlobalData/PlayersTutorial.fcg" as PlayersTutorial
+graph TutorialUIButton {
+    //Executed when entity is created
+    event OnPressed(player entity<Player>) {
+        // LogError("Pressed")
+        globalEntity<PlayersTutorial>.ChangeScene(player) // Change the scene of the player's tutorial UI
+    }
+}

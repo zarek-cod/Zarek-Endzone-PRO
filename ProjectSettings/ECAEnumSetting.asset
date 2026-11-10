@@ -1,0 +1,35 @@
+{
+  "_tag": {
+    "type": "ECAEnumSetting"
+  },
+  "_entityId": "RxYHnl8B",
+  "enumCount": 0,
+  "enumDefines": {
+    "CustomEnum35729298": {
+      "label": "SCORING_TYPE",
+      "key": "CustomEnum35729298",
+      "type": "Int",
+      "info": [
+        {
+          "label": "BOOYAH_COUNT",
+          "key": "E44043999",
+          "value": 0,
+          "type": "Int"
+        },
+        {
+          "label": "ESPORT",
+          "key": "E62132347",
+          "value": 1,
+          "type": "Int"
+        }
+      ],
+      "isCustom": true,
+      "isDirty": false
+    }
+  },
+  "enumNameMap": {
+    "SCORING_TYPE": "CustomEnum35729298"
+  },
+  "children": []
+}
+//"{FE:{"v":"1.14.3883376","c":{"FF":5001},"s":100}

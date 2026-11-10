@@ -1,0 +1,189 @@
+/*
+Global Safe Zones Manager
+Handles all the necessary actions related to safe zones in the game.
+*/
+import "StdLibrary.fcc" as StdLib
+import "EditorGenLib.fcc" as EditorLib
+import "Player.fcc" as Player
+import "LevelObject.fcc" as LevelObject
+import "SafeZone.fcc" as SafeZone
+import "Map.fcc" as Map
+import "Math.fcc" as Math
+import "List.fcc" as List
+import "Time.fcc" as Time
+import "AI.fcc" as AI
+import "../GlobalManager/GlobalGameManager.fcg" as GlobalGameManager
+import "../GlobalManager/GlobalUIManager.fcg" as GlobalUIManager
+import "Workflow.fcc" as Workflow
+graph GlobalSafeZones {
+    safeZonePrepPhaseDmg int = 5
+    safeZonePhase1Dmg int = 30 
+    safeZonePhase2Dmg int = 45 
+    safeZonePhase3Dmg int = 60 
+    safeZoneFinalDmg int = 80 
+    safeZoneStartPoints Map<int, Vector3> = Map<int, Vector3>{}
+    safeZoneEndPoints Map<int, List<entity<Entity>>> = Map<int, List<entity<Entity>>>{}
+    safeZoneInitRadius Map<int, float> = Map<int, float>{}
+    safeZoneStartShrinkTimes Map<int, int> = Map<int, int>{}
+    safeZonesShrinkDuration Map<int, int> = Map<int, int>{}
+    safeZonesEndRadius Map<int, float> = Map<int, float>{}
+    lastSafeZoneDuration int = 30
+    reduceRadiusWhenMoving float = 5.0
+    currentEndPoint entity<Transform> = nil
+    // Init data when game starts
+    event OnGameStart() {
+        safeZoneInitRadius[0] = 15.0
+        safeZoneInitRadius[1] = 20.0
+        safeZoneInitRadius[2] = 40.0
+        safeZoneInitRadius[3] = 40.0
+        safeZoneInitRadius[4] = 40.0
+        safeZoneInitRadius[5] = 40.0
+        safeZoneInitRadius[6] = 50.0
+        safeZoneInitRadius[7] = 38.0
+        safeZoneInitRadius[8] = 30.0
+        safeZoneInitRadius[9] = 35.0
+        safeZoneInitRadius[10] = 30.0
+        safeZonesEndRadius[0] = 12.0
+        safeZonesEndRadius[1] = 17.0
+        safeZonesEndRadius[2] = 20.0
+        safeZonesEndRadius[3] = 20.0
+        safeZonesEndRadius[4] = 20.0
+        safeZonesEndRadius[5] = 20.0
+        safeZonesEndRadius[6] = 25.0
+        safeZonesEndRadius[7] = 20.0
+        safeZonesEndRadius[8] = 20.0
+        safeZonesEndRadius[9] = 20.0
+        safeZonesEndRadius[10] = 20.0
+        SetStartShrinkTime(globalEntity<GlobalGameManager>.prepPhaseDuration)
+        safeZonesShrinkDuration[0] = 60
+        safeZonesShrinkDuration[1] = 60 
+        safeZonesShrinkDuration[2] = 60 
+        safeZonesShrinkDuration[3] = 60 
+        safeZonesShrinkDuration[4] = 60 
+        safeZonesShrinkDuration[5] = 60
+        safeZonesShrinkDuration[6] = 60
+        safeZonesShrinkDuration[7] = 60
+        safeZonesShrinkDuration[8] = 60
+        safeZonesShrinkDuration[9] = 60
+        safeZonesShrinkDuration[10] = 60
+        safeZoneStartPoints[0] = (EResSceneNewScene.StartPos1 as entity<Entity>)<Transform>.Position
+        safeZoneStartPoints[1] = (EResSceneNewScene.StartPos2 as entity<Entity>)<Transform>.Position
+        safeZoneStartPoints[2] = (EResSceneNewScene.StartPos3 as entity<Entity>)<Transform>.Position
+        safeZoneStartPoints[3] = (EResSceneNewScene.StartPos4 as entity<Entity>)<Transform>.Position
+        safeZoneStartPoints[4] = (EResSceneNewScene.StartPos5 as entity<Entity>)<Transform>.Position
+        safeZoneStartPoints[5] = (EResSceneNewScene.StartPos6 as entity<Entity>)<Transform>.Position
+        safeZoneStartPoints[6] = (EResSceneNewScene.StartPos7 as entity<Entity>)<Transform>.Position
+        safeZoneStartPoints[7] = (EResSceneNewScene.StartPos8 as entity<Entity>)<Transform>.Position
+        safeZoneStartPoints[8] = (EResSceneNewScene.StartPos9 as entity<Entity>)<Transform>.Position
+        safeZoneStartPoints[9] = (EResSceneNewScene.StartPos10 as entity<Entity>)<Transform>.Position
+        safeZoneStartPoints[10] = (EResSceneNewScene.StartPos11 as entity<Entity>)<Transform>.Position
+        safeZoneEndPoints[0] = GetChildren(EResSceneNewScene.EndPos1List as entity<Entity>)
+        safeZoneEndPoints[1] = GetChildren(EResSceneNewScene.EndPos2List as entity<Entity>)
+        safeZoneEndPoints[2] = GetChildren(EResSceneNewScene.EndPos3List as entity<Entity>)
+        safeZoneEndPoints[3] = GetChildren(EResSceneNewScene.EndPos4List as entity<Entity>)
+        safeZoneEndPoints[4] = GetChildren(EResSceneNewScene.EndPos5List as entity<Entity>)
+        safeZoneEndPoints[5] = GetChildren(EResSceneNewScene.EndPos6List as entity<Entity>)
+        safeZoneEndPoints[6] = GetChildren(EResSceneNewScene.EndPos7List as entity<Entity>)
+        safeZoneEndPoints[7] = GetChildren(EResSceneNewScene.EndPos8List as entity<Entity>)
+        safeZoneEndPoints[8] = GetChildren(EResSceneNewScene.EndPos9List as entity<Entity>)
+        safeZoneEndPoints[9] = GetChildren(EResSceneNewScene.EndPos10List as entity<Entity>)
+        safeZoneEndPoints[10] = GetChildren(EResSceneNewScene.EndPos11List as entity<Entity>)
+    }
+
+    // Update safe zone start shrink time when prep phase duration is changed
+    func SetStartShrinkTime(prepDuration int){
+        safeZoneStartShrinkTimes[0] = globalEntity<GlobalGameManager>.prepPhaseDuration + 10 
+        safeZoneStartShrinkTimes[1] = globalEntity<GlobalGameManager>.prepPhaseDuration + 10 
+        safeZoneStartShrinkTimes[2] = globalEntity<GlobalGameManager>.prepPhaseDuration + 15 
+        safeZoneStartShrinkTimes[3] = globalEntity<GlobalGameManager>.prepPhaseDuration + 15
+        safeZoneStartShrinkTimes[4] = globalEntity<GlobalGameManager>.prepPhaseDuration + 15
+        safeZoneStartShrinkTimes[5] = globalEntity<GlobalGameManager>.prepPhaseDuration + 15
+        safeZoneStartShrinkTimes[6] = globalEntity<GlobalGameManager>.prepPhaseDuration + 15
+        safeZoneStartShrinkTimes[7] = globalEntity<GlobalGameManager>.prepPhaseDuration + 15
+        safeZoneStartShrinkTimes[8] = globalEntity<GlobalGameManager>.prepPhaseDuration + 10 
+        safeZoneStartShrinkTimes[9] = globalEntity<GlobalGameManager>.prepPhaseDuration + 10
+        safeZoneStartShrinkTimes[10] = globalEntity<GlobalGameManager>.prepPhaseDuration + 10
+    }
+
+    /* Open a specific safe zone (DEPRECATED)
+    @param safezoneId The ID of the safe zone to open, which goes with the respective spawn point id
+    */
+    // async func OpenSafeZone(safezoneId int) {
+    //     // if ContainKey(safeZonesDict, safezoneId) {
+    //     //     SetActive(safeZonesDict[safezoneId], true) // Activate the safe zone
+    //     //     safeZonesDict[safezoneId]<Visibility>.IsVisible = true // Set safe zone's visibility to true
+    //     //     safeZonesDict[safezoneId]<SafeZone>.DamageValue = 40 // Set the damage to 40
+    //     // } else {
+    //     //     // Log an error if the safe zone ID is not found
+    //     //     LogError("Safe zone not found: " + safezoneId)
+    //     //     return
+    //     // }
+
+    //     // // Check to disable all other safe zones
+    //     // // Including inactivate other safe zones, set their damage value to 0 (to make sure no overlap damage between safe zones) and visibility to false
+    //     // for index, safeZone in safeZonesDict {
+    //     //     if index != safezoneId {
+    //     //         SetActive(safeZone, false)
+    //     //         safeZonesDict[index]<SafeZone>.DamageValue = 0
+    //     //         safeZonesDict[index]<Visibility>.IsVisible = false
+    //     //     }
+    //     // }
+    // }
+
+    // func SetSafeZoneStatus(status bool) {
+    //     SetActive(mainSafeZone, status)
+    // }
+
+    // func MoveSafeZoneToIndex(index int) {
+    //     LogError("Safe Zone Details before : " + mainSafeZone<Transform>.Position + ", " + mainSafeZone<SafeZone>.StartRadius + ", " + mainSafeZone<SafeZone>.EndRadius)
+    //     mainSafeZone<Transform>.Position = safeZoneStartPoints[index]
+    //     var randomEndPoint = RandomInt(0, List.Length(safeZoneEndPoints[index]))
+    //     var endPointPosition = safeZoneEndPoints[index][randomEndPoint] as entity<Transform>
+    //     mainSafeZoneEnd<Transform>.Position = endPointPosition<Transform>.Position
+    //     // mainSafeZone<SafeZone>.StartRadius = safeZoneInitRadius[index]
+    //     // mainSafeZone<SafeZone>.DamageValue = 40
+
+    //     LogError("Safe Zone Details after: " + mainSafeZone<Transform>.Position + ", " + mainSafeZone<SafeZone>.StartRadius + ", " + mainSafeZone<SafeZone>.EndRadius + " " + mainSafeZoneEnd<Transform>.Position + " " + endPointPosition)
+    //     // mainSafeZone<SafeZone>.ShrinkDuration = safeZonesShrinkDuration[index]
+    //     // mainSafeZone<SafeZone>.ShrinkStartTime = safeZoneStartShrinkTimes[index]
+    //     // mainSafeZone<SafeZone>.ShrinkStartTime = 20000
+    //     // mainSafeZone<SafeZone>.DamageValue = safeZoneDamageValues[index]
+    //     // mainSafeZone<SafeZone>.DamageTimeInterval = 2000
+    //     // mainSafeZone<SafeZone>.EndRadius = 0
+    // }
+
+    /*
+    Activate a specific safe zone
+    @param index The index of the safe zone to activate, which goes with the respective spawn point id
+    */
+    async func ActivateSafeZone(index int, phase entity<Phase>){
+        if phase<Phase>.Index == EPhase.__Before6Combat__ {
+            LogWarning("Safe Zone activated for index: " + index)
+            DisableSafeZone()
+            EnableSafeZone(safeZoneStartPoints[index], safeZoneInitRadius[index], 90, safeZonesShrinkDuration[index], safeZonePrepPhaseDmg)
+            LogWarning("Safe Zone starts to shrink in " + safeZoneStartShrinkTimes[index] + "secs")
+        } else if phase<Phase>.Index == EPhase.Combat {
+            DisableSafeZone()
+            EnableMovingSafeZone(safeZoneStartPoints[index], safeZoneStartPoints[index], safeZoneInitRadius[index], safeZonesEndRadius[index], 33, safeZonePhase1Dmg)
+            globalEntity<GlobalUIManager>.ActivateBorderShrinkingNotification()
+            LogWarning("Safe Zone phase 1: " + safeZoneStartPoints[index] + " to " + safeZoneStartPoints[index] + " with radius from " + safeZoneInitRadius[index] + " to " + safeZonesEndRadius[index] + " in duration 5")
+        } else if phase<Phase>.Index == EPhase.MovingSafeZone {
+            var randomMovingPoint = RandomInt(0, List.Length(safeZoneEndPoints[index]))
+            var endPointPosition = safeZoneEndPoints[index][randomMovingPoint] as entity<Transform>
+            currentEndPoint = endPointPosition
+            DisableSafeZone()
+            EnableMovingSafeZone(safeZoneStartPoints[index], endPointPosition<Transform>.Position, safeZonesEndRadius[index], safeZonesEndRadius[index] - reduceRadiusWhenMoving, safeZonesShrinkDuration[index], safeZonePhase2Dmg)
+            globalEntity<GlobalUIManager>.ActivateBorderMovingNotification()
+            LogWarning("Safe Zone phase 2: " + safeZoneStartPoints[index] + " to " + endPointPosition<Transform>.Position + " with radius from " + safeZonesEndRadius[index] + " to " + (safeZonesEndRadius[index] - reduceRadiusWhenMoving) + " in duration " + safeZonesShrinkDuration[index])
+        } else if phase<Phase>.Index == EPhase.LastSafeZone {
+            DisableSafeZone()
+            EnableMovingSafeZone(currentEndPoint<Transform>.Position, currentEndPoint<Transform>.Position, safeZonesEndRadius[index] - reduceRadiusWhenMoving, 0, lastSafeZoneDuration, safeZonePhase3Dmg)
+            globalEntity<GlobalUIManager>.ActivateBorderShrinkingNotification()
+            LogWarning("Safe Zone phase 3: " + currentEndPoint<Transform>.Position + " to " + currentEndPoint<Transform>.Position + " with radius from " + (safeZonesEndRadius[index] - reduceRadiusWhenMoving) + " to " + 0 + " in duration " + safeZonesShrinkDuration[index])
+        } else if phase<Phase>.Index == EPhase.SuddenDeath {
+            DisableSafeZone()
+            EnableMovingSafeZone(currentEndPoint<Transform>.Position, currentEndPoint<Transform>.Position, 0, 0, 0, safeZoneFinalDmg)
+            LogWarning("Safe Zone phase 4: " + currentEndPoint<Transform>.Position + " to " + currentEndPoint<Transform>.Position + " with radius from " + 0 + " to " + 0 + " in duration " + 0)
+        }
+    }
+}

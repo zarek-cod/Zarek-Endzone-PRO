@@ -1,0 +1,118 @@
+{
+  "_tag": {
+    "type": "ECATupleSettingAsset"
+  },
+  "_entityId": "QwcdgiS4",
+  "tupleDefines": {
+    "GKpznyiN_Value": {
+      "label": "Points Rank_Value",
+      "name": "GKpznyiN_Value",
+      "info": [
+        {
+          "label": "Value",
+          "name": "Value",
+          "type": "Int",
+          "index": 0
+        },
+        {
+          "label": "Win Rate",
+          "name": "Win Rate",
+          "type": "Float",
+          "index": 1
+        },
+        {
+          "label": "KD",
+          "name": "KD",
+          "type": "Float",
+          "index": 2
+        },
+        {
+          "label": "temp",
+          "name": "temp",
+          "type": "Int",
+          "index": 3
+        }
+      ]
+    },
+    "GKpznyiN": {
+      "label": "Points Rank",
+      "name": "GKpznyiN",
+      "info": [
+        {
+          "label": "Rank",
+          "name": "Rank",
+          "type": "Int",
+          "index": 0
+        },
+        {
+          "label": "Key",
+          "name": "Key",
+          "type": "String",
+          "index": 1
+        },
+        {
+          "label": "Value",
+          "name": "Value",
+          "type": "GKpznyiN_Value",
+          "index": 2
+        }
+      ]
+    },
+    "qXHGzJK2": {
+      "label": "Players Data",
+      "name": "qXHGzJK2",
+      "info": [
+        {
+          "label": "Kill",
+          "name": "Kill",
+          "type": "Int",
+          "index": 0
+        },
+        {
+          "label": "Death",
+          "name": "Death",
+          "type": "Int",
+          "index": 1
+        },
+        {
+          "label": "Matches Played",
+          "name": "Matches Played",
+          "type": "Int",
+          "index": 2
+        },
+        {
+          "label": "Win Matches",
+          "name": "Win Matches",
+          "type": "Int",
+          "index": 3
+        }
+      ]
+    },
+    "PIWbVxmd": {
+      "label": "Statistical Data",
+      "name": "PIWbVxmd",
+      "info": [
+        {
+          "label": "HIGHEST_MATCH_ELIM",
+          "name": "HIGHEST_MATCH_ELIM",
+          "type": "Int",
+          "index": 0
+        },
+        {
+          "label": "HEADSHOTS",
+          "name": "HEADSHOTS",
+          "type": "Int",
+          "index": 1
+        },
+        {
+          "label": "AVG_DMG_PER_MATCH",
+          "name": "AVG_DMG_PER_MATCH",
+          "type": "Int",
+          "index": 2
+        }
+      ]
+    }
+  },
+  "children": []
+}
+//"{FE:{"v":"1.19.4689915","c":{"FF":5001},"s":100}

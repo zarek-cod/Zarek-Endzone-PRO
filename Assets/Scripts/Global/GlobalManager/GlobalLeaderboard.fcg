@@ -1,0 +1,1256 @@
+/*
+    GlobalLeaderboard.fcg
+    This file contains the GlobalLeaderboard class, which is used to manage the leaderboard system in the game.
+    It handles the initialization and updating of the leaderboard UI, as well as the sorting and updating of the leaderboard data.
+    It also handles the adding and removing of players from the leaderboard, as well as the clearing of the leaderboard data.
+    It also handles the retrieval of the leaderboard data for a specific player.
+    It also handles the setting of the leaderboard data for a specific player.
+*/
+
+/*
+    Imports
+*/
+import "StdLibrary.fcc" as StdLib
+import "EditorGenLib.fcc" as EditorLib
+import "Player.fcc" as Player
+import "Database.fcc" as Database
+import "Workflow.fcc" as Workflow
+import "Convert.fcc" as Convert
+import "Math.fcc" as Math
+import "List.fcc" as List
+import "Hud.fcc" as Hud
+import "../GlobalData/PlayerData.fcg" as PlayerData
+import "../../Player/PlayerUI.fcg" as PlayerUI
+import "Avatar.fcc" as Avatar
+import "Map.fcc" as Map
+/*
+    Graph
+*/
+graph GlobalLeaderboard {
+    // ================================================================================================
+    // PROPERTIES - Data Storage and UI References
+    // ================================================================================================
+    
+    // Stores player statistics for all players in the current game session.
+    // Data format: [rankingPoint, winRate, kd, temp(ignored), kills, matchesPlayed, winMatches, 
+    //               highestMatchElimination, headshots, averageDamagePerMatch]
+    // Index 0: Ranking point (calculated score for leaderboard sorting)
+    // Index 1: Temporary value (unused, should be skipped)
+    // Index 2: Total kills
+    // Index 3: Total deaths
+    // Index 4: Total matches played
+    // Index 5: Total win matches
+    // Index 6: Highest match elimination count
+    // Index 7: Total headshots
+    // Index 8: Average damage per match
+    playerData Map<entity<Player>, List<int>> = Map<entity<Player>, List<int>>{}
+
+    // Stores player win rate and KD ratio for all players in the current game session.
+    // Data format: [winRate, kd]
+    // Index 0: Win rate percentage
+    // Index 1: Kill/Death ratio
+    playerWinRateAndKDMap Map<entity<Player>, List<float>> = Map<entity<Player>, List<float>>{}
+    // Tracks the total number of players currently in the game session
+    playersInGameCount int = 0
+
+    // ================================================================================================
+    // UI References - Ranking Leaderboard
+    // ================================================================================================
+    
+    // Main UI container for the ranking leaderboard (displays players sorted by ranking points)
+    leaderBoardRankingUI entity<CustomUI> = nil
+    // Prefab widget template for displaying individual player data in the ranking leaderboard
+    playerDataPrefab entity<UIWidget> = nil
+    // Layout container that holds all player entries in the ranking leaderboard
+    playerLayout entity<UIWidget> = nil
+
+    // ================================================================================================
+    // UI References - Highest Match Elimination Leaderboard (update in 11/11)
+    // ================================================================================================
+    
+    // Main UI container for the highest match elimination leaderboard (displays players sorted by highest match elimination)
+    leaderBoardHMEUI entity<CustomUI> = nil
+    // Prefab widget template for displaying individual player data in the highest match elimination leaderboard
+    hmePlayerDataPrefab entity<UIWidget> = nil
+    // Layout container that holds all player entries in the highest match elimination leaderboard
+    hmePlayerLayout entity<UIWidget> = nil
+
+    // ================================================================================================
+    // UI References - Average Damage Per Match Leaderboard (update in 11/11)
+    // ================================================================================================
+    
+    // Main UI container for the average damage per match leaderboard (displays players sorted by average damage per match)
+    leaderBoardADMUI entity<CustomUI> = nil
+    // Prefab widget template for displaying individual player data in the average damage per match leaderboard
+    admPlayerDataPrefab entity<UIWidget> = nil
+    // Layout container that holds all player entries in the average damage per match leaderboard
+    admPlayerLayout entity<UIWidget> = nil
+
+    // ================================================================================================
+    // UI References - Headshots Leaderboard
+    // ================================================================================================
+    
+    // Main UI container for the headshots leaderboard (displays players sorted by total headshots)
+    leaderBoardHeadshotsUI entity<CustomUI> = nil
+    // Prefab widget template for displaying individual player data in the headshots leaderboard
+    headshotsPlayerDataPrefab entity<UIWidget> = nil
+    // Layout container that holds all player entries in the headshots leaderboard
+    headshotsPlayerLayout entity<UIWidget> = nil
+
+    // ================================================================================================
+    // UI References - Personal Statistics
+    // ================================================================================================
+    
+    // Maps player UUIDs to their personal statistics UI instances
+    // Each player gets their own personal stats display showing detailed game statistics
+    personalStatsUIMap Map<UUID, entity<CustomUI>> = Map<UUID, entity<CustomUI>>{}
+
+    // ================================================================================================
+    // UI INITIALIZATION AND UPDATE FUNCTIONS
+    // ================================================================================================
+    
+    /*
+    Initializes all leaderboard UI elements in the game world.
+    
+    Creates and configures four leaderboard displays:
+    1. Ranking Leaderboard - Main leaderboard sorted by ranking points
+    2. Highest Match Elimination Leaderboard - Shows players sorted by highest match elimination
+    3. Average Damage Per Match Leaderboard - Shows players sorted by average damage per match
+    4. Headshots Leaderboard - Shows players sorted by total headshots
+    
+    For each leaderboard, this function:
+    - Creates the CustomUI instance and positions it in the world
+    - Sets appropriate scale and rotation
+    - Retrieves and stores references to player data prefabs and layout containers
+    - Sets localized titles for single-column leaderboards
+    All leaderboard UI are set up with nil in player argument to allow one UI entity for all players
+    */
+    func InitUI() {
+        // Get the leaderboard positions from level objects in the scene
+        var _rankLb = EResSceneNewScene.RankLB as entity<Entity>
+        var _hmeLb = EResSceneNewScene.HMELB as entity<Entity>
+        var _admLb = EResSceneNewScene.ADMLB as entity<Entity>
+        var _headshotsLb = EResSceneNewScene.HeadshotLB as entity<Entity>
+        var _mainScale = Vector3{5, 5, 5}
+        LogError("Ranking leaderboard position: " + ToString(_rankLb<Transform>.Position))
+        LogError("Highest match elimination leaderboard position: " + ToString(_hmeLb<Transform>.Position))
+        LogError("Average damage per match leaderboard position: " + ToString(_admLb<Transform>.Position))
+        LogError("Headshots leaderboard position: " + ToString(_headshotsLb<Transform>.Position))
+        // Ranking leaderboard UI
+        CreateCustomUI(out var oLeaderBoardRankingUI, nil, EResUI.Leaderboard)
+        oLeaderBoardRankingUI<CustomUI>.InScene = true
+        oLeaderBoardRankingUI<CustomUI>.WorldPosition = _rankLb<Transform>.Position
+        oLeaderBoardRankingUI<CustomUI>.Scale = _mainScale
+        leaderBoardRankingUI= oLeaderBoardRankingUI
+        playerDataPrefab = GetWidgetFromCustomUI(nil, oLeaderBoardRankingUI, EResUILeaderboard.Player)
+        playerLayout = GetWidgetFromCustomUI(nil, oLeaderBoardRankingUI, EResUILeaderboard.PlayerLayout)
+
+        // Highest match elimination leaderboard UI
+        CreateCustomUI(out var oLeaderBoardHMEUI, nil, EResUI.LeaderboardOneColumn)
+        oLeaderBoardHMEUI<CustomUI>.InScene = true
+        oLeaderBoardHMEUI<CustomUI>.WorldPosition = _hmeLb<Transform>.Position
+        oLeaderBoardHMEUI<CustomUI>.Scale = _mainScale
+        // The rotation gets from the scene, this should be adjusted manually if needed
+        oLeaderBoardHMEUI<CustomUI>.Rotation = Vector3{0, 90, 0}
+        leaderBoardHMEUI = oLeaderBoardHMEUI
+        var titleWidget = GetWidgetFromCustomUI(nil, oLeaderBoardHMEUI, EResUILeaderboardOneColumn.ColumnTitle)
+        titleWidget<UIWidgetLabel>.Content = LocString{"LEADERBOARD_HIGHESTMATCHELIM", {}}
+        hmePlayerDataPrefab = GetWidgetFromCustomUI(nil, oLeaderBoardHMEUI, EResUILeaderboardOneColumn.Player)
+        hmePlayerLayout = GetWidgetFromCustomUI(nil, oLeaderBoardHMEUI, EResUILeaderboardOneColumn.PlayerLayout)
+
+        // Average damage per match leaderboard UI
+        CreateCustomUI(out var oLeaderBoardADMUI, nil, EResUI.LeaderboardOneColumn)
+        oLeaderBoardADMUI<CustomUI>.InScene = true
+        oLeaderBoardADMUI<CustomUI>.WorldPosition = _admLb<Transform>.Position
+        oLeaderBoardADMUI<CustomUI>.Scale = _mainScale
+        // The rotation gets from the scene, this should be adjusted manually if needed
+        oLeaderBoardADMUI<CustomUI>.Rotation = Vector3{0, -90, 0}
+        leaderBoardADMUI = oLeaderBoardADMUI
+        titleWidget = GetWidgetFromCustomUI(nil, oLeaderBoardADMUI, EResUILeaderboardOneColumn.ColumnTitle)
+        titleWidget<UIWidgetLabel>.Content = LocString{"LEADERBOARD_DMG_PER_MATCH", {}}
+        admPlayerDataPrefab = GetWidgetFromCustomUI(nil, oLeaderBoardADMUI, EResUILeaderboardOneColumn.Player)
+        admPlayerLayout = GetWidgetFromCustomUI(nil, oLeaderBoardADMUI, EResUILeaderboardOneColumn.PlayerLayout)
+
+        // Headshots leaderboard UI
+        CreateCustomUI(out var oLeaderBoardHeadshotsUI, nil, EResUI.LeaderboardOneColumn)
+        oLeaderBoardHeadshotsUI<CustomUI>.InScene = true
+        oLeaderBoardHeadshotsUI<CustomUI>.WorldPosition = _headshotsLb<Transform>.Position
+        oLeaderBoardHeadshotsUI<CustomUI>.Scale = _mainScale
+        // The rotation gets from the scene, this should be adjusted manually if needed
+        oLeaderBoardHeadshotsUI<CustomUI>.Rotation = Vector3{0, 180, 0}
+        leaderBoardHeadshotsUI = oLeaderBoardHeadshotsUI
+        titleWidget = GetWidgetFromCustomUI(nil, oLeaderBoardHeadshotsUI, EResUILeaderboardOneColumn.ColumnTitle)
+        titleWidget<UIWidgetLabel>.Content = LocString{"LEADERBOARD_HEADSHOTS", {}}
+        headshotsPlayerDataPrefab = GetWidgetFromCustomUI(nil, oLeaderBoardHeadshotsUI, EResUILeaderboardOneColumn.Player)
+        headshotsPlayerLayout = GetWidgetFromCustomUI(nil, oLeaderBoardHeadshotsUI, EResUILeaderboardOneColumn.PlayerLayout)
+    }
+
+    /*
+    Updates all leaderboard UI displays with the latest player data.
+    
+    This function refreshes all four leaderboard views:
+    - Ranking leaderboard (sorted by ranking points)
+    - Highest match elimination leaderboard (sorted by highest match elimination)
+    - Average damage per match leaderboard (sorted by average damage per match)
+    - Headshots leaderboard (sorted by total headshots)
+    
+    Call this function whenever player data changes to ensure all leaderboards
+    reflect the current game state.
+    */
+    func UpdateAllLeaderboardsUI(){
+        UpdateRankingLeaderboardUI()
+        UpdateHMELeaderboardUI()
+        UpdateADMLeaderboardUI()
+        UpdateHeadshotsLeaderboardUI()
+    }
+
+    /*
+    Sorts players by their ranking points in descending order (highest first).
+    
+    Parameters:
+    - playerData: Map containing player entities and their statistics
+    
+    Returns:
+    - List of player entities sorted by ranking point (index 0 in player data)
+    
+    Uses a selection sort algorithm to find the player with the highest ranking
+    point at each iteration and adds them to the sorted list.
+    */
+    func SortPlayerViaRankingPoint(playerData Map<entity<Player>, List<int>>) List<entity<Player>> {
+        var sortedPlayers List<entity<Player>> = List<entity<Player>>{}
+        var initPlayerList List<entity<Player>> = List<entity<Player>>{}
+        for player, data in playerData {
+            Append(initPlayerList, player)
+        }
+        while List.Length(initPlayerList) > 0 {
+            var highestPlayer = initPlayerList[0]
+            for index, player in initPlayerList {
+                if playerData[player][0] > playerData[highestPlayer][0] { // Sort by ranking point
+                    highestPlayer = player
+                }
+            }
+            List.Remove(initPlayerList, highestPlayer)
+            Append(sortedPlayers, highestPlayer)
+        }
+        return sortedPlayers
+    }
+
+    /*
+    Sorts players by their highest match elimination in descending order (highest HME first).
+    
+    Parameters:
+    - playerData: Map containing player entities and their statistics
+    
+    Returns:
+    - List of player entities sorted by KD ratio (index 2 in player data)
+    
+    Uses a selection sort algorithm to find the player with the highest HME
+    ratio at each iteration and adds them to the sorted list.
+    */
+    func SortPlayerDataViaHME(playerData Map<entity<Player>, List<int>>) List<entity<Player>> {
+        var sortedPlayers List<entity<Player>> = List<entity<Player>>{}
+        var initPlayerList List<entity<Player>> = List<entity<Player>>{}
+        for player, data in playerData {
+            Append(initPlayerList, player)
+        }
+        while List.Length(initPlayerList) > 0 {
+            var highestPlayer = initPlayerList[0]
+            for index, player in initPlayerList {
+                if playerData[player][6] > playerData[highestPlayer][6] { // Sort by HME
+                    highestPlayer = player
+                }
+            }
+            List.Remove(initPlayerList, highestPlayer)
+            Append(sortedPlayers, highestPlayer)
+        }
+        return sortedPlayers
+    }
+
+    /*
+    Sorts players by their average damage per match in descending order (highest ADM first).
+    
+    Parameters:
+    - playerData: Map containing player entities and their statistics
+    
+    Returns:
+    - List of player entities sorted by win rate (index 1 in player data)
+    
+    Uses a selection sort algorithm to find the player with the highest ADM
+    at each iteration and adds them to the sorted list.
+    */
+    func SortPlayerDataViaADM(playerData Map<entity<Player>, List<int>>) List<entity<Player>> {
+        var sortedPlayers List<entity<Player>> = List<entity<Player>>{}
+        var initPlayerList List<entity<Player>> = List<entity<Player>>{}
+        for player, data in playerData {
+            Append(initPlayerList, player)
+        }
+        while List.Length(initPlayerList) > 0 {
+            var highestPlayer = initPlayerList[0]
+            for index, player in initPlayerList {
+                if playerData[player][8] > playerData[highestPlayer][8] {
+                    highestPlayer = player
+                }
+            }
+            List.Remove(initPlayerList, highestPlayer)
+            Append(sortedPlayers, highestPlayer)
+        }
+        return sortedPlayers
+    }
+
+    /*
+    Sorts players by their total headshots in descending order (most headshots first).
+    
+    Parameters:
+    - playerData: Map containing player entities and their statistics
+    
+    Returns:
+    - List of player entities sorted by total headshots (index 8 in player data)
+    
+    Uses a selection sort algorithm to find the player with the most headshots
+    at each iteration and adds them to the sorted list.
+    */
+    func SortPlayerDataViaHeadshots(playerData Map<entity<Player>, List<int>>) List<entity<Player>> {
+        var sortedPlayers List<entity<Player>> = List<entity<Player>>{}
+        var initPlayerList List<entity<Player>> = List<entity<Player>>{}
+        for player, data in playerData {
+            Append(initPlayerList, player)
+        }
+        while List.Length(initPlayerList) > 0 {
+            var highestPlayer = initPlayerList[0]
+            for index, player in initPlayerList {
+                if playerData[player][7] > playerData[highestPlayer][7] {
+                    highestPlayer = player
+                }
+            }
+            List.Remove(initPlayerList, highestPlayer)
+            Append(sortedPlayers, highestPlayer)
+        }
+        return sortedPlayers
+    }
+
+    /*
+    Updates the ranking leaderboard UI with current player data.
+    
+    This function:
+    1. Sorts all players by their ranking points (descending order)
+    2. Retrieves the child widgets from the ranking leaderboard layout
+    3. Updates each player entry with:
+       - Player avatar (from UserUID)
+       - Highest match elimination (or "N/A" if unavailable)
+       - Win rate percentage (or "N/A" if unavailable)
+    
+    The ranking leaderboard displays players sorted by their calculated ranking points,
+    which is a composite score used for overall leaderboard positioning.
+    */
+    func UpdateRankingLeaderboardUI(){
+        var _sortedPlayers = SortPlayerViaRankingPoint(playerData)
+        var _childWidgets = GetChildren(playerLayout)
+        for index, player in _sortedPlayers {
+            var _childWidget = _childWidgets[index]
+            var _avatarWidget = GetChildByIndex(_childWidget, 1)
+            var _kdWidget = GetChildByIndex(_childWidget, 2)
+            var _winRateWidget = GetChildByIndex(_childWidget, 3)
+            _avatarWidget<UIWidgetProfile>.AccountID = player<Player>.UserUID
+            if playerWinRateAndKDMap[player][1] == -1 {
+                _kdWidget<UIWidgetLabel>.Content = "N/A"
+            } else {
+                _kdWidget<UIWidgetLabel>.Content = ToString(playerWinRateAndKDMap[player][1])
+            }
+            if playerWinRateAndKDMap[player][0] == -1 {
+                _winRateWidget<UIWidgetLabel>.Content = "N/A"
+            } else {
+                _winRateWidget<UIWidgetLabel>.Content = ToString(playerWinRateAndKDMap[player][0]) + "%"
+            }
+        }
+    }
+
+    /*
+    Updates the highest match elimination leaderboard UI with current player data.
+    
+    This function:
+    1. Sorts all players by their total kill count (descending order)
+    2. Retrieves the child widgets from the kill leaderboard layout
+    3. Updates each player entry with:
+       - Player avatar (from UserUID)
+       - Total kill count (or "N/A" if unavailable)
+    
+    The kill leaderboard displays players sorted by their total number of eliminations.
+    */
+    func UpdateHMELeaderboardUI(){
+        var _sortedPlayers = SortPlayerDataViaHME(playerData)
+        var _childWidgets = GetChildren(hmePlayerLayout)
+        for index, player in _sortedPlayers {
+            var _childWidget = _childWidgets[index]
+            var _avatarWidget = GetChildByIndex(_childWidget, 1)
+            var _hmeWidget = GetChildByIndex(_childWidget, 2)
+            _avatarWidget<UIWidgetProfile>.AccountID = player<Player>.UserUID
+            if playerData[player][6] == -1 {
+                _hmeWidget<UIWidgetLabel>.Content = "N/A"
+            } else {
+                _hmeWidget<UIWidgetLabel>.Content = ToString(playerData[player][6])
+            }
+        }
+    }
+
+    /*
+    Updates the win rate leaderboard UI with current player data.
+    
+    This function:
+    1. Sorts all players by their win rate percentage (descending order)
+    2. Retrieves the child widgets from the win rate leaderboard layout
+    3. Updates each player entry with:
+       - Player avatar (from UserUID)
+       - Win rate percentage (or "N/A" if unavailable)
+    
+    The win rate leaderboard displays players sorted by their win rate percentage,
+    calculated as (wins / total matches) * 100.
+    */
+    func UpdateADMLeaderboardUI(){
+        var _sortedPlayers = SortPlayerDataViaADM(playerData)
+        var _childWidgets = GetChildren(admPlayerLayout)
+        for index, player in _sortedPlayers {
+            var _childWidget = _childWidgets[index]
+            var _avatarWidget = GetChildByIndex(_childWidget, 1)
+            var _admWidget = GetChildByIndex(_childWidget, 2)
+            _avatarWidget<UIWidgetProfile>.AccountID = player<Player>.UserUID
+            if playerData[player][8] == -1 {
+                _admWidget<UIWidgetLabel>.Content = "N/A"
+            } else {
+                _admWidget<UIWidgetLabel>.Content = ToString(playerData[player][8])
+            }
+        }
+    }
+
+    /*
+    Updates the KD (Kill/Death) leaderboard UI with current player data.
+    
+    This function:
+    1. Sorts all players by their KD ratio (descending order)
+    2. Retrieves the child widgets from the KD leaderboard layout
+    3. Updates each player entry with:
+       - Player avatar (from UserUID)
+       - KD ratio (or "N/A" if unavailable)
+    
+    The KD leaderboard displays players sorted by their kill/death ratio,
+    calculated as (kills / deaths). If a player has no deaths, the KD is
+    calculated as (kills / 1.0).
+    */
+    func UpdateHeadshotsLeaderboardUI(){
+        var _sortedPlayers = SortPlayerDataViaHeadshots(playerData)
+        var _childWidgets = GetChildren(headshotsPlayerLayout)
+        for index, player in _sortedPlayers {
+            var _childWidget = _childWidgets[index]
+            var _avatarWidget = GetChildByIndex(_childWidget, 1)
+            var _headshotsWidget = GetChildByIndex(_childWidget, 2)
+            _avatarWidget<UIWidgetProfile>.AccountID = player<Player>.UserUID
+            if playerData[player][7] == -1 {
+                _headshotsWidget<UIWidgetLabel>.Content = "N/A"
+            } else {
+                _headshotsWidget<UIWidgetLabel>.Content = ToString(playerData[player][7])
+            }
+        }
+    }
+
+    /*
+    Adds a new player entry to all leaderboard UI displays.
+    
+    Parameters:
+    - player: The player entity to add to the leaderboards
+    
+    Behavior:
+    - Increments the player count
+    - For the first player: Activates the existing prefab widgets for all leaderboards
+    - For subsequent players: Clones the prefab widgets and adds them as children
+      to each leaderboard UI container
+    
+    This function ensures that each player gets a UI entry in all four leaderboard
+    displays (ranking, kills, win rate, and headshots).
+    */
+    func AddPlayerToLeaderBoardUI(player entity<Player>){
+        playersInGameCount = playersInGameCount + 1
+        if playersInGameCount == 1 {
+            playerDataPrefab<UIWidget>.Active = true
+            hmePlayerDataPrefab<UIWidget>.Active = true
+            admPlayerDataPrefab<UIWidget>.Active = true
+            headshotsPlayerDataPrefab<UIWidget>.Active = true
+        } else {
+            StdLib.Clone(out var oPlayerDataPrefab, playerDataPrefab)
+            SetParent(oPlayerDataPrefab<Transform>, leaderBoardRankingUI<Transform>, false)
+            StdLib.Clone(out var oHMEPlayerDataPrefab, hmePlayerDataPrefab)
+            SetParent(oHMEPlayerDataPrefab<Transform>, leaderBoardHMEUI<Transform>, false)
+            StdLib.Clone(out var oADMPlayerDataPrefab, admPlayerDataPrefab)
+            SetParent(oADMPlayerDataPrefab<Transform>, leaderBoardADMUI<Transform>, false)
+            StdLib.Clone(out var oHeadshotsPlayerDataPrefab, headshotsPlayerDataPrefab)
+            SetParent(oHeadshotsPlayerDataPrefab<Transform>, leaderBoardHeadshotsUI<Transform>, false)
+        }
+    }
+
+    /*
+    Initializes and displays the personal statistics UI for a specific player.
+    
+    Parameters:
+    - player: The player entity whose statistics will be displayed
+    
+    This function:
+    1. Creates a CustomUI instance for personal statistics
+    2. Positions and scales it in the game world
+    3. Retrieves all stat widgets (avatar, games, wins, kills, KD, etc.)
+    4. Populates each widget with the player's current statistics
+    5. Stores the UI reference in personalStatsUIMap for later access
+    
+    The personal stats UI displays:
+    - Player avatar
+    - Total games played
+    - Total wins
+    - Total kills
+    - KD ratio
+    - Highest match elimination count
+    - Total headshots
+    - Average damage per match
+    
+    Values are displayed as "N/A" if the data is unavailable (value is -1).
+    */
+    func InitPersonalStatsUI(player entity<Player>){
+        var _personalStatsUI = EResSceneNewScene.PersonalStatsLB as entity<Entity>
+        var _mainScale = Vector3{5, 5, 5}
+
+        // Create the personal stats UI. Each gets their own UI entity to personalize the UI
+        CreateCustomUI(out var oPersonalStatsUI, player, EResUI.LeaderboardStatistics)
+        oPersonalStatsUI<CustomUI>.InScene = true
+        oPersonalStatsUI<CustomUI>.WorldPosition = _personalStatsUI<Transform>.Position
+        oPersonalStatsUI<CustomUI>.Scale = _mainScale
+        // The rotation gets from the scene, this should be adjusted manually if needed
+        oPersonalStatsUI<CustomUI>.Rotation = Vector3{0, -36, 0}
+        personalStatsUIMap[player<Player>.UserUID] = oPersonalStatsUI
+
+        // Get the child widgets from the personal stats UI
+        var _avatarWidget = GetWidgetFromCustomUI(player, oPersonalStatsUI, EResUILeaderboardStatistics.Avatar)
+        var _gamesWidget = GetWidgetFromCustomUI(player, oPersonalStatsUI, EResUILeaderboardStatistics.GV)
+        var _winsWidget = GetWidgetFromCustomUI(player, oPersonalStatsUI, EResUILeaderboardStatistics.WV)
+        var _killsWidget = GetWidgetFromCustomUI(player, oPersonalStatsUI, EResUILeaderboardStatistics.EV)
+        var _kdWidget = GetWidgetFromCustomUI(player, oPersonalStatsUI, EResUILeaderboardStatistics.KDV)
+        var _highestMatchEliminationWidget = GetWidgetFromCustomUI(player, oPersonalStatsUI, EResUILeaderboardStatistics.HMEV)
+        var _headshotsWidget = GetWidgetFromCustomUI(player, oPersonalStatsUI, EResUILeaderboardStatistics.HV)
+        var _avgDMGPerMatchWidget = GetWidgetFromCustomUI(player, oPersonalStatsUI, EResUILeaderboardStatistics.ADMV)
+        _avatarWidget<UIWidgetProfile>.AccountID = player<Player>.UserUID
+
+        // See the format of playerData in the PROPERTIES section
+        if playerData[player][4] == -1 {
+            _gamesWidget<UIWidgetLabel>.Content = "N/A"
+        } else {
+            _gamesWidget<UIWidgetLabel>.Content = ToString(playerData[player][4])
+        }
+        if playerData[player][5] == -1 {
+            _winsWidget<UIWidgetLabel>.Content = "N/A"
+        } else {
+            _winsWidget<UIWidgetLabel>.Content = ToString(playerData[player][5])
+        }
+        if playerData[player][2] == -1 {
+            _killsWidget<UIWidgetLabel>.Content = "N/A"
+        } else {
+            _killsWidget<UIWidgetLabel>.Content = ToString(playerData[player][2])
+        }
+        if playerData[player][2] == -1 {
+            _kdWidget<UIWidgetLabel>.Content = "N/A"
+        } else {
+            _kdWidget<UIWidgetLabel>.Content = ToString(playerWinRateAndKDMap[player][1])
+        }
+        if playerData[player][6] == -1 {
+            _highestMatchEliminationWidget<UIWidgetLabel>.Content = "N/A"
+        } else {
+            _highestMatchEliminationWidget<UIWidgetLabel>.Content = ToString(playerData[player][6])
+        }
+        if playerData[player][7] == -1 {
+            _headshotsWidget<UIWidgetLabel>.Content = "N/A"
+        } else {
+            _headshotsWidget<UIWidgetLabel>.Content = ToString(playerData[player][7])
+        }
+        if playerData[player][8] == -1 {
+            _avgDMGPerMatchWidget<UIWidgetLabel>.Content = "N/A"
+        } else {
+            _avgDMGPerMatchWidget<UIWidgetLabel>.Content = ToString(playerData[player][8])
+        }   
+    }
+
+    // ================================================================================================
+    // EVENTS - Game Lifecycle and Player Management
+    // ================================================================================================
+    
+    /*
+    Triggered when a player joins the game session.
+    
+    Parameters:
+    - player: The player entity that just joined
+    
+    This event handler:
+    1. Adds the player to all leaderboard UI displays
+    2. Reads the player's leaderboard data from the database ("Points Rank" association)
+    3. Reads the player's game statistics from data stores:
+       - "Players Data" store: Contains kills, deaths, matches played, wins
+       - "Statistical Data" store: Contains highest eliminations, headshots, avg damage
+    4. Combines all data into the playerData map
+    5. Initializes the player's personal statistics UI
+    6. Updates all leaderboard displays with the new player data
+    
+    If any data is missing or unavailable, default values (-1) are used and displayed as "N/A".
+    */
+    event OnPlayerJoin(player entity<Player>) {
+        AddPlayerToLeaderBoardUI(player)
+        ReadDBLeaderboardAssociationValue("Points Rank", player<Player>.UserUID, out var result, "", out var statusCode, out var associationValue)
+        ReadFromDataStore("Players Data", player<Player>.UserUID, "Data", out var data, "", out var dataStatusCode)
+        ReadFromDataStore("Statistical Data", player<Player>.UserUID, "Data", out var statisticalData, "", out var statisticalDataStatusCode)
+        var _finalList List<int> = List<int>{} 
+        var _pointsRankData List<object> = nil
+        var _killData int = -1 
+        var _deathData int = -1
+        var _matchesPlayed int = -1
+        var _winMatches int = -1
+        var _statisticalDataList List<int> = nil
+
+        // Read the leaderboard data from the database
+        if statusCode == 13 as StatusCode || statusCode != StatusCode.NoError {
+            _pointsRankData = List<int>{-1, -1}
+        } else if statusCode == StatusCode.NoError {
+            var temp = result[2] as List<object>
+            _pointsRankData = List<int>{temp[0] as int, temp[3] as int}
+        }
+        AppendRange(_finalList, _pointsRankData)
+
+        // Read the player data from the data store
+        if dataStatusCode == StatusCode.NoError {
+            var _dataList = data as List<object>
+            _killData = _dataList[0] as int
+            _deathData = _dataList[1] as int
+            _matchesPlayed = _dataList[2] as int
+            _winMatches = _dataList[3] as int
+            AppendRange(_finalList, List<int>{_killData, _deathData, _matchesPlayed, _winMatches})
+        } else {
+            AppendRange(_finalList, List<int>{-1, -1, -1, -1})
+        }
+
+        // Read the statistical data from the data store
+        if statisticalDataStatusCode == StatusCode.NoError {
+            if statisticalData == nil {
+                _statisticalDataList = List<int>{-1, -1, -1}
+            } else {
+                _statisticalDataList = statisticalData as List<int>
+            }
+        } else if statisticalDataStatusCode == 13 as StatusCode || statisticalDataStatusCode != StatusCode.NoError {
+            _statisticalDataList = List<int>{-1, -1, -1}
+        }
+        // Append the statistical data to the final list
+        List.AppendRange(_finalList, _statisticalDataList)
+        // Append the final list to the playerData map
+        playerData[player] = _finalList
+
+        // Append the player win rate and KD ratio to the playerWinRateAndKDMap
+        if statusCode == 13 as StatusCode || statusCode != StatusCode.NoError {
+            if _matchesPlayed >= 5 {
+                if _killData == -1 || _deathData == -1 || _matchesPlayed == -1 || _winMatches == -1 {
+                    playerWinRateAndKDMap[player] = List<float>{-1, -1}
+                    return
+                }
+                var winRate float = (IntToFloat(_winMatches as int) / IntToFloat(_matchesPlayed as int)) * 100.0
+                var kd float = (IntToFloat(_killData as int) / IntToFloat(_deathData as int))
+                playerWinRateAndKDMap[player] = List<float>{winRate, kd}
+
+                // In case the player in not in the ranking leaderboard (not in the top 150), calculate the ranking point based on the player's win rate and KD ratio
+                if playerData[player][0] == -1 {
+                    var _rankingPoint int = Math.Round(kd * 9500.0) + Math.Round(winRate * 5.0)
+                    playerData[player][0] = _rankingPoint
+                }
+            } else {
+                playerWinRateAndKDMap[player] = List<float>{-1, -1}
+            }
+        } else if statusCode == StatusCode.NoError {
+            var temp = result[2] as List<object>
+            playerWinRateAndKDMap[player] = List<float>{temp[1] as float, temp[2] as float}
+        }
+        // Initialize the personal stats UI for the player
+        InitPersonalStatsUI(player)
+        // Update the leaderboard UI
+        UpdateAllLeaderboardsUI()
+    }
+
+    event OnPhaseStart(phase entity<Phase>) {
+        if phase<Phase>.Index == EPhase.Start{
+            InitUI()
+        }
+    }
+    /*
+    Triggered when the GlobalLeaderboard graph is first initialized.
+    
+    This event handler performs two main tasks:
+    
+    1. UI Initialization:
+       - Calls InitUI() to create and configure all leaderboard UI elements
+    
+    2. Leaderboard Data Expiration Check:
+       - Retrieves the current server timestamp
+       - Reads the last server timestamp from the database
+       - Calculates the time difference
+       - If the difference exceeds 14 days (1,209,600 seconds):
+         * Uses a deletion flag system to prevent race conditions with other server instances
+         * Clears all leaderboard data from the database and data stores
+         * Updates the timestamp in the database
+         * Resets the deletion flag
+       - If the timestamp difference is negative (time sync issue):
+         * Corrects the timestamp values in the database
+    
+    The deletion flag system ensures that if multiple server instances are running,
+    only one will perform the cleanup operation, preventing data corruption.
+    */
+    event OnAwake() {
+        // =============== Check if the server time stamp is outdated ===============
+        var serverTimeStamp = GetServerTimestamp() // Get the current server time stamp
+        
+        // Retrive from the database and convert to int
+        ReadFromAccumulatedDataStore("Server", "lastServerTimeStamp", out var lastServerTimeStamp, "", out var lastServerTimeStampReadStatusCode)
+        var lastServerTimeStampInt = Math.Round(lastServerTimeStamp / 1.0)
+
+        // Check if the read status code is not no error
+        if lastServerTimeStampReadStatusCode != StatusCode.NoError {
+            LogError("Failed to read last server time stamp from the database. Status code: " + ToString(lastServerTimeStampReadStatusCode))
+        } else {
+            LogError("Last server time stamp: " + ToString(lastServerTimeStamp))
+        }
+
+        // Small delay to avoid race condition
+        WaitForMillisecond(200)
+
+        // Check if the last server time stamp is not set. If not set, set it to the current server time stamp
+        if lastServerTimeStampInt == nil || lastServerTimeStampInt == 0 {
+            LogError("Last server time stamp is not set, setting it to current server time stamp. Current server time stamp: " + ToString(serverTimeStamp))
+            WriteToAccumulatedDataStore("Server", "lastServerTimeStamp", 1, serverTimeStamp, "", out var lastServerTimeStampWriteStatusCode)
+            WaitForMillisecond(500)
+            LogError("Time stamp set in the database.")
+            return
+        }
+
+        // Calculate the difference between the current server time stamp and the last server time stamp
+        var diff int = serverTimeStamp - lastServerTimeStampInt
+        // WaitForMillisecond(500)
+
+        // Log the difference
+        LogError("Difference between current server time stamp and last server time stamp: " + diff + " " + serverTimeStamp + " " + lastServerTimeStampInt + " " + (serverTimeStamp - lastServerTimeStampInt))
+
+        // Overall status code flag variable to check if the read operation is successful
+        var overallStatusCode int = StatusCode.NoError
+
+        // Check if the difference is greater than 1209600 seconds (14 days). If it is, clear the leaderboard data and update the time stamp in the database
+        if diff > 1209600 {
+
+            // ====================== Set up deletion flag ======================
+            ReadFromAccumulatedDataStore("Server", "isDeleting", out var isDeleting, "", out var isDeletingStatusCode)
+            overallStatusCode = isDeletingStatusCode
+            // Keep reading the deletion flag until the read operation is successful
+            while overallStatusCode != StatusCode.NoError {
+                LogError("Failed to read isDeleting from the database. Status code: " + ToString(overallStatusCode))
+                WaitForMillisecond(1000)
+                ReadFromAccumulatedDataStore("Server", "isDeleting", out var isDeleting2, "", out var newStatusCode)
+                overallStatusCode = newStatusCode
+                isDeleting = isDeleting2
+            }
+            WaitForMillisecond(500)
+
+            // Check if the deletion flag is not set. If not set, set it to 1
+            if isDeleting == nil {
+                WriteToAccumulatedDataStore("Server", "isDeleting", 1, 1, "", out var isDeletingWriteStatusCode)
+                overallStatusCode = isDeletingWriteStatusCode
+                while overallStatusCode != StatusCode.NoError {
+                    LogError("Failed to write isDeleting to the database. Status code: " + ToString(overallStatusCode))
+                    WaitForMillisecond(1000)
+                    WriteToAccumulatedDataStore("Server", "isDeleting", 1, 1, "", out var newStatusCode)
+                    overallStatusCode = newStatusCode
+                }
+            } else {
+                // Check if the deletion flag is not 0. If it is not 0 (other games are running and deleting the leaderboard data), wait for 180000ms and check again
+                // 180000ms is used as a timeout. If the other server process cannot reset the deletion flag to 0 in this time, this current server process will reset the deletion flag to 0 and delete the leaderboard data
+                var isDeletingInt int = Math.Round(isDeleting / 1.0)
+                if isDeletingInt != 0 {
+
+                    LogError("Other games are running and deleting the leaderboard data, waiting for 180000ms to check again")
+                WaitForMillisecond(180000)
+                    LogError("Checking again if the other games are running and deleting the leaderboard data")
+
+                ReadFromAccumulatedDataStore("Server", "isDeleting", out var isDeleting, "", out var isDeletingStatusCode)
+                    overallStatusCode = isDeletingStatusCode
+                    while overallStatusCode != StatusCode.NoError {
+                        LogError("Failed to read isDeleting from the database. Status code: " + ToString(overallStatusCode))
+                        WaitForMillisecond(1000)
+                        ReadFromAccumulatedDataStore("Server", "isDeleting", out var isDeleting2, "", out var newStatusCode)
+                        overallStatusCode = newStatusCode
+                        isDeleting = isDeleting2
+                    }
+
+                    var isDeletingInt2 = Math.Round(isDeleting / 1.0)
+                    if isDeletingInt2 == 0 {
+                        return
+                    }
+                    LogError("isDeleting flag timeout, reset it to 0 and delete the leaderboard data")
+                    WriteToAccumulatedDataStore("Server", "isDeleting", 2, 1, "", out var isDeletingWriteStatusCode)
+                    overallStatusCode = isDeletingWriteStatusCode
+                    while overallStatusCode != StatusCode.NoError {
+                        LogError("Failed to write isDeleting to the database. Status code: " + ToString(overallStatusCode))
+                        WaitForMillisecond(1000)
+                        WriteToAccumulatedDataStore("Server", "isDeleting", 2, 1, "", out var newStatusCode)
+                        overallStatusCode = newStatusCode
+                    }
+                } 
+
+                // Set the deletion flag to 1 to indicate that the leaderboard data is being deleted, avoid race condition
+                isDeletingInt = 1
+                WriteToAccumulatedDataStore("Server", "isDeleting", 1, 1, "", out var isDeletingWriteStatusCode)
+                overallStatusCode = isDeletingWriteStatusCode
+                while overallStatusCode != StatusCode.NoError {
+                    LogError("Failed to write isDeleting to the database. Status code: " + ToString(overallStatusCode))
+                    WaitForMillisecond(1000)
+                    WriteToAccumulatedDataStore("Server", "isDeleting", 1, 1, "", out var newStatusCode)
+                    overallStatusCode = newStatusCode
+                }
+            }
+
+            // Deletion information test (only for debugging)
+            // ReadFromAccumulatedDataStore("Server", "isDeleting", out var isDeletingtest, "", out var isDeletingReadStatusCodeTest)
+            // WaitForMillisecond(500)
+            // LogError("isDeletingtest: " + ToString(isDeletingtest) + ", isDeletingReadStatusCode: " + ToString(isDeletingReadStatusCodeTest))
+            // ====================== End of deletion information test ======================
+
+            // Logging information
+            LogError("Leaderboard data is outdated, clearing leaderboard data. Current server time stamp: " + ToString(serverTimeStamp) + ", last server time stamp: " + ToString(lastServerTimeStamp))
+
+            // Clear the leaderboard data
+            wait ClearLeaderboardData()
+            LogError("Updating Time stamp in the database...")
+            WaitForMillisecond(500)
+
+            // Only after the leaderboard data is cleared, update the time stamp in the database
+            WriteToAccumulatedDataStore("Server", "lastServerTimeStamp", 1, diff, "", out var lastServerTimeStampWriteStatusCode)
+            overallStatusCode = lastServerTimeStampWriteStatusCode
+            while overallStatusCode != StatusCode.NoError {
+                LogError("Failed to write last server time stamp to the database. Status code: " + ToString(overallStatusCode))
+                WaitForMillisecond(1000)
+                WriteToAccumulatedDataStore("Server", "lastServerTimeStamp", 1, diff, "", out var newStatusCode)
+                overallStatusCode = newStatusCode
+            }
+
+            // Small delay to avoid race condition
+            WaitForMillisecond(500)
+            LogError("Time stamp updated in the database.")
+
+            // After deletion, set the deletion flag to 0, indicate that the deletion is complete
+            WriteToAccumulatedDataStore("Server", "isDeleting", 2, 1, "", out var isDeletingWriteStatusCode)
+            overallStatusCode = isDeletingWriteStatusCode
+            while overallStatusCode != StatusCode.NoError {
+                LogError("Failed to write isDeleting to the database. Status code: " + ToString(overallStatusCode))
+                WaitForMillisecond(1000)
+                WriteToAccumulatedDataStore("Server", "isDeleting", 2, 1, "", out var newStatusCode)
+                overallStatusCode = newStatusCode
+            }
+
+            // Planning for retrying plan. But not implemented yet.
+
+            // WaitForMillisecond(1000)
+            // var resetAttempts int = 0
+            // ReadFromAccumulatedDataStore("Server", "isDeleting", out var isDeleting2, "", out var isDeletingReadStatusCode)
+            // var isDeletingInt2 = Math.Round(isDeleting2 / 1.0)
+            // while isDeletingReadStatusCode != StatusCode.NoError || isDeletingInt2 != 0 {
+            //     LogError("Failed to set isDeleting to 2. Status code: " + ToString(isDeletingReadStatusCode) + ". Retrying...")
+            //     WaitForMillisecond(2000)
+            //     WriteToAccumulatedDataStore("Server", "isDeleting", 2, 1, "", out var isDeletingWriteStatusCode)
+            //     resetAttempts = resetAttempts + 1
+            //     if resetAttempts > 10 {
+            //         LogError("Failed to set isDeleting to 2 after 10 attempts. Giving up and do a deletion")
+            //         ReadFromAccumulatedDataStore("Server", "isDeleting", out var isDeleting, "", out var isDeletingReadStatusCode)
+            //         if isDeletingReadStatusCode != StatusCode.NoError {
+            //             LogError("Failed to read isDeleting from the database. Status code: " + ToString(isDeletingReadStatusCode))
+            //             return
+            //         }
+            //         var isDeletingInt = Math.Round(isDeleting / 1.0)
+            //         WaitForMillisecond(100)
+            //         WriteToAccumulatedDataStore("Server", "isDeleting", 2, isDeletingInt, "", out var isDeletingWriteStatusCode)
+            //         return
+            //     }
+            // }
+        } else if diff < -600 {
+            // LogError("Difference between current server time stamp and last server time stamp is negative. This should not happen. Please check the code.")
+            var overallStatusCode = StatusCode.NoError
+            WriteToAccumulatedDataStore("Server", "lastServerTimeStamp", 2, lastServerTimeStampInt, "", out var lastServerTimeStampWriteStatusCode)
+            overallStatusCode = lastServerTimeStampWriteStatusCode
+            while overallStatusCode != StatusCode.NoError {
+                LogError("Failed to write last server time stamp to the database. Status code: " + ToString(overallStatusCode))
+                WaitForMillisecond(1000)
+                WriteToAccumulatedDataStore("Server", "lastServerTimeStamp", 2, lastServerTimeStampInt, "", out var newStatusCode)
+                overallStatusCode = newStatusCode
+            }
+            WriteToAccumulatedDataStore("Server", "lastServerTimeStamp", 1, serverTimeStamp, "", out var lastServerTimeStampWriteStatusCode1)
+            overallStatusCode = lastServerTimeStampWriteStatusCode1
+            while overallStatusCode != StatusCode.NoError {
+                LogError("Failed to write last server time stamp to the database. Status code: " + ToString(overallStatusCode))
+                WaitForMillisecond(1000)
+                WriteToAccumulatedDataStore("Server", "lastServerTimeStamp", 1, serverTimeStamp, "", out var newStatusCode)
+                overallStatusCode = newStatusCode
+            }
+            return
+        }
+    } 
+
+    
+    // ================================================================================================
+    // DATABASE OPERATIONS - Leaderboard Data Management
+    // ================================================================================================
+    
+    /*
+    Clears all leaderboard data from the database and data stores.
+    
+    This async function:
+    1. Iterates through the top 150 leaderboard entries (ranks 1-150)
+    2. For each entry:
+       - Reads the player's leaderboard association data
+       - Removes the player from the "Points Rank" leaderboard
+       - Removes the player's data from the "Players Data" data store
+    3. Retries operations on failure with exponential backoff (1 second delays)
+    
+    This function is called when leaderboard data has expired (older than 14 days)
+    to reset the leaderboard for a new season or period.
+    
+    Note: The function handles up to 150 players, which is the typical leaderboard
+    size limit. If fewer players exist, it stops early when no more entries are found.
+    */
+    async func ClearLeaderboardData() {
+        var overallStatusCode = StatusCode.NoError
+        var associationOverallStatusCode = StatusCode.NoError
+
+        // The maximum rows in the leaderboard is 150, so loop through all 150 rows
+        for i = 1, 150, 1 {
+            ReadDBLeaderboardAssociationValuesByRange("Points Rank", i, i, out var result, "", out var statusCode3, out var associationStatusCode3)
+            overallStatusCode = statusCode3
+            associationOverallStatusCode = associationStatusCode3
+            while (overallStatusCode != StatusCode.NoError && overallStatusCode != 13 as StatusCode) || (associationOverallStatusCode != StatusCode.NoError && associationOverallStatusCode != 13 as StatusCode) {
+                LogError("Failed to read leaderboard data from the database. Status code: " + ToString(overallStatusCode))
+                WaitForMillisecond(1000)
+                ReadDBLeaderboardAssociationValuesByRange("Points Rank", i, i, out var result2, "", out var newStatusCode, out var newAssociationStatusCode)
+                overallStatusCode = newStatusCode
+                associationOverallStatusCode = newAssociationStatusCode
+                result = result2
+            }
+            if List.Length(result) <= 0 {
+                break
+            }
+            // The output variable has the format of List<List<object>>, each inner list is a player's data. So extract the first inner list
+            var eList = result[0] as List<object>
+            // // LogError("Status code: " + ToString(statusCode4))
+            RemoveFromLeaderboardDataStoreByKey("Points Rank", eList[1] as UUID, "", out var statusCode4)
+            while statusCode4 != StatusCode.NoError && statusCode4 != 13 as StatusCode {
+                LogError("Failed to remove leaderboard data from the database. Status code: " + ToString(statusCode4))
+                WaitForMillisecond(1000)
+                RemoveFromLeaderboardDataStoreByKey("Points Rank", eList[1] as UUID, "", out var newStatusCode)
+                statusCode4 = newStatusCode
+            }
+            RemoveFromDataStore("Players Data", eList[1] as UUID, "Data", "", out var dataRemoveStatusCode)
+            while dataRemoveStatusCode != StatusCode.NoError {
+                LogError("Failed to remove player data from data store. Status code: " + ToString(dataRemoveStatusCode))
+                WaitForMillisecond(1000)
+                RemoveFromDataStore("Players Data", eList[1] as UUID, "Data", "", out var newStatusCode)
+                dataRemoveStatusCode = newStatusCode
+            }
+            RemoveFromDataStore("Statistical Data", eList[1] as UUID, "Data", "", out var statisticalDataRemoveStatusCode)
+            while statisticalDataRemoveStatusCode != StatusCode.NoError {
+                LogError("Failed to remove statistical data from data store. Status code: " + ToString(statisticalDataRemoveStatusCode))
+                WaitForMillisecond(1000)
+                RemoveFromDataStore("Statistical Data", eList[1] as UUID, "Data", "", out var newStatusCode)
+                statisticalDataRemoveStatusCode = newStatusCode
+            }
+        }
+    }
+
+    /*
+    Retrieves the leaderboard data for a specific player from the database.
+    
+    Parameters:
+    - player: The player entity to get leaderboard data for
+    - returnList: Output parameter containing the player's leaderboard data
+    
+    Returns:
+    - returnList: List<int> containing the player's leaderboard statistics, or nil if not found
+    
+    This async function:
+    1. Reads the player's leaderboard association value from "Points Rank"
+    2. Retries on failure with 1 second delays until successful
+    3. Extracts the leaderboard data (index 2 of the result)
+    4. Returns nil if the player has no leaderboard data
+    
+    The returned data format matches the playerData structure used throughout the system.
+    */
+    async func GetLeaderboardDataForPlayer(player entity<Player>, out var returnList List<int>) {
+        ReadDBLeaderboardAssociationValue("Points Rank", player<Player>.UserUID, out var result, "", out var statusCode2, out var associationValue2)
+        while statusCode2 != StatusCode.NoError || associationValue2 != StatusCode.NoError {
+            LogError("Failed to read leaderboard data from the database. Status code: " + ToString(statusCode2))
+            WaitForMillisecond(1000)
+            ReadDBLeaderboardAssociationValue("Points Rank", player<Player>.UserUID, out var result2, "", out var newStatusCode, out var newAssociationStatusCode)
+            statusCode2 = newStatusCode
+            associationValue2 = newAssociationStatusCode
+            result = result2
+        }
+        if result[2] == nil {
+            returnList = nil 
+        } else {
+            returnList = result[2] as List<int>
+        }
+    }
+
+    /*
+    Sets or updates the leaderboard data for a specific player.
+    
+    Parameters:
+    - player: The player entity to update leaderboard data for
+    - points: Additional ranking points to add to the player's current score
+    - matchesPlayed: Additional matches played to add to the player's total
+    
+    This async function:
+    1. Retrieves the player's existing leaderboard data
+    2. If no data exists: Creates a new leaderboard entry with the provided values
+    3. If data exists: Updates the entry by adding the new points and incrementing matches played
+    4. Retries database writes on failure with 1 second delays until successful
+    5. Waits 2 seconds after completion to ensure data is persisted
+    
+    This function is typically called at the end of a match to update player rankings
+    based on their performance.
+    */
+    async func SetLeaderboardDataForPlayer(player entity<Player>, points int, matchesPlayed int) {
+        wait GetLeaderboardDataForPlayer(player, out var playerData)
+        if playerData == nil {
+            WriteDBLeaderboardAssociationValue("Points Rank", player<Player>.UserUID, List<object>{points, matchesPlayed}, "", out var statusCode, out var associationValue)
+            while statusCode != StatusCode.NoError || associationValue != StatusCode.NoError {
+                LogError("Failed to write leaderboard data to the database. Status code: " + ToString(statusCode))
+                WaitForMillisecond(1000)
+                WriteDBLeaderboardAssociationValue("Points Rank", player<Player>.UserUID, List<object>{points, matchesPlayed}, "", out var newStatusCode, out var newAssociationStatusCode)
+                statusCode = newStatusCode
+                associationValue = newAssociationStatusCode
+            }
+        } else {
+            var oldScore = playerData[0]
+            var oldMatchesPlayed = playerData[1]
+            WriteDBLeaderboardAssociationValue("Points Rank", player<Player>.UserUID, List<object>{oldScore + points, oldMatchesPlayed + 1}, "", out var statusCode, out var associationValue)
+            while statusCode != StatusCode.NoError || associationValue != StatusCode.NoError {
+                LogError("Failed to write leaderboard data to the database. Status code: " + ToString(statusCode))
+                WaitForMillisecond(1000)
+                WriteDBLeaderboardAssociationValue("Points Rank", player<Player>.UserUID, List<object>{oldScore + points, oldMatchesPlayed + 1}, "", out var newStatusCode, out var newAssociationStatusCode)
+                statusCode = newStatusCode
+                associationValue = newAssociationStatusCode
+            }
+        }
+        WaitForMillisecond(2000)
+    }
+
+    /*
+    Stores or updates a player's game statistics in the database and updates leaderboard rankings.
+    
+    Parameters:
+    - player: The player entity whose data is being stored
+    - kills: Number of kills the player achieved in this match
+    - deaths: Number of deaths the player had in this match
+    - matchesPlayed: Number of matches played (typically 1 for a single match)
+    - isWinMatch: Whether the player won this match
+    
+    This async function performs the following operations:
+    
+    1. Data Retrieval:
+       - Reads existing player data from "Players Data" store
+       - Reads existing statistical data from "Statistical Data" store
+       - Retries on failure with 1 second delays
+    
+    2. Data Updates:
+       - Updates total kills, deaths, matches played, and wins
+       - Updates highest match elimination if current match is higher
+       - Updates total headshots (adds current match headshots)
+       - Recalculates average damage per match using weighted average
+    
+    3. Data Storage:
+       - Writes updated player data to "Players Data" store
+       - Writes updated statistical data to "Statistical Data" store
+       - Retries on failure with 1 second delays
+    
+    4. Leaderboard Update:
+       - Calculates win rate percentage
+       - Calculates KD ratio (kills/deaths, or kills/1.0 if no deaths)
+       - Calculates ranking points: (KD * 9500) + (WinRate * 5)
+       - Updates leaderboard entry in "Points Rank" association
+       - Only updates leaderboard if player has played at least 5 matches
+    
+    This function is typically called at the end of a match to persist all player statistics.
+    */
+    async func StorePlayerDataToDatabase(player entity<Player>, kills int, deaths int, matchesPlayed int, isWinMatch bool) {
+        LogError("Storing player data to database for player: " + ToString(player<Player>.UserUID) + ", kills: " + ToString(kills) + ", deaths: " + ToString(deaths) + ", matchesPlayed: " + ToString(matchesPlayed) + ", isWinMatch: " + ToString(isWinMatch))
+        ReadFromDataStore("Players Data", player<Player>.UserUID, "Data", out var data, "", out var dataStatusCode)
+        ReadFromDataStore("Statistical Data", player<Player>.UserUID, "Data", out var statisticalData, "", out var statisticalDataStatusCode)
+        while statisticalDataStatusCode != StatusCode.NoError {
+            LogError("Failed to read statistical data from data store for player: " + ToString(player<Player>.UserUID) + ", statistical data status code: " + ToString(statisticalDataStatusCode))
+            WaitForMillisecond(1000)
+            ReadFromDataStore("Statistical Data", player<Player>.UserUID, "Data", out var statisticalData2, "", out var newStatusCode)
+            statisticalDataStatusCode = newStatusCode
+            statisticalData = statisticalData2
+        }
+        while dataStatusCode != StatusCode.NoError {
+            LogError("Failed to read player data from data store for player: " + ToString(player<Player>.UserUID) + ", data status code: " + ToString(dataStatusCode))
+            WaitForMillisecond(1000)
+            ReadFromDataStore("Players Data", player<Player>.UserUID, "Data", out var data2, "", out var newStatusCode)
+            dataStatusCode = newStatusCode
+            data = data2
+        }
+        var playerData = data as List<int>
+        var statisticalDataList = statisticalData as List<int>
+        if playerData == nil {
+            playerData = List<int>{0, 0, 0, 0}
+        }
+        if statisticalDataList == nil {
+            statisticalDataList = List<int>{0, 0, 0}
+        }
+        var _kill = playerData[0]
+        var _death = playerData[1]
+        var _matchesPlayed = playerData[2]
+        var _winMatches = playerData[3]
+        var _highestMatchElimination = statisticalDataList[0]
+        var _headshots = statisticalDataList[1]
+        var _avgDMGPerMatch = statisticalDataList[2]
+
+        var playerCurrentMatchData = globalEntity<PlayerData>.GetPlayerData(player)
+        // Highest match elimination update check
+        if playerCurrentMatchData[0] > _highestMatchElimination {
+            statisticalDataList[0] = playerCurrentMatchData[0]
+        }
+
+        // Headshots update 
+        statisticalDataList[1] = _headshots + playerCurrentMatchData[3]
+
+        // Average damage per match update check
+        statisticalDataList[2] = Math.Round((_avgDMGPerMatch * _matchesPlayed + playerCurrentMatchData[2]) / (_matchesPlayed + matchesPlayed))
+
+        playerData[0] = _kill + kills
+        playerData[1] = _death + deaths
+        playerData[2] = _matchesPlayed + matchesPlayed
+        if isWinMatch {
+            playerData[3] = _winMatches + 1
+        } else {
+            playerData[3] = _winMatches
+        }
+        var playerDataList = List<object>{playerData[0], playerData[1], playerData[2], playerData[3]}
+        WriteToDataStore("Players Data", player<Player>.UserUID, "Data", playerDataList, "", out var playerDataWriteStatusCode)
+        while playerDataWriteStatusCode != StatusCode.NoError {
+            LogError("Failed to write player data to data store for player: " + ToString(player<Player>.UserUID) + ", player data status code: " + ToString(playerDataWriteStatusCode))
+            WaitForMillisecond(1000)
+            WriteToDataStore("Players Data", player<Player>.UserUID, "Data", playerDataList, "", out var newStatusCode)
+            playerDataWriteStatusCode = newStatusCode
+        }
+        WriteToDataStore("Statistical Data", player<Player>.UserUID, "Data", statisticalDataList, "", out var statisticalDataWriteStatusCode)
+        while statisticalDataWriteStatusCode != StatusCode.NoError {
+            LogError("Failed to write statistical data to data store for player: " + ToString(player<Player>.UserUID) + ", statistical data status code: " + ToString(statisticalDataWriteStatusCode))
+            WaitForMillisecond(1000)
+            WriteToDataStore("Statistical Data", player<Player>.UserUID, "Data", statisticalDataList, "", out var newStatusCode)
+            statisticalDataWriteStatusCode = newStatusCode
+        }
+        // If the total matches played is less than 5, the player is not shown in ranking
+        if _matchesPlayed as int + matchesPlayed < 5 {
+            return
+        }
+
+        var winRate float 
+        if isWinMatch {
+            winRate = IntToFloat(_winMatches as int + 1) / IntToFloat(_matchesPlayed as int + matchesPlayed) * 100.0
+        } else {
+            winRate = (IntToFloat(_winMatches as int) / IntToFloat(_matchesPlayed as int + matchesPlayed)) * 100.0
+        }
+        var kd float
+        if _death as int + deaths <= 0 {
+            kd = (IntToFloat(_kill as int + kills) / 1.0)
+        } else {
+            kd = (IntToFloat(_kill as int + kills) / IntToFloat(_death as int + deaths))
+        }
+        var sortCriteria int = Math.Round(kd * 9500.0) + Math.Round(winRate * 5.0)
+        WriteDBLeaderboardAssociationValue("Points Rank", player<Player>.UserUID, List<object>{sortCriteria, winRate, kd, 0}, "", out var statusCode, out var associationValue)
+        while statusCode != StatusCode.NoError || associationValue != StatusCode.NoError {
+            LogError("Failed to write leaderboard data to the database. Status code: " + ToString(statusCode))
+            WaitForMillisecond(1000)
+            WriteDBLeaderboardAssociationValue("Points Rank", player<Player>.UserUID, List<object>{sortCriteria, winRate, kd, 0}, "", out var newStatusCode, out var newAssociationStatusCode)
+            statusCode = newStatusCode
+            associationValue = newAssociationStatusCode
+        }
+    }
+
+    /*
+    Retrieves the Kill/Death ratio and win rate for a specific player.
+    
+    Parameters:
+    - player: The player entity to get statistics for
+    - kd: Output parameter for the player's KD ratio
+    - winRate: Output parameter for the player's win rate percentage
+    
+    Returns:
+    - kd: The player's KD ratio, or -1 if unavailable or player has less than 5 matches
+    - winRate: The player's win rate percentage, or -1 if unavailable or player has less than 5 matches
+    
+    This async function:
+    1. Reads the player's leaderboard data from "Points Rank" association
+    2. Reads the player's game data from "Players Data" store
+    3. Validates that the player has played at least 5 matches (minimum requirement for ranking)
+    4. Extracts KD and win rate from the leaderboard association data
+    5. Returns -1 for both values if:
+       - Player data is not found
+       - Player has less than 5 matches played
+       - Leaderboard data is unavailable
+    
+    This function is used to get player statistics for display or calculations
+    without requiring the full playerData structure.
+    */
+    async func GetKDAndWinRate(player entity<Player>, out var kd float, out var winRate float) {
+        winRate = -1
+        kd = -1
+        WaitForMillisecond(500)
+        if Map.ContainKey(playerWinRateAndKDMap, player) {
+            kd = playerWinRateAndKDMap[player][1]
+            winRate = playerWinRateAndKDMap[player][0]
+            return
+        }
+        ReadDBLeaderboardAssociationValue("Points Rank", player<Player>.UserUID, out var result, "", out var statusCode, out var associationValue)
+        ReadFromDataStore("Players Data", player<Player>.UserUID, "Data", out var data, "", out var dataStatusCode)
+        while statusCode != StatusCode.NoError && statusCode != 13 as StatusCode {
+            LogError("Failed to read leaderboard data from the database. Status code: " + ToString(statusCode))
+            WaitForMillisecond(1000)
+            ReadDBLeaderboardAssociationValue("Points Rank", player<Player>.UserUID, out var result2, "", out var newStatusCode, out var newAssociationStatusCode)
+            statusCode = newStatusCode
+            associationValue = newAssociationStatusCode
+        }
+        while dataStatusCode != StatusCode.NoError && dataStatusCode != 13 as StatusCode {
+            LogError("Failed to read player data from data store for player: " + ToString(player<Player>.UserUID) + ", data status code: " + ToString(dataStatusCode))
+            WaitForMillisecond(1000)
+            ReadFromDataStore("Players Data", player<Player>.UserUID, "Data", out var data2, "", out var newStatusCode)
+            dataStatusCode = newStatusCode
+            data = data2
+        }
+        var eList = result[2] as List<object>
+        if eList != nil && statusCode == StatusCode.NoError {
+            kd = eList[2] as float
+            winRate = eList[1] as float
+            return
+        }
+        // if eList == nil  || statusCode == 13 as StatusCode {
+        //     kd = -1 
+        //     winRate = -1 
+        // } else {
+        //     kd = eList[2] as float
+        //     winRate = eList[1] as float
+        // }
+        var playerData = data as List<int>
+        if playerData == nil {
+            kd = -1 
+            winRate = -1 
+            return
+        }
+        var _matchesPlayed = playerData[2] as int
+        if _matchesPlayed < 5 {
+            kd = -1 
+            winRate = -1 
+            return
+        }
+    }
+}

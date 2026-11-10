@@ -1,0 +1,137 @@
+/*PlayerData.fcg
+Stores player-specific data and statistics, including KDA and damage dealt.
+*/
+import "StdLibrary.fcc" as StdLib
+import "EditorGenLib.fcc" as EditorLib
+import "Map.fcc" as Map
+import "List.fcc" as List
+import ".././../Team/TeamCurrentRoundData.fcg" as TeamCurrentRoundData
+import "Convert.fcc" as Convert
+graph PlayerData {
+    // The list has 4 members: Kills, Deaths, Damage, Headshots respectively to their indexes
+    playerDataDict Map<entity<Player>, List<int>> // Map to store player data such as Kills, Deaths, Damage, Headshots
+
+    // EVENTS
+    event OnAwake() {
+        playerDataDict = Map<entity<Player>, List<int>>{} // Initialize the player data map
+    }
+
+    // FUNCTIONS
+    /*
+    Register a player to receive updates.
+    @param player: The player entity to register
+    */
+    func RegisterPlayer(player entity<Player>) {
+        if (!Map.ContainKey(playerDataDict, player)) {
+            playerDataDict[player] = List<int>{0, 0, 0, 0} // Initialize Kills, Deaths, Damage, Headshots
+        }
+    }
+
+    /*
+    Unregister a player from receiving updates.
+    @param player: The player entity to unregister
+    */
+    func UnregisterPlayer(player entity<Player>) {
+        if (Map.ContainKey(playerDataDict, player)) {
+            Map.Remove(playerDataDict, player) // Remove player data when the player leaves
+        }
+    }
+
+    /*
+    Set the player data.
+    @param player: The player entity to set the data for
+    @param data: The player data to set
+    */
+    func SetPlayerData(player entity<Player>, data List<int>) {
+        if (Map.ContainKey(playerDataDict, player)) {
+            playerDataDict[player] = data
+        }
+    }
+
+    /*
+    Get the player data.
+    @param player: The player entity to get the data for
+    @return: The player data as a list of integers
+    */
+    func GetPlayerData(player entity<Player>) List<int> {
+        if (Map.ContainKey(playerDataDict, player)) {
+            return playerDataDict[player]
+        }
+        LogError("<PlayerData.fcg>: Player not found " + player<Player>.NickName)
+        return List<int>{0, 0, 0, 0} // Return default values if player not found
+    }
+
+    /*
+    Increase the damage dealt data of a player.
+    @param player: The player entity to increase the damage for
+    @param amount: The amount of damage to increase
+    */
+    func IncreaseDamage(player entity<Player>, amount int) {
+        if (Map.ContainKey(playerDataDict, player)) {
+            playerDataDict[player][2] = playerDataDict[player][2] + amount // Increase Damage
+            // LogInfo("<PlayerData.fcg>: Damage increased for " + player<Player>.NickName + " by " + amount)
+        }
+    }
+
+    /*
+    Increase the kill count data of a player.
+    @param player: The player entity to increase the kill count for
+    */
+    func IncreaseKill(player entity<Player>) {
+        if (Map.ContainKey(playerDataDict, player)) {
+            playerDataDict[player][0] = playerDataDict[player][0] + 1 // Increase Kills
+            // LogInfo("<PlayerData.fcg>: Kill increased for " + player<Player>.NickName)
+            var hostTeam = player<Player>.HostTeam
+            if hostTeam != nil {
+                hostTeam<TeamCurrentRoundData>.IncreaseKill()
+            }
+        }
+    }
+
+    /*
+    Increase the death count data of a player.
+    @param player: The player entity to increase the death count for
+    */
+    func IncreaseDeath(player entity<Player>) {
+        if (Map.ContainKey(playerDataDict, player)) {
+            playerDataDict[player][1] = playerDataDict[player][1] + 1 // Increase Deaths
+            // LogInfo("<PlayerData.fcg>: Death increased for " + player<Player>.NickName)
+        }
+    }
+
+    /*
+    Increase the headshot count data of a player.
+    @param player: The player entity to increase the headshot count for
+    */
+    func IncreaseHeadshot(player entity<Player>) {
+        if (Map.ContainKey(playerDataDict, player)) {
+            playerDataDict[player][3] = playerDataDict[player][3] + 1 // Increase Headshots
+            // LogError("<PlayerData.fcg>: Headshot increased for " + player<Player>.NickName)
+            // LogError("<PlayerData.fcg>: Headshot count: " + ToString(playerDataDict[player][3]))
+        }
+    }
+
+    /*
+    Get the sorted player list. The list is sorted by players' kills, then damages in descending order
+    @return: A list of players sorted by their kill count
+    */
+    func GetSortedPlayerList() List<entity<Player>> {
+        var returnList = List<entity<Player>>{}
+        var players = GetAllPlayers()
+        while List.Length(players) > 0 {
+            var highestPlayer = players[0]
+            for index, player in players {
+                if (playerDataDict[player][0] > playerDataDict[highestPlayer][0]) {
+                    highestPlayer = player
+                } else if (playerDataDict[player][0] == playerDataDict[highestPlayer][0]) {
+                    if (playerDataDict[player][2] > playerDataDict[highestPlayer][2]) {
+                        highestPlayer = player
+                    }
+                }
+            }
+            List.Remove(players, highestPlayer)
+            Append(returnList, highestPlayer)
+        }
+        return returnList
+    }
+}

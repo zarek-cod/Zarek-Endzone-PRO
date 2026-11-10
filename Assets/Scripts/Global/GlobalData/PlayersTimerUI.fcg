@@ -1,0 +1,90 @@
+/* PlayersTimerUI.fcg (NOT USED ANYMORE)
+   Description: This script handles the player timer UI functionality in the game.
+   It is responsible for managing the player's timer UI and its interactions.
+*/
+import "StdLibrary.fcc" as StdLib
+import "EditorGenLib.fcc" as EditorLib
+import "Hud.fcc" as Hud
+import "Map.fcc" as Map
+import "Player.fcc" as Player
+import "Workflow.fcc" as Workflow
+import "Time.fcc" as Time
+import "Collection.fcc" as Collection
+import "../GlobalManager/GlobalUIManager.fcg" as GlobalUIManager
+graph PlayersTimerUI {
+    playersTimerUI Map<entity<Player>, entity<UICountdownReminder>> // Map to associate players with their timer UIs
+
+    event OnAwake() {
+        playersTimerUI = Map<entity<Player>, entity<UICountdownReminder>>{} // Initialize the map of players' timer UIs at the start of the game
+    }
+
+    // DEPRECATED
+    /* Register the player's timer UI.
+       This function associates a player with their timer UI in the map.
+       @param player: The player entity whose timer UI will be registered
+       @return: Returns true if the operation was successful
+    */
+    // func RegisterTimerUI(player entity<Player>) bool {
+    //     // LogError("Start countdown time: " + (startCountdown) + " seconds")
+    //     if (playersTimerUI == nil) {
+    //         playersTimerUI = Map<entity<Player>, entity<UICountdownReminder>>{} // Initialize the map if it is null
+    //     }
+    //     if (!ContainKey(playersTimerUI, player)) {
+    //         CreateBuiltInUI(out var timerUI, player, EResInternalHud.CountdownReminderHud as BuiltInUIType) // Create a new timer UI for the player
+    //         playersTimerUI[player] = timerUI as entity<UICountdownReminder> // Associate the player with their timer UI
+    //         playersTimerUI[player]<UICountdownReminder>.IsVisible = false// Set the timer UI to be invisible initially
+    //         return true // Return true to indicate the operation was successful
+    //     } else {
+    //         LogWarning("<PlayersTimerUI.fcg>: Timer UI already registered for player: " + player<Entity>.Name) // Warning Info
+    //         return false // Return false to indicate the operation was unsuccessful
+    //     }
+    // }
+
+    // /*
+    // Unregister a player from timer UI
+    // @param player: The player unregisters.
+    // @return bool: True if success, otherwise false
+    // */
+    // func UnRegisterTimerUI(player entity<Player>) bool {
+    //     if ContainKey(playersTimerUI, player) {
+    //         DestroyCustomUI(playersTimerUI[player] as entity<CustomUI>) // Destroy the player's timer UI
+    //         Remove(playersTimerUI, player) // Remove the player's timer UI from the map
+    //         return true
+    //     }
+    //     return false // Return false to indicate the operation was unsuccessful
+    // }
+
+    /* Set the player's timer UI.
+       This function sets the base time and duration for the player's timer UI.
+       @param time: The time in miliseconds to set for the player's timer UI
+       @return: Returns true if the operation was successful
+    */
+    async func SetPlayerTimer(player entity<Player>, time int) {
+        // if (ContainKey(playersTimerUI, player)) {
+        //     // playersTimerUI[player]<UICountdownReminder>.IsVisible = true // Make the timer UI visible
+        //     // playersTimerUI[player]<UICountdownReminder>.Description = LocString{"ROUND_COUNTDOWN", List<string>{}} // Use localization for the timer description
+        //     // playersTimerUI[player]<UICountdownReminder>.BaseTime = globalEntity<Global>.GameTimeCount / 1000 // Set the base time for the player's timer UI
+        //     // playersTimerUI[player]<UICountdownReminder>.Duration = time / 1000 // Set the duration for the player's timer UI
+        //     WaitForMillisecond(time - 5000)
+        //     // playersTimerUI[player]<UICountdownReminder>.IsVisible = false // Make the timer UI visible
+        //     globalEntity<GlobalUIManager>.Enable5sCountdownHUD(player) // Enable the 5 seconds countdown HUD for the player
+        // } else {
+        //     LogWarning("<PlayersTimerUI.fcg>: No timer UI found for player: " + player<Entity>.Name) // Warning Info
+        // }
+    }
+
+    /* Set the visibility of the player's timer UI.
+       This function sets the visibility of each player's timer UI based on the provided boolean value.
+       @param status: A boolean indicating whether to show or hide the timer UI
+       @return: Returns true if the operation was successful
+    */
+    async func SetTimerVisibility(status bool) {
+        for index, player in GetAllPlayers() {
+            if(ContainKey(playersTimerUI, player)) {
+                playersTimerUI[player]<UICountdownReminder>.IsVisible = status // Set the visibility of the player's timer UI
+            } else {
+                LogWarning("<PlayersTimerUI.fcg>: No timer UI found for player: " + player<Entity>.Name) // Warning Info
+            }
+        }
+    }
+}

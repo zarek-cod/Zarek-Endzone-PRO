@@ -1,0 +1,35 @@
+# Craftland Studio generated state
+/Temp/
+/Cache/
+/Logs/
+*.log
+*.tmp
+*.bak
+/main.gproj.lock
+
+# Local agent runtime state
+/.aismith/
+/.codex/
+
+# Operating-system noise
+Thumbs.db
+.DS_Store
+
+# Local MCP endpoints. These files contain machine-specific connection URLs.
+.cursor/mcp.json
+.vscode/mcp.json
+
+# Craftland/Garena-distributed libraries and built-in content.
+# Restore these from an authorized Craftland Studio installation.
+/Libraries/
+/Assets/stdlibrary.fab
+/Assets/stdlibrary.fab.meta
+/Assets/BuiltInAC/
+/Assets/BuiltInAC.meta
+/Assets/SampleMaterials/
+/Assets/SampleMaterials.meta
+
+# Media provenance has not yet been documented. Keep it local until the
+# owner confirms redistribution rights for every file in this directory.
+/Assets/Resources/
+/Assets/Resources.meta

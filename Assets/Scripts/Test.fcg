@@ -1,0 +1,57 @@
+import "StdLibrary.fcc" as StdLib
+import "EditorGenLib.fcc" as EditorLib
+import "Hud.fcc" as Hud
+import "Database.fcc" as Database
+import "Convert.fcc" as Convert
+import "List.fcc" as List
+import "Math.fcc" as Math
+import "Player.fcc" as Player
+graph Test {
+    lastServerTimeStamp2 int64
+    event OnAwake() {
+        // ReadFromAccumulatedDataStore("Server", "lastServerTimeStamp", out var lastServerTimeStamp, "", out var statusCode)
+        // lastServerTimeStamp2 = lastServerTimeStamp
+    }
+    event OnPressed(player entity<Player>) {
+        ReadFromLeaderboardDataStore("Points Rank", player<Player>.UserUID, out var result, "", out var statusCode)
+        NotifyShowTips(player, "Result: " + ToString(result) + ", Status code: " + ToString(statusCode), #FFFFFFFF, 5000)
+        // SetDefaultUIStatus(player, PlayerUISwitchType.SwimmingSurfHUD, CommonUISwitchValue.OriginalLogic)
+        // GetDefaultUIInfo(PlayerUISwitchType.SwimmingSurfHUD, out var isEnabled, out var position, out var size)
+        // WriteToDataStore("Players Data", player<Player>.UserUID, "Data", List<object>{0, 1, 2, 3}, "", out var statusCode)
+        // ReadFromDataStore("Players Data", player<Player>.UserUID, "Kill", out var kill, "", out var killReadStatusCode)
+        // ReadFromDataStore("Players Data", player<Player>.UserUID, "Death", out var death, "", out var deathReadStatusCode)
+        // ReadFromDataStore("Players Data", player<Player>.UserUID, "Matches Played", out var matchesPlayed, "", out var matchesPlayedReadStatusCode)
+        // ReadFromDataStore("Players Data", player<Player>.UserUID, "Win Matches", out var winMatches, "", out var winMatchesReadStatusCode)
+        // NotifyShowTips(player, "Kill: " + ToString(kill) + ", Death: " + ToString(death) + ", Matches Played: " + ToString(matchesPlayed) + ", Win Matches: " + ToString(winMatches), #FFFFFFFF, 5000)
+        // var kd float = IntToFloat(kill as int) / IntToFloat(death as int)
+        // NotifyShowTips(player, "KD: " + ToString(kd), #FFFFFFFF, 5000)
+        // var winRate float = IntToFloat(winMatches as int) / IntToFloat(matchesPlayed as int)
+        // WriteDBLeaderboardAssociationValue("Points Rank", player<Player>.UserUID, List<object>{Math.Round(kd * 60.0) + Math.Round(winRate * 40.0), winRate, kd, 0}, "", out var statusCode, out var associationValue)
+        // ReadFromAccumulatedDataStore("Server", "isDeleting", out var isDeleting, "", out var isDeletingReadStatusCode)
+        // ReadFromAccumulatedDataStore("Server", "lastServerTimeStamp", out var lastServerTimeStamp, "", out var lastServerTimeStampReadStatusCode)
+        // var lastServerTimeStampInt = Math.Round(lastServerTimeStamp / 1.0)
+        // var serverTimeStamp = GetServerTimestamp() // Get the current server time stamp
+        // var diff int = serverTimeStamp - lastServerTimeStampInt
+        // NotifyShowTips(player, "isDeleting: " + ToString(isDeleting) + ", isDeletingReadStatusCode: " + ToString(isDeletingReadStatusCode), #FFFFFFFF, 5000)
+        // NotifyShowTips(player,"lastServerTimeStamp: " + ToString(lastServerTimeStamp) + ", serverTimeStamp: " + ToString(serverTimeStamp) + ", diff: " + ToString(diff), #FFFFFFFF, 5000)
+        // WriteToAccumulatedDataStore("Server", "lastServerTimeStamp", 2, 1, "", out var statusCode2)
+        // WriteDBLeaderboardAssociationValue("Points Rank", player<Player>.UserUID, List<object>{100, 10}, "", out var statusCode, out var associationValue)
+        // ReadFromLeaderboardDataStoreByRank("Points Rank", 1, 2, out var result, "", out var statusCode2)
+        // ReadDBLeaderboardAssociationValuesByRange("Points Rank", 1, 1, out var result2, "", out var statusCode3, out var associationStatusCode3)
+
+        // LogError(List.Length(result2) <= 0)
+        // for index, value in result2 {
+        //     LogError(value)
+        // }
+        // WriteDBLeaderboardAssociationValue("Points Rank", player<Player>.UserUID, List<object>{RandomInt(1, 100), player<Player>.MaxHP}, "", out var statusCode, out var associationValue)        
+        // for index, list in result2 {
+        //     var hehe = list as List<object>
+        //     WriteDBLeaderboardAssociationValue("Points Rank", hehe[1] as UUID, List<object>{0, 0}, "", out var statusCode4, out var associationStatusCode4)
+        // }
+
+        // ReadDBLeaderboardAssociationValuesByRange("Points Rank", 1, 150, out var result3, "", out var statusCode5, out var associationStatusCode5)
+        // for index, value in result3 {
+        //     LogError(value)
+        // }
+    }
+}

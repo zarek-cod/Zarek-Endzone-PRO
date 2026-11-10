@@ -1,0 +1,118 @@
+{
+  "_tag": {
+    "type": "ff.DataStorage"
+  },
+  "_entityId": "vN40Xskn",
+  "children": [],
+  "prefabVariant": null,
+  "activeValue": {
+    "selfValue": true,
+    "valueTag": "activeValue"
+  },
+  "unlockedValue": {
+    "selfValue": true,
+    "valueTag": "unlockedValue"
+  },
+  "editorLockValue": false,
+  "editorVisibleValue": true,
+  "modId": 31,
+  "storageOpen": true,
+  "rankSheets": [
+    {
+      "sheetOrder": 1,
+      "sheetName": "Points Rank",
+      "sheetId": "GKpznyiN",
+      "type": "Int",
+      "keyType": "String",
+      "usePlayerID": true,
+      "columns": [
+        {
+          "name": "Win Rate",
+          "type": "Float",
+          "saved": true
+        },
+        {
+          "name": "KD",
+          "type": "Float",
+          "saved": true
+        },
+        {
+          "name": "temp",
+          "type": "Int",
+          "saved": true
+        }
+      ]
+    }
+  ],
+  "dataSheets": [],
+  "statisticalSheets": [
+    {
+      "sheetName": "Server",
+      "sheetId": "Uxfw98H0",
+      "type": "Int",
+      "keys": [
+        "lastServerTimeStamp",
+        "isDeleting"
+      ]
+    }
+  ],
+  "multicolumnSheets": [
+    {
+      "sheetName": "Players Data",
+      "sheetId": "qXHGzJK2",
+      "type": "MultiColumn",
+      "columns": [
+        {
+          "name": "Kill",
+          "type": "Int",
+          "saved": true
+        },
+        {
+          "name": "Death",
+          "type": "Int",
+          "saved": true
+        },
+        {
+          "name": "Matches Played",
+          "type": "Int",
+          "saved": true
+        },
+        {
+          "name": "Win Matches",
+          "type": "Int",
+          "saved": true
+        }
+      ],
+      "keyType": "String"
+    },
+    {
+      "sheetName": "Statistical Data",
+      "sheetId": "PIWbVxmd",
+      "type": "MultiColumn",
+      "columns": [
+        {
+          "name": "HIGHEST_MATCH_ELIM",
+          "type": "Int",
+          "saved": true
+        },
+        {
+          "name": "HEADSHOTS",
+          "type": "Int",
+          "saved": true
+        },
+        {
+          "name": "AVG_DMG_PER_MATCH",
+          "type": "Int",
+          "saved": true
+        }
+      ],
+      "keyType": "String"
+    }
+  ],
+  "craftlandLeadboard": null,
+  "_entityName": "T_43_YU_WS_MODULE_DATABASE",
+  "showSwitch": true,
+  "multicolumnSheetsClient": [],
+  "dataSheetsClient": []
+}
+//"{FE:{"v":"1.19.4689915","c":{"FF":5001},"s":100}

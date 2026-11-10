@@ -1,0 +1,22 @@
+{
+  "_tag": {
+    "type": "EntityTagSetting"
+  },
+  "_entityId": "L5X6jNMA",
+  "TagSetting": [
+    {
+      "id": "entityTag39541327",
+      "label": "Team1"
+    },
+    {
+      "id": "entityTag38382841",
+      "label": "Team2"
+    },
+    {
+      "id": "entityTag85256571",
+      "label": "Team3"
+    }
+  ],
+  "children": []
+}
+//"{FE:{"v":"1.14.3847898","c":{"FF":5001},"s":100}

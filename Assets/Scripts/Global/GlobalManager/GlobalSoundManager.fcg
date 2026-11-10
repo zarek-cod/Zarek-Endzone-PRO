@@ -1,0 +1,28 @@
+/*
+Global Sound Manager
+Handles all the necessary actions related to sound in the game.
+*/
+import "StdLibrary.fcc" as StdLib
+import "EditorGenLib.fcc" as EditorLib
+import "Playable.fcc" as Playable
+import "Animation.fcc" as Animation
+import "Map.fcc" as Map
+import "Player.fcc" as Player
+import "LevelObject.fcc" as LevelObject
+graph GlobalSoundManager {
+    // Play the 5 seconds countdown sound effect for a specified delay
+    async func PlayFiveSecSfx(player entity<Player>, delay int) {
+        WaitForMillisecond(delay)
+        NotifyPlaySoundV2(player, EResSound.FIVE_SEC_COUNT_DOWN as AudioID, 1.0) // Play the 5 seconds countdown sound effect
+    }
+
+    // Play the end match sound effect for a specified player
+    func PlayEndMatchSound(player entity<Player>) {
+        NotifyPlaySoundV2(player, EResSound.MATCH_END as AudioID, 1.0) // Play the end match sound effect
+    }
+
+    // Play the last round notification sound effect for a specified player
+    func PlayLastRoundNotificationSound(player entity<Player>) {
+        NotifyPlaySoundV2(player, EResSound.LAST_ROUND_SFX as AudioID, 1.0) // Play the last round notification sound effect
+    }
+}

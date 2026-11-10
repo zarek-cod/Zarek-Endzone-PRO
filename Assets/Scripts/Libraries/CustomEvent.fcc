@@ -1,0 +1,4 @@
+import "StdLibrary.fcc" as StdLib
+
+// Event that is fired whenever a team wins a round
+event EndRound(WinningTeam entity<Team>)

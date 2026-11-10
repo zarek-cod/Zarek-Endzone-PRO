@@ -1,0 +1,29 @@
+{
+  "_tag": {
+    "type": "StreamingSetting"
+  },
+  "_entityId": "mEfAW8TB",
+  "streamings": [
+    {
+      "key": "streaming78955073",
+      "name": "streaming1",
+      "chunkSize": 30,
+      "viewDistance": 60,
+      "index": 0
+    },
+    {
+      "key": "streaming16460007",
+      "name": "streaming2",
+      "chunkSize": 50,
+      "viewDistance": 150
+    },
+    {
+      "key": "streaming51153601",
+      "name": "streaming3",
+      "chunkSize": 100,
+      "viewDistance": 300
+    }
+  ],
+  "children": []
+}
+//"{FE:{"v":"1.14.3870515","c":{"FF":5001},"s":100}

@@ -1,0 +1,342 @@
+/* TeamData.cfg
+This script contains all team-related data and functionality,
+using in score board, and team management
+*/
+import "StdLibrary.fcc" as StdLib
+import "EditorGenLib.fcc" as EditorLib
+import "Map.fcc" as Map
+import "List.fcc" as List
+import "../GlobalData/PlayerData.fcg" as PlayerData
+import "../GlobalConfig.fcg" as GlobalConfig
+import "Workflow.fcc" as Workflow
+import "../GlobalManager/GlobalGameManager.fcg" as GlobalGameManager
+graph TeamData {
+    // For both normal booyah mode and esport mode
+    teamPoints Map<entity<Team>, int>  // Map to keep track of points for each team
+    
+    // For esport mode only
+    teamPlacementPoints Map<entity<Team>, int> = nil 
+    teamKillsPoints Map<entity<Team>, int> = nil 
+    teamBooyahCount Map<entity<Team>, int> = nil
+
+    // On the game starts, init team points
+    event OnAwake() {
+        teamPoints = Map<entity<Team>, int>{} // Initialize the team points map
+        if GlobalConfig.scoringType == SCORING_TYPE.ESPORT {
+            teamPlacementPoints = Map<entity<Team>, int>{}
+            teamKillsPoints = Map<entity<Team>, int>{}
+            teamBooyahCount = Map<entity<Team>, int>{}
+        }
+    }
+
+    /* Initialize the team points map with zero points for each team.
+       This function should be called at the start of the game.
+    */
+    func InitializeTeamPoints() {
+        for index, team in GetAllTeams() {
+            teamPoints[team] = 0 // Set initial points to zero
+            if GlobalConfig.scoringType == SCORING_TYPE.ESPORT {
+                teamPlacementPoints[team] = 0
+                teamKillsPoints[team] = 0
+                teamBooyahCount[team] = 0
+            }
+        }
+    }
+
+    /* Register a new team in the team points map.
+       This function adds a new team to the map with an initial score of zero.
+       @param team: The team entity to register
+       (This function is called when a new team is added to the game)
+       @return: Returns true if the operation was successful, false if the team was already registered
+    */
+    func RegisterTeamPoint(team entity<Team>) bool {
+        if (!ContainKey(teamPoints, team)) {
+            teamPoints[team] = 0 // Initialize points for the new team
+            if GlobalConfig.scoringType == SCORING_TYPE.ESPORT {
+                teamPlacementPoints[team] = 0
+                teamKillsPoints[team] = 0
+                teamBooyahCount[team] = 0
+            }
+            return true
+        } else {
+            LogWarning("<TeamData.fcg>: Team already registered: " + team) // Warning Info
+            return false
+        }
+    }
+
+    /* Add points to a specific team's score.
+       USING IN BOOYAH COUNT SCORE TYPE ONLY.
+       @param team: The team entity to which points will be added
+       @param points: The number of points to add
+    */
+    func AddPointsToTeam(team entity<Team>, points int) {
+        if (ContainKey(teamPoints, team)) {
+            teamPoints[team] = teamPoints[team] + points // Increment the team's score
+            // LogInfo("<TeamData.fcg>: Added " + points + " points to team: " + team<Entity>.Name) // Debug Info
+        } else {
+            LogError("<TeamData.fcg>: Team not found: " + team<Entity>.Name) // Error Info
+        }
+    }
+
+    /* Add esport points to a specific team.
+        USING IN ESPORT SCORE TYPE ONLY.
+       @param team: The team entity to which points will be added
+       @param kills: The number of kills to add
+       @param placementPoints: The number of placement points to add
+    */
+    func AddEsportPointsToTeam(team entity<Team>, kills int, placementPoints int) {
+        if GlobalConfig.scoringType != SCORING_TYPE.ESPORT {
+            LogError("<TeamData.fcg>: Cannot add esport points to team: " + team<Entity>.Name + " because scoring type is not esport. Try to change the scoring type in GlobalConfig.fcg to esport.")
+            return
+        }
+        if (!ContainKey(teamPlacementPoints, team) || !ContainKey(teamKillsPoints, team) || !ContainKey(teamBooyahCount, team) || !ContainKey(teamPoints, team)) {
+            LogError("<TeamData.fcg>: Team not found in one (many) of the needed data: " + team<Entity>.Name)
+            return
+        }
+        teamPoints[team] = teamPoints[team] + placementPoints + kills
+        teamPlacementPoints[team] = teamPlacementPoints[team] + placementPoints
+        teamKillsPoints[team] = teamKillsPoints[team] + kills
+        // LogInfo("<TeamData.fcg>: Added " + placementPoints + " placement points, " + kills + " kills points, and " + teamBooyahCount[team] + " seconds of booyah time points to team: " + team<Entity>.Name)
+    }
+
+    /* Add booyah time to a specific team. Which team wins win +1 point.
+       @param team: The team entity to which booyah time will be added
+    */
+    func AddBooyahToTeam(team entity<Team>) {
+        if GlobalConfig.scoringType != SCORING_TYPE.ESPORT {
+            LogError("<TeamData.fcg>: Cannot add booyah time to team: " + team<Entity>.Name + " because scoring type is not esport. Try to change the scoring type in GlobalConfig.fcg to esport.")
+            return
+        }
+        teamBooyahCount[team] = teamBooyahCount[team] + 1
+        LogInfo("<TeamData.fcg>: Added 1 booyah time to team: " + team<Entity>.Name)
+    }
+
+    /* Get the booyah count for a specific team.
+        Team booyah count is the number of times a team has won a round.
+       @param team: The team entity to get the booyah count.
+       @return: The booyah count for the specified team.
+    */
+    func GetTeamBooyahCount(team entity<Team>) int {
+        if GlobalConfig.scoringType == SCORING_TYPE.ESPORT {
+            return teamBooyahCount[team]
+        }
+        LogError("<TeamData.fcg>: Cannot get booyah time for team: " + team<Entity>.Name + " because scoring type is not esport. Try to change the scoring type in GlobalConfig.fcg to esport.")
+        return -1 
+    }
+
+    /* Get the placement points for a specific team.
+        Team placement points is the point that the team gets for the placement of the team in one round. Available in ESPORT SCORE TYPE only.
+       @param team: The team entity to get the placement points.
+       @return: The placement points for the specified team.
+    */
+    func GetTeamPlacementPoints(team entity<Team>) int {
+        if GlobalConfig.scoringType == SCORING_TYPE.ESPORT {
+            return teamPlacementPoints[team]
+        }
+        LogError("<TeamData.fcg>: Cannot get placement points for team: " + team<Entity>.Name + " because scoring type is not esport. Try to change the scoring type in GlobalConfig.fcg to esport.")
+        return -1 
+    }
+
+    /* Get the kills points for a specific team.
+       Team kills points is the point that the team gets for the kills of the team in one round. Available in ESPORT SCORE TYPE only.
+       @param team: The team entity to get the kills points.
+       @return: The kills points for the specified team.
+    */
+    func GetTeamKillsPoints(team entity<Team>) int {
+        if GlobalConfig.scoringType == SCORING_TYPE.ESPORT {
+            return teamKillsPoints[team]
+        }
+        LogError("<TeamData.fcg>: Cannot get kills points for team: " + team<Entity>.Name + " because scoring type is not esport. Try to change the scoring type in GlobalConfig.fcg to esport.")
+        return -1 
+    }
+
+    /* Get the esport points for a specific team.
+       Team esport points is the point that the team gets for the kills and placement of the team in one round. Available in ESPORT SCORE TYPE only.
+       @param team: The team entity to get the esport points.
+       @return: The esport points for the specified team.
+    */
+    func GetTeamEsportPoints(team entity<Team>) int {
+        if GlobalConfig.scoringType == SCORING_TYPE.ESPORT {
+            return teamPoints[team]
+        }
+        LogError("<TeamData.fcg>: Cannot get esport points for team: " + team<Entity>.Name + " because scoring type is not esport. Try to change the scoring type in GlobalConfig.fcg to esport.")
+        return -1 
+    }
+
+    /* Get the current points for all teams.
+       This function returns the map of team points.
+       @return: A map of entity<Team> to int representing team points
+    */
+    func GetTeamPoints(team entity<Team>) int {
+        if GlobalConfig.scoringType == SCORING_TYPE.ESPORT {
+            return teamPoints[team]
+        }
+        LogError("<TeamData.fcg>: Cannot get points for team: " + team<Entity>.Name + " because scoring type is not esport. Try to change the scoring type in GlobalConfig.fcg to esport.")
+        return -1 
+    }
+
+    /* Get the current points for all teams.
+       This function returns the map of all team points.
+       @return: A map of entity<Team> to int representing all team points
+    */
+    func GetAllTeamPoints() Map<entity<Team>, int> {
+        return teamPoints // Return the map of team points
+    }
+
+    /* Get the current point of one team
+        @param team: The team entity to get the point.
+        @return: The current points of the specified team.
+    */
+    func GetTeamPoint(team entity<Team>) int {
+        if (ContainKey(teamPoints, team)) {
+            return teamPoints[team] // Return the points for the specified team
+        } else {
+            LogError("<TeamData.fcg>: Team not found: " + team<Entity>.Name) // Error Info
+            return 0 // Return zero if the team is not found
+        }
+        // LogInfo("<TeamData.fcg>: Current points " + teamPoints) // Debug Info
+    }
+
+    /* Get the team list sorted by points
+       @return: A list of teams sorted by their points in descending order
+    */
+    func GetSortedTeamList() List<entity<Team>>{
+        var sortedTeams List<entity<Team>> = List<entity<Team>>{}
+        var teamCopyDict Map<entity<Team>, int> = Map<entity<Team>, int>{} 
+        var currentActiveTeams List<entity<Team>> = globalEntity<GlobalGameManager>.GetActiveTeams()
+        for team, point in teamPoints {
+            teamCopyDict[team] = point
+        }
+        if GlobalConfig.scoringType == SCORING_TYPE.BOOYAH_COUNT {
+            while Map.Length(teamCopyDict) > 0 {
+                var currentMaxTeam = GetAllKeys(teamCopyDict)[0]
+                for index, team in GetAllKeys(teamCopyDict) {
+                    if teamCopyDict[team as entity<Team>] > teamCopyDict[currentMaxTeam as entity<Team>] {
+                        currentMaxTeam = team
+                    } else if teamCopyDict[team as entity<Team>] == teamCopyDict[currentMaxTeam as entity<Team>] {
+                        // If points are equal, prefer the team with more kill points
+                        var currentMaxTeamKills int = 0
+                        var teamKills int = 0
+                        for index, player in currentMaxTeam as entity<Team><Team>.AllTeammates {
+                            currentMaxTeamKills = currentMaxTeamKills + globalEntity<PlayerData>.GetPlayerData(player)[0] // Sum kills of all teammates
+                        }
+                        for index, player in team as entity<Team><Team>.AllTeammates {
+                            teamKills = teamKills + globalEntity<PlayerData>.GetPlayerData(player)[0] // Sum kills of all teammates
+                        }
+                        if teamKills > currentMaxTeamKills {
+                            currentMaxTeam = team
+                        }
+                    }
+                }
+                Append(sortedTeams, currentMaxTeam)
+                Map.Remove(teamCopyDict, currentMaxTeam)
+            }
+        } else if GlobalConfig.scoringType == SCORING_TYPE.ESPORT {
+            while Map.Length(teamCopyDict) > 0 {
+                var currentMaxTeam = GetAllKeys(teamCopyDict)[0]
+                for index, team in GetAllKeys(teamCopyDict) {
+                    if teamCopyDict[team as entity<Team>] > teamCopyDict[currentMaxTeam as entity<Team>] {
+                        currentMaxTeam = team
+                    } else if teamCopyDict[team as entity<Team>] == teamCopyDict[currentMaxTeam as entity<Team>] {
+                        if !List.Contain(currentActiveTeams, currentMaxTeam) && !List.Contain(currentActiveTeams, team) {
+                            continue
+                        } else if !List.Contain(currentActiveTeams, currentMaxTeam) {
+                            currentMaxTeam = team
+                        } 
+                        if teamBooyahCount[team as entity<Team>] > teamBooyahCount[currentMaxTeam as entity<Team>] {
+                            currentMaxTeam = team
+                        } else if teamBooyahCount[team as entity<Team>] == teamBooyahCount[currentMaxTeam as entity<Team>] {
+                            if teamKillsPoints[team as entity<Team>] > teamKillsPoints[currentMaxTeam as entity<Team>] {
+                                currentMaxTeam = team
+                            }
+                        }
+                    }
+                }
+                Append(sortedTeams, currentMaxTeam)
+                Map.Remove(teamCopyDict, currentMaxTeam)
+            }
+        }
+        return sortedTeams
+    }
+
+    /*Get players grouped by their teams for full scoreboard
+    @return: A list of lists, where each inner list contains players from the same team
+    */
+    func GetSortedPlayersGroup() List<List<entity<Player>>> {
+        var sortedTeams List<entity<Team>> = GetSortedTeamList()
+        var sortedPlayersGroup List<List<entity<Player>>> = List<List<entity<Player>>>{}
+        for index, team in sortedTeams {
+            var playersInTeam List<entity<Player>> = GetSortedPlayersInTeam(team)
+            Append(sortedPlayersGroup, playersInTeam)
+        }
+        return sortedPlayersGroup
+    }
+
+    /*
+    Get the sorted players in a specific team.
+    The players are sorted by their kills, then their damages in descending order.
+    @param team: The team entity to get the sorted players from.
+    @return: A list of players sorted by their scores.
+    */
+    func GetSortedPlayersInTeam(team entity<Team>) List<entity<Player>> {
+        var playersInTeam List<entity<Player>> = List<entity<Player>>{}
+        for index, player in team<Team>.AllTeammates {
+            Append(playersInTeam, player)
+        }
+        var sortedPlayers List<entity<Player>> = List<entity<Player>>{}
+        while List.Length(playersInTeam) > 0 {
+            var highestPlayer = playersInTeam[0]
+            for index, player in playersInTeam {
+                if (globalEntity<PlayerData>.GetPlayerData(player)[0] > globalEntity<PlayerData>.GetPlayerData(highestPlayer)[0]) {
+                    highestPlayer = player
+                } else if (globalEntity<PlayerData>.GetPlayerData(player)[0] == globalEntity<PlayerData>.GetPlayerData(highestPlayer)[0]) {
+                    if (globalEntity<PlayerData>.GetPlayerData(player)[2] > globalEntity<PlayerData>.GetPlayerData(highestPlayer)[2]) {
+                        highestPlayer = player
+                    }
+                }
+            }
+            List.Remove(playersInTeam, highestPlayer)
+            Append(sortedPlayers, highestPlayer)
+        }
+        return sortedPlayers
+    }
+
+    /*
+    Get the sorted scores for all teams.
+    @return: A list of integers representing the sorted scores of all teams, in sorted order, for using together with GetSortedPlayersGroup()
+    */
+    func GetSortedScores() List<int> {
+        var sortedTeams List<entity<Team>> = GetSortedTeamList()
+        var sortedScores List<int> = List<int>{}
+        for index, team in sortedTeams {
+            Append(sortedScores, teamPoints[team])
+        }
+        // LogError(sortedScores)
+        return sortedScores
+    }
+}
+
+// DEPRECATED FUNCTIONS
+    /* Set the kills for a specific team.
+       @param team: The team entity for which to set the kills.
+       @param kills: The number of kills to set.
+    */
+    // func SetTeamKills(team entity<Team>, kills int) {
+    //     if(!ContainKey(teamKills, team)) {
+    //         teamKills[team] = 0 // Initialize kills for the team if not already set
+    //     }
+    //     if(kills != 0){
+    //         teamKills[team] = kills
+    //     }
+    // }
+
+    /* Get the kills for a specific team.
+       @param team: The team entity for which to get the kills.
+       @return: The number of kills for the specified team.
+    */
+    // func GetTeamKills(team entity<Team>) int {
+    //     if(ContainKey(teamKills, team)) {
+    //         return teamKills[team]
+    //     }
+    //     return -1
+    // }

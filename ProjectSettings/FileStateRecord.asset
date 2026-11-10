@@ -1,0 +1,118 @@
+{
+  "_tag": {
+    "type": "FileStateRecord"
+  },
+  "_entityId": "X9iVogmQ",
+  "fileState": {
+    "b80uzw07dbv-lw7lo3oj-f7kqzv8vgcj": {
+      "viewState": {
+        "x": 331.827392578125,
+        "y": 102.61292266845703,
+        "z": 242.77560424804688
+      },
+      "rotationState": {
+        "x": 27.099945068359375,
+        "y": 294.89990234375,
+        "z": 0
+      }
+    },
+    "24fg17yzy0g-mdyd1vi2-gkoy9i99xm": {
+      "viewState": {
+        "x": 779.5000009536743,
+        "y": -76.83339309692383
+      },
+      "scaleState": 1
+    },
+    "gmwgx8ap9d-mdzpt3ez-8cbf5bd2xti": {
+      "viewState": {
+        "x": -189.75537109375,
+        "y": 105.5
+      },
+      "scaleState": 0.75
+    },
+    "69xpm3wc2ir-mdzqoa2w-8qmhu5re3bp": {
+      "viewState": {
+        "x": 220.4267578125,
+        "y": 26.5
+      },
+      "scaleState": 0.5
+    },
+    "a6mevs6rait-mdzs8w4a-tvqcrkmdgtr": {
+      "viewState": {
+        "x": 418.3547668457031,
+        "y": 425.2500305175781
+      },
+      "scaleState": 0.75
+    },
+    "tvek2ying5s-mdzsnxxe-7l20gfu7k0n": {
+      "viewState": {
+        "x": 47.701690673828125,
+        "y": 52.25000762939453
+      },
+      "scaleState": 0.75
+    },
+    "BA9iBjOL://whgog58btr-lx1724pg-3h0scyd2o43": {
+      "viewState": {
+        "x": 117.69140434265142,
+        "y": 196.49999904632568
+      },
+      "scaleState": 1
+    },
+    "7a2uq2dkj72-me10s9wa-2hq69po7r7t": {
+      "viewState": {
+        "x": -181.6328125,
+        "y": 63.000000000000114
+      },
+      "scaleState": 1
+    },
+    "q57w9f5cn3-me163lq8-5e0mflnnl6e": {
+      "viewState": {
+        "x": -255.01172637939453,
+        "y": 56.500000953674316
+      },
+      "scaleState": 1
+    },
+    "c5pg7l5gsfw-me6yh0jh-ne3z37r2ig": {
+      "viewState": {
+        "x": 577,
+        "y": -192
+      },
+      "scaleState": 1
+    },
+    "q0914pqtz2-me9n4i3w-26tf92w53sz": {
+      "viewState": {
+        "x": 264.2500305175781,
+        "y": 60
+      },
+      "scaleState": 1
+    },
+    "4xapq6t085a-lw7o4jf0-qijq6ombjwp": {
+      "viewState": {
+        "x": -23.177085876464844,
+        "y": 21.472824096679688,
+        "z": 151.70443725585938
+      },
+      "rotationState": {
+        "x": 30.699806213378906,
+        "y": 146.49990844726562,
+        "z": 0
+      }
+    },
+    "jb4zty6mdy8-mfuvo5w3-p9oo5j67w4q": {
+      "viewState": {
+        "x": 0,
+        "y": 0
+      },
+      "scaleState": 1
+    },
+    "lv75f5i5u-mfuvoboh-dwfc1xwnndf": {
+      "viewState": {
+        "x": -391,
+        "y": -138
+      },
+      "scaleState": 1
+    }
+  },
+  "children": []
+}
+//"{FE:{"v":"1.19.4689915","c":{"FF":5001},"s":100}

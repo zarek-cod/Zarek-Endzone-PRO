@@ -1,0 +1,121 @@
+/* Script: PlayersShopIcon.fcg
+   Description: This script handles the player shop icon functionality in the game.
+   It is responsible for managing the player's shop icon and its interactions.
+*/
+import "StdLibrary.fcc" as StdLib
+import "EditorGenLib.fcc" as EditorLib
+import "Hud.fcc" as Hud
+import "Map.fcc" as Map
+import "Math.fcc" as Math
+graph PlayersShopIcon {
+    shopIcon Map<entity<Player>, entity<CustomUI>> // Map to associate players with their shop icons
+    shopIconPosition Map<entity<Player>, Vector2> // Map to associate players with their shop icon positions
+    shopIconSize Map<entity<Player>, Vector2> // Map to associate players with their shop icon sizes
+    event OnGameStart() {
+        shopIcon = Map<entity<Player>, entity<CustomUI>>{} // Initialize the map of players' shop icons at the start of the game
+        shopIconPosition = Map<entity<Player>, Vector2>{} // Initialize the map of players' shop icon positions at the start of the game
+        // LogInfo("<PlayersShopIcon.fcg>: Game started, players' shop icons initialized") // Debug Info
+    }
+
+    /* Register the player's shop icon.
+       This function associates a player with their shop icon in the map.
+       @param player: The player entity whose shop icon will be registered
+       @return: Returns true if the operation was successful
+    */
+    func RegisterShopIcon(player entity<Player>) bool {
+        CreateCustomUI(out var icon, player, EResUI.ShopIconUI);
+        if (shopIcon == nil) {
+            shopIcon = Map<entity<Player>, entity<CustomUI>>{} // Initialize the map if it is null
+        }
+        icon<CustomUI>.IsVisible = false // Initially set the shop icon to not visible
+        if (!ContainKey(shopIcon, player)) {
+            shopIcon[player] = icon // Associate the player with their shop icon
+            // var iconWidget = GetWidgetFromCustomUI(player, icon, EResUIShopIconUI.BUTTON as CustomUIWidgetID)
+           // LogInfo("<PlayersShopIcon.fcg>: Registered shop icon for player: " + player<Entity>.Name + "with position: " + iconWidget<UIWidget>.AnchorPosition)
+            return true // Return true to indicate the operation was successful
+        } else {
+            LogWarning("<PlayersShopIcon.fcg>: Shop icon already registered for player: " + player<Entity>.Name) // Warning Info
+            return false // Return false to indicate the operation was unsuccessful
+        }
+    }
+
+    /* Register the player's shop icon position.
+       This function associates a player with their shop icon position in the map.
+       @param player: The player entity whose shop icon position will be registered
+       @param clientPosition: The position of the shop icon in the client
+       @return: Returns true if the operation was successful
+    */
+    func RegisterClientShopIconDimension(player entity<Player>, clientPosition Vector2, clientSize Vector2) bool {
+        if (shopIconPosition == nil) {
+            shopIconPosition = Map<entity<Player>, Vector2>{} // Initialize the map if it is null
+        }
+        shopIconPosition[player] = clientPosition // Associate the player with their shop icon position
+        shopIconSize[player] = clientSize // Associate the player with their shop icon size
+        if Map.ContainKey(shopIcon, player) {
+            var iconWidget = GetWidgetFromCustomUI(player, shopIcon[player], EResUIShopIconUI.BUTTON as CustomUIWidgetID)
+            iconWidget<UIWidget>.AnchorPosition = Vector3{clientPosition.X, clientPosition.Y, 0}
+            // iconWidget<UIWidget>.Width = Math.Round(clientSize.X / 1.2)
+            // iconWidget<UIWidget>.Height = Math.Round(clientSize.Y / 1.2)
+        }
+        return true // Return true to indicate the operation was successful
+    }
+
+    /* Unregister the player's shop icon.
+       This function removes the player's shop icon from the map if it exists.
+       @param player: The player entity whose shop icon will be unregistered
+       @return: Returns true if the operation was successful, false if the player was not found
+       (Currently not used in the game, but can be useful for future features or cleanup operations)
+    */
+    func UnregisterShopIcon(player entity<Player>) bool {
+        if (ContainKey(shopIcon, player)) {
+            DestroyCustomUI(shopIcon[player])
+            Remove(shopIcon, player) // Remove the player's shop icon from the map
+            // LogInfo("<PlayersShopIcon.fcg>: Unregistered shop icon for player: " + player<Entity>.Name) // Debug Info
+            return true // Return true to indicate the operation was successful
+        } else {
+            LogWarning("<PlayersShopIcon.fcg>: No shop icon found for player: " + player<Entity>.Name) // Warning Info
+            return false // Return false to indicate the operation was unsuccessful
+        }
+
+    }
+
+    /* Toggle the visibility of all players' shop icons.
+       This function sets the visibility of each player's shop icon based on the provided boolean value.
+       @param visible: A boolean indicating whether to show or hide the shop icons
+       @return: Returns true if the operation was successful
+    */
+    func ToggleAllIcons(visible bool) bool {
+        for player, shop in shopIcon {
+            // if Map.ContainKey(shopIconPosition, player) {
+            //     var iconWidget = GetWidgetFromCustomUI(player, shop, EResUIShopIconUI.BUTTON as CustomUIWidgetID)
+            //     iconWidget<UIWidget>.AnchorPosition = Vector3{shopIconPosition[player].X, shopIconPosition[player].Y, 0}
+            // } else {
+            //     LogWarning("<PlayersShopIcon.fcg>: No shop icon position found for player: " + player<Entity>.Name) // Warning Info
+            // }
+            // if Map.ContainKey(shopIconSize, player) {
+            //     var iconWidget = GetWidgetFromCustomUI(player, shop, EResUIShopIconUI.BUTTON as CustomUIWidgetID)
+            // } else {
+            //     LogWarning("<PlayersShopIcon.fcg>: No shop icon size found for player: " + player<Entity>.Name) // Warning Info
+            // }
+            shop<CustomUI>.IsVisible = visible // Set the visibility of each player's shop icon
+            // LogInfo("<PlayersShopIcon.fcg>: Set shop icon visibility for player: " + player<Entity>.Name + " to " + visible) // Debug Info
+        }
+        return true // Return true to indicate the operation was successful
+    }
+
+    /*
+    Toggle shop icon for a specific player
+    @param player: The player entity whose shop icon will be toggled
+    @return: Returns true if the operation was successful
+    */
+    func ToggleIconForPlayer(player entity<Player>, status bool) bool {
+        if (ContainKey(shopIcon, player)) {
+            shopIcon[player]<CustomUI>.IsVisible = status // Set the visibility
+            // LogInfo("<PlayersShopIcon.fcg>: Toggled shop icon visibility for player: " + player<Entity>.Name) // Debug Info
+            return true
+        }
+        LogError("<PlayersShopIcon.fcg>: No shop icon found for player: " + player<Player>.NickName) // Error Info
+        return false
+    }
+
+}

@@ -1,0 +1,1626 @@
+{
+  "_tag": {
+    "type": "ResourceRegisteration"
+  },
+  "_entityId": "yd4Pnquu",
+  "Resource": {
+    "ui": {
+      "id": "ui",
+      "children": [
+        {
+          "refer": {
+            "fileId": "mtmnh3shk4h-mdznpnxu-vmyhvobmo4g",
+            "filePath": "Assets\\UI\\ShopIcon.ui",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "ui"
+          },
+          "scriptName": "ShopIconUI",
+          "children": [
+            {
+              "id": "XpEVddJr",
+              "scriptName": "BUTTON"
+            }
+          ]
+        },
+        {
+          "refer": {
+            "fileId": "xvip7zhfwwd-me6vbb4w-y68102ys7pj",
+            "filePath": "Assets\\UI\\MiniScoreBoard.ui",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "ui"
+          },
+          "scriptName": "MiniScoreBoardUI",
+          "children": [
+            {
+              "id": "VeUCA3IR",
+              "scriptName": "Layout"
+            },
+            {
+              "id": "7ChPZapq",
+              "scriptName": "Team1Bg"
+            },
+            {
+              "id": "WQQg5D9n",
+              "scriptName": "Team2Bg"
+            },
+            {
+              "id": "KFfGY6Hd",
+              "scriptName": "Team3Bg"
+            },
+            {
+              "id": "ep0Ki2Ir",
+              "scriptName": "Team1Score"
+            },
+            {
+              "id": "gcIi7AlY",
+              "scriptName": "Team2Score"
+            },
+            {
+              "id": "uF05J78N",
+              "scriptName": "Team3Score"
+            },
+            {
+              "id": "eiByFNbF",
+              "scriptName": "Team1ScoreBG"
+            },
+            {
+              "id": "blesmBDr",
+              "scriptName": "Team2ScoreBG"
+            },
+            {
+              "id": "RcNVeHqq",
+              "scriptName": "Team3ScoreBg"
+            },
+            {
+              "id": "zWB5UVU7",
+              "scriptName": "Team1AlivesLayout"
+            },
+            {
+              "id": "fAunZoiZ",
+              "scriptName": "Team2AlivesLayout"
+            },
+            {
+              "id": "IqcQKOXr",
+              "scriptName": "Team3AlivesLayout"
+            },
+            {
+              "id": "lzpnjqQk",
+              "scriptName": "TextAnimTeam1"
+            },
+            {
+              "id": "tStx5COo",
+              "scriptName": "TextAnimTeam2"
+            },
+            {
+              "id": "rtXJYT6l",
+              "scriptName": "TextAnimTeam3"
+            }
+          ]
+        },
+        {
+          "refer": {
+            "fileId": "seqjl5bmwhd-me707act-9yh0bs47mbj",
+            "filePath": "Assets\\UI\\FullScoreBoard.ui",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "ui"
+          },
+          "scriptName": "FullScoreBoard",
+          "children": [
+            {
+              "id": "vFyKxDeh",
+              "scriptName": "FirstRankTeamBooyah"
+            },
+            {
+              "id": "BxuWR8D9",
+              "scriptName": "SecondRankTeamBooyah"
+            },
+            {
+              "id": "hUm3rppA",
+              "scriptName": "ThirdRankTeamBooyah"
+            },
+            {
+              "id": "dG8BoGH1",
+              "scriptName": "TeamInfoLayout"
+            },
+            {
+              "id": "r61sreno",
+              "scriptName": "TeamName1"
+            },
+            {
+              "id": "5V37pHcY",
+              "scriptName": "TeamName2"
+            },
+            {
+              "id": "996vA3yX",
+              "scriptName": "TeamName3"
+            },
+            {
+              "id": "UnT5rkLq",
+              "scriptName": "Rank1BG"
+            },
+            {
+              "id": "zjPNz09m",
+              "scriptName": "Rank2BG"
+            },
+            {
+              "id": "KS67tS2J",
+              "scriptName": "Rank3BG"
+            },
+            {
+              "id": "qwHipcx7",
+              "scriptName": "Increase1"
+            },
+            {
+              "id": "C6buQagt",
+              "scriptName": "Increase2"
+            },
+            {
+              "id": "XN5ReIkB",
+              "scriptName": "Increase3"
+            },
+            {
+              "id": "ahIZVgks",
+              "scriptName": "Rank1NameBg"
+            },
+            {
+              "id": "QPb0oM0T",
+              "scriptName": "Rank2NameBg"
+            },
+            {
+              "id": "D1AUy1uY",
+              "scriptName": "Rank3NameBg"
+            },
+            {
+              "id": "yb4OeJsC",
+              "scriptName": "Rank1BooyahBg"
+            },
+            {
+              "id": "TKAM3AI6",
+              "scriptName": "Rank2BooyahBg"
+            },
+            {
+              "id": "ip8nNVl4",
+              "scriptName": "Rank3BooyahBg"
+            }
+          ]
+        },
+        {
+          "refer": {
+            "fileId": "iy4b2j58t5-mecc53nr-mw66xrvecvh",
+            "filePath": "Assets\\UI\\GameInfo.ui",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "ui"
+          },
+          "scriptName": "GameInfo",
+          "children": [
+            {
+              "id": "ip85tDjm",
+              "scriptName": "Counter"
+            },
+            {
+              "id": "JYpiVrsO",
+              "scriptName": "RoundStageText"
+            },
+            {
+              "id": "XC8UBxUL",
+              "scriptName": "SkillText"
+            },
+            {
+              "id": "GVgqPt1C",
+              "scriptName": "TargetText"
+            }
+          ]
+        },
+        {
+          "refer": {
+            "fileId": "s6uls960ch-megr6hu0-1v18c2hlj4h",
+            "filePath": "Assets\\UI\\Tutorial.ui",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "ui"
+          },
+          "scriptName": "Tutorial",
+          "children": [
+            {
+              "id": "mmAy27e5",
+              "scriptName": "Scene1"
+            },
+            {
+              "id": "gXQEpUl4",
+              "scriptName": "Scene2"
+            },
+            {
+              "id": "7diNpHs0",
+              "scriptName": "Scene3"
+            },
+            {
+              "id": "R4AVg4ly",
+              "scriptName": "Scene4"
+            },
+            {
+              "id": "HvmeOquT",
+              "scriptName": "Scene5"
+            },
+            {
+              "id": "ZnfFe7In",
+              "scriptName": "ChangeSceneButton"
+            },
+            {
+              "id": "c36j5wSO",
+              "scriptName": "SkipButton"
+            }
+          ]
+        },
+        {
+          "refer": {
+            "fileId": "4yk1j05l5l6-mgyigqou-z4tsmo9dbz",
+            "filePath": "Assets\\UI\\EsportFullScoreBoard.ui",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "ui"
+          },
+          "scriptName": "EsportFullScoreBoard",
+          "children": [
+            {
+              "id": "vFyKxDeh",
+              "scriptName": "FirstRankTeamBooyah"
+            },
+            {
+              "id": "BxuWR8D9",
+              "scriptName": "SecondRankTeamBooyah"
+            },
+            {
+              "id": "hUm3rppA",
+              "scriptName": "ThirdRankTeamBooyah"
+            },
+            {
+              "id": "r61sreno",
+              "scriptName": "FirstRankTeamName"
+            },
+            {
+              "id": "5V37pHcY",
+              "scriptName": "SecRankTeamName"
+            },
+            {
+              "id": "996vA3yX",
+              "scriptName": "ThirdRankTeamName"
+            },
+            {
+              "id": "UnT5rkLq",
+              "scriptName": "Rank1BG"
+            },
+            {
+              "id": "zjPNz09m",
+              "scriptName": "Rank2BG"
+            },
+            {
+              "id": "KS67tS2J",
+              "scriptName": "Rank3BG"
+            },
+            {
+              "id": "ahIZVgks",
+              "scriptName": "Rank1NameBg"
+            },
+            {
+              "id": "QPb0oM0T",
+              "scriptName": "Rank2NameBg"
+            },
+            {
+              "id": "D1AUy1uY",
+              "scriptName": "Rank3NameBg"
+            },
+            {
+              "id": "a0SiGPVG",
+              "scriptName": "Rank1KillBg"
+            },
+            {
+              "id": "x6S4u2rE",
+              "scriptName": "Rank2KillBg"
+            },
+            {
+              "id": "ip8nNVl4",
+              "scriptName": "Rank3KillBg"
+            },
+            {
+              "id": "yb4OeJsC",
+              "scriptName": "Rank1BooyahBg"
+            },
+            {
+              "id": "TKAM3AI6",
+              "scriptName": "Rank2BooyahBg"
+            },
+            {
+              "id": "5oCZ1ZOR",
+              "scriptName": "Rank3BooyahBg"
+            },
+            {
+              "id": "pSJ18B8S",
+              "scriptName": "Rank1PlacementBg"
+            },
+            {
+              "id": "ApFIuzUd",
+              "scriptName": "Rank2PlacementBg"
+            },
+            {
+              "id": "Thv5xQKu",
+              "scriptName": "Rank3PlacementBg"
+            },
+            {
+              "id": "ajiYjYzQ",
+              "scriptName": "Rank1TSBg"
+            },
+            {
+              "id": "Zj07sFwp",
+              "scriptName": "Rank2TSBg"
+            },
+            {
+              "id": "DST462SY",
+              "scriptName": "Rank3TSBg"
+            },
+            {
+              "id": "PeuV2S3c",
+              "scriptName": "FirstRankTeamKill"
+            },
+            {
+              "id": "5F8SETuZ",
+              "scriptName": "SecondRankTeamKill"
+            },
+            {
+              "id": "TSVK3qe8",
+              "scriptName": "ThirdRankTeamKill"
+            },
+            {
+              "id": "udoTf8F6",
+              "scriptName": "FIrstRankTeamPlPts"
+            },
+            {
+              "id": "o7kjvN2t",
+              "scriptName": "SecRankTeamPlPts"
+            },
+            {
+              "id": "x8AolPbq",
+              "scriptName": "ThirdRankTeamPlPts"
+            },
+            {
+              "id": "pmu2XlM5",
+              "scriptName": "FirstRankTeamTS"
+            },
+            {
+              "id": "q4ebxfR6",
+              "scriptName": "SecRankTeamTS"
+            },
+            {
+              "id": "WpG8tBgs",
+              "scriptName": "ThirdRankTeamTS"
+            },
+            {
+              "id": "6PwC49U8",
+              "scriptName": "PI1"
+            },
+            {
+              "id": "FbNCe7xT",
+              "scriptName": "PI2"
+            },
+            {
+              "id": "OFzMzW0l",
+              "scriptName": "PI3"
+            },
+            {
+              "id": "DPufl3dP",
+              "scriptName": "BIncrease1"
+            },
+            {
+              "id": "LHTw7oPn",
+              "scriptName": "BIncrease2"
+            },
+            {
+              "id": "hVpfJmE5",
+              "scriptName": "BIncrease3"
+            },
+            {
+              "id": "qwHipcx7",
+              "scriptName": "KIncrease1"
+            },
+            {
+              "id": "C6buQagt",
+              "scriptName": "KIncrease2"
+            },
+            {
+              "id": "XN5ReIkB",
+              "scriptName": "KIncrease3"
+            },
+            {
+              "id": "FlMcQv5U",
+              "scriptName": "TooltipText"
+            }
+          ]
+        },
+        {
+          "refer": {
+            "fileId": "we3l3q7dc4-mhjyhpq3-1nxe30p49ua",
+            "filePath": "Assets\\UI\\Leaderboard.ui",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "ui"
+          },
+          "scriptName": "Leaderboard",
+          "children": [
+            {
+              "id": "zcxfIxe9",
+              "scriptName": "pKD"
+            },
+            {
+              "id": "GheAz8Lm",
+              "scriptName": "pWinrate"
+            },
+            {
+              "id": "W6uXfhVN",
+              "scriptName": "Avatar"
+            },
+            {
+              "id": "HmH7hUil",
+              "scriptName": "Player"
+            },
+            {
+              "id": "MIc9M3Pm",
+              "scriptName": "PlayerLayout"
+            }
+          ]
+        },
+        {
+          "refer": {
+            "fileId": "jqwtpc656i9-mhnaftt7-2c75pwde1qd",
+            "filePath": "Assets\\UI\\LeaderboardOneColumn.ui",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "ui"
+          },
+          "scriptName": "LeaderboardOneColumn",
+          "children": [
+            {
+              "id": "MIc9M3Pm",
+              "scriptName": "PlayerLayout"
+            },
+            {
+              "id": "HmH7hUil",
+              "scriptName": "Player"
+            },
+            {
+              "id": "wmuwT3KW",
+              "scriptName": "ColumnTitle"
+            }
+          ]
+        },
+        {
+          "refer": {
+            "fileId": "o56i65mu90h-mhob70rm-xt9ykyxi2nb",
+            "filePath": "Assets\\UI\\LeaderboardStatistics.ui",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "ui"
+          },
+          "scriptName": "LeaderboardStatistics",
+          "children": [
+            {
+              "id": "MIc9M3Pm",
+              "scriptName": "DataLayout"
+            },
+            {
+              "id": "t2ZprYIF",
+              "scriptName": "DataRow"
+            },
+            {
+              "id": "W6uXfhVN",
+              "scriptName": "Avatar"
+            },
+            {
+              "id": "WzPbdhMg",
+              "scriptName": "GV"
+            },
+            {
+              "id": "Wctt8K2N",
+              "scriptName": "WV"
+            },
+            {
+              "id": "GnurJIt4",
+              "scriptName": "KDV"
+            },
+            {
+              "id": "Vr0fsHIf",
+              "scriptName": "EV"
+            },
+            {
+              "id": "HZqigmmq",
+              "scriptName": "ADMV"
+            },
+            {
+              "id": "Vgw6RJTl",
+              "scriptName": "ASTV"
+            },
+            {
+              "id": "hhsoz9iv",
+              "scriptName": "HV"
+            },
+            {
+              "id": "qnnfGpJ9",
+              "scriptName": "HMEV"
+            }
+          ]
+        }
+      ]
+    },
+    "scene": {
+      "id": "scene",
+      "children": [
+        {
+          "refer": {
+            "fileId": "b80uzw07dbv-lw7lo3oj-f7kqzv8vgcj",
+            "filePath": "Assets\\Scene\\New Scene.scene",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "scene"
+          },
+          "scriptName": "NewScene",
+          "children": [
+            {
+              "id": "BQWhjc5C",
+              "scriptName": "SpawnGroup1"
+            },
+            {
+              "id": "zsF09YZU",
+              "scriptName": "SpawnGroup2"
+            },
+            {
+              "id": "pqNeTg45",
+              "scriptName": "SpawnGroup3"
+            },
+            {
+              "id": "CUb1bS4y",
+              "scriptName": "GameStartSpawnPoint"
+            },
+            {
+              "id": "nYLqPbYQ",
+              "scriptName": "SpawnGroup4"
+            },
+            {
+              "id": "netyOr6F",
+              "scriptName": "SpawnGroup5"
+            },
+            {
+              "id": "h6sAAwDO",
+              "scriptName": "SpawnGroup6"
+            },
+            {
+              "id": "zw7I9shp",
+              "scriptName": "SpawnGroup7"
+            },
+            {
+              "id": "OZVOn6Iq",
+              "scriptName": "StartPos1"
+            },
+            {
+              "id": "a5k6yMKo",
+              "scriptName": "StartPos2"
+            },
+            {
+              "id": "cKCLxhHs",
+              "scriptName": "StartPos3"
+            },
+            {
+              "id": "37LajY5R",
+              "scriptName": "StartPos4"
+            },
+            {
+              "id": "OIXeN9TN",
+              "scriptName": "StartPos5"
+            },
+            {
+              "id": "8ioIlHVJ",
+              "scriptName": "StartPos6"
+            },
+            {
+              "id": "dy8BoXSq",
+              "scriptName": "StartPos7"
+            },
+            {
+              "id": "IKdly4C8",
+              "scriptName": "EndPos1List"
+            },
+            {
+              "id": "SElDOtjJ",
+              "scriptName": "EndPos2List"
+            },
+            {
+              "id": "g2v8AI1g",
+              "scriptName": "EndPos3List"
+            },
+            {
+              "id": "f0IzmLkr",
+              "scriptName": "EndPos4List"
+            },
+            {
+              "id": "aDioDQg8",
+              "scriptName": "EndPos5List"
+            },
+            {
+              "id": "P9nXE4pQ",
+              "scriptName": "EndPos6List"
+            },
+            {
+              "id": "CIz8o9vA",
+              "scriptName": "EndPos7List"
+            },
+            {
+              "id": "oGDzcivw",
+              "scriptName": "SpawnGroup8"
+            },
+            {
+              "id": "l091YrvV",
+              "scriptName": "EndPos8List"
+            },
+            {
+              "id": "wpWRaOcY",
+              "scriptName": "StartPos8"
+            },
+            {
+              "id": "Np6Ljich",
+              "scriptName": "SpawnGroup9"
+            },
+            {
+              "id": "ZBHCUsLs",
+              "scriptName": "StartPos9"
+            },
+            {
+              "id": "t0LTCls8",
+              "scriptName": "EndPos9List"
+            },
+            {
+              "id": "z1A26jGJ",
+              "scriptName": "SpawnGroup10"
+            },
+            {
+              "id": "U0lYrXRi",
+              "scriptName": "StartPos10"
+            },
+            {
+              "id": "PypOeXCO",
+              "scriptName": "EndPos10List"
+            },
+            {
+              "id": "IoTJs5Pu",
+              "scriptName": "SpawnGroup11"
+            },
+            {
+              "id": "2Z7ncrCd",
+              "scriptName": "StartPos11"
+            },
+            {
+              "id": "8BFdoX9B",
+              "scriptName": "EndPos11List"
+            },
+            {
+              "id": "TfpU8LTo",
+              "scriptName": "RankLB"
+            },
+            {
+              "id": "Rf8MeWBH",
+              "scriptName": "PersonalStatsLB"
+            },
+            {
+              "id": "lm0aB3Wb",
+              "scriptName": "HMELB"
+            },
+            {
+              "id": "q5t6Y7LK",
+              "scriptName": "ADMLB"
+            },
+            {
+              "id": "yufNsG5T",
+              "scriptName": "HeadshotLB"
+            }
+          ]
+        }
+      ]
+    },
+    "prefab": {
+      "id": "prefab",
+      "children": [
+        {
+          "refer": {
+            "fileId": "sQGQ0ldo://qg2mo7auou-mji0x2bx-205c339pxlv",
+            "filePath": "sQGQ0ldo://Mini_Kelly.prefab",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "prefab"
+          },
+          "scriptName": "Mini_Kelly",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "sQGQ0ldo://czycgwwryo-mji0x2c6-yypym8qmqj",
+            "filePath": "sQGQ0ldo://Mini_Tatsuya.prefab",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "prefab"
+          },
+          "scriptName": "Mini_Tatsuya",
+          "children": []
+        }
+      ]
+    },
+    "ugcscript": {
+      "id": "ugcscript",
+      "children": [
+        {
+          "refer": {
+            "fileId": "cokmgh6a7n9-me19tysj-5f4y1bak1f7",
+            "filePath": "Assets\\Scripts\\Player\\PlayerController.fcg",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "ugcscript"
+          },
+          "scriptName": "PlayerController",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "14u1ldw7bid-me2cnmd6-dc9ovgqfrdm",
+            "filePath": "Assets\\Scripts\\Global\\GlobalData\\PlayersTimerUI.fcg",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "ugcscript"
+          },
+          "scriptName": "PlayersTimerUI",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "cnavcxlqlx8-me2ceqp9-72xaicvqnzj",
+            "filePath": "Assets\\Scripts\\Global\\GlobalData\\PlayersShopIcon.fcg",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "ugcscript"
+          },
+          "scriptName": "PlayersShopIcon",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "1fmiavpxggz-me2b0nyo-5tc30wio6wm",
+            "filePath": "Assets\\Scripts\\Global\\GlobalData\\SpawnPoints.fcg",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "ugcscript"
+          },
+          "scriptName": "SpawnPoints",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "nsusd6o2c5-me2aw50x-2ig8hx43rkg",
+            "filePath": "Assets\\Scripts\\Global\\GlobalData\\TeamPoints.fcg",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "ugcscript"
+          },
+          "scriptName": "TeamPoints",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "x3acsvan9b-me2akzg0-y6yqrdplgxk",
+            "filePath": "Assets\\Scripts\\Global\\GlobalData\\TeamsAlive.fcg",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "ugcscript"
+          },
+          "scriptName": "TeamsAlive",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "rm7hbd00za-me2j6qtx-baf7xcr3ois",
+            "filePath": "Assets\\Scripts\\Global\\GlobalData\\PlayersWallets.fcg",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "ugcscript"
+          },
+          "scriptName": "PlayersWallets",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "x9knpdezlnj-me2jh2f0-jqisv43fp1",
+            "filePath": "Assets\\Scripts\\Global\\GlobalManager\\GlobalCurrencyManager.fcg",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "ugcscript"
+          },
+          "scriptName": "GlobalCurrencyManager",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "wuejhutkrqa-me2kwv9d-np0e8hv7o5m",
+            "filePath": "Assets\\Scripts\\Global\\GlobalManager\\GlobalPreparationPhaseManager.fcg",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "ugcscript"
+          },
+          "scriptName": "GlobalPreparationPhaseManager",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "gfx3sfnn84n-me2nd6ur-y17ei7n6ru",
+            "filePath": "Assets\\Scripts\\Global\\GlobalManager\\GlobalCombatManager.fcg",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "ugcscript"
+          },
+          "scriptName": "GlobalCombatManager",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "0rapooqlaqr-me6n70q4-24bi9d7g6l0h",
+            "filePath": "Assets\\Scripts\\Global\\GlobalData\\CombatRoundCounter.fcg",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "ugcscript"
+          },
+          "scriptName": "CombatRoundCounter",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "r7fwtygqdla-me6hwd2h-umai379vxk",
+            "filePath": "Assets\\Scripts\\Global\\GlobalManager\\GlobalUIManager.fcg",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "ugcscript"
+          },
+          "scriptName": "GlobalUIManager",
+          "children": []
+        }
+      ]
+    },
+    "eca": {
+      "id": "eca",
+      "children": []
+    },
+    "texture": {
+      "id": "texture",
+      "children": [
+        {
+          "refer": {
+            "fileId": "c142b137dde952bfa7bd03b47c420376",
+            "filePath": "lib://fftextures/WorkshopIconLibrary/FF_UI_Mode_CS.png",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "texture"
+          },
+          "scriptName": "openingIcon_1",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "ypk1h7yo0p-me6u4vxx-11vad93mh81p",
+            "filePath": "Assets\\Resources\\Logo.png",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "texture"
+          },
+          "scriptName": "logo",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "b063b0439839b3d97a8fd2aa6a57ef8b",
+            "filePath": "lib://fftextures/WorkshopIconLibrary/T_34_M_WS_ICON_SQUARE.png",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "texture"
+          },
+          "scriptName": "Square",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "h2n0b2obp6n-mf3m8uo9-ddh2tp4kl2l",
+            "filePath": "Assets\\Resources\\SeaTalk_IMG_20250903_134809.png",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "texture"
+          },
+          "scriptName": "FullMap",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "1825665227fdf4993c4c5d6062c9a1e9",
+            "filePath": "lib://fftextures/WorkshopIconLibrary/FF_UI_SmallWindow_Botton.png",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "texture"
+          },
+          "scriptName": "SmallWindow",
+          "children": []
+        }
+      ]
+    },
+    "effecttype": {
+      "id": "effecttype",
+      "children": [
+        {
+          "refer": {
+            "fileId": "EffectType_UGC_T_34_LY_WS_VFX5",
+            "filePath": "lib://ffEffects/T_34_LY_WS_VFX5",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "effecttype"
+          },
+          "scriptName": "PIXELS",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "EffectType_UGC_T_34_LY_WS_VFX2",
+            "filePath": "lib://ffEffects/T_34_LY_WS_VFX2",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "effecttype"
+          },
+          "scriptName": "CYLINDRICAL",
+          "children": []
+        }
+      ]
+    },
+    "sound": {
+      "id": "sound",
+      "children": [
+        {
+          "refer": {
+            "fileId": "2d46f0afed54a0815c124b6ef54255e3",
+            "filePath": "lib://ffsounds/WorkshopAudio/T_34_M_WS_SOUNDDD.wav",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "sound"
+          },
+          "scriptName": "FIVE_SEC_COUNT_DOWN",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "c25b2d4d794fd3c3ec727f1af9c6c751",
+            "filePath": "lib://ffsounds/WorkshopAudio/T_39_HJ_WS_SOUND16.wav",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "sound"
+          },
+          "scriptName": "TIP",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "mklj8y0cukc-mejulrht-d60c3eldkd",
+            "filePath": "Assets\\Resources\\booyah-free-fire.mp3",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "sound"
+          },
+          "scriptName": "MATCH_END",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "56a863128e53efe1b3a39667696f9c0c",
+            "filePath": "lib://ffsounds/WorkshopAudio/T_39_HJ_WS_SOUND14.wav",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "sound"
+          },
+          "scriptName": "LAST_ROUND_SFX",
+          "children": []
+        }
+      ]
+    },
+    "fitem": {
+      "id": "fitem",
+      "children": [
+        {
+          "refer": {
+            "fileId": "559b9fa1c2f28c6c71b1801580f3cd2c",
+            "filePath": "lib://ffitem/item_303",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "fitem"
+          },
+          "scriptName": "VestLv3",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "40e2f427910bb56d752a087cd3e815ff",
+            "filePath": "lib://ffitem/item_306",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "fitem"
+          },
+          "scriptName": "HelmetLv3",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "0d72e1119f4bb2a233503ed6d2ca8456",
+            "filePath": "lib://ffitem/item_1201",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "fitem"
+          },
+          "scriptName": "GlooWall",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "9cb4b297a2dc2e25384c2df19681304d",
+            "filePath": "lib://ffitem/item_6",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "fitem"
+          },
+          "scriptName": "AK47",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "6f5de8bb6efa2adb36531668f7e3965d",
+            "filePath": "lib://ffitem/item_28",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "fitem"
+          },
+          "scriptName": "XM8",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "40e09243ca39167877ac302d27d2a3cc",
+            "filePath": "lib://ffitem/item_70",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "fitem"
+          },
+          "scriptName": "GROZAX",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "f426d0587d254d00b2d1d3cf084149c0",
+            "filePath": "lib://ffitem/item_21002",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "fitem"
+          },
+          "scriptName": "M590",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "b26d4b6d0017c23f98958fbb274918bd",
+            "filePath": "lib://ffitem/item_102",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "fitem"
+          },
+          "scriptName": "MedKit",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "5496c970a33aad3509e3bf94a8375066",
+            "filePath": "lib://ffitem/item_1205",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "fitem"
+          },
+          "scriptName": "SuperMed",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "033b704ad14b987de10a8153fdfcf476",
+            "filePath": "lib://ffitem/item_213",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "fitem"
+          },
+          "scriptName": "Inhaler",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "698c01f07293fdee9a72fbf3bb8def47",
+            "filePath": "lib://ffitem/item_601",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "fitem"
+          },
+          "scriptName": "Grenade",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "fd115ee625367e3a2b490e24d0e28ce9",
+            "filePath": "lib://ffitem/item_608",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "fitem"
+          },
+          "scriptName": "FlashFreeze",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "76566d3f-f2cf-4834-8fb0-5b640bba0e8f",
+            "filePath": "lib://ffitem/item_617",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "fitem"
+          },
+          "scriptName": "GlooMelter",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "81ec8f407273315b5da0ff7327a3d049",
+            "filePath": "lib://ffitem/item_503",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "fitem"
+          },
+          "scriptName": "Muzzle",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "1dc64f46da51fc8fc5c5b8b06e933bb9",
+            "filePath": "lib://ffitem/item_513",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "fitem"
+          },
+          "scriptName": "Mag",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "1755ce65fa2161caa93a7882917bde1c",
+            "filePath": "lib://ffitem/item_523",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "fitem"
+          },
+          "scriptName": "Foregrip",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "98d38ce98956314fd73c9d992fe0fdd1",
+            "filePath": "lib://ffitem/item_534",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "fitem"
+          },
+          "scriptName": "Scope",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "11d80e209376012c2dc07eace2975fb1",
+            "filePath": "lib://ffitem/item_543",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "fitem"
+          },
+          "scriptName": "Stock",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "11b6a75a-6ed0-4edb-b152-94eb6238590d",
+            "filePath": "lib://ffitem/item_544",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "fitem"
+          },
+          "scriptName": "ShotgunStock",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "2d1dd5a0fa4545b83fc2051a42ed9f3e",
+            "filePath": "lib://ffitem/item_3008",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "fitem"
+          },
+          "scriptName": "UpgradeChip",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "6bffee8aa3c11c0815990849a9680c40",
+            "filePath": "lib://ffitem/item_82",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "fitem"
+          },
+          "scriptName": "M4A1",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "a58eaded28f06011b59b44de642cf15c",
+            "filePath": "lib://ffitem/item_195",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "fitem"
+          },
+          "scriptName": "AUG",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "0ba13b1b42fcc1a588adff3ab6596a6e",
+            "filePath": "lib://ffitem/item_131",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "fitem"
+          },
+          "scriptName": "FAMAS",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "e74e0ef33e391734a8ff7ca46894e444",
+            "filePath": "lib://ffitem/item_180",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "fitem"
+          },
+          "scriptName": "SCAR",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "a419e3880446b4bf80f3d1af6615b3f6",
+            "filePath": "lib://ffitem/item_93",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "fitem"
+          },
+          "scriptName": "HEAL_PISTOL",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "3c05875974f836b6897d21aa766bb2bf",
+            "filePath": "lib://ffitem/item_48",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "fitem"
+          },
+          "scriptName": "WOODPECKER",
+          "children": []
+        }
+      ]
+    },
+    "fScenePrefab": {
+      "id": "fScenePrefab",
+      "children": [
+        {
+          "refer": {
+            "fileId": "150d8a69-8ec4-4ac6-9137-6c6298ecb4d9_222",
+            "filePath": "lib://ffmod/ffOptionID_1/option_9/se_222",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "fScenePrefab"
+          },
+          "scriptName": "TEXT_OBJECT",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "150d8a69-8ec4-4ac6-9137-6c6298ecb4d9_223",
+            "filePath": "lib://ffmod/ffOptionID_1/option_9/se_223",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "fScenePrefab"
+          },
+          "scriptName": "ICON_OBJECT",
+          "children": []
+        }
+      ]
+    },
+    "clothskin": {
+      "id": "clothskin",
+      "children": []
+    },
+    "weaponskin": {
+      "id": "weaponskin",
+      "children": []
+    },
+    "vehicleskin": {
+      "id": "vehicleskin",
+      "children": []
+    },
+    "emoteskin": {
+      "id": "emoteskin",
+      "children": []
+    },
+    "csv": {
+      "id": "csv",
+      "children": []
+    },
+    "internalhudtype": {
+      "id": "internalhudtype",
+      "children": [
+        {
+          "refer": {
+            "fileId": "InternalHud_UGCShopHud",
+            "filePath": "lib://ffInternalHuds/UGCShopHud",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "internalhudtype"
+          },
+          "scriptName": "ShopHUD",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "InternalHud_PhaseCountDownHud",
+            "filePath": "lib://ffInternalHuds/PhaseCountDownHud",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "internalhudtype"
+          },
+          "scriptName": "StageCountdownHUD",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "InternalHud_OpeningBannerHud",
+            "filePath": "lib://ffInternalHuds/OpeningBannerHud",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "internalhudtype"
+          },
+          "scriptName": "OpeningBannerHud",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "InternalHud_CountdownReminderHud",
+            "filePath": "lib://ffInternalHuds/CountdownReminderHud",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "internalhudtype"
+          },
+          "scriptName": "CountdownReminderHud",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "InternalHud_ResultBannerHud",
+            "filePath": "lib://ffInternalHuds/ResultBannerHud",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "internalhudtype"
+          },
+          "scriptName": "ResultBannerHud",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "InternalHud_NormalRoundStartBannerHud",
+            "filePath": "lib://ffInternalHuds/NormalRoundStartBannerHud",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "internalhudtype"
+          },
+          "scriptName": "RoundInfoHud",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "InternalHud_RoundInfoHud",
+            "filePath": "lib://ffInternalHuds/RoundInfoHud",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "internalhudtype"
+          },
+          "scriptName": "EndRoundInfoHud",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "InternalHud_TweenTipsHud",
+            "filePath": "lib://ffInternalHuds/TweenTipsHud",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "internalhudtype"
+          },
+          "scriptName": "TipHud",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "InternalHud_MultiTeamMatchResultHud",
+            "filePath": "lib://ffInternalHuds/MultiTeamMatchResultHud",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "internalhudtype"
+          },
+          "scriptName": "MultiTeamMatchResultHud",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "InternalHud_ProgressSkillButtonHud",
+            "filePath": "lib://ffInternalHuds/ProgressSkillButtonHud",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "internalhudtype"
+          },
+          "scriptName": "ProgressSkillButtonHud",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "InternalHud_FiveSecondCountDownHud",
+            "filePath": "lib://ffInternalHuds/FiveSecondCountDownHud",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "internalhudtype"
+          },
+          "scriptName": "FiveSecondCountDownHud",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "InternalHud_MoreTeamLeaderboardHudV2",
+            "filePath": "lib://ffInternalHuds/MoreTeamLeaderboardHudV2",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "internalhudtype"
+          },
+          "scriptName": "MultiTeamScoreBoard",
+          "children": []
+        }
+      ]
+    },
+    "textureResource": {
+      "id": "textureResource",
+      "children": []
+    },
+    "mesh": {
+      "id": "mesh",
+      "children": []
+    },
+    "material": {
+      "id": "material",
+      "children": []
+    },
+    "ac": {
+      "id": "ac",
+      "children": []
+    },
+    "particles": {
+      "id": "particles",
+      "children": []
+    },
+    "playerdata": {
+      "id": "playerdata",
+      "children": []
+    },
+    "xbt": {
+      "id": "xbt",
+      "children": []
+    },
+    "pfm": {
+      "id": "pfm",
+      "children": []
+    },
+    "skilltype": {
+      "id": "skilltype",
+      "children": []
+    },
+    "pd": {
+      "id": "pd",
+      "children": []
+    }
+  },
+  "children": []
+}
+//"{FE:{"v":"0.2.4448847","c":{"FF":5001},"s":100}

@@ -1,0 +1,162 @@
+/*
+   This script manages the target and combat timer for each player.
+   It is responsible for updating the UI elements related to the timer and combat stage.
+*/
+import "StdLibrary.fcc" as StdLib
+import "EditorGenLib.fcc" as EditorLib
+import "Hud.fcc" as Hud
+import "Map.fcc" as Map
+import "Time.fcc" as Time
+import "Convert.fcc" as Convert
+import "../GlobalManager/GlobalGameManager.fcg" as GlobalGameManager
+import "../GlobalData/CombatRoundCounter.fcg" as CombatRoundCounter
+import "../GlobalData/SpawnPoints.fcg" as SpawnPoints
+import "../GlobalManager/GlobalPreparationPhaseManager.fcg" as GlobalPreparationPhaseManager
+import "Player.fcc" as Player
+import "../GlobalConfig.fcg" as GlobalConfig
+graph TargetAndCombatTimer {
+    // Map to store the main custom UI (for unregister)
+    mainCustomUIDict Map<entity<Player>, entity<CustomUI>>
+
+    // Map to store combat stage UI elements for each player
+    combatStageDict Map<entity<Player>, entity<UIWidget>>
+
+    // Map to store user timer UI elements for each player
+    userTimerDict Map<entity<Player>, entity<UIWidgetLabel>>
+
+    // Map to store round count info UI elements for each player
+    roundCountInfoDict Map<entity<Player>, entity<UIWidgetLabel>>
+
+    // Timer variables
+    timer int = 0
+    second int = 0
+    minute int = 0
+    isStart bool = false
+
+    //Executed when entity is created
+    event OnAwake() {
+        timer = 0 
+        userTimerDict = Map<entity<Player>, entity<UIWidgetLabel>>{}
+        combatStageDict = Map<entity<Player>, entity<UIWidget>>{}
+        mainCustomUIDict = Map<entity<Player>, entity<CustomUI>>{}
+        roundCountInfoDict = Map<entity<Player>, entity<UIWidgetLabel>>{}
+    }
+
+    // Update the timer UI for all players
+    event OnFixedUpdate() {
+        if isStart && timer > 0 {
+            timer = timer - globalEntity<Global>.FixedDeltaTime
+            var elapsedTime = timer / 1000
+            second = elapsedTime % 60
+            minute = elapsedTime / 60
+            for player, ui in userTimerDict{
+                if ContainKey(userTimerDict, player) {
+                    if minute < 10 {
+                        ui<UIWidgetLabel>.Content = "0" + ToString(minute) 
+                    } else {
+                        ui<UIWidgetLabel>.Content = ToString(minute)
+                    }
+                    ui<UIWidgetLabel>.Content = ui<UIWidgetLabel>.Content + ":"
+                    if second < 10 {
+                        ui<UIWidgetLabel>.Content = ui<UIWidgetLabel>.Content + "0" + ToString(second)
+                    } else {
+                        ui<UIWidgetLabel>.Content = ui<UIWidgetLabel>.Content + ToString(second)
+                    }
+                }
+            }
+        }
+    }
+
+    /*
+    Register the player's combat timer UI.
+    This function creates a custom UI for the player and initializes the timer UI with 0:00.
+    It also registers the target count and round stage text widgets.
+    @param player The player entity to register the UI for
+    */
+    func RegisterGameInfo(player entity<Player>) {
+        if !ContainKey(userTimerDict, player) {
+            CreateCustomUI(out var createdUI, player, EResUI.GameInfo)
+            mainCustomUIDict[player] = createdUI
+            var timerTextWidget = GetWidgetFromCustomUI(player, createdUI, EResUIGameInfo.Counter)
+            userTimerDict[player] = timerTextWidget<UIWidgetLabel>
+            userTimerDict[player]<UIWidgetLabel>.Content = "00:00" // Initialize the timer UI with 0:00
+            var targetTextWidget = GetWidgetFromCustomUI(player, createdUI, EResUIGameInfo.TargetText)
+            roundCountInfoDict[player] = targetTextWidget<UIWidgetLabel>
+            var roundStageTextWidget = GetWidgetFromCustomUI(player, createdUI, EResUIGameInfo.RoundStageText)
+            combatStageDict[player] = roundStageTextWidget 
+            if GlobalConfig.scoringType == SCORING_TYPE.BOOYAH_COUNT {
+                targetTextWidget<UIWidgetLabel>.Content = LocString{"TARGET_UI_TITLE_TEXT", List<string>{ToString(globalEntity<GlobalGameManager>.winPoints)}} 
+            } else {
+                targetTextWidget<UIWidgetLabel>.Content = LocString{"ROUND_INFO_2", List<string>{ToString(globalEntity<CombatRoundCounter>.GetCount()), ToString(GlobalConfig.esportMaxRound)}} 
+            }
+        }
+    }
+
+    /*
+    Unregister the player's game info UI.
+    @param player The player entity to unregister the UI for
+    */
+    func UnregisterGameInfo(player entity<Player>) {
+        if Map.ContainKey(mainCustomUIDict, player) {
+            DestroyCustomUI(mainCustomUIDict[player]) // Destroy the player's timer UI
+            Remove(userTimerDict, player) // Remove the player's timer UI from the map
+            Remove(combatStageDict, player) // Remove the player's combat stage UI from the map
+            Remove(mainCustomUIDict, player) // Remove the player's main custom UI from the map
+        }
+        LogError("Unregistered game info for player: " + player<Player>.NickName)
+    }
+
+    /*
+    Register the player's round stage UI.
+    This function creates a custom UI for the player and initializes the round stage UI with the current stage information.
+    It also registers the target count and timer text widgets.
+    @param player The player entity to register the UI for
+    */
+    func UpdateRoundStageInfo(player entity<Player>, stage int, stageName string) {
+        if ContainKey(combatStageDict, player) {
+            combatStageDict[player]<UIWidgetLabel>.Content = LocString{"ROUND_INFO", List<string>{stageName}}
+        } else {
+            LogError("Player does not have a combat stage UI registered.")
+        }
+    }
+
+    /*
+    Update the round count info for the player.
+    USE IN ESPORT MODE ONLY
+    @param player The player entity to update the round count info for
+    @param roundCount The current round count
+    */
+    func UpdateRoundCountInfo(player entity<Player>, roundCount int) {
+        if ContainKey(roundCountInfoDict, player) {
+            roundCountInfoDict[player]<UIWidgetLabel>.Content = LocString{"ROUND_INFO_2", List<string>{ToString(roundCount), ToString(GlobalConfig.esportMaxRound)}}
+        } else {
+            LogError("Player does not have a main custom UI registered.")
+        }
+    }
+
+    /*
+    Reset the timer and UI for all players.
+    */
+    func ResetTimer() {
+        isStart = false
+        timer = 0
+        second = 0
+        minute = 0
+        for player, ui in userTimerDict {
+            ui<UIWidgetLabel>.Content = "00:00" // Reset the timer UI for all players
+        }
+    }
+
+    /*
+    Start the timer and update the UI for all players.
+    */
+    func StartTimer(duration int) {
+        timer = duration // Reset the timer to 0 when starting
+        second = duration % 60 
+        minute = duration / 60 
+        for player, ui in userTimerDict {
+            ui<UIWidgetLabel>.Content = "00:00" // Reset the timer UI for all players
+        }
+        isStart = true
+    }
+}

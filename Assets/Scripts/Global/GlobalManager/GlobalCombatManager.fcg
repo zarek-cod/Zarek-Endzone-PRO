@@ -1,0 +1,139 @@
+/* 
+Global Combat Manager
+This script manages all the interactions when inside the combat phase.
+This is the replacement for GlobalRoundHandler.eca
+*/
+import "../GlobalData/PlayerData.fcg" as PlayerData
+import "StdLibrary.fcc" as StdLib
+import "EditorGenLib.fcc" as EditorLib
+import "Combat.fcc" as Combat
+import "../GlobalData/TeamsAlive.fcg" as TeamsAlive
+import "LevelObject.fcc" as LevelObject
+import "Workflow.fcc" as Workflow
+import "List.fcc" as List
+import "../GlobalData/CombatRoundCounter.fcg" as CombatRoundCounter
+import "Player.fcc" as Player
+import "../GlobalData/TeamData.fcg" as TeamData
+import "Hostility.fcc" as Hostility
+import "../GlobalManager/GlobalUIManager.fcg" as GlobalUIManager
+import "../GlobalData/TargetAndCombatTimer.fcg" as TargetAndCombatTimer
+import "Math.fcc" as Math
+import "Items.fcc" as Items
+import "../GlobalData/GlobalSafeZones.fcg" as GlobalSafeZones
+import "../GlobalManager/GlobalPreparationPhaseManager.fcg" as GlobalPreparationPhaseManager
+graph GlobalCombatManager {
+    isChecked bool = false // A flag to check if the combat phase has been initialized
+
+    teamsAlive List<Team> = List<Team>{} // List of teams that are still alive in the combat phase
+    // allDroppedItems List<entity<ItemBase>> = List<entity<ItemBase>>{} // List of all dropped items on ground in each round
+
+    teamRanking List<entity<Team>> = List<entity<Team>>{} // List of teams in a combat, the earlier team aced, the lower the rank
+
+    // When the combat phase starts, activate the timer also
+    event OnPhaseStart(phase entity<Phase>) {
+        if phase<Phase>.Index == EPhase.__Before6Combat__ {
+            List.Clear(teamRanking)
+        }
+        if phase<Phase>.Index == EPhase.Combat {
+            globalEntity<TargetAndCombatTimer>.StartTimer(phase<Phase>.Duration)
+        }
+        if phase<Phase>.Index == EPhase.MovingSafeZone {
+            globalEntity<TargetAndCombatTimer>.StartTimer(phase<Phase>.Duration)
+        }
+        if phase<Phase>.Index == EPhase.LastSafeZone {
+            globalEntity<TargetAndCombatTimer>.StartTimer(phase<Phase>.Duration)
+        }
+    }
+
+    // When a new round starts, reset the timer and other relevant data
+    event OnRoundStart(roundIndex int) {
+        isChecked = false // Reset the isChecked flag at the start of each round
+        if (roundIndex == 0) {
+            teamsAlive = globalEntity<TeamsAlive>.GetAliveTeams() // Get the list of alive teams
+            // LogInfo("<GlobalCombatManager.fcg>: Round started, teams alive initialized") // Debug Info
+            teamRanking = List<entity<Team>>{}
+        }
+    }
+
+    // On Player Be Eliminated, update mini scoreboard
+    event OnPlayerBeEliminated(player entity<Player>) {
+        globalEntity<GlobalUIManager>.UpdateMiniScoreboard() // Update the mini scoreboard UI after a player is eliminated to update current alives
+    }
+
+    // On Player Eliminate, update mini scoreboard and full scoreboard
+    event OnPlayerEliminate(player entity<Player>, eliminatedPlayer entity<Player>, damageType DamageType) {
+        if damageType != DamageType.ElectricZone && damageType != DamageType.Falling && damageType != DamageType.Exit && damageType != DamageType.Disconnect  {
+            if player != eliminatedPlayer {
+                globalEntity<PlayerData>.IncreaseKill(player)
+            }
+            globalEntity<GlobalUIManager>.UpdateMiniScoreboard() // Update the mini scoreboard UI after a player is eliminated to update current alives
+        }
+        globalEntity<PlayerData>.IncreaseDeath(eliminatedPlayer)
+    }
+
+    event OnPlayerDealDamage(attacker entity<Player>, target entity<Player>, damageType DamageType, value int, damagedBodyPart DamagedBodyPartType) {
+        if damageType != DamageType.ElectricZone && damageType != DamageType.Falling && damageType != DamageType.Exit && damageType != DamageType.Disconnect  {
+            if attacker != target {
+                globalEntity<PlayerData>.IncreaseDamage(attacker, value) // Increase damage in the mid game full score board
+            }
+        }
+    }
+
+    // Deprecated: Use ClearResidualLevelObject function instead
+    func AddItemToList(item entity<ItemBase>) {
+        // Append(allDroppedItems, item)
+    }
+
+    // Deprecated: Use ClearResidualLevelObject function instead
+    func ClearAllItemsOnGround(){
+        // for index, item in allDroppedItems {
+        //     // LogError("Destroyed item: " + item)
+        //     Destroy(item)
+        // }
+    }
+
+    /* Check if the combat phase should end
+       This function checks the current state of the teams and determines if the combat phase should end.
+    */
+    func CheckEndCombatCondition() {
+        if isChecked == true {
+            return
+        }
+        // ZAREK: only count squads that actually have participants, and never
+        // index a three-element list with a team number greater than three.
+        var activeTeams = List<entity<Team>>{}
+        for index, player in GetAllPlayers() {
+            var team = player<Player>.HostTeam
+            if team != nil && !List.Contain(activeTeams, team) {
+                Append(activeTeams, team)
+            }
+        }
+        var survivingTeams = List<entity<Team>>{}
+        for index, team in activeTeams {
+            if !team<Team>.IsAced {
+                Append(survivingTeams, team)
+            }
+        }
+        if List.Length(survivingTeams) == 1 {
+            isChecked = true
+            globalEntity<TargetAndCombatTimer>.ResetTimer()
+            ClearAllItemsOnGround()
+            DispatchEvent(CombatEnd, thisEntity, List<object>{survivingTeams[0]})
+            return
+        }
+        if List.Length(survivingTeams) == 0 {
+            isChecked = true
+            ClearAllItemsOnGround()
+            globalEntity<TargetAndCombatTimer>.ResetTimer()
+            DispatchEvent(NoTeamWinException, thisEntity, List<object>{})
+        }
+    }
+
+    func AddAcedTeam(team entity<Team>) {
+        List.Append(teamRanking, team)
+    }
+
+    func GetTeamRanking() List<entity<Team>> {
+        return teamRanking
+    }
+}

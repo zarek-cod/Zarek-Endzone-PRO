@@ -1,0 +1,50 @@
+{
+  "_tag": {
+    "type": "ecaDesc",
+    "resourceId": ""
+  },
+  "_entityId": "qOlI3yVa",
+  "children": [],
+  "prefabVariant": null,
+  "activeValue": {
+    "selfValue": true,
+    "valueTag": "activeValue"
+  },
+  "unlockedValue": {
+    "selfValue": true,
+    "valueTag": "unlockedValue"
+  },
+  "editorLockValue": false,
+  "editorVisibleValue": true,
+  "TypeDefines": {
+    "Global": {
+      "label": "Game entity",
+      "name": "Global",
+      "bases": [
+        "Entity"
+      ],
+      "ecaScripts": [],
+      "typeID": 11,
+      "PropDefines": [],
+      "IsPartial": true
+    },
+    "Player": {
+      "label": "Player",
+      "name": "Player",
+      "bases": [
+        "FightingEntity",
+        "ScoreableEntity",
+        "RankableEntity",
+        "Visibility",
+        "BuffableEntity",
+        "FormulableEntity",
+        "AnimationControllerAble"
+      ],
+      "ecaScripts": [],
+      "typeID": 14,
+      "PropDefines": [],
+      "IsPartial": true
+    }
+  }
+}
+//"{FE:{"v":"1.14.3847898","c":{"FF":5001},"s":100}

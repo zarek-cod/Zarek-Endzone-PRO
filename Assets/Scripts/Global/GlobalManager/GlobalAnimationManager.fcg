@@ -1,0 +1,94 @@
+import "StdLibrary.fcc" as StdLib
+import "EditorGenLib.fcc" as EditorLib
+import "Playable.fcc" as Playable
+import "Hud.fcc" as Hud
+import "Map.fcc" as Map
+import "Economy.fcc" as Economy
+import "Player.fcc" as Player
+import "Convert.fcc" as Convert
+graph GlobalAnimationManager {
+    async func DOIncreaseTween(widget entity<UIWidget>){
+        var defaultPos = widget<UIWidget>.AnchorPosition
+        widget<UIWidgetLabel>.Alpha = 1.0
+        CreateTween(widget, UIWidget.AnchorPosition, Vector2{defaultPos.X, defaultPos.Y}, Vector2{defaultPos.X, defaultPos.Y + 50}, TweenStyle.Once, CreateCurve(List<float>{0, 0, 1, 1}), 4000, out var moveTween, true)
+        CreateTween(widget, UIWidgetLabel.Alpha, 1.0, 0.0, TweenStyle.Once, CreateCurve(List<float>{0, 0, 1, 1}), 4000, out var alphaReverseTween, true)
+        WaitForMillisecond(4000)
+        // LogError(defaultPos)
+        Destroy(moveTween)
+        Destroy(alphaReverseTween)
+        widget<Transform>.LocalPosition = defaultPos
+    }
+
+    async func DOIncreaseTweenFullScoreBoard(scoreWidget entity<UIWidget>, increaseUIWidget entity<UIWidget>, increaseTo int){
+        var defaultPos = increaseUIWidget<UIWidget>.AnchorPosition
+        increaseUIWidget<UIWidgetLabel>.Alpha = 1.0
+        CreateTween(increaseUIWidget, UIWidget.AnchorPosition, Vector2{defaultPos.X, defaultPos.Y}, Vector2{defaultPos.X - 50, defaultPos.Y}, TweenStyle.Once, CreateCurve(List<float>{0, 0, 1, 1}), 3000, out var moveTween, true)
+        CreateTween(increaseUIWidget, UIWidgetLabel.Alpha, 1.0, 0.0, TweenStyle.Once, CreateCurve(List<float>{0, 0, 1, 1}), 3000, out var alphaReverseTween, true)
+        WaitForMillisecond(2000)
+        // Update the score widget to reflect the new score after the animation
+        scoreWidget<UIWidgetLabel>.Content = ToString(increaseTo) 
+        WaitForMillisecond(1000)
+        // LogError(defaultPos)
+        Destroy(moveTween)
+        Destroy(alphaReverseTween)
+        increaseUIWidget<Transform>.LocalPosition = defaultPos
+    }
+
+    async func DOChangeColor(widget entity<UIWidget>, fromColor Color, toColor Color, duration int){
+        CreateTween(widget, UIWidgetImage.Color, fromColor, toColor, TweenStyle.Once, CreateCurve(List<float>{0, 0, 1, 1}), duration, out var colorTween, true)
+        WaitForMillisecond(duration)
+        Destroy(colorTween)
+    }
+
+    /*
+    Change the increase alpha of a widget.
+    @param widget: The widget to change the increase alpha of
+    @param increaseValue: The value to increase the alpha by
+    @param duration: The duration of the animation
+    @param contentWidget: The widget to display the increase value
+    @param increaseTo: The value to increase to
+    */
+    async func DOChangeIncreaseAlpha(widget entity<UIWidget>, increaseValue int, duration int, contentWidget entity<UIWidget>, increaseTo int){
+        if increaseValue == 0 {
+            contentWidget<UIWidgetLabel>.Content = ToString(increaseTo)
+            return
+        }
+        contentWidget<UIWidgetLabel>.Content = ToString(increaseTo - increaseValue)
+        widget<UIWidgetLabel>.Alpha = 1.0
+        widget<UIWidgetLabel>.Content = "+" + ToString(increaseValue)
+
+        var defaultPos = widget<UIWidget>.AnchorPosition
+        var curve = CreateCurve(List<float>{0, 0, 1, 1})
+
+        WaitForMillisecond(500)
+        CreateTween(widget, UIWidget.AnchorPosition, defaultPos, defaultPos + Vector3{-25, 0, 0}, TweenStyle.Once, curve, duration, out var positionTween, true)
+        CreateTween(widget, UIWidgetLabel.Alpha, 1.0, 0.0, TweenStyle.Once, curve, duration, out var alphaTween, true)
+
+        WaitForMillisecond(duration)
+        Destroy(alphaTween)
+        Destroy(positionTween)
+
+        widget<UIWidget>.AnchorPosition = defaultPos
+        widget<UIWidgetLabel>.Alpha = 0.0
+        contentWidget<UIWidgetLabel>.Content = ToString(increaseTo)
+        widget<UIWidgetLabel>.Content = 0 // Reset the content to 0
+    }
+
+    async func DOIncrease(widget entity<UIWidget>, increaseTo int, delay int, duration int){
+        WaitForMillisecond(delay)
+        // var lastContent = widget<UIWidgetLabel>.Content
+        // StringToInt(lastContent, out var lastContentInt, out var isSuccess)
+        // if !isSuccess {
+        //     widget<UIWidgetLabel>.Content = ToString(increaseTo)
+        //     return
+        // }
+
+        // var tweenDuration int = duration / (increaseTo - lastContentInt)
+        // while lastContentInt < increaseTo {
+        //     lastContentInt = lastContentInt + 1
+        //     widget<UIWidgetLabel>.Content = ToString(lastContentInt)
+        //     WaitForMillisecond(tweenDuration)
+        // }
+        widget<UIWidgetLabel>.Content = ToString(increaseTo)
+    }
+}

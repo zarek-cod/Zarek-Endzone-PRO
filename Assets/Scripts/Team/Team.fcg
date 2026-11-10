@@ -1,0 +1,23 @@
+/*
+Auto attach to each team entity when a team is formed
+*/
+import "StdLibrary.fcc" as StdLib
+import "EditorGenLib.fcc" as EditorLib
+import "Combat.fcc" as Combat
+import "../Global/GlobalManager/GlobalCombatManager.fcg" as GlobalCombatManager
+import "../Global/GlobalData/TeamData.fcg" as TeamData
+graph Team {
+    lastRoundPoint int = 0
+    event OnACE() {
+        globalEntity<GlobalCombatManager>.AddAcedTeam(thisEntity as entity<Team>)
+        globalEntity<GlobalCombatManager>.CheckEndCombatCondition() // Check if the combat should end when a team is aced 
+    }
+
+    func GetLastRoundPoint() int {
+        return lastRoundPoint
+    }
+
+    func SetLastRoundPoint(point int) {
+        lastRoundPoint = point
+    }
+}

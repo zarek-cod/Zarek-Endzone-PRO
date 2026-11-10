@@ -1,0 +1,38 @@
+{
+  "_tag": {
+    "type": "EditorGenSymbolSetting"
+  },
+  "_entityId": "eOaM5QoI",
+  "GenSymbol": {
+    "Components": {
+      "Global": {
+        "label": "",
+        "props": {}
+      }
+    },
+    "Events": {
+      "signal_68600453": {
+        "label": "EndRound",
+        "params": {}
+      },
+      "signal_86504563": {
+        "label": "CombatEnd",
+        "params": {}
+      },
+      "signal_76192606": {
+        "label": "NoTeamWinException",
+        "params": {}
+      }
+    },
+    "Graphs": {
+      "BA9iBjOL://whgog58btr-lx1724pg-3h0scyd2o43": {
+        "label": "__Spawn6Point6Auto6Closer__",
+        "vars": {},
+        "funcs": {}
+      }
+    },
+    "Enums": {}
+  },
+  "children": []
+}
+//"{FE:{"v":"1.14.3883376","c":{"FF":5001},"s":100}

@@ -1,0 +1,72 @@
+import "StdLibrary.fcc" as StdLib
+import "EditorGenLib.fcc" as EditorLib
+import "Hud.fcc" as Hud
+import "LevelObject.fcc" as LevelObject
+import "Playable.fcc" as Playable
+import "Math.fcc" as Math
+import "../Global/GlobalManager/GlobalLeaderboard.fcg" as GlobalLeaderboard
+import "Convert.fcc" as Convert
+import "Workflow.fcc" as Workflow
+import "Strings.fcc" as String
+import "List.fcc" as List
+graph PlayerUI {
+    // leaderBoardUI entity<CustomUI> = nil
+    inGameScoreBoard entity<BuiltInUI> = nil
+    _textObject entity<LevelObject> = nil
+    playerWidget entity<UIWidget> = nil
+
+    playerLeaderboardAvatarWidget entity<UIWidget> = nil
+
+    func SetPlayerLeaderboardAvatarWidget(widget entity<UIWidget>){
+        playerLeaderboardAvatarWidget = widget
+    }
+
+    func GetPlayerLeaderboardAvatarWidget() entity<UIWidget>{
+        return playerLeaderboardAvatarWidget
+    }
+
+    event OnAwake() {
+        globalEntity<GlobalLeaderboard>.GetKDAndWinRate(thisEntity as entity<Player>, out var kd, out var winRate)
+        CreateLevelObject(out var textObject, thisEntity<Transform>.Position, EResLevelObject.TEXT_OBJECT)
+        _textObject = textObject
+        var text string
+        if kd == -1 && winRate == -1 {
+            // LogError("KD or win rate is 0.0, kd: " + ToString(kd) + ", winRate: " + ToString(winRate))
+            return
+        }
+        text = thisEntity<Player>.NickName + "\n" + "KD: " + Sub(ToString(kd), 0, 3)
+
+        // SetParent(iconObject<Transform>, textObject<Transform>, false)
+        textObject<Text>.Offset = Vector3{0, 1.7, 0}
+        textObject<Text>.Depth = 100
+        textObject<Text>.Content= text
+        textObject<Text>.FontSize = 30
+        textObject<Text>.FollowTarget = thisEntity
+        textObject<Text>.Color = #FFFFFF
+        textObject<Text>.FontStyle = 1 
+        // var _visiblePlayers List<entity<Player>> = GetAllPlayers()
+        // List.Remove(_visiblePlayers, thisEntity)
+        // textObject<Text>.VisiblePlayers = _visiblePlayers
+        // textObject<Text>.Depth = 100
+        textObject<Text>.Width = 350
+        textObject<Text>.Height = 75
+        textObject<Text>.OverflowType = OverflowType.Shrink
+    }
+
+    // event OnUpdate() {
+    //     LogError("Player position: " + thisEntity<Player>.Position)
+    // }
+
+    event OnPhaseStart(phase entity<Phase>) {
+        if phase<Phase>.Index != EPhase.Preparation {
+            if _textObject != nil {
+                Destroy(_textObject)
+                _textObject = nil
+            }
+            // if _iconObject != nil {
+            //     Destroy(_iconObject)
+            //     _iconObject = nil
+            // }
+        }
+    }
+}

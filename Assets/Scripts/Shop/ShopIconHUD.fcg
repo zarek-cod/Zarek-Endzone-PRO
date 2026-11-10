@@ -1,0 +1,33 @@
+import "StdLibrary.fcc" as StdLib
+import "EditorGenLib.fcc" as EditorLib
+import "Hud.fcc" as Hud
+import "Economy.fcc" as Economy
+import "List.fcc" as List
+import "Workflow.fcc" as Workflow
+// import "../Global.fcg" as Global
+graph ShopIconHUD {
+    uiList List<entity<CustomUI>> = {}
+    //Executed when entity is created
+    event OnAwake() {
+
+    }
+    event OnPressed(player entity<Player>) {
+        CreateBuiltInUI(out var newShopUI, player, EResInternalHud.ShopHUD as BuiltInUIType)
+        newShopUI<UIStore>.Store = GetAllShops()[0]
+        Append(uiList, newShopUI)
+    }
+
+    event OnPhaseEnd(phase entity<Phase>) {
+        if phase<Phase>.Index == EPhase.__Before6Combat__ {
+            for index, shopUI in uiList {
+                DestroyCustomUI(shopUI)
+            }
+        }
+    }
+
+    func OpenShopExternal(player entity<Player>) {
+        CreateBuiltInUI(out var newShopUI, player, EResInternalHud.ShopHUD as BuiltInUIType)
+        newShopUI<UIStore>.Store = GetAllShops()[0]
+        Append(uiList, newShopUI)
+    }
+}

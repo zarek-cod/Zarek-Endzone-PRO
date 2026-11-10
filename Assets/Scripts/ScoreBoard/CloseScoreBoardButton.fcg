@@ -1,0 +1,9 @@
+import "StdLibrary.fcc" as StdLib
+import "EditorGenLib.fcc" as EditorLib
+import "Hud.fcc" as Hud
+import "../Global/GlobalManager/GlobalUIManager.fcg" as GlobalUIManager
+graph CloseScoreBoardButton {
+    event OnPressed(player entity<Player>) {
+       globalEntity<GlobalUIManager>.SetVisibilityFullScoreBoard(player, false) 
+    }
+}

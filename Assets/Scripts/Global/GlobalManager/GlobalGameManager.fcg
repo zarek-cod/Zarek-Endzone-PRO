@@ -1,0 +1,412 @@
+/* GlobalGameManager.fcg
+    Description: This script manages global game settings and events.
+    It is responsible for initializing global game data, initializing player state and handling game-wide events.
+    This is the replacement for Global.eca and Global.fcg
+*/
+import "../GlobalData/TeamsAlive.fcg" as TeamsAlive
+import "StdLibrary.fcc" as StdLib
+import "EditorGenLib.fcc" as EditorLib
+import "../GlobalData/TeamPoints.fcg" as TeamPoints
+import "../GlobalData/SpawnPoints.fcg" as SpawnPoints
+import "Player.fcc" as Player
+import "Hostility.fcc" as Hostility
+import "Workflow.fcc" as Workflow
+import "Items.fcc" as Items
+// import "../../Libraries/CustomEvent.fcc" as CustomEvent
+import "../GlobalData/PlayersTimerUI.fcg" as PlayersTimerUI
+import "../GlobalData/PlayersShopIcon.fcg" as PlayersShopIcon
+import "./GlobalUIManager.fcg" as GlobalUIManager
+import "../GlobalData/TeamData.fcg" as TeamData
+import "../../Player/PlayerController.fcg" as PlayerController
+import "../GlobalData/TargetAndCombatTimer.fcg" as TargetAndCombatTimer
+import "../GlobalData/PlayersTutorial.fcg" as PlayersTutorial
+import "../GlobalManager/GlobalSoundManager.fcg" as GlobalSoundManager
+import "../GlobalData/PlayerData.fcg" as PlayerData
+import "../GlobalData/GlobalSafeZones.fcg" as GlobalSafeZones
+import "../GlobalManager/GlobalPreparationPhaseManager.fcg" as GlobalPreparationPhaseManager
+import "../GlobalManager/GlobalCombatManager.fcg" as GlobalCombatManager
+import "List.fcc" as List
+import "Hud.fcc" as Hud
+import "Combat.fcc" as Combat
+import "SafeZone.fcc" as SafeZone
+import "MiniMap.fcc" as MiniMap
+import "Playable.fcc" as Playable
+import "Animation.fcc" as Animation
+import "../GlobalConfig.fcg" as GlobalConfig
+import "../../Team/TeamCurrentRoundData.fcg" as TeamCurrentRoundData
+import "../../Team/Team.fcg" as TeamFCG
+import "../GlobalData/CombatRoundCounter.fcg" as CombatRoundCounter
+import "../GlobalManager/GlobalLeaderboard.fcg" as GlobalLeaderboard
+graph GlobalGameManager {
+    winPoints int = 3 // Number of points required to win the game
+    maxRoundLock int = 2 // Change to another map after a certain round
+    availableStages int = 11 // Number of available stages in the game, goes together with the number of safe zones and spawn point groups in GlobalSafeZones.cfg and SpawnPoints.cfg
+    prepPhaseDuration int = 30 // Initial buying phase duration; adjusted by preparation manager
+    isMatchEnded bool = false // Flag to check if the match has ended
+    isRoundEnded bool = false // Flag to check if the round has ended
+    /* 
+    When the game starts:
+    - If a player goes into the game to soon, a gravity delay is added to wait until the terrain is loaded.
+    */
+    event OnGameStart() {
+        LogInfo("<GlobalGameManager.fcg>: Game has started") // Debug Info
+    }
+
+    /*
+    When a player joins the game:
+    - Set the invincibility status for the player to true
+    - Add a delay before the player can move
+    - Added items to the player
+    (Maybe move this to when round starts, as these items should be renew every round)
+    */
+    event OnPlayerJoin(player entity<Player>) {
+        // Register necessary UIs
+        start globalEntity<GlobalUIManager>.CreateGlobalOpeningHUD(player)
+        // globalEntity<PlayersShopIcon>.RegisterShopIcon(player) // Register the player's shop icon UI (MOVED TO PlayerController.fcg for assigning client button position)
+        globalEntity<PlayerData>.RegisterPlayer(player) // Register the player for player data tracking
+        globalEntity<GlobalUIManager>.RegisterMiniScoreBoard(player) // Register the player's mini scoreboard UI
+        globalEntity<GlobalUIManager>.RegisterFullScoreBoard(player) // Register the player's full scoreboard UI
+        globalEntity<GlobalUIManager>.RegisterBorderNotification(player)
+        globalEntity<TargetAndCombatTimer>.RegisterGameInfo(player) // Register the player's combat timer
+        globalEntity<PlayersTutorial>.RegisterPlayer(player) // Register the player for the tutorial
+
+        // Init necessary data
+        SetDropStatus(player, false) // Keep the player's weapons when dead
+
+        // Set invincible when player is dead, and teleport to the start zone
+        if globalEntity<Global>.CurrentRoundIndex != 0 {
+            SetInvincibility(player, 30);
+            TransportToGameStartZone(player, EResSceneNewScene.GameStartSpawnPoint<Transform>.Position)
+        }
+
+        // Use a custom minimap to increase the scale of the map
+        var fullMap = EResSprite.FullMap as IconType
+        CreateMiniMapIcon(out var miniMapIcon, player, fullMap)
+        miniMapIcon<MiniMapIcon>.Depth = 0
+        miniMapIcon<MiniMapIcon>.Offset = Vector3{523, 50, 110}
+
+        var miniMap entity<MiniMap> = GetMiniMap(player)
+        miniMap<MiniMap>.Center = Vector3{523, 50, 110}
+        miniMap<MiniMap>.MapSize = 942 
+    }
+
+    // When a new phase starts, update the UI and game state accordingly
+    event OnPhaseStart(phase entity<Phase>) {
+        if (phase<Phase>.Index == EPhase.Preparation) {
+            start PreparationPhaseUIHandler(phase<Phase>.Duration) // Start the preparation phase UI handler
+        }
+        if phase<Phase>.Index == EPhase.End {
+            var aliveTeams = GetActiveTeams()
+            if List.Length(aliveTeams) == 1 {
+                for index, player in GetAllPlayers(){
+                    globalEntity<GlobalUIManager>.CreateEndGameHUD(player, aliveTeams[0], 1, aliveTeams)
+                }
+            } else {
+                var teamSortedList = globalEntity<TeamData>.GetSortedTeamList()
+                var winningTeams = GetAllWinningTeams()
+                for index, player in GetAllPlayers(){
+                    var team entity<Team> = player<Player>.HostTeam
+                    if List.Contain(winningTeams, team) {
+                        globalEntity<GlobalUIManager>.CreateEndGameHUD(player, team, 1, teamSortedList)
+                    } else {
+                        globalEntity<GlobalUIManager>.CreateEndGameHUD(player, team, 2, teamSortedList)
+                    }
+                }
+            }
+        }
+        if phase<Phase>.Index == EPhase.EndCombat {
+            start SetAllPlayerFullScoreBoard()
+        }
+    }
+
+    event OnPhaseEnd(phase entity<Phase>) {
+        if phase<Phase>.Index == EPhase.Preparation{
+            // globalEntity<GlobalUIManager>.UpdateFullScoreBoard()
+        }
+    }
+    async func SetAllPlayerFullScoreBoard(){
+        WaitForMillisecond(1000)
+        for index, player in GetAllPlayers() {
+            globalEntity<GlobalUIManager>.SetVisibilityFullScoreBoard(player, true); // Update the full scoreboard UI
+        }
+    }
+
+    /* When a player quits the game midway:
+    - Eliminate the player immediately
+    - Unregister from all UI elements to avoid unwanted bugs
+    */
+    event OnPlayerQuit(player entity<Player>) {
+        LogError("<GlobalGameManager.fcg>: Player " + player<Player>.NickName + " has quit the game") // Debug Info
+        globalEntity<GlobalUIManager>.UnregisterAllUIs(player)
+        globalEntity<PlayerData>.UnregisterPlayer(player) // Unregister the player from player data tracking
+        EliminateAtNextFrame(player)
+        if isRoundEnded == false {
+            globalEntity<GlobalUIManager>.UpdateMiniScoreboard() // Update the mini scoreboard UI after a player is eliminated to update current alives
+        }
+        var activeTeams = GetActiveTeams()
+        if isMatchEnded == false {
+            if List.Length(activeTeams) == 1 {
+                MatchEndHandler(activeTeams[0])
+            } else if List.Length(activeTeams) > 1 {
+                globalEntity<GlobalCombatManager>.CheckEndCombatCondition()
+            } else {
+                LogWarning("<Zarek Endzone>: Match has no active teams after player quit")
+            }
+        }
+    }
+
+    /*
+    This function is called when the preparation phase starts for a player.
+    It sets up the necessary UI elements and registers the player for the tutorial.
+    @param player The player entity that is starting the preparation phase.
+    */
+    async func PreparationPhaseUIHandler(phaseDuration int) {
+        WaitForMillisecond(phaseDuration - 5000)
+        globalEntity<PlayersTimerUI>.SetTimerVisibility(false)
+        for index, player in GetAllPlayers() {
+            start globalEntity<GlobalUIManager>.Enable5sCountdownHUD(player)
+        }
+    }
+
+    /* When a team is added:
+    - Log info.
+    - Register the team in TeamPoints
+    */
+    event OnTeamAdd(team entity<Team>) {
+        // Register the team in TeamData
+        if globalEntity<TeamData>.RegisterTeamPoint(team) == true {
+        }
+        // Register the team in TeamsAlive
+        if globalEntity<TeamsAlive>.RegisterTeam(team) == true {
+        }
+    }
+
+    /*
+    This function is called when a match ends.
+    @param winningTeam: The winning team entity
+    */
+    async func MatchEndHandler(winningTeam entity<Team>){
+        isMatchEnded = true
+        DisableSafeZone()
+        LogInfo("<GlobalGameManager.fcg>: Team " + winningTeam<Entity> + " has won the game!") // Debug Info
+        for index, player in GetAllPlayers() {
+            // start globalEntity<GlobalLeaderboard>.SetLeaderboardDataForPlayer(player, globalEntity<TeamData>.GetTeamPlacementPoints(player<Player>.HostTeam) + globalEntity<PlayerData>.GetPlayerData(player)[0], 1)
+            start globalEntity<GlobalLeaderboard>.StorePlayerDataToDatabase(player, globalEntity<PlayerData>.GetPlayerData(player)[0], globalEntity<PlayerData>.GetPlayerData(player)[1], 1, true)
+            globalEntity<GlobalUIManager>.UnregisterAllUIs(player) // Unregister all UIs for the player
+            start globalEntity<GlobalUIManager>.CreateLastRoundHUD(List<entity<Team>>{winningTeam}, player) // Create the last round HUD for all players
+            globalEntity<GlobalSoundManager>.PlayEndMatchSound(player)            
+        }
+        WaitForMillisecond(5000)
+        SwitchPhase(EPhase.End)
+    }
+    // Custom event sent from GlobalCombatManager, together with the winning team
+    /*
+    This event is triggered when a round ends.
+    - Log info
+    - Add points to winning team
+    - Check if that team wins or not
+    */
+    event CombatEnd(winningTeam entity<Team>) {
+        isRoundEnded = true
+        ClearResidualLevelObjects()
+        if(winningTeam == nil){
+            LogError("There is no team winning this round")
+            isRoundEnded = false
+            SwitchPhase(EPhase.EndCombat)
+        }
+        for index, teammate in winningTeam<Team>.AllTeammates {
+            if teammate<Player>.HP > 0 {
+                SetInvincibility(teammate, 60)
+            }
+        }
+        globalEntity<TargetAndCombatTimer>.ResetTimer()
+        LogInfo("<GlobalGameManager.fcg>: Round ended. Winning team: " + winningTeam) // Debug Info
+
+        if GlobalConfig.scoringType == SCORING_TYPE.BOOYAH_COUNT {
+            globalEntity<TeamData>.AddPointsToTeam(winningTeam, 1) // Add points to the winning team
+            // globalEntity<GlobalUIManager>.CreatePlusAnimation(winningTeam)
+            globalEntity<GlobalUIManager>.UpdateMiniScoreboard(); // Update the scoreboard for the winning team
+        } else if GlobalConfig.scoringType == SCORING_TYPE.ESPORT {
+            var teamRanking = globalEntity<GlobalCombatManager>.teamRanking
+            winningTeam<TeamCurrentRoundData>.IncreaseBooyah()
+            WaitForNextFrame()
+            globalEntity<TeamData>.AddEsportPointsToTeam(winningTeam, winningTeam<TeamCurrentRoundData>.GetKillThisRound(), GetZarekPlacementPoints(1))
+            globalEntity<TeamData>.AddBooyahToTeam(winningTeam)
+            for index, team in teamRanking {
+                team<TeamFCG>.SetLastRoundPoint(globalEntity<TeamData>.GetTeamPoint(team))            
+                WaitForNextFrame()
+                globalEntity<TeamData>.AddEsportPointsToTeam(team, team<TeamCurrentRoundData>.GetKillThisRound(), GetZarekPlacementPoints(List.Length(teamRanking) - index + 1))
+            }
+        }
+        DisableSafeZone()
+        if CheckWinningCondition(winningTeam) {
+            if GlobalConfig.scoringType == SCORING_TYPE.BOOYAH_COUNT {
+                wait MatchEndHandler(winningTeam)
+            } else if GlobalConfig.scoringType == SCORING_TYPE.ESPORT {
+                isMatchEnded = true
+                wait globalEntity<GlobalUIManager>.CreateEndRoundHUD(winningTeam); // Create the end round HUD for all players
+                start globalEntity<GlobalUIManager>.UpdateFullScoreBoardWinTeam(winningTeam);
+                SwitchPhase(EPhase.EndCombat)
+                WaitForMillisecond(7000)
+                var allWinningTeams = GetAllWinningTeams()
+                for index, player in GetAllPlayers() {
+                    // start globalEntity<GlobalLeaderboard>.SetLeaderboardDataForPlayer(player, globalEntity<TeamData>.GetTeamPlacementPoints(player<Player>.HostTeam) + globalEntity<PlayerData>.GetPlayerData(player)[0], 1)
+                    if List.Contain(allWinningTeams, player<Player>.HostTeam) {
+                        start globalEntity<GlobalLeaderboard>.StorePlayerDataToDatabase(player, globalEntity<PlayerData>.GetPlayerData(player)[0], globalEntity<PlayerData>.GetPlayerData(player)[1], 1, true)
+                    } else {
+                        start globalEntity<GlobalLeaderboard>.StorePlayerDataToDatabase(player, globalEntity<PlayerData>.GetPlayerData(player)[0], globalEntity<PlayerData>.GetPlayerData(player)[1], 1, false)
+                    }
+                    globalEntity<GlobalUIManager>.UnregisterAllUIs(player) // Unregister all UIs for the player
+                    start globalEntity<GlobalUIManager>.CreateLastRoundHUD(allWinningTeams, player)
+                    globalEntity<GlobalSoundManager>.PlayEndMatchSound(player)
+                }
+                WaitForMillisecond(5000)
+                SwitchPhase(EPhase.End)
+            }
+            // WaitForMillisecond(5000)
+        } else {
+            wait globalEntity<GlobalUIManager>.CreateEndRoundHUD(winningTeam); // Create the end round HUD for all players
+            start globalEntity<GlobalUIManager>.UpdateFullScoreBoardWinTeam(winningTeam);
+            ClearResidualLevelObjects()
+            SwitchPhase(EPhase.EndCombat)
+        }
+        isRoundEnded = false
+    }
+
+    // Custom event, used to handle the case where no team wins
+    event NoTeamWinException() {
+        ClearResidualLevelObjects()
+        var team entity<Team> = GetAllTeams()[0]
+        if GlobalConfig.scoringType == SCORING_TYPE.ESPORT {
+            var teamRanking = globalEntity<GlobalCombatManager>.teamRanking
+            WaitForNextFrame()
+            globalEntity<TeamData>.AddBooyahToTeam(team)
+            for index, team in teamRanking {
+                team<TeamFCG>.SetLastRoundPoint(globalEntity<TeamData>.GetTeamPoint(team))            
+                WaitForNextFrame()
+                globalEntity<TeamData>.AddEsportPointsToTeam(team, team<TeamCurrentRoundData>.GetKillThisRound(), GetZarekPlacementPoints(List.Length(teamRanking) - index))
+            }
+        }
+        DisableSafeZone()
+        if CheckWinningCondition(team) {
+            // ==========================================================
+            // The booyah case cannot be ended if there is no team winning, so we only handle the esport case
+            // ==========================================================
+            if GlobalConfig.scoringType == SCORING_TYPE.ESPORT {
+                isMatchEnded = true
+                wait globalEntity<GlobalUIManager>.CreateEndRoundHUD(team); // Create the end round HUD for all players
+                start globalEntity<GlobalUIManager>.UpdateFullScoreBoardWinTeam(team);
+                SwitchPhase(EPhase.EndCombat)
+                WaitForMillisecond(7000)
+                for index, player in GetAllPlayers() {
+                    globalEntity<GlobalUIManager>.UnregisterAllUIs(player) // Unregister all UIs for the player
+                    start globalEntity<GlobalUIManager>.CreateLastRoundHUD(List<entity<Team>>{team}, player)
+                    globalEntity<GlobalSoundManager>.PlayEndMatchSound(player)
+                }
+                WaitForMillisecond(5000)
+                SwitchPhase(EPhase.End)
+            }
+            // WaitForMillisecond(5000)
+        } else {
+            wait globalEntity<GlobalUIManager>.CreateEndRoundHUD(team); // Create the end round HUD for all players
+            start globalEntity<GlobalUIManager>.UpdateFullScoreBoardWinTeam(team);
+            ClearResidualLevelObjects()
+            SwitchPhase(EPhase.EndCombat)
+        }
+        LogError("<GlobalGameManager.fcg>: No team won this round, skipping to the next round") // Debug Info
+    }
+
+    // ZAREK competitive points: winner 12, 2nd 9, 3rd 8, 4th 7,
+    // 5th 6, 6th 5, 7th 4. A round with fewer teams uses the top ranks.
+    func GetZarekPlacementPoints(position int) int {
+        if position == 1 { return 12 }
+        if position == 2 { return 9 }
+        if position == 3 { return 8 }
+        if position == 4 { return 7 }
+        if position == 5 { return 6 }
+        if position == 6 { return 5 }
+        if position == 7 { return 4 }
+        return 0
+    }
+
+    // =========== UTILS FUNCTIONS ================
+    // TEAM FUNCTIONS
+    func GetAllWinningTeams() List<entity<Team>> {
+        var winningTeams List<entity<Team>> = globalEntity<TeamData>.GetSortedTeamList()
+        var returnList List<entity<Team>> = List<entity<Team>>{}
+        if List.Length(winningTeams) <= 1 {
+            return winningTeams
+        }
+        Append(returnList, winningTeams[0])
+        for index, team in winningTeams {
+            if globalEntity<TeamData>.GetTeamEsportPoints(team) < globalEntity<TeamData>.GetTeamEsportPoints(winningTeams[0]) || team == winningTeams[0] {
+                continue
+            } else {
+                if globalEntity<TeamData>.GetTeamBooyahCount(team) < globalEntity<TeamData>.GetTeamBooyahCount(winningTeams[0]) {
+                    continue
+                } else {
+                    if globalEntity<TeamData>.GetTeamKillsPoints(team) < globalEntity<TeamData>.GetTeamKillsPoints(winningTeams[0]) {
+                        continue
+                    } else {
+                        if globalEntity<TeamData>.GetTeamPlacementPoints(team) < globalEntity<TeamData>.GetTeamPlacementPoints(winningTeams[0]) {
+                            continue
+                        } 
+                    }
+                }
+            }
+            Append(returnList, team)
+        }
+        return returnList
+    }
+    /* 
+    Check if a team satisfies the winning condition
+    @param team: The team entity to check
+    @return: Bool value indicating whether the team has won
+    */
+    func CheckWinningCondition(team entity<Team>) bool {
+        if team == nil {
+            LogWarning("<GlobalGameManager.fcg>: The team is nil, recheck if this is an error")
+        }
+        // LogError("Current Points: " + globalEntity<TeamData>.GetTeamPoints())
+        if GlobalConfig.scoringType == SCORING_TYPE.BOOYAH_COUNT {
+            if globalEntity<TeamData>.GetTeamPoint(team) >= winPoints {
+                return true
+            }
+        } else if GlobalConfig.scoringType == SCORING_TYPE.ESPORT {
+            if globalEntity<CombatRoundCounter>.GetCount() >= GlobalConfig.esportMaxRound {
+                return true
+            }
+        }
+
+        // LogInfo("Current Teams: " + GetActiveTeams())
+        // Uncomment this if when there is one team left, the winning condition is met
+        // if List.Length(GetActiveTeams()) <= 1 {
+        //     return true
+        // }
+        return false
+    }
+
+    /*
+    Get the number of active teams (this is used as an alternative to GetAllTeams(), since GetAllTeams() returns all Team entities (including quitted teams), not just the active ones)
+    @return: The number of active teams
+    */
+    func GetActiveTeams() List<entity<Team>> {
+        var teamList = List<entity<Team>>{}
+        for key, player in GetAllPlayers() {
+            var team = player<Player>.HostTeam
+            if team != nil && !List.Contain(teamList, team) {
+                Append(teamList, team)
+            }
+        }
+        return teamList
+    }
+
+    /*
+    Teleports a player to the game start zone.
+    @param player: The player entity to teleport
+    @param startZonePosition: The position to teleport the player to
+    */
+    func TransportToGameStartZone(player entity<Player>, startZonePosition Vector3) {
+        Teleport(player, startZonePosition, Vector3{0, 0, 0})
+    }
+}

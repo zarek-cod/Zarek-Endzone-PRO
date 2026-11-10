@@ -1,0 +1,23 @@
+* text=auto
+
+*.fcg text eol=lf
+*.fcc text eol=lf
+*.md text eol=lf
+*.mdc text eol=lf
+*.json text eol=lf
+*.csv text eol=lf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.wav binary
+*.mp3 binary
+*.scene binary
+*.ui binary
+*.asset binary
+*.eca binary
+*.prefab binary
+*.ter binary
+*.library binary
+*.fab binary
+*.ac binary

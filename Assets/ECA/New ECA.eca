@@ -1,0 +1,59 @@
+{
+  "blocks": {
+    "languageVersion": 0,
+    "blocks": [
+      {
+        "type": "pkskl",
+        "id": ",mo5SSiGnS+4ON[=W1#V",
+        "x": 391,
+        "y": 234,
+        "fields": {
+          "V": ""
+        }
+      },
+      {
+        "type": "a",
+        "id": "+7|;e=w(DxR-R{Vc{]kC",
+        "x": 472,
+        "y": 138,
+        "extraState": {
+          "X": 758,
+          "L": [
+            1,
+            2
+          ],
+          "O": [
+            "o",
+            ""
+          ],
+          "T": "CreateInternalHudClient",
+          "OT": null
+        },
+        "fields": {
+          "P1": {
+            "name": "Created Entity",
+            "type": "TweenTipsHud"
+          }
+        },
+        "inputs": {
+          "P2": {
+            "shadow": {
+              "type": "pih",
+              "id": "k(rL.Scr@zIUN]V_S_Dh",
+              "fields": {
+                "V": "InternalHud_TweenTipsHud"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "graphData": {
+    "ownerType": "Entity",
+    "componentTypes": "Entity",
+    "isStatic": false,
+    "platform": 1
+  }
+}
+//"{FE:{"v":"1.14.3883376","c":{"FF":5001},"s":100}

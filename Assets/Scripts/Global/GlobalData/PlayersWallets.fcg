@@ -1,0 +1,56 @@
+/* PlayersWallets.fcg
+   Description: This script manages the wallets of players.
+   It is responsible for tracking player currencies, transactions, and wallet-related events.
+   (DEPRACATED, No USE)
+*/
+import "StdLibrary.fcc" as StdLib
+import "EditorGenLib.fcc" as EditorLib
+import "Economy.fcc" as Economy
+
+graph PlayersWallets {
+    playersWallets Map<entity<Player>, entity<Wallet>> // Map to track player wallets
+
+    // Init map when the game starts
+    event OnGameStart() {
+        if playersWallets == nil{
+            playersWallets = Map<entity<Player>, entity<Wallet>>{} // Initialize the players wallets map
+        }
+    }
+
+    /* Register a wallet for a player 
+        @param player The player entity for which the wallet is being registered
+        @return True if the wallet was registered successfully, false otherwise
+    */
+    func RegisterWallet(player entity<Player>) bool {
+        // if playersWallets[player] == nil {
+            CreateWallet(player, player, out var newWallet) // Create a new wallet for the player
+            playersWallets[player] = newWallet
+            return true
+        // }
+        // return false
+    }
+
+    /* Get the wallet for a player
+        @param player The player entity for which the wallet is being retrieved
+        @return The wallet entity if it exists, nil otherwise
+    */
+    func GetWallet(player entity<Player>) entity<Wallet> {
+        if playersWallets[player] != nil {
+            return playersWallets[player]
+        }
+        return nil
+    }
+
+    /* Change the wallet balance for a player
+        @param player The player entity for which the wallet balance is being changed
+        @param amount The amount to add or subtract from the wallet balance
+        @return True if the wallet balance was changed successfully, false otherwise
+    */
+    func ChangeWalletMoney(player entity<Player>, amount float) bool {
+        if playersWallets[player] != nil {
+            AddMoney(playersWallets[player], MoneyType.Basic, amount) // Add or subtract money from the player's wallet
+            return true
+        }
+        return false
+    }
+}

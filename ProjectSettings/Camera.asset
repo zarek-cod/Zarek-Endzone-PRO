@@ -1,0 +1,41 @@
+{
+  "_tag": {
+    "type": "ff.Camera",
+    "resourceId": "CameraSetting"
+  },
+  "_entityId": "F7Y7gV55",
+  "children": [],
+  "prefabVariant": null,
+  "activeValue": {
+    "selfValue": true,
+    "valueTag": "activeValue"
+  },
+  "unlockedValue": {
+    "selfValue": true,
+    "valueTag": "unlockedValue"
+  },
+  "editorLockValue": false,
+  "editorVisibleValue": true,
+  "modId": 8,
+  "CameraType": "Classic",
+  "CameraFov": 60,
+  "CameraPitch": 0,
+  "CameraYaw": 0,
+  "CameraOffset": {
+    "x": 1,
+    "y": 1,
+    "z": 1
+  },
+  "CameraBlockMode": 1,
+  "CameraProjectionMode": 0,
+  "TwoDimensionCamEnableZAxis": true,
+  "FPPResource": false,
+  "ecaProps": {},
+  "ecaScript": null,
+  "ecaScripts": [],
+  "_entityName": "T_43_YU_WS_MODULE_CAMERA",
+  "CameraViewingAngleRestrictionType": 0,
+  "showSwitch": false,
+  "enable": true
+}
+//"{FE:{"v":"1.14.3847898","c":{"FF":5001},"s":100}

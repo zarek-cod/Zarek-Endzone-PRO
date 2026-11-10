@@ -1,0 +1,120 @@
+Key,English,Traditional Chinese,Thai,Vietnamese,Indonesia,Brazilian Portuguese,Spanish,Russian,French,Turkish,Hindi,Arabic,Bengali,Malay
+GAME_NAME,Last Safe Zone,最後的安全區,โซนปลอดภัยสุดท้าย,Đại Chiến Bo Cuối,Zona Aman Terakhir,Última Zona Segura,Última zona segura,Последняя безопасная зона,Dernière zone de sécurité,Son Güvenli Bölge,अंतिम सुरक्षित क्षेत्र,آخر منطقة آمنة,শেষ নিরাপদ অঞ্চল,
+GAME_DESCRIPTION,"Three squads, one area, one winning team. Fight to be the last one standing to take the victory!",三個小隊，一個區域，一支必勝隊伍。奮戰到最後，贏得勝利！,สามทีม หนึ่งพื้นที่ หนึ่งทีมผู้ชนะ สู้เพื่อเป็นผู้รอดชีวิตคนสุดท้ายเพื่อคว้าชัยชนะ!,"3 đội, 1 khu vực, 1 đội chiến thắng. Chiến đấu đến cuối cùng để giành chiến thắng.","Tiga regu, satu area, satu tim pemenang. Berjuanglah untuk menjadi yang terakhir bertahan dan meraih kemenangan!","Três esquadrões, uma área, uma equipe vencedora. Lute para ser o último sobrevivente a conquistar a vitória!","Tres escuadrones, una zona, un equipo ganador. ¡Lucha por ser el último en pie y alzarte con la victoria!","Три отряда, одна зона, одна команда-победитель. Сражайтесь, чтобы стать последним выжившим и одержать победу!","Trois escouades, une zone, une équipe gagnante. Battez-vous pour être le dernier survivant et remporter la victoire !","Üç takım, bir bölge, bir kazanan takım. Zafere ulaşmak için ayakta kalan son kişi olmak için mücadele edin!","तीन दस्ते, एक क्षेत्र, एक विजेता टीम। जीत हासिल करने के लिए आखिरी बचे व्यक्ति बनने के लिए लड़ें!",ثلاث فرق، منطقة واحدة، فريق فائز واحد. قاتل لتكون آخر من ينجو ويحقق النصر!,"তিনটি স্কোয়াড, একটি এলাকা, একটি বিজয়ী দল। শেষ হয়ে দাঁড়ানোর লড়াইয়ে জয় নিতে!",
+SHOP_ICON_CONTENT,Shop,店鋪,ร้านค้า,Cửa hàng,Toko,Comprar,Comercio,Магазин,Boutique,Mağaza,दुकान,محل,দোকান,
+TEAM,Team {0},團隊 {0},ทีม {0},Đội {0},Tim {0},Equipe {0},Equipo {0},Команда {0},Équipe {0},Takım {0},टीम {0},الفريق {0},দল {0},
+TEAM_1,Team 1,第一隊,ทีม 1,Đội 1,Tim 1,Equipe 1,Equipo 1,Команда 1,Équipe 1,Takım 1,टीम 1,الفريق 1,দল 1,
+TEAM_2,Team 2,第二隊,ทีม 2,Đội 2,Tim 2,Equipe 2,Equipo 2,Команда 2,Équipe 2,Takım 2,टीम 2,الفريق 2,দল 2,
+TEAM_3,Team 3,第 3 隊,ทีม 3,Đội 3,Tim 3,Equipe 3,Equipo 3,Команда 3,Équipe 3,Takım 3,टीम 3,الفريق 3,দল 3,
+SCBOARD_TITLE_RANK,Rank,秩,อันดับ,Thứ Hạng,Pangkat,Classificação,Rango,Классифицировать,Rang,Rütbe,रैंक,رتبة,পদমর্যাদা,
+SCBOARD_TITLE_TEAMNAME,Team Name,團隊名稱,ชื่อทีม,Tên Đội,Nama Tim,Nome da equipe,Nombre del equipo,Название команды,Nom de l'équipe,Takım Adı,टीम का नाम,اسم الفريق,দলের নাম,
+SCBOARD_TITLE_TOTALKILLS,Total Kills,總擊殺數,ฆ่าทั้งหมด,Tổng Hạ Gục,Total Pembunuhan,Total de mortes,Muertes totales,Всего убийств,Nombre total de victimes,Toplam Öldürme Sayısı,कुल हत्याएं,إجمالي القتلى,টোটাল কিলস,
+SCBOARD_TOOLTIP,Round starts!,回合開始！,เริ่มรอบแล้ว!,Trận đấu bắt đầu!,Babak dimulai!,A rodada começa!,¡La ronda comienza!,Раунд начинается!,Le tour commence !,Tur başlıyor!,दौर शुरू!,بدأت الجولة!,রাউন্ড শুরু!,
+SCBOARD_TITLE_PLACEMENTPTS,Placement Pts,安置點,安置點,Điểm Sống Sót,Poin Penempatan,Pontos de colocação,Puntos de colocación,Очки за размещение,Points de placement,Yerleştirme Puanları,प्लेसमेंट अंक,نقاط تحديد المستوى,প্লেসমেন্ট পয়েন্ট,
+SCBOARD_TITLE_TOTALSCORE,Total Score,總分,總分,Tổng điểm,Skor Total,Pontuação total,Puntuación total,Общий балл,Score total,Toplam Puan,कुल स्कोर,النتيجة الإجمالية,মোট স্কোর,
+ROUND_COUNTDOWN,Combat starts in,戰鬥開始於,การต่อสู้เริ่มต้นใน,Vòng đấu bắt đầu trong,Pertarungan dimulai di,O combate começa em,El combate comienza en,Бой начинается через,Le combat commence dans,Savaş başlıyor,युद्ध शुरू होता है,القتال يبدأ في,মধ্যে যুদ্ধ শুরু হয়,
+START_COUNTDOWN,The game will start shortly,比賽即將開始,เกมจะเริ่มเร็ว ๆ นี้,Trận đấu đang chuẩn bị bắt đầu,Permainan akan segera dimulai,O jogo começará em breve,El juego comenzará en breve.,Игра начнется скоро.,Le jeu va bientôt commencer,Oyun yakında başlayacak,खेल शीघ्र ही शुरू होगा,اللعبة سوف تبدأ قريبا,কিছুক্ষণের মধ্যেই খেলা শুরু হবে,
+ROUND_INFO,{0},{0},{0},{0},{0},{0},{0},{0},{0},{0},{0},{0},{0},
+ROUND_INFO_2,Round {0} - {1},第 {0} - {1} 輪,รอบ {0} - {1},Vòng {0} - {1},Putaran {0} - {1},Rodada {0} - {1},Ronda {0} - {1},Раунд {0} - {1},Tour {0} - {1},Tur {0} - {1},राउंड {0} - {1},الجولة {0} - {1},রাউন্ড {0} - {1},
+ROUND_INFO_NOPARAM,Round,圓形的,กลม,Vòng,Bulat,Redondo,Redondo,Круглый,Rond,Yuvarlak,गोल,دائري,গোলাকার,
+ROUND_END_INFO,Round ended!,回合結束！,รอบนี้จบแล้ว!,Vòng đấu kết thúc!,Babak berakhir!,Rodada encerrada!,¡Ronda terminada!,Раунд завершен!,Le tour est terminé !,Tur bitti!,दौर समाप्त!,إنتهت الجولة!,রাউন্ড শেষ!,
+ROUND_END_SUBTITLE,Team {0} wins the round!,{0} 隊贏得本輪比賽！,ทีม {0} ชนะรอบนี้!,Đội {0} giành chiến thắng!,Tim {0} memenangkan ronde ini!,A equipe {0} vence a rodada!,¡El equipo {0} gana la ronda!,Команда {0} выигрывает раунд!,L'équipe {0} remporte la manche !,{0} takımı turu kazandı!,टीम {0} ने राउंड जीत लिया!,الفريق {0} يفوز بالجولة!,দল {0} রাউন্ড জিতেছে!,
+TARGET_UI_TITLE_TEXT,Target: {0},目標：{0},การแก้ไข：{0},Mục tiêu: {0},Sasaran: {0},Alvo: {0},Objetivo: {0},Цель: {0},Cible : {0},Hedef: {0},लक्ष्य: {0},الهدف: {0},লক্ষ্য: {0},
+Temp,Count down: {0},倒數計時：{0},นับถอยหลัง: {0},,Hitung mundur: {0},Contagem regressiva: {0},Cuenta regresiva: {0},Обратный отсчет: {0},Compte à rebours : {0},Geri sayım: {0},उलटी गिनती: {0},العد التنازلي: {0},কাউন্ট ডাউন: {0},
+TUT_BUTTON,Tutorial,教學,บทช่วยสอน,Hướng dẫn,Tutorial,Tutorial,Tutorial,Учебное пособие,Tutoriel,Eğitim,ट्यूटोरियल,درس تعليمي,টিউটোরিয়াল,
+TUT_SKIP_BTN,Skip,跳過,ข้าม,Bỏ qua,Melewati,Pular,Saltar,Пропускать,Sauter,Atlamak,छोडना,يتخطى,এড়িয়ে যান,
+TUT_S1,"Welcome to Last Safe Zone.
+Engage in a narrow area, with the final safe zone, become the last team to survive.
+Get three points to win the match.","歡迎來到最後安全區。  
+在狹窄的區域內戰鬥，以最後的安全區成為最後存活的團隊。  
+獲得三分以贏得比賽。","ยินดีต้อนรับสู่เขตปลอดภัยสุดท้าย เข้าประลองในพื้นที่แคบ กับเขตปลอดภัยสุดท้าย กลายเป็นทีมสุดท้ายที่รอดชีวิต รับสามคะแนนเพื่อชนะการแข่งขัน
+","Chào mừng đến với Đại Chiến Bo Cuối.
+Chiến đấu trong một khu vực hẹp, với vòng bo cuối cùng, trở thành đội cuối cùng sống sót.  
+Giành được ba điểm để thắng trận đấu.","Selamat datang di Zona Aman Terakhir.
+Bertarung di area sempit, dengan zona aman terakhir, jadilah tim terakhir yang bertahan hidup.  
+Dapatkan tiga poin untuk memenangkan pertandingan.","Bem-vindo à Última Zona Segura.
+Envolva-se em uma área estreita, com a zona segura final, torne-se a última equipe a sobreviver.  
+Consiga três pontos para vencer a partida.","Bienvenido a la Última Zona Segura.
+Participa en un área estrecha, con la última zona segura, conviértete en el último equipo en sobrevivir.  
+Consigue tres puntos para ganar la partida.","Добро пожаловать в последнюю безопасную зону.
+Действуйте в узкой зоне, чтобы добраться до последней безопасной зоны и стать последней выжившей командой.
+Наберите три очка, чтобы выиграть матч.","Bienvenue dans la Dernière Zone Sûre.
+Engagez-vous dans une zone étroite, avec la dernière zone sûre, devenez la dernière équipe à survivre.  
+Obtenez trois points pour remporter le match.","Last Safe Zone Hoş Geldiniz.
+Dar bir alanda, son güvenli bölge ile savaşın, hayatta kalan son takım olun.
+Maçı kazanmak için üç puan kazanın.","लास्ट सेफ ज़ोन में आपका स्वागत है।
+संकीर्ण क्षेत्र में संलग्न रहें, अंतिम सुरक्षित क्षेत्र के साथ, अंतिम जीवित रहने वाली टीम बनें।  
+मैच जीतने के लिए तीन अंक प्राप्त करें।  ","مرحبًا بكم في آخر منطقة آمنة.
+اشترك في منطقة ضيقة، ومع المنطقة الآمنة الأخيرة، كن الفريق الأخير الذي يبقى على قيد الحياة.
+اجمع ثلاث نقاط للفوز بالمباراة.","লাস্ট সেফ জোনে স্বাগতম।
+একটি সংকীর্ণ এলাকায় অংশ নিন, চূড়ান্ত সেফ জোন সহ, টিকে থাকা শেষ দল হিসেবে পরিণত হোন।  
+ম্যাচ জিততে তিন পয়েন্ট অর্জন করুন।",
+TUT_S2,"Your team's point is highlighted.
+Each time your team survives to the last, you get one point.","您的隊伍得分將會被高亮顯示。
+每當您的隊伍存活到最後，您就會獲得一分。","คะแนนของทีมคุณจะถูกไฮไลต์ไว้
+ทุกครั้งที่ทีมของคุณรอดจนเหลือคนสุดท้าย คุณจะได้รับหนึ่งคะแนน","Đội của bạn sẽ được đánh dấu.
+Mỗi khi giành chiến thắng, đội bạn sẽ được một điểm.","Poin tim Anda akan disorot.
+Setiap kali tim Anda bertahan hingga akhir, Anda mendapatkan satu poin.","O ponto da sua equipe é destacado.
+Cada vez que sua equipe chega ao final, você ganha um ponto.","El punto de tu equipo queda resaltado.
+Cada vez que tu equipo sobrevive hasta el último punto, obtienes un punto.","Результаты вашей команды подсвечивается.
+Каждый раз, когда ваша команда доживает до конца, вы получаете одно point.","Le point de votre équipe est mis en évidence.
+Chaque fois que votre équipe survit jusqu'à la fin, vous gagnez un point.","Takımınızın puanı vurgulanır.
+Takımınız sonuncuya kadar her ulaştığında bir puan kazanırsınız.","आपकी टीम का अंक हाइलाइट किया जाता है।
+हर बार जब आपकी टीम आखिरी तक टिकती है, तो आपको एक अंक मिलता है।",سيتم إبراز نقطة فريقك. في كل مرة ينجو فيها فريقك حتى النهاية، تحصل على نقطة واحدة.,"আপনার দলের পয়েন্ট হাইলাইট করা হয়.
+প্রতিবার আপনার দল শেষ পর্যন্ত টিকে গেলে, আপনি একটি পয়েন্ট পাবেন।",
+TUT_S3,Click in your team to see leaderboard details.,點擊您的團隊即可查看排行榜詳情。,คลิกในทีมของคุณเพื่อดูรายละเอียดกระดานผู้นำ,Nhấn chọn vào đội của bạn để xem chi tiết bảng điểm.,Klik tim Anda untuk melihat detail papan peringkat.,Clique na sua equipe para ver os detalhes da tabela de classificação.,Haz clic en tu equipo para ver los detalles de la clasificación.,"Щелкните по своей команде, чтобы увидеть детали таблицы лидеров.",Cliquez sur votre équipe pour voir les détails du classement.,Liderlik tablosunun ayrıntılarını görmek için takımınıza tıklayın.,लीडरबोर्ड विवरण देखने के लिए अपनी टीम पर क्लिक करें।,انقر على فريقك لرؤية تفاصيل لوحة المتصدرين.,লিডারবোর্ডের বিশদ বিবরণ দেখতে আপনার দলে ক্লিক করুন।,
+TUT_S4,"All necessary equipments are set up and refreshed each round.
+Fell free to choose any weapons in the shop.","所有必要的裝備每輪都會設定並刷新。
+您可以自由選擇商店中的任何武器。","อุปกรณ์ที่จำเป็นทั้งหมดจะถูกติดตั้งและรีเฟรชใหม่ทุกรอบ
+เลือกอาวุธใดก็ได้ในร้าน","Mọi trang bị cần thiết đã có và được làm mới mỗi trận đấu.
+Lựa chọn bất kỳ loại súng nào trong Cửa hàng.","Semua perlengkapan yang diperlukan disiapkan dan diperbarui setiap ronde.
+Silakan pilih senjata apa pun di toko.","Todos os equipamentos necessários são configurados e atualizados a cada rodada.
+Sinta-se à vontade para escolher qualquer arma na loja.",Todo el equipo necesario se instala y se renueva en cada ronda. Elige cualquier arma en la tienda.,"Всё необходимое снаряжение устанавливается и обновляется каждый раунд.
+Выбирайте любое оружие в магазине.","Tout l'équipement nécessaire est installé et renouvelé à chaque tour.
+N'hésitez pas à choisir vos armes dans la boutique.","Gerekli tüm ekipmanlar her turda kurulur ve yenilenir.
+Dükkandan dilediğiniz silahı seçebilirsiniz.","सभी ज़रूरी उपकरण हर राउंड में तैयार और ताज़ा किए जाते हैं।
+आप दुकान में से कोई भी हथियार चुनने के लिए स्वतंत्र हैं।","جميع المعدات اللازمة متوفرة ويتم تجديدها بعد كل مباراة.
+يمكنك انتقاء أي سلاح من المتجر.","সমস্ত প্রয়োজনীয় সরঞ্জাম সেট আপ করা হয় এবং প্রতি রাউন্ডে রিফ্রেশ করা হয়।
+দোকানে কোন অস্ত্র চয়ন বিনামূল্যে পড়ে.",
+TUT_S5,Good Luck!,祝你好運！,ขอให้โชคดี!,Chúc May Mắn!,Semoga beruntung!,Boa sorte!,¡Buena suerte!,Удачи!,Bonne chance!,İyi şanlar!,आपको कामयाबी मिले!,حظ سعيد!,শুভকামনা!,
+STAGE_1,Clock Tower,鐘樓,หอนาฬิกา,Clock Tower,Menara Jam,Torre do Relógio,Torre del Reloj,Часовая башня,Tour de l'Horloge,Saat Kulesi,घंटाघर,برج الساعة,ক্লক টাওয়ার,
+STAGE_2,Graveyard,墓園,สุสาน,Nghĩa Địa,Makam,Cemitério,Cementerio,Кладбище,Cimetière,Mezarlık,कब्रिस्तान,مقبرة,কবরস্থান,
+STAGE_3,Peak,頂峰,จุดสูงสุด,Cổng Trời,Puncak,Pico,Cima,Пик,Culminer,Doruğa ulaşmak,चोटी,قمة,পিক,
+STAGE_4,Hangar,機庫,โรงเก็บเครื่องบิน,Doanh Trại,Hanggar,Hangar,Hangar,Ангар,Hangar,Hangar,हैंगर,حظيرة,হ্যাঙ্গার,
+STAGE_5,Katulistiwa,卡圖利斯蒂瓦,คาทูลิสทิวา,Làng Thông,Katulistiwa,Katulistiwa,Katulistiwa,Катулистива,Katulistiwa,Katulistiwa,कटुलिस्टिवा,كاتوليستيوا,কাতুলিস্তিওয়া,
+STAGE_6,Observatory,天文台,หอสังเกตการณ์,Đài Quan Sát,Observatorium,Observatório,Observatorio,Обсерватория,Observatoire,Gözlemevi,बेधशाला,المرصد,মানমন্দির,
+STAGE_7,Mill,磨,โรงสี,Kho Quân Sự,Pabrik,Moinho,Molino,Мельница,Moulin,Değirmen,चक्की,مطحنة,মিল,
+STAGE_8,Shipyard,船廠,อู่ต่อเรือ,Cảng Biển,Galangan kapal,Estaleiro,Astillero,Shipyard,Chantier naval,Tersane,शिपयार्ड,حوض بناء السفن,শিপইয়ার্ড,
+STAGE_9,Cape Town,開普敦,เคปทาวน์,Thành Phố Biển,Kota Tanjung,Cidade do Cabo,Ciudad del Cabo,Кейптаун,Le Cap,Cape Town,केप टाउन,كيب تاون,কেপ টাউন,
+STAGE_10,Cape Town,開普敦,เคปทาวน์,Thành Phố Biển,Kota Tanjung,Cidade do Cabo,Ciudad del Cabo,Кейптаун,Le Cap,Cape Town,केप टाउन,كيب تاون,কেপ টাউন,
+STAGE_11,Bimasakti Strip,比馬沙基帶,แถบบิมาศักติ,Thung Lũng,Bimasakti Strip,Faixa Bimasakti,Franja Bimasakti,Полоса Бимасакти,Bande de Bimasakti,Bimasakti Şeridi,बिमासक्ति पट्टी,شريط بيمساقتي,বিমাসক্তি স্ট্রিপ,
+MULTI_SCBOARD_ELIMINATE,Kills,擊殺數,ฆ่า,Hạ gục,Membunuh,Kills,Kills,Убийств,Tue,Öldürür,हत्या,يقتل,হত্যা করে,
+MULTI_SCBOARD_DEATH,Deaths,死亡人數,ผู้เสียชีวิต,Nằm xuống,Meninggal,Mortes,Fallecidos,Летальные исходы,Décès,Ölümler,मौतें,حالات الوفاة,মৃত্যু,
+MULTI_SCBOARD_DMG,Damage,損害,ความเสียหาย,Sát thương,Kerusakan,Dano,Daño,Повреждать,Dommage,Zarar,हानि,ضرر,ক্ষতি,
+SHOP_TITLE_RIFLE,Rifles,步槍,ปืนไรเฟิล,Súng trường,Pasukan penembak,Rifles,Rifles,Винтовки,Fusils,Tüfekler,राइफल,بنادق,রাইফেলস,
+SHOP_TITLE_SHOTGUN,Shotguns,霰彈槍,ปืนลูกซอง,Súng shotgun,Senapan,Espingardas,Escopetas,Дробовики,Fusils de chasse,Av tüfekleri,बंदूकें,بنادق الصيد,শটগান,
+SHOP_TITLE_SMG,SMGs,衝鋒槍,ปืนกลมือ,Súng tiểu liên,Senjata mesin ringan,Submetralhadoras,Subfusiles,пистолеты-пулеметы,mitraillettes,Hafif makineli tüfekler,एसएमजी,رشاشات رشاشة صغيرة,এসএমজি,
+SHOP_TITLE_SNIPER,Snipers,狙擊手,สไนเปอร์,Súng ngắm,Penembak jitu,Atiradores de elite,Francotiradores,Снайперы,tireurs d'élite,Keskin nişancılar,स्नाइपर्स,قناصة,স্নাইপার,
+FULL_SCBOARD_TARGET,Booyah Target: 3,布亞目標：3,บูย่า เป้าหมาย: 3,Mục tiêu Booyah: 3,Target Booyah: 3,Booyah Alvo: 3,Booyah Objetivo: 3,Цель Буя: 3,Cible Booyah : 3,Booyah Hedefi: 3,बूया लक्ष्य: 3,هدف بويا: 3,বুয়াঃ টার্গেটঃ 3,
+FULL_SCBOARD_ROUND_COUNT,Round {0}/{1},第 {0}/{1} 輪,第 {0}/{1} 輪,Vòng đấu {0}/{1},Putaran {0}/{1},Rodada {0}/{1},Ronda {0}/{1},Раунд {0}/{1},Tour {0}/{1},{0}/{1} Turu,राउंड {0}/{1},الجولة {0}/{1},রাউন্ড {0}/{1},
+GAMEINFO_WELCOME_TEXT,Last Safe Zone,最後的安全區,โซนปลอดภัยสุดท้าย,Đại Chiến Bo Cuối,Zona Aman Terakhir,Última Zona Segura,Última zona segura,Последняя безопасная зона,Dernière zone de sécurité,Son Güvenli Bölge,अंतिम सुरक्षित क्षेत्र,آخر منطقة آمنة,শেষ নিরাপদ অঞ্চল,
+SHOP_OTHER,Other,其他,อื่น,Khác,lain,outro,otro,другой,autre,diğer,अन्य,آخر,অন্য,
+BOOYAH,Booyah,,,,,,,,,,,,,
+GAMESTART,Game Start,遊戲開始,เริ่มเกม,Bắt Đầu,Awal Permainan,Início do jogo,Inicio del juego,Начало игры,Début du jeu,Oyun Başlangıcı,गेम प्रारंभ,بداية اللعبة,খেলা শুরু,
+BORDER_SHRINK_NOTI,The border starts shrinking,邊界開始縮小,邊界開始縮เล็ก,Vòng bo bắt đầu co lại,Perbatasan mulai menyusut,A fronteira começa a encolher,La frontera comienza a reducirse,Граница начинает сокращаться,La frontière commence à se rétrécir,Sınır daralmaya başlıyor,सीमा सिकुड़ने लगती है,الحدود بدأت تتقلص,সীমান্ত সঙ্কুচিত হতে থাকে,
+BORDER_MOVE_NOTI,The border starts moving,邊界開始移動,邊界開始移動,Vòng bo bắt đầu di chuyển,Perbatasan mulai bergerak,A fronteira começa a se mover,La frontera empieza a moverse,Граница начинает двигаться,La frontière commence à bouger,Sınır hareket etmeye başlıyor,सीमा हिलने लगती है,الحدود تبدأ بالتحرك,সীমান্ত নড়তে থাকে,
+SCORE,Score,分數,分數,Điểm,Skor,Pontuação,Puntaje,Счет,Score,Gol,अंक,نتيجة,স্কোর,
+LAST_ROUND_NOTIFICATION,This is the last round!,這是最後一輪！,這是最後一輪!,Đây là vòng cuối cùng!,Ini ronde terakhir!,Esta é a última rodada!,¡Esta es la última ronda!,Это последний раунд!,C'est le dernier tour !,Bu son tur!,यह आखिरी दौर है!,هذه هي الجولة الأخيرة!,এটা শেষ রাউন্ড!,
+LEADERBOARD_KD,KD,KD,KD,KD,KD,KD,KD,KD,KD,KD,KD,KD,KD,
+LEADERBOARD_WINRATE,Win rate (%),勝率（%）,อัตราการชนะ (%),Tỉ lệ thắng (%),Tingkat kemenangan (%),Taxa de vitórias (%),Tasa de victorias (%),Процент побед (%),Taux de victoire (%),Kazanma oranı (%),जीत दर (%),معدل الفوز (%),জয়ের হার (%),
+LEADERBOARD_KILL_TITLE,Kills,殺戮,殺戮,Hạ gục,Membunuh,Kills,Kills,Убийств,Tue,Öldürür,हत्या,يقتل,হত্যা করে,
+LEADERBOARD_HIGHESTMATCHELIM,Highest elims,最高比賽淘汰數,การตกรอบสูงสุด,Hạ gục nhiều nhất,Eliminasi pertandingan tertinggi,Maior número de eliminações em partidas,Mayor número de eliminaciones por partido,Наибольшее количество выбываний из матчей,Nombre d'éliminations le plus élevé,En yüksek maç elemeleri,उच्चतम मैच एलिमिनेशन,أعلى عدد من المباريات التي تم إقصاؤها,সর্বোচ্চ ম্যাচ এলিমিনেশন,
+LEADERBOARD_HEADSHOTS,Headshots,頭像照,ภาพถ่ายเฮดช็อต,Số lần headshot,Foto kepala,Retratos profissionais,Retratos,Хедшоты,Portraits,Baş çekimleri,हेडशॉट्स,ضربات الرأس,হেডশট,
+LEADERBOARD_AVG_SURV_TIME,Average survival time,平均存活時間,ระยะเวลาการอยู่รอดโดยเฉลี่ย,Thời gian sống sót trung bình,Waktu bertahan hidup rata-rata,Tempo médio de sobrevivência,Tiempo medio de supervivencia,Среднее время выживания,Durée de survie moyenne,Ortalama hayatta kalma süresi,औसत जीवित रहने का समय,متوسط ​​وقت البقاء على قيد الحياة,গড় বেঁচে থাকার সময়,
+LEADERBOARD_DMG_PER_MATCH,Average dmg,每場比賽平均傷害,ความเสียหายเฉลี่ยต่อแมตช์,Sát thương trung bình,Rata-rata kerusakan per pertandingan,Dano médio por partida,Daño promedio por partido,Средний урон за матч,Dégâts moyens par match,Maç başına ortalama hasar,प्रति मैच औसत क्षति,متوسط ​​الضرر لكل مباراة,প্রতি ম্যাচে গড় ক্ষতি,
+LEADERBOARD_PLAYER,Player,玩家,ผู้เล่น,Người chơi,Pemain,Jogador,Jugador,Игрок,Joueur,Oyuncu,खिलाड़ी,لاعب,খেলোয়াড়,
+LEADERBOARD_GAME_TITLE,Games,遊戲,เกม,Số trận,Pertandingan,Jogos,Juegos,Игры,Jeux,Oyunlar,खेल,ألعاب,গেমস,
+LEADERORAD_WINS,Wins,勝利,ชัยชนะ,Số trận thắng,Menang,Vitórias,Victorias,Победы,Victoires,Kazanır,जीत,انتصارات,জয়,
+LEADEROARD_ELIM,Eliminations,淘汰賽,การคัดออก,Hạ gục,Eliminasi,Eliminações,Eliminaciones,Исключения,Éliminations,Elemeler,एलिमिनेशन,الإقصاءات,নির্মূল,
+LEADEROARD_KD,K/D Ratio,K/D 比率,อัตราส่วน K/D,Chỉ số K/D,Rasio K/D,Relação K/D,Relación K/D,Соотношение К/Д,Rapport K/D,K/D Oranı,K/D अनुपात,نسبة القتل إلى الموت,কে/ডি অনুপাত,
+LEADERBOARD_OVERVIEW_TITLE,Overview,概述,ภาพรวม,Tổng quan,Ringkasan,Visão geral,Descripción general,Обзор,Aperçu,Genel Bakış,अवलोकन,ملخص,সংক্ষিপ্ত বিবরণ,

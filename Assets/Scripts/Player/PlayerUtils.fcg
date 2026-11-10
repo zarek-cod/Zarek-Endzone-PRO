@@ -1,0 +1,53 @@
+/* PlayerUtils.fcg
+This script contains utility functions for player-related operations.
+*/
+import "StdLibrary.fcc" as StdLib
+import "Items.fcc" as Items
+import "Strings.fcc" as Strings
+import "List.fcc" as List
+import "EditorGenLib.fcc" as EditorLib
+import "Playable.fcc" as Playable
+import "Animation.fcc" as Animation
+import "Math.fcc" as Math
+
+graph PlayerUtils {
+    /*
+    Removes all drop items from the player's inventory.
+    @param player: The player entity to remove drop items from
+    */
+    func RemoveAllDropItems(player entity<Player>){
+        if(player == thisEntity) {
+            GetConsumables(thisEntity as entity<Player>, out var items); // Get all consumables from the player 
+            for index, item in items {
+                // DropItem(player, item as entity<ItemBase>)
+                // LogError(item)
+                // DestroyItem(thisEntity as entity<Player>, item, GetItemCount(thisEntity as entity<Player>, item)) // Destroy the item when player is eliminated
+            }
+            DestroyEquipment(thisEntity as entity<Player>, EquipmentType.Vest, 1, out var isVestSuccess)
+            DestroyEquipment(thisEntity as entity<Player>, EquipmentType.Helmet, 1, out var isHelmetSuccess)
+            // Comment because weapons are kept when eliminated
+            // DestroyEquipment(thisEntity as entity<Player>, EquipmentType.PrimaryWeaponA, 1, out var isPrimaryWeaponASuccess)
+            // DestroyEquipment(thisEntity as entity<Player>, EquipmentType.PrimaryWeaponB, 1, out var isPrimaryWeaponBSuccess)
+            DestroyEquipment(thisEntity as entity<Player>, EquipmentType.SecondaryWeapon, 1, out var isSecondaryWeaponSuccess)
+        }
+    }
+
+    // Create a visual effect at the opponent's spawn point for a specified duration (MAYBE NOT USED, BUT THIS WORKS ACTUALLY)
+    async func CreateOpponentPositionEffect(spawnPoint Vector3, duration int){
+        CreateEffect(out var createdEffect, thisEntity as entity<Player>, EResEffect.CYLINDRICAL as VFXType, LoopType.Loop, true)
+        createdEffect<Transform>.Position = spawnPoint + Vector3{0, 1, 0}
+        // LogError("CreateOpponentPositionEffect at: " + spawnPoint + " for duration: " + duration)
+        createdEffect<Effect>.DiffuseAlpha = 100 
+        createdEffect<Effect>.Color = #F35353 
+        createdEffect<Transform>.Scale = Vector3{3, 150, 3} // Scale the effect to be taller
+        WaitForMillisecond(duration)
+        Destroy(createdEffect)
+    }
+
+    // Rotate the player to face a specific direction, use in the start of the game, e.g., face the center of the safe zone 
+    func RotatePlayerToDirection(spawnPosition Vector3, centerDirection Vector3) Vector3 {
+        var rotateVector = centerDirection - spawnPosition
+        var direction = Normalize(rotateVector)
+        return direction
+    }
+}

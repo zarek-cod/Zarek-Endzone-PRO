@@ -1,0 +1,76 @@
+/*  (DEPRECATED AND MOVED INTO TeamData.cfg) 
+    Script: TeamPoints.fcg
+   Description: This script manages the points for each team in the game.
+   It is responsible for tracking and updating team scores.
+*/
+import "StdLibrary.fcc" as StdLib
+import "EditorGenLib.fcc" as EditorLib
+import "List.fcc" as List
+import "Map.fcc" as Map
+
+graph TeamPoints {
+    // teamPoints Map<entity<Team>, int>  // Map to keep track of points for each team
+    // event OnGameStart() {
+    //     teamPoints = Map<entity<Team>, int>{} // Initialize the team points map
+    // }
+    // /* Initialize the team points map with zero points for each team.
+    //    This function should be called at the start of the game.
+    // */
+    // func InitializeTeamPoints() {
+    //     for index, team in GetAllTeams() {
+    //         teamPoints[team] = 0 // Set initial points to zero
+    //         LogInfo("<TeamPoints.fcg>: Initialized points for team: " + team<Entity>.Name) // Debug Info
+    //     }
+    // }
+
+    // /* Register a new team in the team points map.
+    //    This function adds a new team to the map with an initial score of zero.
+    //    @param team: The team entity to register
+    //    (This function is called when a new team is added to the game)
+    //    @return: Returns true if the operation was successful, false if the team was already registered
+    // */
+    // func RegisterTeam(team entity<Team>) bool {
+    //     if (!ContainKey(teamPoints, team)) {
+    //         teamPoints[team] = 0 // Initialize points for the new team
+    //         LogInfo("<TeamPoints.fcg>: Registered new team: " + team<Entity>.Name) // Debug Info
+    //         return true
+    //     } else {
+    //         LogWarning("<TeamPoints.fcg>: Team already registered: " + team<Entity>.Name) // Warning Info
+    //         return false
+    //     }
+    // }
+    // /* Add points to a specific team's score.
+    //    @param team: The team entity to which points will be added
+    //    @param points: The number of points to add
+    // */
+    // func AddPointsToTeam(team entity<Team>, points int) {
+    //     if (ContainKey(teamPoints, team)) {
+    //         teamPoints[team] = teamPoints[team] + points // Increment the team's score
+    //         LogInfo("<TeamPoints.fcg>: Added " + points + " points to team: " + team<Entity>.Name) // Debug Info
+    //     } else {
+    //         LogError("<TeamPoints.fcg>: Team not found: " + team<Entity>.Name) // Error Info
+    //     }
+    // }
+
+    // /* Get the current points for all teams.
+    //    This function returns the map of team points.
+    //    @return: A map of entity<Team> to int representing team points
+    // */
+    // func GetTeamPoints() Map<entity<Team>, int> {
+    //     return teamPoints // Return the map of team points
+    // }
+
+    // /* Get the current point of one team
+    //     @param team: The team entity to get the point.
+    //     @return: The current points of the specified team.
+    // */
+    // func GetTeamPoint(team entity<Team>) int {
+    //     if (ContainKey(teamPoints, team)) {
+    //         return teamPoints[team] // Return the points for the specified team
+    //     } else {
+    //         LogError("<TeamPoints.fcg>: Team not found: " + team<Entity>.Name) // Error Info
+    //         return 0 // Return zero if the team is not found
+    //     }
+    //     LogInfo("<TeamPoints.fcg>: Current points " + teamPoints) // Debug Info
+    // }
+}

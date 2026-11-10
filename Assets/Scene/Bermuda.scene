@@ -1,0 +1,4641 @@
+{
+  "_tag": {
+    "type": "Scene",
+    "resourceId": ""
+  },
+  "_entityId": "OcQ7Wot5",
+  "children": [
+    {
+      "_tag": {
+        "type": "EnvWeatherEntity",
+        "resourceId": "Primitive/Empty"
+      },
+      "_entityId": "cYV0gPV0",
+      "children": [],
+      "prefabVariant": null,
+      "activeValue": {
+        "selfValue": true,
+        "valueTag": "activeValue"
+      },
+      "unlockedValue": {
+        "selfValue": true,
+        "valueTag": "unlockedValue"
+      },
+      "editorLockValue": false,
+      "editorVisibleValue": true,
+      "position": {
+        "x": -18.638198852539062,
+        "y": 13.477108001708984,
+        "z": 142.52206420898438
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 45.00000762939453,
+        "y": 156,
+        "z": 351
+      },
+      "BTPath": [
+        null
+      ],
+      "visible": true,
+      "VisibilityLayer": 0,
+      "modelOptimization": 0,
+      "streamingLayer": "",
+      "attributes": [
+        2,
+        4
+      ],
+      "isTrigger": false,
+      "collidable": true,
+      "physicalLayer": 0,
+      "physicalMaterial": null,
+      "aoiSetting": 0,
+      "initialTypes": {},
+      "componentList": [],
+      "_filters": [],
+      "curWeatherPresetID": 999,
+      "_entityName": "FE_0_ZZ_SKYENV_SKY",
+      "currentWeather": {
+        "lightColor": {
+          "r": 255,
+          "g": 244,
+          "b": 249,
+          "a": 1
+        },
+        "lightIntensity": 1.08,
+        "darkness": 0.03,
+        "shadowStrength": 0.6,
+        "terrainWetness": 0,
+        "lensFlare": 0.65,
+        "fogColor": {
+          "r": 123,
+          "g": 158,
+          "b": 192,
+          "a": 1
+        },
+        "ambientColor": {
+          "r": 154,
+          "g": 148,
+          "b": 126,
+          "a": 1
+        },
+        "nightMode": false,
+        "resId": "UGC_SKYENV_CITY",
+        "enableFog": true,
+        "fogType": 1,
+        "startDistance": 50,
+        "endDistance": 1000,
+        "density": 0.01,
+        "lightRotation": {
+          "x": 45.00000762939453,
+          "y": 156,
+          "z": 351
+        },
+        "skyMaterial": null
+      },
+      "customWeather": {
+        "lightColor": {
+          "r": 255,
+          "g": 244,
+          "b": 249,
+          "a": 1
+        },
+        "lightIntensity": 1.08,
+        "darkness": 0.03,
+        "shadowStrength": 0.6,
+        "terrainWetness": 0,
+        "lensFlare": 0.65,
+        "fogColor": {
+          "r": 123,
+          "g": 158,
+          "b": 192,
+          "a": 1
+        },
+        "ambientColor": {
+          "r": 154,
+          "g": 148,
+          "b": 126,
+          "a": 1
+        },
+        "nightMode": false,
+        "resId": "UGC_SKYENV_CITY",
+        "enableFog": true,
+        "fogType": 1,
+        "startDistance": 50,
+        "endDistance": 1000,
+        "density": 0.01,
+        "lightRotation": {
+          "x": 45.00000762939453,
+          "y": 156,
+          "z": 351
+        },
+        "skyMaterial": null
+      }
+    },
+    {
+      "_entityName": "FE_54_XYL_PHOTOFILTER_ENTITY_NAME",
+      "_tag": {
+        "type": "PhotoFilterEntity",
+        "resourceId": "Primitive/Empty"
+      },
+      "_entityId": "AsQJ52lp",
+      "children": [],
+      "prefabVariant": null,
+      "activeValue": {
+        "selfValue": true,
+        "valueTag": "activeValue"
+      },
+      "unlockedValue": null,
+      "editorLockValue": false,
+      "editorVisibleValue": true,
+      "position": {
+        "x": 0,
+        "y": 100,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "BTPath": [
+        null
+      ],
+      "visible": true,
+      "VisibilityLayer": 0,
+      "modelOptimization": 0,
+      "streamingLayer": "",
+      "attributes": [
+        2,
+        4
+      ],
+      "isTrigger": false,
+      "collidable": true,
+      "physicalLayer": 0,
+      "aoiSetting": 0,
+      "initialTypes": {},
+      "componentList": [],
+      "FilterType": -1,
+      "Common": {
+        "Brightness": 1,
+        "Contrast": 1,
+        "Saturation": 1
+      },
+      "Comic": {
+        "Threshold": 0.332,
+        "Range": 0.015,
+        "FlashSpeed": 10,
+        "LineIntensity": 2,
+        "LineSize": 1,
+        "PencilSize": 0.0006,
+        "PencilCorrection": 0.3,
+        "PencilColor": {
+          "r": 0,
+          "g": 0,
+          "b": 0,
+          "a": 1
+        }
+      },
+      "Drawing": {
+        "PencilSize": 0.0006,
+        "PencilCorrection": 0.5,
+        "PencilColor": {
+          "r": 53,
+          "g": 37,
+          "b": 30,
+          "a": 1
+        },
+        "PaperColor": {
+          "r": 177,
+          "g": 127,
+          "b": 80,
+          "a": 0
+        },
+        "CornerLose": 0.5,
+        "PaperTex": null
+      },
+      "Pixel": {
+        "Pixelisation": 200,
+        "ColorOffset": {
+          "r": 255,
+          "g": 205,
+          "b": 136,
+          "a": 0.2
+        }
+      },
+      "RGBSplit": {
+        "SplitOffset": 0.005
+      },
+      "GoldenAge": {
+        "Intensity": 1,
+        "Warmth": 0
+      },
+      "Cyberpunk": {
+        "EdgeIntensity": 1,
+        "EdgeSize": 0.0013,
+        "EdgeSensitivity": 0.15,
+        "GlitchInterval": 3,
+        "GlitchDuration": 0.1,
+        "EdgeColor1": {
+          "r": 255,
+          "g": 0,
+          "b": 255,
+          "a": 1
+        },
+        "EdgeColor2": {
+          "r": 51,
+          "g": 255,
+          "b": 255,
+          "a": 1
+        },
+        "EdgeNoiseTex": null
+      }
+    },
+    {
+      "_tag": {
+        "type": "UGCSceneEntity",
+        "resourceId": "Primitive/Empty"
+      },
+      "_entityId": "WgoBirQL",
+      "children": [
+        {
+          "_tag": {
+            "type": "SceneEditEntity",
+            "resourceId": "Primitive/Empty"
+          },
+          "_entityId": "YVQIhLad",
+          "children": [],
+          "prefabVariant": null,
+          "activeValue": {
+            "selfValue": false,
+            "valueTag": "activeValue"
+          },
+          "unlockedValue": {
+            "selfValue": true,
+            "valueTag": "unlockedValue"
+          },
+          "position": {
+            "x": 12.231980323791504,
+            "y": 10.145000457763672,
+            "z": 537.9249877929688
+          },
+          "scale": {
+            "x": 2,
+            "y": 1,
+            "z": 7.099999904632568
+          },
+          "rotation": {
+            "x": 0,
+            "y": 93,
+            "z": 0
+          },
+          "BTPath": [
+            null
+          ],
+          "visible": true,
+          "VisibilityLayer": 0,
+          "modelOptimization": 0,
+          "streamingLayer": "",
+          "attributes": [
+            2,
+            4
+          ],
+          "isTrigger": false,
+          "collidable": true,
+          "physicalLayer": 0,
+          "physicalMaterial": null,
+          "aoiSetting": 0,
+          "initialTypes": {},
+          "componentList": [],
+          "_filters": [],
+          "entityTagData": {
+            "tagPointers": []
+          },
+          "tempIndex": 69,
+          "itemID": 143,
+          "seParent": null,
+          "ecaScripts": [
+            null
+          ],
+          "ecaProps": {
+            "SpawnBox": {},
+            "SpawnPos": {},
+            "LevelObject": {},
+            "Transform": {},
+            "Entity": {},
+            "Visibility": {},
+            "Collider": {},
+            "ColliderShape": {}
+          },
+          "_entityName": "Team 1",
+          "propsData": {
+            "spawnPointCount": 4,
+            "teamID": 0,
+            "_levelObjectID": 1,
+            "teamIDStr": "All teams"
+          },
+          "editorLockValue": false,
+          "editorVisibleValue": true,
+          "_performanceConfigData": {
+            "ItemID": 143,
+            "MeshCount": 38,
+            "ColliderMeshCount": 0,
+            "MaterialCount": 2,
+            "AnimationCount": 0,
+            "BoneCount": 0,
+            "ParticleEmitterCount": 0,
+            "ParticleCount": 0,
+            "TextureMemory": 28088,
+            "ModelMemory": 5524,
+            "AudioMemory": 0
+          }
+        },
+        {
+          "_tag": {
+            "type": "SceneEditEntity",
+            "resourceId": "Primitive/Empty"
+          },
+          "_entityId": "0PBSCKqx",
+          "children": [],
+          "prefabVariant": null,
+          "activeValue": {
+            "selfValue": false,
+            "valueTag": "activeValue"
+          },
+          "unlockedValue": {
+            "selfValue": true,
+            "valueTag": "unlockedValue"
+          },
+          "position": {
+            "x": 32.70006561279297,
+            "y": 13.65999984741211,
+            "z": 553.0218505859375
+          },
+          "scale": {
+            "x": 4,
+            "y": 1,
+            "z": 6
+          },
+          "rotation": {
+            "x": 0,
+            "y": 1.999999761581421,
+            "z": 0
+          },
+          "BTPath": [
+            null
+          ],
+          "visible": true,
+          "VisibilityLayer": 0,
+          "modelOptimization": 0,
+          "streamingLayer": "",
+          "attributes": [
+            2,
+            4
+          ],
+          "isTrigger": false,
+          "collidable": true,
+          "physicalLayer": 0,
+          "physicalMaterial": null,
+          "aoiSetting": 0,
+          "initialTypes": {},
+          "componentList": [],
+          "_filters": [],
+          "entityTagData": {
+            "tagPointers": []
+          },
+          "tempIndex": 70,
+          "itemID": 143,
+          "seParent": null,
+          "ecaScripts": [
+            null
+          ],
+          "ecaProps": {
+            "SpawnBox": {},
+            "SpawnPos": {},
+            "LevelObject": {},
+            "Transform": {},
+            "Entity": {},
+            "Visibility": {}
+          },
+          "_entityName": "Team 2",
+          "propsData": {
+            "spawnPointCount": 4,
+            "teamID": 0,
+            "_levelObjectID": 2,
+            "teamIDStr": "All teams"
+          },
+          "editorLockValue": false,
+          "editorVisibleValue": true,
+          "_performanceConfigData": {
+            "ItemID": 143,
+            "MeshCount": 38,
+            "ColliderMeshCount": 0,
+            "MaterialCount": 2,
+            "AnimationCount": 0,
+            "BoneCount": 0,
+            "ParticleEmitterCount": 0,
+            "ParticleCount": 0,
+            "TextureMemory": 28088,
+            "ModelMemory": 5524,
+            "AudioMemory": 0
+          }
+        },
+        {
+          "_tag": {
+            "type": "SceneEditEntity",
+            "resourceId": "Primitive/Empty"
+          },
+          "_entityId": "1HAbw5Tg",
+          "children": [],
+          "prefabVariant": null,
+          "activeValue": {
+            "selfValue": false,
+            "valueTag": "activeValue"
+          },
+          "unlockedValue": {
+            "selfValue": true,
+            "valueTag": "unlockedValue"
+          },
+          "position": {
+            "x": 12.6557,
+            "y": 17.13,
+            "z": 534.934
+          },
+          "scale": {
+            "x": 4.5,
+            "y": 1,
+            "z": 6
+          },
+          "rotation": {
+            "x": 0,
+            "y": 95,
+            "z": 0
+          },
+          "BTPath": [
+            null
+          ],
+          "visible": true,
+          "VisibilityLayer": 0,
+          "modelOptimization": 0,
+          "streamingLayer": "",
+          "attributes": [
+            2,
+            4
+          ],
+          "isTrigger": false,
+          "collidable": true,
+          "physicalLayer": 0,
+          "physicalMaterial": null,
+          "aoiSetting": 0,
+          "initialTypes": {},
+          "componentList": [],
+          "_filters": [],
+          "entityTagData": {
+            "tagPointers": []
+          },
+          "tempIndex": 71,
+          "itemID": 143,
+          "seParent": null,
+          "ecaScripts": [
+            null
+          ],
+          "ecaProps": {
+            "SpawnBox": {},
+            "SpawnPos": {},
+            "LevelObject": {},
+            "Transform": {},
+            "Entity": {},
+            "Visibility": {}
+          },
+          "_entityName": "Team 3",
+          "propsData": {
+            "spawnPointCount": 4,
+            "teamID": 0,
+            "_levelObjectID": 3,
+            "teamIDStr": "All teams"
+          },
+          "editorLockValue": false,
+          "editorVisibleValue": true,
+          "_performanceConfigData": {
+            "ItemID": 143,
+            "MeshCount": 38,
+            "ColliderMeshCount": 0,
+            "MaterialCount": 2,
+            "AnimationCount": 0,
+            "BoneCount": 0,
+            "ParticleEmitterCount": 0,
+            "ParticleCount": 0,
+            "TextureMemory": 28088,
+            "ModelMemory": 5524,
+            "AudioMemory": 0
+          }
+        }
+      ],
+      "prefabVariant": null,
+      "activeValue": {
+        "selfValue": false,
+        "valueTag": "activeValue"
+      },
+      "unlockedValue": {
+        "selfValue": true,
+        "valueTag": "unlockedValue"
+      },
+      "editorLockValue": false,
+      "editorVisibleValue": true,
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "BTPath": [
+        null
+      ],
+      "visible": true,
+      "VisibilityLayer": 0,
+      "modelOptimization": 0,
+      "streamingLayer": "",
+      "attributes": [
+        2,
+        4
+      ],
+      "isTrigger": false,
+      "collidable": true,
+      "physicalLayer": 0,
+      "physicalMaterial": null,
+      "aoiSetting": 0,
+      "initialTypes": {},
+      "componentList": [],
+      "_filters": [],
+      "entityTagData": {
+        "tagPointers": []
+      },
+      "materials": [
+        null
+      ],
+      "colliders": [],
+      "IsNPC": false,
+      "isCreateAsEmpty": true,
+      "Rigidbody": {
+        "Type": 1,
+        "Mass": 1,
+        "CenterOfMass": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "UseGravity": true,
+        "Drag": 0.05,
+        "AngularDrag": 0.05,
+        "FreezePosX": false,
+        "FreezeRotX": false,
+        "FreezePosY": false,
+        "FreezeRotY": false,
+        "FreezePosZ": false,
+        "FreezeRotZ": false
+      },
+      "ecaScripts": [],
+      "ecaProps": {
+        "CustomLevelObject": {},
+        "LevelObject": {},
+        "Transform": {},
+        "Entity": {},
+        "Visibility": {},
+        "MeshRender": {}
+      },
+      "propsData": {},
+      "entityVersion": 3,
+      "_entityName": "Spawn Group 2"
+    },
+    {
+      "_tag": {
+        "type": "UGCSceneEntity",
+        "resourceId": "Primitive/Empty"
+      },
+      "_entityId": "h8GqCu0g",
+      "children": [
+        {
+          "_tag": {
+            "type": "SceneEditEntity",
+            "resourceId": "Primitive/Empty"
+          },
+          "_entityId": "2PgNeB8G",
+          "children": [],
+          "prefabVariant": null,
+          "activeValue": {
+            "selfValue": true,
+            "valueTag": "activeValue"
+          },
+          "unlockedValue": {
+            "selfValue": true,
+            "valueTag": "unlockedValue"
+          },
+          "editorLockValue": false,
+          "editorVisibleValue": true,
+          "position": {
+            "x": 31.4892,
+            "y": 19.4889,
+            "z": 538.624
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "BTPath": [
+            null
+          ],
+          "visible": true,
+          "VisibilityLayer": 0,
+          "modelOptimization": 0,
+          "streamingLayer": "",
+          "attributes": [
+            2,
+            4
+          ],
+          "isTrigger": false,
+          "collidable": true,
+          "physicalLayer": 0,
+          "physicalMaterial": null,
+          "aoiSetting": 0,
+          "initialTypes": {},
+          "componentList": [],
+          "_filters": [],
+          "entityTagData": {
+            "tagPointers": []
+          },
+          "tempIndex": 72,
+          "itemID": 365,
+          "seParent": null,
+          "ecaScripts": [
+            null
+          ],
+          "ecaProps": {
+            "EradicateZone": {},
+            "LevelObject": {},
+            "Transform": {},
+            "Entity": {},
+            "Visibility": {},
+            "ResetableEntity": {}
+          },
+          "_entityName": "Safe Zone End Point",
+          "propsData": {
+            "StartRadius": 30,
+            "EndRadius": 0,
+            "StartTime": 0,
+            "StartShrinkTime": 25000,
+            "ShrinkTime": 60000,
+            "DamageTimeInterval": 2000,
+            "DamageValue": 30,
+            "CloseTime": 120000,
+            "resetEveryRound": true,
+            "pairEntityID": "MPJvDbS8",
+            "EffectColor": {
+              "r": 0,
+              "g": 118,
+              "b": 255,
+              "a": 0.49
+            },
+            "groupID": 2,
+            "isEnd": true
+          },
+          "_performanceConfigData": {
+            "ItemID": 365,
+            "MeshCount": 1640,
+            "ColliderMeshCount": 0,
+            "MaterialCount": 4,
+            "AnimationCount": 0,
+            "BoneCount": 0,
+            "ParticleEmitterCount": 1,
+            "ParticleCount": 10,
+            "TextureMemory": 44984,
+            "ModelMemory": 70564,
+            "AudioMemory": 0
+          }
+        },
+        {
+          "_tag": {
+            "type": "SceneEditEntity",
+            "resourceId": "Primitive/Empty"
+          },
+          "_entityId": "MPJvDbS8",
+          "children": [],
+          "prefabVariant": null,
+          "activeValue": {
+            "selfValue": true,
+            "valueTag": "activeValue"
+          },
+          "unlockedValue": {
+            "selfValue": true,
+            "valueTag": "unlockedValue"
+          },
+          "editorLockValue": false,
+          "editorVisibleValue": true,
+          "position": {
+            "x": 31.48900032043457,
+            "y": 19.48900032043457,
+            "z": 533.6240234375
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "BTPath": [
+            null
+          ],
+          "visible": true,
+          "VisibilityLayer": 0,
+          "modelOptimization": 0,
+          "streamingLayer": "",
+          "attributes": [
+            2,
+            4
+          ],
+          "isTrigger": false,
+          "collidable": true,
+          "physicalLayer": 0,
+          "physicalMaterial": null,
+          "aoiSetting": 0,
+          "initialTypes": {},
+          "componentList": [],
+          "_filters": [
+            "game.related12"
+          ],
+          "entityTagData": {
+            "tagPointers": []
+          },
+          "tempIndex": 73,
+          "itemID": 364,
+          "seParent": null,
+          "ecaScripts": [
+            null
+          ],
+          "ecaProps": {
+            "EradicateZone": {},
+            "LevelObject": {},
+            "Transform": {},
+            "Entity": {},
+            "Visibility": {},
+            "ResetableEntity": {}
+          },
+          "_entityName": "Custom Safe Zone",
+          "propsData": {
+            "StartRadius": 30,
+            "EndRadius": 0,
+            "StartTime": 0,
+            "StartShrinkTime": 25000,
+            "ShrinkTime": 60000,
+            "DamageTimeInterval": 2000,
+            "DamageValue": 30,
+            "CloseTime": 120000,
+            "resetEveryRound": true,
+            "pairEntityID": "2PgNeB8G",
+            "EffectColor": {
+              "r": 0,
+              "g": 118,
+              "b": 255,
+              "a": 0.49
+            },
+            "groupID": 2,
+            "isEnd": false
+          },
+          "_performanceConfigData": {
+            "ItemID": 364,
+            "MeshCount": 1660,
+            "ColliderMeshCount": 0,
+            "MaterialCount": 3,
+            "AnimationCount": 0,
+            "BoneCount": 0,
+            "ParticleEmitterCount": 0,
+            "ParticleCount": 0,
+            "TextureMemory": 29020,
+            "ModelMemory": 73612,
+            "AudioMemory": 0
+          }
+        }
+      ],
+      "prefabVariant": null,
+      "activeValue": {
+        "selfValue": false,
+        "valueTag": "activeValue"
+      },
+      "unlockedValue": {
+        "selfValue": true,
+        "valueTag": "unlockedValue"
+      },
+      "editorLockValue": false,
+      "editorVisibleValue": true,
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "BTPath": [
+        null
+      ],
+      "visible": true,
+      "VisibilityLayer": 0,
+      "modelOptimization": 0,
+      "streamingLayer": "",
+      "attributes": [
+        2,
+        4
+      ],
+      "isTrigger": false,
+      "collidable": true,
+      "physicalLayer": 0,
+      "physicalMaterial": null,
+      "aoiSetting": 0,
+      "initialTypes": {},
+      "componentList": [],
+      "_filters": [],
+      "entityTagData": {
+        "tagPointers": []
+      },
+      "materials": [
+        null
+      ],
+      "colliders": [],
+      "IsNPC": false,
+      "isCreateAsEmpty": true,
+      "Rigidbody": {
+        "Type": 1,
+        "Mass": 1,
+        "CenterOfMass": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "UseGravity": true,
+        "Drag": 0.05,
+        "AngularDrag": 0.05,
+        "FreezePosX": false,
+        "FreezeRotX": false,
+        "FreezePosY": false,
+        "FreezeRotY": false,
+        "FreezePosZ": false,
+        "FreezeRotZ": false
+      },
+      "ecaScripts": [],
+      "ecaProps": {
+        "CustomLevelObject": {},
+        "LevelObject": {},
+        "Transform": {},
+        "Entity": {},
+        "Visibility": {},
+        "MeshRender": {}
+      },
+      "propsData": {},
+      "entityVersion": 3,
+      "_entityName": "Second Safe Zone"
+    },
+    {
+      "_tag": {
+        "type": "UGCSceneEntity",
+        "resourceId": "Primitive/Empty"
+      },
+      "_entityId": "NpoFRX2G",
+      "children": [
+        {
+          "_tag": {
+            "type": "UGCSceneEntity",
+            "resourceId": "Primitive/Empty"
+          },
+          "_entityId": "Hoa74Jh6",
+          "children": [
+            {
+              "_tag": {
+                "type": "SceneEditEntity",
+                "resourceId": "Primitive/Empty"
+              },
+              "_entityId": "81xXoFmi",
+              "children": [],
+              "prefabVariant": null,
+              "activeValue": {
+                "selfValue": true,
+                "valueTag": "activeValue"
+              },
+              "unlockedValue": {
+                "selfValue": true,
+                "valueTag": "unlockedValue"
+              },
+              "editorLockValue": false,
+              "editorVisibleValue": true,
+              "position": {
+                "x": 230.8979949951172,
+                "y": 9.829999923706055,
+                "z": -102.514
+              },
+              "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+              },
+              "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              },
+              "BTPath": [
+                null
+              ],
+              "visible": true,
+              "VisibilityLayer": 0,
+              "modelOptimization": 0,
+              "streamingLayer": "",
+              "attributes": [
+                2,
+                4
+              ],
+              "isTrigger": false,
+              "collidable": true,
+              "physicalLayer": 0,
+              "physicalMaterial": null,
+              "aoiSetting": 0,
+              "initialTypes": {},
+              "componentList": [],
+              "_filters": [
+                "game.related12"
+              ],
+              "entityTagData": {
+                "tagPointers": []
+              },
+              "tempIndex": 74,
+              "itemID": 364,
+              "seParent": null,
+              "ecaScripts": [],
+              "ecaProps": {
+                "EradicateZone": {},
+                "LevelObject": {},
+                "Transform": {},
+                "Entity": {},
+                "Visibility": {},
+                "ResetableEntity": {}
+              },
+              "_entityName": "Safe Zone 1 ",
+              "propsData": {
+                "StartRadius": 30,
+                "EndRadius": 0,
+                "StartTime": 0,
+                "StartShrinkTime": 25000,
+                "ShrinkTime": 60000,
+                "DamageTimeInterval": 2000,
+                "DamageValue": 0,
+                "CloseTime": 120000,
+                "resetEveryRound": true,
+                "pairEntityID": "dKRc5IFT",
+                "EffectColor": {
+                  "r": 0,
+                  "g": 118,
+                  "b": 255,
+                  "a": 0.49
+                },
+                "groupID": 3,
+                "isEnd": false
+              },
+              "_performanceConfigData": {
+                "ItemID": 364,
+                "MeshCount": 1660,
+                "ColliderMeshCount": 0,
+                "MaterialCount": 3,
+                "AnimationCount": 0,
+                "BoneCount": 0,
+                "ParticleEmitterCount": 0,
+                "ParticleCount": 0,
+                "TextureMemory": 29020,
+                "ModelMemory": 73612,
+                "AudioMemory": 0
+              }
+            },
+            {
+              "_tag": {
+                "type": "SceneEditEntity",
+                "resourceId": "Primitive/Empty"
+              },
+              "_entityId": "QjpolHIp",
+              "children": [],
+              "prefabVariant": null,
+              "activeValue": {
+                "selfValue": true,
+                "valueTag": "activeValue"
+              },
+              "unlockedValue": {
+                "selfValue": true,
+                "valueTag": "unlockedValue"
+              },
+              "editorLockValue": false,
+              "editorVisibleValue": true,
+              "position": {
+                "x": 230.8979949951172,
+                "y": 9.829999923706055,
+                "z": -97.51399993896484
+              },
+              "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+              },
+              "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              },
+              "BTPath": [
+                null
+              ],
+              "visible": true,
+              "VisibilityLayer": 0,
+              "modelOptimization": 0,
+              "streamingLayer": "",
+              "attributes": [
+                2,
+                4
+              ],
+              "isTrigger": false,
+              "collidable": true,
+              "physicalLayer": 0,
+              "physicalMaterial": null,
+              "aoiSetting": 0,
+              "initialTypes": {},
+              "componentList": [],
+              "_filters": [],
+              "entityTagData": {
+                "tagPointers": []
+              },
+              "tempIndex": 75,
+              "itemID": 365,
+              "seParent": null,
+              "ecaScripts": [],
+              "ecaProps": {
+                "EradicateZone": {},
+                "LevelObject": {},
+                "Transform": {},
+                "Entity": {},
+                "Visibility": {},
+                "ResetableEntity": {}
+              },
+              "_entityName": "Safe Zone End Point 1",
+              "propsData": {
+                "StartRadius": 30,
+                "EndRadius": 0,
+                "StartTime": 0,
+                "StartShrinkTime": 25000,
+                "ShrinkTime": 60000,
+                "DamageTimeInterval": 2000,
+                "DamageValue": 0,
+                "CloseTime": 120000,
+                "resetEveryRound": true,
+                "pairEntityID": "NJgVJ9LX",
+                "EffectColor": {
+                  "r": 0,
+                  "g": 118,
+                  "b": 255,
+                  "a": 0.49
+                },
+                "groupID": 4,
+                "isEnd": true
+              },
+              "_performanceConfigData": {
+                "ItemID": 365,
+                "MeshCount": 1640,
+                "ColliderMeshCount": 0,
+                "MaterialCount": 4,
+                "AnimationCount": 0,
+                "BoneCount": 0,
+                "ParticleEmitterCount": 1,
+                "ParticleCount": 10,
+                "TextureMemory": 44984,
+                "ModelMemory": 70564,
+                "AudioMemory": 0
+              }
+            }
+          ],
+          "prefabVariant": null,
+          "activeValue": {
+            "selfValue": false,
+            "valueTag": "activeValue"
+          },
+          "unlockedValue": {
+            "selfValue": true,
+            "valueTag": "unlockedValue"
+          },
+          "editorLockValue": false,
+          "editorVisibleValue": true,
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "BTPath": [
+            null
+          ],
+          "visible": true,
+          "VisibilityLayer": 0,
+          "modelOptimization": 0,
+          "streamingLayer": "",
+          "attributes": [
+            2,
+            4
+          ],
+          "isTrigger": false,
+          "collidable": true,
+          "physicalLayer": 0,
+          "physicalMaterial": null,
+          "aoiSetting": 0,
+          "initialTypes": {},
+          "componentList": [],
+          "_filters": [],
+          "entityTagData": {
+            "tagPointers": []
+          },
+          "materials": [
+            null
+          ],
+          "colliders": [],
+          "IsNPC": false,
+          "isCreateAsEmpty": true,
+          "Rigidbody": {
+            "Type": 1,
+            "Mass": 1,
+            "CenterOfMass": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "UseGravity": true,
+            "Drag": 0.05,
+            "AngularDrag": 0.05,
+            "FreezePosX": false,
+            "FreezeRotX": false,
+            "FreezePosY": false,
+            "FreezeRotY": false,
+            "FreezePosZ": false,
+            "FreezeRotZ": false
+          },
+          "ecaScripts": [
+            null
+          ],
+          "ecaProps": {
+            "CustomLevelObject": {},
+            "LevelObject": {},
+            "Transform": {},
+            "Entity": {},
+            "Visibility": {},
+            "MeshRender": {}
+          },
+          "propsData": {},
+          "entityVersion": 3,
+          "_entityName": "First Safe Zone"
+        },
+        {
+          "_tag": {
+            "type": "UGCSceneEntity",
+            "resourceId": "Primitive/Empty"
+          },
+          "_entityId": "5WoKFqqw",
+          "children": [
+            {
+              "_tag": {
+                "type": "SceneEditEntity",
+                "resourceId": "Primitive/Empty"
+              },
+              "_entityId": "G2apxHZu",
+              "children": [],
+              "prefabVariant": null,
+              "activeValue": {
+                "selfValue": true,
+                "valueTag": "activeValue"
+              },
+              "unlockedValue": {
+                "selfValue": true,
+                "valueTag": "unlockedValue"
+              },
+              "position": {
+                "x": 31.4892,
+                "y": 19.4889,
+                "z": 538.624
+              },
+              "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+              },
+              "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              },
+              "BTPath": [
+                null
+              ],
+              "visible": true,
+              "VisibilityLayer": 0,
+              "modelOptimization": 0,
+              "streamingLayer": "",
+              "attributes": [
+                2,
+                4
+              ],
+              "isTrigger": false,
+              "collidable": true,
+              "physicalLayer": 0,
+              "physicalMaterial": null,
+              "aoiSetting": 0,
+              "initialTypes": {},
+              "componentList": [],
+              "_filters": [],
+              "entityTagData": {
+                "tagPointers": []
+              },
+              "tempIndex": 76,
+              "itemID": 365,
+              "seParent": null,
+              "ecaScripts": [
+                null
+              ],
+              "ecaProps": {
+                "EradicateZone": {},
+                "LevelObject": {},
+                "Transform": {},
+                "Entity": {},
+                "Visibility": {},
+                "ResetableEntity": {}
+              },
+              "_entityName": "Safe Zone End Point 2",
+              "propsData": {
+                "StartRadius": 30,
+                "EndRadius": 0,
+                "StartTime": 0,
+                "StartShrinkTime": 25000,
+                "ShrinkTime": 60000,
+                "DamageTimeInterval": 2000,
+                "DamageValue": 0,
+                "CloseTime": 120000,
+                "resetEveryRound": true,
+                "pairEntityID": "QPjcJzbQ",
+                "EffectColor": {
+                  "r": 0,
+                  "g": 118,
+                  "b": 255,
+                  "a": 0.49
+                },
+                "groupID": 5,
+                "isEnd": true
+              },
+              "editorLockValue": false,
+              "editorVisibleValue": true,
+              "_performanceConfigData": {
+                "ItemID": 365,
+                "MeshCount": 1640,
+                "ColliderMeshCount": 0,
+                "MaterialCount": 4,
+                "AnimationCount": 0,
+                "BoneCount": 0,
+                "ParticleEmitterCount": 1,
+                "ParticleCount": 10,
+                "TextureMemory": 44984,
+                "ModelMemory": 70564,
+                "AudioMemory": 0
+              }
+            },
+            {
+              "_tag": {
+                "type": "SceneEditEntity",
+                "resourceId": "Primitive/Empty"
+              },
+              "_entityId": "TBfwdIzs",
+              "children": [],
+              "prefabVariant": null,
+              "activeValue": {
+                "selfValue": true,
+                "valueTag": "activeValue"
+              },
+              "unlockedValue": {
+                "selfValue": true,
+                "valueTag": "unlockedValue"
+              },
+              "editorLockValue": false,
+              "editorVisibleValue": true,
+              "position": {
+                "x": 31.48900032043457,
+                "y": 19.48900032043457,
+                "z": 533.6240234375
+              },
+              "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+              },
+              "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              },
+              "BTPath": [
+                null
+              ],
+              "visible": true,
+              "VisibilityLayer": 0,
+              "modelOptimization": 0,
+              "streamingLayer": "",
+              "attributes": [
+                2,
+                4
+              ],
+              "isTrigger": false,
+              "collidable": true,
+              "physicalLayer": 0,
+              "physicalMaterial": null,
+              "aoiSetting": 0,
+              "initialTypes": {},
+              "componentList": [],
+              "_filters": [
+                "game.related12"
+              ],
+              "entityTagData": {
+                "tagPointers": []
+              },
+              "tempIndex": 77,
+              "itemID": 364,
+              "seParent": null,
+              "ecaScripts": [
+                null
+              ],
+              "ecaProps": {
+                "EradicateZone": {},
+                "LevelObject": {},
+                "Transform": {},
+                "Entity": {},
+                "Visibility": {},
+                "ResetableEntity": {}
+              },
+              "_entityName": "Safe Zone 2",
+              "propsData": {
+                "StartRadius": 30,
+                "EndRadius": 0,
+                "StartTime": 0,
+                "StartShrinkTime": 25000,
+                "ShrinkTime": 60000,
+                "DamageTimeInterval": 2000,
+                "DamageValue": 0,
+                "CloseTime": 120000,
+                "resetEveryRound": true,
+                "pairEntityID": "avkPclvD",
+                "EffectColor": {
+                  "r": 0,
+                  "g": 118,
+                  "b": 255,
+                  "a": 0.49
+                },
+                "groupID": 6,
+                "isEnd": false
+              },
+              "_performanceConfigData": {
+                "ItemID": 364,
+                "MeshCount": 1660,
+                "ColliderMeshCount": 0,
+                "MaterialCount": 3,
+                "AnimationCount": 0,
+                "BoneCount": 0,
+                "ParticleEmitterCount": 0,
+                "ParticleCount": 0,
+                "TextureMemory": 29020,
+                "ModelMemory": 73612,
+                "AudioMemory": 0
+              }
+            }
+          ],
+          "prefabVariant": null,
+          "activeValue": {
+            "selfValue": false,
+            "valueTag": "activeValue"
+          },
+          "unlockedValue": {
+            "selfValue": true,
+            "valueTag": "unlockedValue"
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "BTPath": [
+            null
+          ],
+          "visible": true,
+          "VisibilityLayer": 0,
+          "modelOptimization": 0,
+          "streamingLayer": "",
+          "attributes": [
+            2,
+            4
+          ],
+          "isTrigger": false,
+          "collidable": true,
+          "physicalLayer": 0,
+          "physicalMaterial": null,
+          "aoiSetting": 0,
+          "initialTypes": {},
+          "componentList": [],
+          "_filters": [],
+          "entityTagData": {
+            "tagPointers": []
+          },
+          "materials": [
+            null
+          ],
+          "colliders": [],
+          "IsNPC": false,
+          "isCreateAsEmpty": true,
+          "Rigidbody": {
+            "Type": 1,
+            "Mass": 1,
+            "CenterOfMass": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "UseGravity": true,
+            "Drag": 0.05,
+            "AngularDrag": 0.05,
+            "FreezePosX": false,
+            "FreezeRotX": false,
+            "FreezePosY": false,
+            "FreezeRotY": false,
+            "FreezePosZ": false,
+            "FreezeRotZ": false
+          },
+          "ecaScripts": [],
+          "ecaProps": {
+            "CustomLevelObject": {},
+            "LevelObject": {},
+            "Transform": {},
+            "Entity": {},
+            "Visibility": {},
+            "MeshRender": {}
+          },
+          "propsData": {},
+          "entityVersion": 3,
+          "_entityName": "Second Safe Zone",
+          "editorLockValue": false,
+          "editorVisibleValue": true
+        },
+        {
+          "_tag": {
+            "type": "UGCSceneEntity",
+            "resourceId": "Primitive/Empty"
+          },
+          "_entityId": "2RNRhuYB",
+          "children": [
+            {
+              "_tag": {
+                "type": "SceneEditEntity",
+                "resourceId": "Primitive/Empty"
+              },
+              "_entityId": "DA6bjWLK",
+              "children": [],
+              "prefabVariant": null,
+              "activeValue": {
+                "selfValue": true,
+                "valueTag": "activeValue"
+              },
+              "unlockedValue": {
+                "selfValue": true,
+                "valueTag": "unlockedValue"
+              },
+              "editorLockValue": false,
+              "editorVisibleValue": true,
+              "position": {
+                "x": 676.027,
+                "y": 70.1079,
+                "z": 74.7414
+              },
+              "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+              },
+              "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              },
+              "BTPath": [
+                null
+              ],
+              "visible": true,
+              "VisibilityLayer": 0,
+              "modelOptimization": 0,
+              "streamingLayer": "",
+              "attributes": [
+                2,
+                4
+              ],
+              "isTrigger": false,
+              "collidable": true,
+              "physicalLayer": 0,
+              "physicalMaterial": null,
+              "aoiSetting": 0,
+              "initialTypes": {},
+              "componentList": [],
+              "_filters": [],
+              "entityTagData": {
+                "tagPointers": []
+              },
+              "tempIndex": 78,
+              "itemID": 365,
+              "seParent": null,
+              "ecaScripts": [
+                null
+              ],
+              "ecaProps": {
+                "EradicateZone": {},
+                "LevelObject": {},
+                "Transform": {},
+                "Entity": {},
+                "Visibility": {},
+                "ResetableEntity": {}
+              },
+              "_entityName": "Safe Zone End Point 3",
+              "propsData": {
+                "StartRadius": 40,
+                "EndRadius": 0,
+                "StartTime": 0,
+                "StartShrinkTime": 25000,
+                "ShrinkTime": 70000,
+                "DamageTimeInterval": 2000,
+                "DamageValue": 0,
+                "CloseTime": 120000,
+                "resetEveryRound": true,
+                "pairEntityID": "gOPxuDAi",
+                "EffectColor": {
+                  "r": 0,
+                  "g": 118,
+                  "b": 255,
+                  "a": 0.49
+                },
+                "groupID": 7,
+                "isEnd": true
+              },
+              "_performanceConfigData": {
+                "ItemID": 365,
+                "MeshCount": 1640,
+                "ColliderMeshCount": 0,
+                "MaterialCount": 4,
+                "AnimationCount": 0,
+                "BoneCount": 0,
+                "ParticleEmitterCount": 1,
+                "ParticleCount": 10,
+                "TextureMemory": 44984,
+                "ModelMemory": 70564,
+                "AudioMemory": 0
+              }
+            },
+            {
+              "_tag": {
+                "type": "SceneEditEntity",
+                "resourceId": "Primitive/Empty"
+              },
+              "_entityId": "Qh6w5FKW",
+              "children": [],
+              "prefabVariant": null,
+              "activeValue": {
+                "selfValue": true,
+                "valueTag": "activeValue"
+              },
+              "unlockedValue": {
+                "selfValue": true,
+                "valueTag": "unlockedValue"
+              },
+              "position": {
+                "x": 676.027,
+                "y": 70.1079,
+                "z": 74.7414
+              },
+              "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+              },
+              "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              },
+              "BTPath": [
+                null
+              ],
+              "visible": true,
+              "VisibilityLayer": 0,
+              "modelOptimization": 0,
+              "streamingLayer": "",
+              "attributes": [
+                2,
+                4
+              ],
+              "isTrigger": false,
+              "collidable": true,
+              "physicalLayer": 0,
+              "physicalMaterial": null,
+              "aoiSetting": 0,
+              "initialTypes": {},
+              "componentList": [],
+              "_filters": [
+                "game.related12"
+              ],
+              "entityTagData": {
+                "tagPointers": []
+              },
+              "tempIndex": 79,
+              "itemID": 364,
+              "seParent": null,
+              "ecaScripts": [
+                null
+              ],
+              "ecaProps": {
+                "EradicateZone": {},
+                "LevelObject": {},
+                "Transform": {},
+                "Entity": {},
+                "Visibility": {},
+                "ResetableEntity": {}
+              },
+              "_entityName": "Safe Zone 3",
+              "propsData": {
+                "StartRadius": 40,
+                "EndRadius": 0,
+                "StartTime": 0,
+                "StartShrinkTime": 25000,
+                "ShrinkTime": 70000,
+                "DamageTimeInterval": 2000,
+                "DamageValue": 0,
+                "CloseTime": 120000,
+                "resetEveryRound": true,
+                "pairEntityID": "fCxR20Ni",
+                "EffectColor": {
+                  "r": 0,
+                  "g": 118,
+                  "b": 255,
+                  "a": 0.49
+                },
+                "groupID": 8,
+                "isEnd": false
+              },
+              "editorLockValue": false,
+              "editorVisibleValue": true,
+              "_performanceConfigData": {
+                "ItemID": 364,
+                "MeshCount": 1660,
+                "ColliderMeshCount": 0,
+                "MaterialCount": 3,
+                "AnimationCount": 0,
+                "BoneCount": 0,
+                "ParticleEmitterCount": 0,
+                "ParticleCount": 0,
+                "TextureMemory": 29020,
+                "ModelMemory": 73612,
+                "AudioMemory": 0
+              }
+            }
+          ],
+          "prefabVariant": null,
+          "activeValue": {
+            "selfValue": false,
+            "valueTag": "activeValue"
+          },
+          "unlockedValue": {
+            "selfValue": true,
+            "valueTag": "unlockedValue"
+          },
+          "editorLockValue": false,
+          "editorVisibleValue": true,
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "BTPath": [
+            null
+          ],
+          "visible": true,
+          "VisibilityLayer": 0,
+          "modelOptimization": 0,
+          "streamingLayer": "",
+          "attributes": [
+            2,
+            4
+          ],
+          "isTrigger": false,
+          "collidable": true,
+          "physicalLayer": 0,
+          "physicalMaterial": null,
+          "aoiSetting": 0,
+          "initialTypes": {},
+          "componentList": [],
+          "_filters": [],
+          "entityTagData": {
+            "tagPointers": []
+          },
+          "materials": [
+            null
+          ],
+          "colliders": [],
+          "IsNPC": false,
+          "isCreateAsEmpty": true,
+          "Rigidbody": {
+            "Type": 1,
+            "Mass": 1,
+            "CenterOfMass": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "UseGravity": true,
+            "Drag": 0.05,
+            "AngularDrag": 0.05,
+            "FreezePosX": false,
+            "FreezeRotX": false,
+            "FreezePosY": false,
+            "FreezeRotY": false,
+            "FreezePosZ": false,
+            "FreezeRotZ": false
+          },
+          "ecaScripts": [],
+          "ecaProps": {
+            "CustomLevelObject": {},
+            "LevelObject": {},
+            "Transform": {},
+            "Entity": {},
+            "Visibility": {},
+            "MeshRender": {}
+          },
+          "propsData": {},
+          "entityVersion": 3,
+          "_entityName": "Third Safe Zone"
+        },
+        {
+          "_tag": {
+            "type": "UGCSceneEntity",
+            "resourceId": "Primitive/Empty"
+          },
+          "_entityId": "XR635GFl",
+          "children": [
+            {
+              "_tag": {
+                "type": "SceneEditEntity",
+                "resourceId": "Primitive/Empty"
+              },
+              "_entityId": "QdjUsAGy",
+              "children": [],
+              "prefabVariant": null,
+              "activeValue": {
+                "selfValue": true,
+                "valueTag": "activeValue"
+              },
+              "unlockedValue": {
+                "selfValue": true,
+                "valueTag": "unlockedValue"
+              },
+              "editorLockValue": false,
+              "editorVisibleValue": true,
+              "position": {
+                "x": 21.3072,
+                "y": 2.563,
+                "z": 70.7698
+              },
+              "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+              },
+              "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              },
+              "BTPath": [
+                null
+              ],
+              "visible": true,
+              "VisibilityLayer": 0,
+              "modelOptimization": 0,
+              "streamingLayer": "",
+              "attributes": [
+                2,
+                4
+              ],
+              "isTrigger": false,
+              "collidable": true,
+              "physicalLayer": 0,
+              "physicalMaterial": null,
+              "aoiSetting": 0,
+              "initialTypes": {},
+              "componentList": [],
+              "_filters": [],
+              "entityTagData": {
+                "tagPointers": []
+              },
+              "tempIndex": 80,
+              "itemID": 365,
+              "seParent": null,
+              "ecaScripts": [
+                null
+              ],
+              "ecaProps": {
+                "EradicateZone": {},
+                "LevelObject": {},
+                "Transform": {},
+                "Entity": {},
+                "Visibility": {},
+                "ResetableEntity": {}
+              },
+              "_entityName": "Safe Zone End Point 4",
+              "propsData": {
+                "StartRadius": 40,
+                "EndRadius": 0,
+                "StartTime": 0,
+                "StartShrinkTime": 25000,
+                "ShrinkTime": 60000,
+                "DamageTimeInterval": 2000,
+                "DamageValue": 0,
+                "CloseTime": 120000,
+                "resetEveryRound": true,
+                "pairEntityID": "BUBRI4rf",
+                "EffectColor": {
+                  "r": 0,
+                  "g": 118,
+                  "b": 255,
+                  "a": 0.49
+                },
+                "groupID": 9,
+                "isEnd": true
+              },
+              "_performanceConfigData": {
+                "ItemID": 365,
+                "MeshCount": 1640,
+                "ColliderMeshCount": 0,
+                "MaterialCount": 4,
+                "AnimationCount": 0,
+                "BoneCount": 0,
+                "ParticleEmitterCount": 1,
+                "ParticleCount": 10,
+                "TextureMemory": 44984,
+                "ModelMemory": 70564,
+                "AudioMemory": 0
+              }
+            },
+            {
+              "_tag": {
+                "type": "SceneEditEntity",
+                "resourceId": "Primitive/Empty"
+              },
+              "_entityId": "OvKAuD5x",
+              "children": [],
+              "prefabVariant": null,
+              "activeValue": {
+                "selfValue": true,
+                "valueTag": "activeValue"
+              },
+              "unlockedValue": {
+                "selfValue": true,
+                "valueTag": "unlockedValue"
+              },
+              "editorLockValue": false,
+              "editorVisibleValue": true,
+              "position": {
+                "x": 21.3072,
+                "y": 2.563,
+                "z": 70.7698
+              },
+              "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+              },
+              "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              },
+              "BTPath": [
+                null
+              ],
+              "visible": true,
+              "VisibilityLayer": 0,
+              "modelOptimization": 0,
+              "streamingLayer": "",
+              "attributes": [
+                2,
+                4
+              ],
+              "isTrigger": false,
+              "collidable": true,
+              "physicalLayer": 0,
+              "physicalMaterial": null,
+              "aoiSetting": 0,
+              "initialTypes": {},
+              "componentList": [],
+              "_filters": [
+                "game.related12"
+              ],
+              "entityTagData": {
+                "tagPointers": []
+              },
+              "tempIndex": 81,
+              "itemID": 364,
+              "seParent": null,
+              "ecaScripts": [
+                null
+              ],
+              "ecaProps": {
+                "EradicateZone": {},
+                "LevelObject": {},
+                "Transform": {},
+                "Entity": {},
+                "Visibility": {},
+                "ResetableEntity": {}
+              },
+              "_entityName": "Safe Zone 4",
+              "propsData": {
+                "StartRadius": 40,
+                "EndRadius": 0,
+                "StartTime": 0,
+                "StartShrinkTime": 25000,
+                "ShrinkTime": 60000,
+                "DamageTimeInterval": 2000,
+                "DamageValue": 0,
+                "CloseTime": 120000,
+                "resetEveryRound": true,
+                "pairEntityID": "hXDl2aLL",
+                "EffectColor": {
+                  "r": 0,
+                  "g": 118,
+                  "b": 255,
+                  "a": 0.49
+                },
+                "groupID": 10,
+                "isEnd": false
+              },
+              "_performanceConfigData": {
+                "ItemID": 364,
+                "MeshCount": 1660,
+                "ColliderMeshCount": 0,
+                "MaterialCount": 3,
+                "AnimationCount": 0,
+                "BoneCount": 0,
+                "ParticleEmitterCount": 0,
+                "ParticleCount": 0,
+                "TextureMemory": 29020,
+                "ModelMemory": 73612,
+                "AudioMemory": 0
+              }
+            }
+          ],
+          "prefabVariant": null,
+          "activeValue": {
+            "selfValue": false,
+            "valueTag": "activeValue"
+          },
+          "unlockedValue": {
+            "selfValue": true,
+            "valueTag": "unlockedValue"
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "BTPath": [
+            null
+          ],
+          "visible": true,
+          "VisibilityLayer": 0,
+          "modelOptimization": 0,
+          "streamingLayer": "",
+          "attributes": [
+            2,
+            4
+          ],
+          "isTrigger": false,
+          "collidable": true,
+          "physicalLayer": 0,
+          "physicalMaterial": null,
+          "aoiSetting": 0,
+          "initialTypes": {},
+          "componentList": [],
+          "_filters": [],
+          "entityTagData": {
+            "tagPointers": []
+          },
+          "materials": [
+            null
+          ],
+          "colliders": [],
+          "IsNPC": false,
+          "isCreateAsEmpty": true,
+          "Rigidbody": {
+            "Type": 1,
+            "Mass": 1,
+            "CenterOfMass": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "UseGravity": true,
+            "Drag": 0.05,
+            "AngularDrag": 0.05,
+            "FreezePosX": false,
+            "FreezeRotX": false,
+            "FreezePosY": false,
+            "FreezeRotY": false,
+            "FreezePosZ": false,
+            "FreezeRotZ": false
+          },
+          "ecaScripts": [],
+          "ecaProps": {
+            "CustomLevelObject": {},
+            "LevelObject": {},
+            "Transform": {},
+            "Entity": {},
+            "Visibility": {},
+            "MeshRender": {}
+          },
+          "propsData": {},
+          "entityVersion": 3,
+          "_entityName": "Fourth Safe Zone",
+          "editorLockValue": false,
+          "editorVisibleValue": true
+        },
+        {
+          "_tag": {
+            "type": "UGCSceneEntity",
+            "resourceId": "Primitive/Empty"
+          },
+          "_entityId": "lMRtkCU3",
+          "children": [
+            {
+              "_tag": {
+                "type": "SceneEditEntity",
+                "resourceId": "Primitive/Empty"
+              },
+              "_entityId": "wwP3k0Jq",
+              "children": [],
+              "prefabVariant": null,
+              "activeValue": {
+                "selfValue": true,
+                "valueTag": "activeValue"
+              },
+              "unlockedValue": {
+                "selfValue": true,
+                "valueTag": "unlockedValue"
+              },
+              "editorLockValue": false,
+              "editorVisibleValue": true,
+              "position": {
+                "x": 162.496,
+                "y": 1.86346,
+                "z": 346.683
+              },
+              "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+              },
+              "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              },
+              "BTPath": [
+                null
+              ],
+              "visible": true,
+              "VisibilityLayer": 0,
+              "modelOptimization": 0,
+              "streamingLayer": "",
+              "attributes": [
+                2,
+                4
+              ],
+              "isTrigger": false,
+              "collidable": true,
+              "physicalLayer": 0,
+              "physicalMaterial": null,
+              "aoiSetting": 0,
+              "initialTypes": {},
+              "componentList": [],
+              "_filters": [
+                "game.related12"
+              ],
+              "entityTagData": {
+                "tagPointers": []
+              },
+              "tempIndex": 82,
+              "itemID": 364,
+              "seParent": null,
+              "ecaScripts": [
+                null
+              ],
+              "ecaProps": {
+                "EradicateZone": {},
+                "LevelObject": {},
+                "Transform": {},
+                "Entity": {},
+                "Visibility": {},
+                "ResetableEntity": {}
+              },
+              "_entityName": "Safe Zone 5",
+              "propsData": {
+                "StartRadius": 40,
+                "EndRadius": 0,
+                "StartTime": 0,
+                "StartShrinkTime": 30000,
+                "ShrinkTime": 55000,
+                "DamageTimeInterval": 2000,
+                "DamageValue": 0,
+                "CloseTime": 120000,
+                "resetEveryRound": true,
+                "pairEntityID": "53sNspSq",
+                "EffectColor": {
+                  "r": 0,
+                  "g": 118,
+                  "b": 255,
+                  "a": 0.49
+                },
+                "groupID": 11,
+                "isEnd": false
+              },
+              "_performanceConfigData": {
+                "ItemID": 364,
+                "MeshCount": 1660,
+                "ColliderMeshCount": 0,
+                "MaterialCount": 3,
+                "AnimationCount": 0,
+                "BoneCount": 0,
+                "ParticleEmitterCount": 0,
+                "ParticleCount": 0,
+                "TextureMemory": 29020,
+                "ModelMemory": 73612,
+                "AudioMemory": 0
+              }
+            },
+            {
+              "_tag": {
+                "type": "SceneEditEntity",
+                "resourceId": "Primitive/Empty"
+              },
+              "_entityId": "NpkC9ctF",
+              "children": [],
+              "prefabVariant": null,
+              "activeValue": {
+                "selfValue": true,
+                "valueTag": "activeValue"
+              },
+              "unlockedValue": {
+                "selfValue": true,
+                "valueTag": "unlockedValue"
+              },
+              "editorLockValue": false,
+              "editorVisibleValue": true,
+              "position": {
+                "x": 162.496,
+                "y": 1.86346,
+                "z": 346.683
+              },
+              "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+              },
+              "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              },
+              "BTPath": [
+                null
+              ],
+              "visible": true,
+              "VisibilityLayer": 0,
+              "modelOptimization": 0,
+              "streamingLayer": "",
+              "attributes": [
+                2,
+                4
+              ],
+              "isTrigger": false,
+              "collidable": true,
+              "physicalLayer": 0,
+              "physicalMaterial": null,
+              "aoiSetting": 0,
+              "initialTypes": {},
+              "componentList": [],
+              "_filters": [],
+              "entityTagData": {
+                "tagPointers": []
+              },
+              "tempIndex": 83,
+              "itemID": 365,
+              "seParent": null,
+              "ecaScripts": [
+                null
+              ],
+              "ecaProps": {
+                "EradicateZone": {},
+                "LevelObject": {},
+                "Transform": {},
+                "Entity": {},
+                "Visibility": {},
+                "ResetableEntity": {}
+              },
+              "_entityName": "Safe Zone End Point 5",
+              "propsData": {
+                "StartRadius": 40,
+                "EndRadius": 0,
+                "StartTime": 0,
+                "StartShrinkTime": 30000,
+                "ShrinkTime": 55000,
+                "DamageTimeInterval": 2000,
+                "DamageValue": 0,
+                "CloseTime": 120000,
+                "resetEveryRound": true,
+                "pairEntityID": "m1lIAgR6",
+                "EffectColor": {
+                  "r": 0,
+                  "g": 118,
+                  "b": 255,
+                  "a": 0.49
+                },
+                "groupID": 12,
+                "isEnd": true
+              },
+              "_performanceConfigData": {
+                "ItemID": 365,
+                "MeshCount": 1640,
+                "ColliderMeshCount": 0,
+                "MaterialCount": 4,
+                "AnimationCount": 0,
+                "BoneCount": 0,
+                "ParticleEmitterCount": 1,
+                "ParticleCount": 10,
+                "TextureMemory": 44984,
+                "ModelMemory": 70564,
+                "AudioMemory": 0
+              }
+            }
+          ],
+          "prefabVariant": null,
+          "activeValue": {
+            "selfValue": false,
+            "valueTag": "activeValue"
+          },
+          "unlockedValue": {
+            "selfValue": true,
+            "valueTag": "unlockedValue"
+          },
+          "editorLockValue": false,
+          "editorVisibleValue": true,
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "BTPath": [
+            null
+          ],
+          "visible": true,
+          "VisibilityLayer": 0,
+          "modelOptimization": 0,
+          "streamingLayer": "",
+          "attributes": [
+            2,
+            4
+          ],
+          "isTrigger": false,
+          "collidable": true,
+          "physicalLayer": 0,
+          "physicalMaterial": null,
+          "aoiSetting": 0,
+          "initialTypes": {},
+          "componentList": [],
+          "_filters": [],
+          "entityTagData": {
+            "tagPointers": []
+          },
+          "materials": [
+            null
+          ],
+          "colliders": [],
+          "IsNPC": false,
+          "isCreateAsEmpty": true,
+          "Rigidbody": {
+            "Type": 1,
+            "Mass": 1,
+            "CenterOfMass": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "UseGravity": true,
+            "Drag": 0.05,
+            "AngularDrag": 0.05,
+            "FreezePosX": false,
+            "FreezeRotX": false,
+            "FreezePosY": false,
+            "FreezeRotY": false,
+            "FreezePosZ": false,
+            "FreezeRotZ": false
+          },
+          "ecaScripts": [],
+          "ecaProps": {
+            "CustomLevelObject": {},
+            "LevelObject": {},
+            "Transform": {},
+            "Entity": {},
+            "Visibility": {},
+            "MeshRender": {}
+          },
+          "propsData": {},
+          "entityVersion": 3,
+          "_entityName": "Fifth Safe Zone"
+        },
+        {
+          "_tag": {
+            "type": "UGCSceneEntity",
+            "resourceId": "Primitive/Empty"
+          },
+          "_entityId": "a910Mfpp",
+          "children": [
+            {
+              "_tag": {
+                "type": "SceneEditEntity",
+                "resourceId": "Primitive/Empty"
+              },
+              "_entityId": "Q4CHqhep",
+              "children": [],
+              "prefabVariant": null,
+              "activeValue": {
+                "selfValue": true,
+                "valueTag": "activeValue"
+              },
+              "unlockedValue": {
+                "selfValue": true,
+                "valueTag": "unlockedValue"
+              },
+              "editorLockValue": false,
+              "editorVisibleValue": true,
+              "position": {
+                "x": -124.69999694824219,
+                "y": 28.135000228881836,
+                "z": 371.85101318359375
+              },
+              "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+              },
+              "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              },
+              "BTPath": [
+                null
+              ],
+              "visible": true,
+              "VisibilityLayer": 0,
+              "modelOptimization": 0,
+              "streamingLayer": "",
+              "attributes": [
+                2,
+                4
+              ],
+              "isTrigger": false,
+              "collidable": true,
+              "physicalLayer": 0,
+              "physicalMaterial": null,
+              "aoiSetting": 0,
+              "initialTypes": {},
+              "componentList": [],
+              "_filters": [
+                "game.related12"
+              ],
+              "entityTagData": {
+                "tagPointers": []
+              },
+              "tempIndex": 84,
+              "itemID": 364,
+              "seParent": null,
+              "ecaScripts": [
+                null
+              ],
+              "ecaProps": {
+                "EradicateZone": {},
+                "LevelObject": {},
+                "Transform": {},
+                "Entity": {},
+                "Visibility": {},
+                "ResetableEntity": {}
+              },
+              "_entityName": "Safe Zone 6",
+              "propsData": {
+                "StartRadius": 40,
+                "EndRadius": 0,
+                "StartTime": 0,
+                "StartShrinkTime": 30000,
+                "ShrinkTime": 50000,
+                "DamageTimeInterval": 2000,
+                "DamageValue": 0,
+                "CloseTime": 120000,
+                "resetEveryRound": true,
+                "pairEntityID": "iCJ3z8JB",
+                "EffectColor": {
+                  "r": 0,
+                  "g": 118,
+                  "b": 255,
+                  "a": 0.49
+                },
+                "groupID": 13,
+                "isEnd": false
+              },
+              "_performanceConfigData": {
+                "ItemID": 364,
+                "MeshCount": 1660,
+                "ColliderMeshCount": 0,
+                "MaterialCount": 3,
+                "AnimationCount": 0,
+                "BoneCount": 0,
+                "ParticleEmitterCount": 0,
+                "ParticleCount": 0,
+                "TextureMemory": 29020,
+                "ModelMemory": 73612,
+                "AudioMemory": 0
+              }
+            },
+            {
+              "_tag": {
+                "type": "SceneEditEntity",
+                "resourceId": "Primitive/Empty"
+              },
+              "_entityId": "4VPAxJ9r",
+              "children": [],
+              "prefabVariant": null,
+              "activeValue": {
+                "selfValue": true,
+                "valueTag": "activeValue"
+              },
+              "unlockedValue": {
+                "selfValue": true,
+                "valueTag": "unlockedValue"
+              },
+              "editorLockValue": false,
+              "editorVisibleValue": true,
+              "position": {
+                "x": -124.69999694824219,
+                "y": 28.135000228881836,
+                "z": 376.85101318359375
+              },
+              "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+              },
+              "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              },
+              "BTPath": [
+                null
+              ],
+              "visible": true,
+              "VisibilityLayer": 0,
+              "modelOptimization": 0,
+              "streamingLayer": "",
+              "attributes": [
+                2,
+                4
+              ],
+              "isTrigger": false,
+              "collidable": true,
+              "physicalLayer": 0,
+              "physicalMaterial": null,
+              "aoiSetting": 0,
+              "initialTypes": {},
+              "componentList": [],
+              "_filters": [],
+              "entityTagData": {
+                "tagPointers": []
+              },
+              "tempIndex": 85,
+              "itemID": 365,
+              "seParent": null,
+              "ecaScripts": [
+                null
+              ],
+              "ecaProps": {
+                "EradicateZone": {},
+                "LevelObject": {},
+                "Transform": {},
+                "Entity": {},
+                "Visibility": {},
+                "ResetableEntity": {}
+              },
+              "_entityName": "Safe Zone End Point 6",
+              "propsData": {
+                "StartRadius": 40,
+                "EndRadius": 0,
+                "StartTime": 0,
+                "StartShrinkTime": 30000,
+                "ShrinkTime": 50000,
+                "DamageTimeInterval": 2000,
+                "DamageValue": 0,
+                "CloseTime": 120000,
+                "resetEveryRound": true,
+                "pairEntityID": "npnrOlOH",
+                "EffectColor": {
+                  "r": 0,
+                  "g": 118,
+                  "b": 255,
+                  "a": 0.49
+                },
+                "groupID": 14,
+                "isEnd": true
+              },
+              "_performanceConfigData": {
+                "ItemID": 365,
+                "MeshCount": 1640,
+                "ColliderMeshCount": 0,
+                "MaterialCount": 4,
+                "AnimationCount": 0,
+                "BoneCount": 0,
+                "ParticleEmitterCount": 1,
+                "ParticleCount": 10,
+                "TextureMemory": 44984,
+                "ModelMemory": 70564,
+                "AudioMemory": 0
+              }
+            }
+          ],
+          "prefabVariant": null,
+          "activeValue": {
+            "selfValue": false,
+            "valueTag": "activeValue"
+          },
+          "unlockedValue": {
+            "selfValue": true,
+            "valueTag": "unlockedValue"
+          },
+          "editorLockValue": false,
+          "editorVisibleValue": true,
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "BTPath": [
+            null
+          ],
+          "visible": true,
+          "VisibilityLayer": 0,
+          "modelOptimization": 0,
+          "streamingLayer": "",
+          "attributes": [
+            2,
+            4
+          ],
+          "isTrigger": false,
+          "collidable": true,
+          "physicalLayer": 0,
+          "physicalMaterial": null,
+          "aoiSetting": 0,
+          "initialTypes": {},
+          "componentList": [],
+          "_filters": [],
+          "entityTagData": {
+            "tagPointers": []
+          },
+          "materials": [
+            null
+          ],
+          "colliders": [],
+          "IsNPC": false,
+          "isCreateAsEmpty": true,
+          "Rigidbody": {
+            "Type": 1,
+            "Mass": 1,
+            "CenterOfMass": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "UseGravity": true,
+            "Drag": 0.05,
+            "AngularDrag": 0.05,
+            "FreezePosX": false,
+            "FreezeRotX": false,
+            "FreezePosY": false,
+            "FreezeRotY": false,
+            "FreezePosZ": false,
+            "FreezeRotZ": false
+          },
+          "ecaScripts": [],
+          "ecaProps": {
+            "CustomLevelObject": {},
+            "LevelObject": {},
+            "Transform": {},
+            "Entity": {},
+            "Visibility": {},
+            "MeshRender": {}
+          },
+          "propsData": {},
+          "entityVersion": 3,
+          "_entityName": "Sixth Safe Zone"
+        },
+        {
+          "_tag": {
+            "type": "UGCSceneEntity",
+            "resourceId": "Primitive/Empty"
+          },
+          "_entityId": "3s3j5DeK",
+          "children": [
+            {
+              "_tag": {
+                "type": "SceneEditEntity",
+                "resourceId": "Primitive/Empty"
+              },
+              "_entityId": "AcDbHOAZ",
+              "children": [],
+              "prefabVariant": null,
+              "activeValue": {
+                "selfValue": true,
+                "valueTag": "activeValue"
+              },
+              "unlockedValue": {
+                "selfValue": true,
+                "valueTag": "unlockedValue"
+              },
+              "editorLockValue": false,
+              "editorVisibleValue": true,
+              "position": {
+                "x": 914.22998046875,
+                "y": 48.89400100708008,
+                "z": 502.0987243652344
+              },
+              "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+              },
+              "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              },
+              "BTPath": [
+                null
+              ],
+              "visible": true,
+              "VisibilityLayer": 0,
+              "modelOptimization": 0,
+              "streamingLayer": "",
+              "attributes": [
+                2,
+                4
+              ],
+              "isTrigger": false,
+              "collidable": true,
+              "physicalLayer": 0,
+              "physicalMaterial": null,
+              "aoiSetting": 0,
+              "initialTypes": {},
+              "componentList": [],
+              "_filters": [
+                "game.related12"
+              ],
+              "entityTagData": {
+                "tagPointers": []
+              },
+              "tempIndex": 86,
+              "itemID": 364,
+              "seParent": null,
+              "ecaScripts": [
+                null
+              ],
+              "ecaProps": {
+                "EradicateZone": {},
+                "LevelObject": {},
+                "Transform": {},
+                "Entity": {},
+                "Visibility": {},
+                "ResetableEntity": {}
+              },
+              "_entityName": "Safe Zone 7",
+              "propsData": {
+                "StartRadius": 50,
+                "EndRadius": 0,
+                "StartTime": 0,
+                "StartShrinkTime": 30000,
+                "ShrinkTime": 50000,
+                "DamageTimeInterval": 2000,
+                "DamageValue": 0,
+                "CloseTime": 120000,
+                "resetEveryRound": true,
+                "pairEntityID": "nUZm7mKn",
+                "EffectColor": {
+                  "r": 0,
+                  "g": 118,
+                  "b": 255,
+                  "a": 0.49
+                },
+                "groupID": 15,
+                "isEnd": false
+              },
+              "_performanceConfigData": {
+                "ItemID": 364,
+                "MeshCount": 1660,
+                "ColliderMeshCount": 0,
+                "MaterialCount": 3,
+                "AnimationCount": 0,
+                "BoneCount": 0,
+                "ParticleEmitterCount": 0,
+                "ParticleCount": 0,
+                "TextureMemory": 29020,
+                "ModelMemory": 73612,
+                "AudioMemory": 0
+              }
+            },
+            {
+              "_tag": {
+                "type": "SceneEditEntity",
+                "resourceId": "Primitive/Empty"
+              },
+              "_entityId": "w838mkQc",
+              "children": [],
+              "prefabVariant": null,
+              "activeValue": {
+                "selfValue": true,
+                "valueTag": "activeValue"
+              },
+              "unlockedValue": {
+                "selfValue": true,
+                "valueTag": "unlockedValue"
+              },
+              "editorLockValue": false,
+              "editorVisibleValue": true,
+              "position": {
+                "x": 914.22998046875,
+                "y": 48.89400100708008,
+                "z": 511.2460021972656
+              },
+              "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+              },
+              "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+              },
+              "BTPath": [
+                null
+              ],
+              "visible": true,
+              "VisibilityLayer": 0,
+              "modelOptimization": 0,
+              "streamingLayer": "",
+              "attributes": [
+                2,
+                4
+              ],
+              "isTrigger": false,
+              "collidable": true,
+              "physicalLayer": 0,
+              "physicalMaterial": null,
+              "aoiSetting": 0,
+              "initialTypes": {},
+              "componentList": [],
+              "_filters": [],
+              "entityTagData": {
+                "tagPointers": []
+              },
+              "tempIndex": 87,
+              "itemID": 365,
+              "seParent": null,
+              "ecaScripts": [
+                null
+              ],
+              "ecaProps": {
+                "EradicateZone": {},
+                "LevelObject": {},
+                "Transform": {},
+                "Entity": {},
+                "Visibility": {},
+                "ResetableEntity": {}
+              },
+              "_entityName": "Safe Zone End Point 7",
+              "propsData": {
+                "StartRadius": 50,
+                "EndRadius": 0,
+                "StartTime": 0,
+                "StartShrinkTime": 30000,
+                "ShrinkTime": 50000,
+                "DamageTimeInterval": 2000,
+                "DamageValue": 0,
+                "CloseTime": 120000,
+                "resetEveryRound": true,
+                "pairEntityID": "Dcpz9Tle",
+                "EffectColor": {
+                  "r": 0,
+                  "g": 118,
+                  "b": 255,
+                  "a": 0.49
+                },
+                "groupID": 16,
+                "isEnd": true
+              },
+              "_performanceConfigData": {
+                "ItemID": 365,
+                "MeshCount": 1640,
+                "ColliderMeshCount": 0,
+                "MaterialCount": 4,
+                "AnimationCount": 0,
+                "BoneCount": 0,
+                "ParticleEmitterCount": 1,
+                "ParticleCount": 10,
+                "TextureMemory": 44984,
+                "ModelMemory": 70564,
+                "AudioMemory": 0
+              }
+            }
+          ],
+          "prefabVariant": null,
+          "activeValue": {
+            "selfValue": false,
+            "valueTag": "activeValue"
+          },
+          "unlockedValue": {
+            "selfValue": true,
+            "valueTag": "unlockedValue"
+          },
+          "editorLockValue": false,
+          "editorVisibleValue": true,
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "scale": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "BTPath": [
+            null
+          ],
+          "visible": true,
+          "VisibilityLayer": 0,
+          "modelOptimization": 0,
+          "streamingLayer": "",
+          "attributes": [
+            2,
+            4
+          ],
+          "isTrigger": false,
+          "collidable": true,
+          "physicalLayer": 0,
+          "physicalMaterial": null,
+          "aoiSetting": 0,
+          "initialTypes": {},
+          "componentList": [],
+          "_filters": [],
+          "entityTagData": {
+            "tagPointers": []
+          },
+          "materials": [
+            null
+          ],
+          "colliders": [],
+          "IsNPC": false,
+          "isCreateAsEmpty": true,
+          "Rigidbody": {
+            "Type": 1,
+            "Mass": 1,
+            "CenterOfMass": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "UseGravity": true,
+            "Drag": 0.05,
+            "AngularDrag": 0.05,
+            "FreezePosX": false,
+            "FreezeRotX": false,
+            "FreezePosY": false,
+            "FreezeRotY": false,
+            "FreezePosZ": false,
+            "FreezeRotZ": false
+          },
+          "ecaScripts": [],
+          "ecaProps": {
+            "CustomLevelObject": {},
+            "LevelObject": {},
+            "Transform": {},
+            "Entity": {},
+            "Visibility": {},
+            "MeshRender": {}
+          },
+          "propsData": {},
+          "entityVersion": 3,
+          "_entityName": "Seventh Safe Zone"
+        }
+      ],
+      "prefabVariant": null,
+      "activeValue": {
+        "selfValue": true,
+        "valueTag": "activeValue"
+      },
+      "unlockedValue": {
+        "selfValue": true,
+        "valueTag": "unlockedValue"
+      },
+      "editorLockValue": false,
+      "editorVisibleValue": true,
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "BTPath": [
+        null
+      ],
+      "visible": true,
+      "VisibilityLayer": 0,
+      "modelOptimization": 0,
+      "streamingLayer": "",
+      "attributes": [
+        2,
+        4
+      ],
+      "isTrigger": false,
+      "collidable": true,
+      "physicalLayer": 0,
+      "physicalMaterial": null,
+      "aoiSetting": 0,
+      "initialTypes": {},
+      "componentList": [],
+      "_filters": [],
+      "entityTagData": {
+        "tagPointers": []
+      },
+      "materials": [
+        null
+      ],
+      "colliders": [],
+      "IsNPC": false,
+      "isCreateAsEmpty": true,
+      "Rigidbody": {
+        "Type": 1,
+        "Mass": 1,
+        "CenterOfMass": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "UseGravity": true,
+        "Drag": 0.05,
+        "AngularDrag": 0.05,
+        "FreezePosX": false,
+        "FreezeRotX": false,
+        "FreezePosY": false,
+        "FreezeRotY": false,
+        "FreezePosZ": false,
+        "FreezeRotZ": false
+      },
+      "ecaScripts": [],
+      "ecaProps": {
+        "CustomLevelObject": {},
+        "LevelObject": {},
+        "Transform": {},
+        "Entity": {},
+        "Visibility": {},
+        "MeshRender": {}
+      },
+      "propsData": {},
+      "entityVersion": 3,
+      "_entityName": "Safe Zones"
+    },
+    {
+      "_tag": {
+        "type": "SceneEditEntity",
+        "resourceId": "Primitive/Empty"
+      },
+      "_entityId": "dKRc5IFT",
+      "children": [],
+      "prefabVariant": null,
+      "activeValue": {
+        "selfValue": true,
+        "valueTag": "activeValue"
+      },
+      "unlockedValue": {
+        "selfValue": true,
+        "valueTag": "unlockedValue"
+      },
+      "editorLockValue": false,
+      "editorVisibleValue": true,
+      "position": {
+        "x": 230.8979949951172,
+        "y": 9.829999923706055,
+        "z": -97.514
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "BTPath": [
+        null
+      ],
+      "visible": true,
+      "VisibilityLayer": 0,
+      "modelOptimization": 0,
+      "streamingLayer": "",
+      "attributes": [
+        2,
+        4
+      ],
+      "isTrigger": false,
+      "collidable": true,
+      "physicalLayer": 0,
+      "physicalMaterial": null,
+      "aoiSetting": 0,
+      "initialTypes": {},
+      "componentList": [],
+      "_filters": [],
+      "entityTagData": {
+        "tagPointers": []
+      },
+      "tempIndex": 88,
+      "itemID": 365,
+      "seParent": null,
+      "ecaScripts": [
+        null
+      ],
+      "ecaProps": {
+        "EradicateZone": {},
+        "LevelObject": {},
+        "Transform": {},
+        "Entity": {},
+        "Visibility": {},
+        "ResetableEntity": {}
+      },
+      "_entityName": "Safe Zone End Point",
+      "propsData": {
+        "StartRadius": 50,
+        "EndRadius": 10,
+        "StartTime": 0,
+        "StartShrinkTime": 5000,
+        "ShrinkTime": 30000,
+        "DamageTimeInterval": 2000,
+        "DamageValue": 10,
+        "CloseTime": 120000,
+        "resetEveryRound": true,
+        "pairEntityID": "81xXoFmi",
+        "EffectColor": {
+          "r": 0,
+          "g": 118,
+          "b": 255,
+          "a": 0.49
+        },
+        "groupID": 3,
+        "isEnd": true
+      },
+      "_performanceConfigData": {
+        "ItemID": 365,
+        "MeshCount": 1640,
+        "ColliderMeshCount": 0,
+        "MaterialCount": 4,
+        "AnimationCount": 0,
+        "BoneCount": 0,
+        "ParticleEmitterCount": 1,
+        "ParticleCount": 10,
+        "TextureMemory": 44984,
+        "ModelMemory": 70564,
+        "AudioMemory": 0
+      }
+    },
+    {
+      "_tag": {
+        "type": "SceneEditEntity",
+        "resourceId": "Primitive/Empty"
+      },
+      "_entityId": "NJgVJ9LX",
+      "children": [],
+      "prefabVariant": null,
+      "activeValue": {
+        "selfValue": true,
+        "valueTag": "activeValue"
+      },
+      "unlockedValue": {
+        "selfValue": true,
+        "valueTag": "unlockedValue"
+      },
+      "editorLockValue": false,
+      "editorVisibleValue": true,
+      "position": {
+        "x": 230.8979949951172,
+        "y": 9.829999923706055,
+        "z": -102.51399993896484
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "BTPath": [
+        null
+      ],
+      "visible": true,
+      "VisibilityLayer": 0,
+      "modelOptimization": 0,
+      "streamingLayer": "",
+      "attributes": [
+        2,
+        4
+      ],
+      "isTrigger": false,
+      "collidable": true,
+      "physicalLayer": 0,
+      "physicalMaterial": null,
+      "aoiSetting": 0,
+      "initialTypes": {},
+      "componentList": [],
+      "_filters": [
+        "game.related12"
+      ],
+      "entityTagData": {
+        "tagPointers": []
+      },
+      "tempIndex": 89,
+      "itemID": 364,
+      "seParent": null,
+      "ecaScripts": [
+        null
+      ],
+      "ecaProps": {
+        "EradicateZone": {},
+        "LevelObject": {},
+        "Transform": {},
+        "Entity": {},
+        "Visibility": {},
+        "ResetableEntity": {}
+      },
+      "_entityName": "Custom Safe Zone",
+      "propsData": {
+        "StartRadius": 50,
+        "EndRadius": 10,
+        "StartTime": 0,
+        "StartShrinkTime": 5000,
+        "ShrinkTime": 30000,
+        "DamageTimeInterval": 2000,
+        "DamageValue": 10,
+        "CloseTime": 120000,
+        "resetEveryRound": true,
+        "pairEntityID": "QjpolHIp",
+        "EffectColor": {
+          "r": 0,
+          "g": 118,
+          "b": 255,
+          "a": 0.49
+        },
+        "groupID": 4,
+        "isEnd": false
+      },
+      "_performanceConfigData": {
+        "ItemID": 364,
+        "MeshCount": 1660,
+        "ColliderMeshCount": 0,
+        "MaterialCount": 3,
+        "AnimationCount": 0,
+        "BoneCount": 0,
+        "ParticleEmitterCount": 0,
+        "ParticleCount": 0,
+        "TextureMemory": 29020,
+        "ModelMemory": 73612,
+        "AudioMemory": 0
+      }
+    },
+    {
+      "_tag": {
+        "type": "SceneEditEntity",
+        "resourceId": "Primitive/Empty"
+      },
+      "_entityId": "QPjcJzbQ",
+      "children": [],
+      "prefabVariant": null,
+      "activeValue": {
+        "selfValue": true,
+        "valueTag": "activeValue"
+      },
+      "unlockedValue": {
+        "selfValue": true,
+        "valueTag": "unlockedValue"
+      },
+      "editorLockValue": false,
+      "editorVisibleValue": true,
+      "position": {
+        "x": 31.4892,
+        "y": 19.4889,
+        "z": 533.624
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "BTPath": [
+        null
+      ],
+      "visible": true,
+      "VisibilityLayer": 0,
+      "modelOptimization": 0,
+      "streamingLayer": "",
+      "attributes": [
+        2,
+        4
+      ],
+      "isTrigger": false,
+      "collidable": true,
+      "physicalLayer": 0,
+      "physicalMaterial": null,
+      "aoiSetting": 0,
+      "initialTypes": {},
+      "componentList": [],
+      "_filters": [
+        "game.related12"
+      ],
+      "entityTagData": {
+        "tagPointers": []
+      },
+      "tempIndex": 90,
+      "itemID": 364,
+      "seParent": null,
+      "ecaScripts": [
+        null
+      ],
+      "ecaProps": {
+        "EradicateZone": {},
+        "LevelObject": {},
+        "Transform": {},
+        "Entity": {},
+        "Visibility": {},
+        "ResetableEntity": {}
+      },
+      "_entityName": "Custom Safe Zone (1)",
+      "propsData": {
+        "StartRadius": 50,
+        "EndRadius": 10,
+        "StartTime": 0,
+        "StartShrinkTime": 5000,
+        "ShrinkTime": 30000,
+        "DamageTimeInterval": 2000,
+        "DamageValue": 10,
+        "CloseTime": 120000,
+        "resetEveryRound": true,
+        "pairEntityID": "G2apxHZu",
+        "EffectColor": {
+          "r": 0,
+          "g": 118,
+          "b": 255,
+          "a": 0.49
+        },
+        "groupID": 5,
+        "isEnd": false
+      },
+      "_performanceConfigData": {
+        "ItemID": 364,
+        "MeshCount": 1660,
+        "ColliderMeshCount": 0,
+        "MaterialCount": 3,
+        "AnimationCount": 0,
+        "BoneCount": 0,
+        "ParticleEmitterCount": 0,
+        "ParticleCount": 0,
+        "TextureMemory": 29020,
+        "ModelMemory": 73612,
+        "AudioMemory": 0
+      }
+    },
+    {
+      "_tag": {
+        "type": "SceneEditEntity",
+        "resourceId": "Primitive/Empty"
+      },
+      "_entityId": "avkPclvD",
+      "children": [],
+      "prefabVariant": null,
+      "activeValue": {
+        "selfValue": true,
+        "valueTag": "activeValue"
+      },
+      "unlockedValue": {
+        "selfValue": true,
+        "valueTag": "unlockedValue"
+      },
+      "editorLockValue": false,
+      "editorVisibleValue": true,
+      "position": {
+        "x": 31.48900032043457,
+        "y": 19.48900032043457,
+        "z": 538.6240234375
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "BTPath": [
+        null
+      ],
+      "visible": true,
+      "VisibilityLayer": 0,
+      "modelOptimization": 0,
+      "streamingLayer": "",
+      "attributes": [
+        2,
+        4
+      ],
+      "isTrigger": false,
+      "collidable": true,
+      "physicalLayer": 0,
+      "physicalMaterial": null,
+      "aoiSetting": 0,
+      "initialTypes": {},
+      "componentList": [],
+      "_filters": [],
+      "entityTagData": {
+        "tagPointers": []
+      },
+      "tempIndex": 91,
+      "itemID": 365,
+      "seParent": null,
+      "ecaScripts": [
+        null
+      ],
+      "ecaProps": {
+        "EradicateZone": {},
+        "LevelObject": {},
+        "Transform": {},
+        "Entity": {},
+        "Visibility": {},
+        "ResetableEntity": {}
+      },
+      "_entityName": "Safe Zone End Point (1)",
+      "propsData": {
+        "StartRadius": 50,
+        "EndRadius": 10,
+        "StartTime": 0,
+        "StartShrinkTime": 5000,
+        "ShrinkTime": 30000,
+        "DamageTimeInterval": 2000,
+        "DamageValue": 10,
+        "CloseTime": 120000,
+        "resetEveryRound": true,
+        "pairEntityID": "TBfwdIzs",
+        "EffectColor": {
+          "r": 0,
+          "g": 118,
+          "b": 255,
+          "a": 0.49
+        },
+        "groupID": 6,
+        "isEnd": true
+      },
+      "_performanceConfigData": {
+        "ItemID": 365,
+        "MeshCount": 1640,
+        "ColliderMeshCount": 0,
+        "MaterialCount": 4,
+        "AnimationCount": 0,
+        "BoneCount": 0,
+        "ParticleEmitterCount": 1,
+        "ParticleCount": 10,
+        "TextureMemory": 44984,
+        "ModelMemory": 70564,
+        "AudioMemory": 0
+      }
+    },
+    {
+      "_tag": {
+        "type": "SceneEditEntity",
+        "resourceId": "Primitive/Empty"
+      },
+      "_entityId": "gOPxuDAi",
+      "children": [],
+      "prefabVariant": null,
+      "activeValue": {
+        "selfValue": true,
+        "valueTag": "activeValue"
+      },
+      "unlockedValue": {
+        "selfValue": true,
+        "valueTag": "unlockedValue"
+      },
+      "editorLockValue": false,
+      "editorVisibleValue": true,
+      "position": {
+        "x": 676.027,
+        "y": 70.1079,
+        "z": 69.7414
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "BTPath": [
+        null
+      ],
+      "visible": true,
+      "VisibilityLayer": 0,
+      "modelOptimization": 0,
+      "streamingLayer": "",
+      "attributes": [
+        2,
+        4
+      ],
+      "isTrigger": false,
+      "collidable": true,
+      "physicalLayer": 0,
+      "physicalMaterial": null,
+      "aoiSetting": 0,
+      "initialTypes": {},
+      "componentList": [],
+      "_filters": [
+        "game.related12"
+      ],
+      "entityTagData": {
+        "tagPointers": []
+      },
+      "tempIndex": 92,
+      "itemID": 364,
+      "seParent": null,
+      "ecaScripts": [
+        null
+      ],
+      "ecaProps": {
+        "EradicateZone": {},
+        "LevelObject": {},
+        "Transform": {},
+        "Entity": {},
+        "Visibility": {},
+        "ResetableEntity": {}
+      },
+      "_entityName": "Custom Safe Zone (2)",
+      "propsData": {
+        "StartRadius": 50,
+        "EndRadius": 10,
+        "StartTime": 0,
+        "StartShrinkTime": 5000,
+        "ShrinkTime": 30000,
+        "DamageTimeInterval": 2000,
+        "DamageValue": 10,
+        "CloseTime": 120000,
+        "resetEveryRound": true,
+        "pairEntityID": "DA6bjWLK",
+        "EffectColor": {
+          "r": 0,
+          "g": 118,
+          "b": 255,
+          "a": 0.49
+        },
+        "groupID": 7,
+        "isEnd": false
+      },
+      "_performanceConfigData": {
+        "ItemID": 364,
+        "MeshCount": 1660,
+        "ColliderMeshCount": 0,
+        "MaterialCount": 3,
+        "AnimationCount": 0,
+        "BoneCount": 0,
+        "ParticleEmitterCount": 0,
+        "ParticleCount": 0,
+        "TextureMemory": 29020,
+        "ModelMemory": 73612,
+        "AudioMemory": 0
+      }
+    },
+    {
+      "_tag": {
+        "type": "SceneEditEntity",
+        "resourceId": "Primitive/Empty"
+      },
+      "_entityId": "fCxR20Ni",
+      "children": [],
+      "prefabVariant": null,
+      "activeValue": {
+        "selfValue": true,
+        "valueTag": "activeValue"
+      },
+      "unlockedValue": {
+        "selfValue": true,
+        "valueTag": "unlockedValue"
+      },
+      "editorLockValue": false,
+      "editorVisibleValue": true,
+      "position": {
+        "x": 676.027,
+        "y": 70.1079,
+        "z": 79.7414
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "BTPath": [
+        null
+      ],
+      "visible": true,
+      "VisibilityLayer": 0,
+      "modelOptimization": 0,
+      "streamingLayer": "",
+      "attributes": [
+        2,
+        4
+      ],
+      "isTrigger": false,
+      "collidable": true,
+      "physicalLayer": 0,
+      "physicalMaterial": null,
+      "aoiSetting": 0,
+      "initialTypes": {},
+      "componentList": [],
+      "_filters": [],
+      "entityTagData": {
+        "tagPointers": []
+      },
+      "tempIndex": 93,
+      "itemID": 365,
+      "seParent": null,
+      "ecaScripts": [
+        null
+      ],
+      "ecaProps": {
+        "EradicateZone": {},
+        "LevelObject": {},
+        "Transform": {},
+        "Entity": {},
+        "Visibility": {},
+        "ResetableEntity": {}
+      },
+      "_entityName": "Safe Zone End Point (2)",
+      "propsData": {
+        "StartRadius": 50,
+        "EndRadius": 10,
+        "StartTime": 0,
+        "StartShrinkTime": 5000,
+        "ShrinkTime": 30000,
+        "DamageTimeInterval": 2000,
+        "DamageValue": 10,
+        "CloseTime": 120000,
+        "resetEveryRound": true,
+        "pairEntityID": "Qh6w5FKW",
+        "EffectColor": {
+          "r": 0,
+          "g": 118,
+          "b": 255,
+          "a": 0.49
+        },
+        "groupID": 8,
+        "isEnd": true
+      },
+      "_performanceConfigData": {
+        "ItemID": 365,
+        "MeshCount": 1640,
+        "ColliderMeshCount": 0,
+        "MaterialCount": 4,
+        "AnimationCount": 0,
+        "BoneCount": 0,
+        "ParticleEmitterCount": 1,
+        "ParticleCount": 10,
+        "TextureMemory": 44984,
+        "ModelMemory": 70564,
+        "AudioMemory": 0
+      }
+    },
+    {
+      "_tag": {
+        "type": "SceneEditEntity",
+        "resourceId": "Primitive/Empty"
+      },
+      "_entityId": "BUBRI4rf",
+      "children": [],
+      "prefabVariant": null,
+      "activeValue": {
+        "selfValue": true,
+        "valueTag": "activeValue"
+      },
+      "unlockedValue": {
+        "selfValue": true,
+        "valueTag": "unlockedValue"
+      },
+      "editorLockValue": false,
+      "editorVisibleValue": true,
+      "position": {
+        "x": 21.3072,
+        "y": 2.563,
+        "z": 65.7698
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "BTPath": [
+        null
+      ],
+      "visible": true,
+      "VisibilityLayer": 0,
+      "modelOptimization": 0,
+      "streamingLayer": "",
+      "attributes": [
+        2,
+        4
+      ],
+      "isTrigger": false,
+      "collidable": true,
+      "physicalLayer": 0,
+      "physicalMaterial": null,
+      "aoiSetting": 0,
+      "initialTypes": {},
+      "componentList": [],
+      "_filters": [
+        "game.related12"
+      ],
+      "entityTagData": {
+        "tagPointers": []
+      },
+      "tempIndex": 94,
+      "itemID": 364,
+      "seParent": null,
+      "ecaScripts": [
+        null
+      ],
+      "ecaProps": {
+        "EradicateZone": {},
+        "LevelObject": {},
+        "Transform": {},
+        "Entity": {},
+        "Visibility": {},
+        "ResetableEntity": {}
+      },
+      "_entityName": "Custom Safe Zone (3)",
+      "propsData": {
+        "StartRadius": 50,
+        "EndRadius": 10,
+        "StartTime": 0,
+        "StartShrinkTime": 5000,
+        "ShrinkTime": 30000,
+        "DamageTimeInterval": 2000,
+        "DamageValue": 10,
+        "CloseTime": 120000,
+        "resetEveryRound": true,
+        "pairEntityID": "QdjUsAGy",
+        "EffectColor": {
+          "r": 0,
+          "g": 118,
+          "b": 255,
+          "a": 0.49
+        },
+        "groupID": 9,
+        "isEnd": false
+      },
+      "_performanceConfigData": {
+        "ItemID": 364,
+        "MeshCount": 1660,
+        "ColliderMeshCount": 0,
+        "MaterialCount": 3,
+        "AnimationCount": 0,
+        "BoneCount": 0,
+        "ParticleEmitterCount": 0,
+        "ParticleCount": 0,
+        "TextureMemory": 29020,
+        "ModelMemory": 73612,
+        "AudioMemory": 0
+      }
+    },
+    {
+      "_tag": {
+        "type": "SceneEditEntity",
+        "resourceId": "Primitive/Empty"
+      },
+      "_entityId": "hXDl2aLL",
+      "children": [],
+      "prefabVariant": null,
+      "activeValue": {
+        "selfValue": true,
+        "valueTag": "activeValue"
+      },
+      "unlockedValue": {
+        "selfValue": true,
+        "valueTag": "unlockedValue"
+      },
+      "editorLockValue": false,
+      "editorVisibleValue": true,
+      "position": {
+        "x": 21.3072,
+        "y": 2.563,
+        "z": 75.7698
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "BTPath": [
+        null
+      ],
+      "visible": true,
+      "VisibilityLayer": 0,
+      "modelOptimization": 0,
+      "streamingLayer": "",
+      "attributes": [
+        2,
+        4
+      ],
+      "isTrigger": false,
+      "collidable": true,
+      "physicalLayer": 0,
+      "physicalMaterial": null,
+      "aoiSetting": 0,
+      "initialTypes": {},
+      "componentList": [],
+      "_filters": [],
+      "entityTagData": {
+        "tagPointers": []
+      },
+      "tempIndex": 95,
+      "itemID": 365,
+      "seParent": null,
+      "ecaScripts": [
+        null
+      ],
+      "ecaProps": {
+        "EradicateZone": {},
+        "LevelObject": {},
+        "Transform": {},
+        "Entity": {},
+        "Visibility": {},
+        "ResetableEntity": {}
+      },
+      "_entityName": "Safe Zone End Point (3)",
+      "propsData": {
+        "StartRadius": 50,
+        "EndRadius": 10,
+        "StartTime": 0,
+        "StartShrinkTime": 5000,
+        "ShrinkTime": 30000,
+        "DamageTimeInterval": 2000,
+        "DamageValue": 10,
+        "CloseTime": 120000,
+        "resetEveryRound": true,
+        "pairEntityID": "OvKAuD5x",
+        "EffectColor": {
+          "r": 0,
+          "g": 118,
+          "b": 255,
+          "a": 0.49
+        },
+        "groupID": 10,
+        "isEnd": true
+      },
+      "_performanceConfigData": {
+        "ItemID": 365,
+        "MeshCount": 1640,
+        "ColliderMeshCount": 0,
+        "MaterialCount": 4,
+        "AnimationCount": 0,
+        "BoneCount": 0,
+        "ParticleEmitterCount": 1,
+        "ParticleCount": 10,
+        "TextureMemory": 44984,
+        "ModelMemory": 70564,
+        "AudioMemory": 0
+      }
+    },
+    {
+      "_tag": {
+        "type": "SceneEditEntity",
+        "resourceId": "Primitive/Empty"
+      },
+      "_entityId": "53sNspSq",
+      "children": [],
+      "prefabVariant": null,
+      "activeValue": {
+        "selfValue": true,
+        "valueTag": "activeValue"
+      },
+      "unlockedValue": {
+        "selfValue": true,
+        "valueTag": "unlockedValue"
+      },
+      "editorLockValue": false,
+      "editorVisibleValue": true,
+      "position": {
+        "x": 162.496,
+        "y": 1.86346,
+        "z": 351.683
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "BTPath": [
+        null
+      ],
+      "visible": true,
+      "VisibilityLayer": 0,
+      "modelOptimization": 0,
+      "streamingLayer": "",
+      "attributes": [
+        2,
+        4
+      ],
+      "isTrigger": false,
+      "collidable": true,
+      "physicalLayer": 0,
+      "physicalMaterial": null,
+      "aoiSetting": 0,
+      "initialTypes": {},
+      "componentList": [],
+      "_filters": [],
+      "entityTagData": {
+        "tagPointers": []
+      },
+      "tempIndex": 96,
+      "itemID": 365,
+      "seParent": null,
+      "ecaScripts": [
+        null
+      ],
+      "ecaProps": {
+        "EradicateZone": {},
+        "LevelObject": {},
+        "Transform": {},
+        "Entity": {},
+        "Visibility": {},
+        "ResetableEntity": {}
+      },
+      "_entityName": "Safe Zone End Point (4)",
+      "propsData": {
+        "StartRadius": 50,
+        "EndRadius": 10,
+        "StartTime": 0,
+        "StartShrinkTime": 5000,
+        "ShrinkTime": 30000,
+        "DamageTimeInterval": 2000,
+        "DamageValue": 10,
+        "CloseTime": 120000,
+        "resetEveryRound": true,
+        "pairEntityID": "wwP3k0Jq",
+        "EffectColor": {
+          "r": 0,
+          "g": 118,
+          "b": 255,
+          "a": 0.49
+        },
+        "groupID": 11,
+        "isEnd": true
+      },
+      "_performanceConfigData": {
+        "ItemID": 365,
+        "MeshCount": 1640,
+        "ColliderMeshCount": 0,
+        "MaterialCount": 4,
+        "AnimationCount": 0,
+        "BoneCount": 0,
+        "ParticleEmitterCount": 1,
+        "ParticleCount": 10,
+        "TextureMemory": 44984,
+        "ModelMemory": 70564,
+        "AudioMemory": 0
+      }
+    },
+    {
+      "_tag": {
+        "type": "SceneEditEntity",
+        "resourceId": "Primitive/Empty"
+      },
+      "_entityId": "m1lIAgR6",
+      "children": [],
+      "prefabVariant": null,
+      "activeValue": {
+        "selfValue": true,
+        "valueTag": "activeValue"
+      },
+      "unlockedValue": {
+        "selfValue": true,
+        "valueTag": "unlockedValue"
+      },
+      "editorLockValue": false,
+      "editorVisibleValue": true,
+      "position": {
+        "x": 162.496,
+        "y": 1.86346,
+        "z": 341.683
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "BTPath": [
+        null
+      ],
+      "visible": true,
+      "VisibilityLayer": 0,
+      "modelOptimization": 0,
+      "streamingLayer": "",
+      "attributes": [
+        2,
+        4
+      ],
+      "isTrigger": false,
+      "collidable": true,
+      "physicalLayer": 0,
+      "physicalMaterial": null,
+      "aoiSetting": 0,
+      "initialTypes": {},
+      "componentList": [],
+      "_filters": [
+        "game.related12"
+      ],
+      "entityTagData": {
+        "tagPointers": []
+      },
+      "tempIndex": 97,
+      "itemID": 364,
+      "seParent": null,
+      "ecaScripts": [
+        null
+      ],
+      "ecaProps": {
+        "EradicateZone": {},
+        "LevelObject": {},
+        "Transform": {},
+        "Entity": {},
+        "Visibility": {},
+        "ResetableEntity": {}
+      },
+      "_entityName": "Custom Safe Zone (4)",
+      "propsData": {
+        "StartRadius": 50,
+        "EndRadius": 10,
+        "StartTime": 0,
+        "StartShrinkTime": 5000,
+        "ShrinkTime": 30000,
+        "DamageTimeInterval": 2000,
+        "DamageValue": 10,
+        "CloseTime": 120000,
+        "resetEveryRound": true,
+        "pairEntityID": "NpkC9ctF",
+        "EffectColor": {
+          "r": 0,
+          "g": 118,
+          "b": 255,
+          "a": 0.49
+        },
+        "groupID": 12,
+        "isEnd": false
+      },
+      "_performanceConfigData": {
+        "ItemID": 364,
+        "MeshCount": 1660,
+        "ColliderMeshCount": 0,
+        "MaterialCount": 3,
+        "AnimationCount": 0,
+        "BoneCount": 0,
+        "ParticleEmitterCount": 0,
+        "ParticleCount": 0,
+        "TextureMemory": 29020,
+        "ModelMemory": 73612,
+        "AudioMemory": 0
+      }
+    },
+    {
+      "_tag": {
+        "type": "SceneEditEntity",
+        "resourceId": "Primitive/Empty"
+      },
+      "_entityId": "iCJ3z8JB",
+      "children": [],
+      "prefabVariant": null,
+      "activeValue": {
+        "selfValue": true,
+        "valueTag": "activeValue"
+      },
+      "unlockedValue": {
+        "selfValue": true,
+        "valueTag": "unlockedValue"
+      },
+      "editorLockValue": false,
+      "editorVisibleValue": true,
+      "position": {
+        "x": -124.69999694824219,
+        "y": 28.135000228881836,
+        "z": 376.85101318359375
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "BTPath": [
+        null
+      ],
+      "visible": true,
+      "VisibilityLayer": 0,
+      "modelOptimization": 0,
+      "streamingLayer": "",
+      "attributes": [
+        2,
+        4
+      ],
+      "isTrigger": false,
+      "collidable": true,
+      "physicalLayer": 0,
+      "physicalMaterial": null,
+      "aoiSetting": 0,
+      "initialTypes": {},
+      "componentList": [],
+      "_filters": [],
+      "entityTagData": {
+        "tagPointers": []
+      },
+      "tempIndex": 98,
+      "itemID": 365,
+      "seParent": null,
+      "ecaScripts": [
+        null
+      ],
+      "ecaProps": {
+        "EradicateZone": {},
+        "LevelObject": {},
+        "Transform": {},
+        "Entity": {},
+        "Visibility": {},
+        "ResetableEntity": {}
+      },
+      "_entityName": "Safe Zone End Point (5)",
+      "propsData": {
+        "StartRadius": 50,
+        "EndRadius": 10,
+        "StartTime": 0,
+        "StartShrinkTime": 5000,
+        "ShrinkTime": 30000,
+        "DamageTimeInterval": 2000,
+        "DamageValue": 10,
+        "CloseTime": 120000,
+        "resetEveryRound": true,
+        "pairEntityID": "Q4CHqhep",
+        "EffectColor": {
+          "r": 0,
+          "g": 118,
+          "b": 255,
+          "a": 0.49
+        },
+        "groupID": 13,
+        "isEnd": true
+      },
+      "_performanceConfigData": {
+        "ItemID": 365,
+        "MeshCount": 1640,
+        "ColliderMeshCount": 0,
+        "MaterialCount": 4,
+        "AnimationCount": 0,
+        "BoneCount": 0,
+        "ParticleEmitterCount": 1,
+        "ParticleCount": 10,
+        "TextureMemory": 44984,
+        "ModelMemory": 70564,
+        "AudioMemory": 0
+      }
+    },
+    {
+      "_tag": {
+        "type": "SceneEditEntity",
+        "resourceId": "Primitive/Empty"
+      },
+      "_entityId": "npnrOlOH",
+      "children": [],
+      "prefabVariant": null,
+      "activeValue": {
+        "selfValue": true,
+        "valueTag": "activeValue"
+      },
+      "unlockedValue": {
+        "selfValue": true,
+        "valueTag": "unlockedValue"
+      },
+      "editorLockValue": false,
+      "editorVisibleValue": true,
+      "position": {
+        "x": -124.69999694824219,
+        "y": 28.135000228881836,
+        "z": 371.85101318359375
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "BTPath": [
+        null
+      ],
+      "visible": true,
+      "VisibilityLayer": 0,
+      "modelOptimization": 0,
+      "streamingLayer": "",
+      "attributes": [
+        2,
+        4
+      ],
+      "isTrigger": false,
+      "collidable": true,
+      "physicalLayer": 0,
+      "physicalMaterial": null,
+      "aoiSetting": 0,
+      "initialTypes": {},
+      "componentList": [],
+      "_filters": [
+        "game.related12"
+      ],
+      "entityTagData": {
+        "tagPointers": []
+      },
+      "tempIndex": 99,
+      "itemID": 364,
+      "seParent": null,
+      "ecaScripts": [
+        null
+      ],
+      "ecaProps": {
+        "EradicateZone": {},
+        "LevelObject": {},
+        "Transform": {},
+        "Entity": {},
+        "Visibility": {},
+        "ResetableEntity": {}
+      },
+      "_entityName": "Custom Safe Zone (5)",
+      "propsData": {
+        "StartRadius": 50,
+        "EndRadius": 10,
+        "StartTime": 0,
+        "StartShrinkTime": 5000,
+        "ShrinkTime": 30000,
+        "DamageTimeInterval": 2000,
+        "DamageValue": 10,
+        "CloseTime": 120000,
+        "resetEveryRound": true,
+        "pairEntityID": "4VPAxJ9r",
+        "EffectColor": {
+          "r": 0,
+          "g": 118,
+          "b": 255,
+          "a": 0.49
+        },
+        "groupID": 14,
+        "isEnd": false
+      },
+      "_performanceConfigData": {
+        "ItemID": 364,
+        "MeshCount": 1660,
+        "ColliderMeshCount": 0,
+        "MaterialCount": 3,
+        "AnimationCount": 0,
+        "BoneCount": 0,
+        "ParticleEmitterCount": 0,
+        "ParticleCount": 0,
+        "TextureMemory": 29020,
+        "ModelMemory": 73612,
+        "AudioMemory": 0
+      }
+    },
+    {
+      "_tag": {
+        "type": "SceneEditEntity",
+        "resourceId": "Primitive/Empty"
+      },
+      "_entityId": "nUZm7mKn",
+      "children": [],
+      "prefabVariant": null,
+      "activeValue": {
+        "selfValue": true,
+        "valueTag": "activeValue"
+      },
+      "unlockedValue": {
+        "selfValue": true,
+        "valueTag": "unlockedValue"
+      },
+      "editorLockValue": false,
+      "editorVisibleValue": true,
+      "position": {
+        "x": 914.22998046875,
+        "y": 48.89400100708008,
+        "z": 507.0987243652344
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "BTPath": [
+        null
+      ],
+      "visible": true,
+      "VisibilityLayer": 0,
+      "modelOptimization": 0,
+      "streamingLayer": "",
+      "attributes": [
+        2,
+        4
+      ],
+      "isTrigger": false,
+      "collidable": true,
+      "physicalLayer": 0,
+      "physicalMaterial": null,
+      "aoiSetting": 0,
+      "initialTypes": {},
+      "componentList": [],
+      "_filters": [],
+      "entityTagData": {
+        "tagPointers": []
+      },
+      "tempIndex": 100,
+      "itemID": 365,
+      "seParent": null,
+      "ecaScripts": [
+        null
+      ],
+      "ecaProps": {
+        "EradicateZone": {},
+        "LevelObject": {},
+        "Transform": {},
+        "Entity": {},
+        "Visibility": {},
+        "ResetableEntity": {}
+      },
+      "_entityName": "Safe Zone End Point (6)",
+      "propsData": {
+        "StartRadius": 50,
+        "EndRadius": 10,
+        "StartTime": 0,
+        "StartShrinkTime": 5000,
+        "ShrinkTime": 30000,
+        "DamageTimeInterval": 2000,
+        "DamageValue": 10,
+        "CloseTime": 120000,
+        "resetEveryRound": true,
+        "pairEntityID": "AcDbHOAZ",
+        "EffectColor": {
+          "r": 0,
+          "g": 118,
+          "b": 255,
+          "a": 0.49
+        },
+        "groupID": 15,
+        "isEnd": true
+      },
+      "_performanceConfigData": {
+        "ItemID": 365,
+        "MeshCount": 1640,
+        "ColliderMeshCount": 0,
+        "MaterialCount": 4,
+        "AnimationCount": 0,
+        "BoneCount": 0,
+        "ParticleEmitterCount": 1,
+        "ParticleCount": 10,
+        "TextureMemory": 44984,
+        "ModelMemory": 70564,
+        "AudioMemory": 0
+      }
+    },
+    {
+      "_tag": {
+        "type": "SceneEditEntity",
+        "resourceId": "Primitive/Empty"
+      },
+      "_entityId": "Dcpz9Tle",
+      "children": [],
+      "prefabVariant": null,
+      "activeValue": {
+        "selfValue": true,
+        "valueTag": "activeValue"
+      },
+      "unlockedValue": {
+        "selfValue": true,
+        "valueTag": "unlockedValue"
+      },
+      "editorLockValue": false,
+      "editorVisibleValue": true,
+      "position": {
+        "x": 914.22998046875,
+        "y": 48.89400100708008,
+        "z": 506.2460021972656
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "BTPath": [
+        null
+      ],
+      "visible": true,
+      "VisibilityLayer": 0,
+      "modelOptimization": 0,
+      "streamingLayer": "",
+      "attributes": [
+        2,
+        4
+      ],
+      "isTrigger": false,
+      "collidable": true,
+      "physicalLayer": 0,
+      "physicalMaterial": null,
+      "aoiSetting": 0,
+      "initialTypes": {},
+      "componentList": [],
+      "_filters": [
+        "game.related12"
+      ],
+      "entityTagData": {
+        "tagPointers": []
+      },
+      "tempIndex": 101,
+      "itemID": 364,
+      "seParent": null,
+      "ecaScripts": [
+        null
+      ],
+      "ecaProps": {
+        "EradicateZone": {},
+        "LevelObject": {},
+        "Transform": {},
+        "Entity": {},
+        "Visibility": {},
+        "ResetableEntity": {}
+      },
+      "_entityName": "Custom Safe Zone (6)",
+      "propsData": {
+        "StartRadius": 50,
+        "EndRadius": 10,
+        "StartTime": 0,
+        "StartShrinkTime": 5000,
+        "ShrinkTime": 30000,
+        "DamageTimeInterval": 2000,
+        "DamageValue": 10,
+        "CloseTime": 120000,
+        "resetEveryRound": true,
+        "pairEntityID": "w838mkQc",
+        "EffectColor": {
+          "r": 0,
+          "g": 118,
+          "b": 255,
+          "a": 0.49
+        },
+        "groupID": 16,
+        "isEnd": false
+      },
+      "_performanceConfigData": {
+        "ItemID": 364,
+        "MeshCount": 1660,
+        "ColliderMeshCount": 0,
+        "MaterialCount": 3,
+        "AnimationCount": 0,
+        "BoneCount": 0,
+        "ParticleEmitterCount": 0,
+        "ParticleCount": 0,
+        "TextureMemory": 29020,
+        "ModelMemory": 73612,
+        "AudioMemory": 0
+      }
+    }
+  ],
+  "prefabVariant": null,
+  "activeValue": {
+    "selfValue": true,
+    "valueTag": "activeValue"
+  },
+  "unlockedValue": {
+    "selfValue": true,
+    "valueTag": "unlockedValue"
+  },
+  "editorLockValue": false,
+  "editorVisibleValue": true,
+  "discriminator": "ISceneLike",
+  "_entityName": "Bermuda",
+  "mapID": 1,
+  "terrainInfo": {
+    "texture": [
+      {
+        "fileId": "e4c65232d3be1e92230bbcfdfd075038",
+        "filePath": "lib://fftextures/WorkshopItemTexture/SceneEdit_Cube_Texture_Grassland_01.png",
+        "_tag": {
+          "type": "GFileRefer"
+        },
+        "fileType": "texture"
+      }
+    ]
+  }
+}
+//"{FE:{"v":"1.19.4689915","c":{"FF":5001},"s":100}

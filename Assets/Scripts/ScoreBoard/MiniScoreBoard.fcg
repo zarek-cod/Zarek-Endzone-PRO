@@ -1,0 +1,10 @@
+import "StdLibrary.fcc" as StdLib
+import "EditorGenLib.fcc" as EditorLib
+import "Hud.fcc" as Hud
+import "../Global/GlobalManager/GlobalUIManager.fcg" as GlobalUIManager
+import "../Player/PlayerUI.fcg" as PlayerUI
+graph MiniScoreBoard {
+    event OnPressed(player entity<Player>) {
+        start globalEntity<GlobalUIManager>.CreateInGameScoreBoard(player) // Show the in-combat scoreboard when the mini scoreboard is pressed
+    }
+}

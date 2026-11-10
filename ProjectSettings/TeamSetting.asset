@@ -1,0 +1,51 @@
+{
+  "_tag": {
+    "type": "ff.TeamSetting",
+    "resourceId": "TeamSetting"
+  },
+  "_entityId": "XNhVXAmS",
+  "prefabVariant": null,
+  "children": [],
+  "properties": {},
+  "activeValue": {
+    "selfValue": true,
+    "valueTag": "activeValue"
+  },
+  "unlockedValue": {
+    "selfValue": true,
+    "valueTag": "unlockedValue"
+  },
+  "TeamCount": 3,
+  "MemberCount": 4,
+  "ecaScript": null,
+  "ecaScripts": [
+    {
+      "fileId": "zsr9nltupxa-me8e91k2-5yww3e2hc1p",
+      "filePath": "Assets\\Scripts\\Team\\Team.fcg",
+      "_tag": {
+        "type": "GFileRefer"
+      },
+      "fileType": "ugcscript"
+    },
+    {
+      "fileId": "lzn8dgbiqgh-mg6008h2-y3j3vtup5h",
+      "filePath": "Assets\\Scripts\\Team\\TeamCurrentRoundData.fcg",
+      "_tag": {
+        "type": "GFileRefer"
+      },
+      "fileType": "ugcscript"
+    }
+  ],
+  "_entityName": "FE_0_HW_GAME_EDITOR_TEAMSETTING",
+  "MaxTeamPlayerNumber": 12,
+  "MaxRoomPlayerNumber": 30,
+  "MaxTeamNumber": 30,
+  "MinNumOfMatchStart": 9,
+  "ecaProps": {
+    "Team": {},
+    "Entity": {},
+    "ScoreableEntity": {},
+    "RankableEntity": {}
+  }
+}
+//"{FE:{"v":"1.15.4008519","c":{"FF":5001},"s":100}

@@ -1,0 +1,101 @@
+{
+  "_tag": {
+    "type": "ecaEventDesc"
+  },
+  "_entityId": "zXGgh24t",
+  "customEventDefines": {
+    "signal_68600453": {
+      "name": "wutdehel",
+      "eventType": 0,
+      "enitityType": "Component",
+      "typeID": 100001,
+      "props": [
+        {
+          "name": "WinningTeam",
+          "value": "Team",
+          "key": 1
+        }
+      ],
+      "propCount": 1,
+      "apiTargetV2": "both",
+      "version": 45,
+      "key": "signal_68600453"
+    },
+    "signal_76192606": {
+      "name": "NoTeamWinException",
+      "eventType": 0,
+      "enitityType": "Component",
+      "typeID": 100000,
+      "props": [],
+      "propCount": 1,
+      "apiTargetV2": "both",
+      "version": 45,
+      "key": "signal_76192606"
+    },
+    "signal_86504563": {
+      "name": "CombatEnd",
+      "eventType": 0,
+      "enitityType": "Component",
+      "typeID": 100002,
+      "props": [
+        {
+          "name": "winningTeam",
+          "value": "Team",
+          "key": 1
+        }
+      ],
+      "propCount": 1,
+      "apiTargetV2": "both",
+      "version": 45,
+      "key": "signal_86504563"
+    },
+    "signal_86426040": {
+      "name": "PlaySoundInClient",
+      "eventType": 0,
+      "enitityType": "Component",
+      "typeID": 100003,
+      "props": [
+        {
+          "name": "audioId",
+          "value": "AudioID",
+          "key": 1
+        }
+      ],
+      "propCount": 1,
+      "apiTargetV2": "both",
+      "version": 45,
+      "key": "signal_86426040"
+    },
+    "signal_69610108": {
+      "name": "OnUpdateShopButton",
+      "eventType": 0,
+      "enitityType": "Component",
+      "typeID": 100004,
+      "props": [
+        {
+          "name": "position",
+          "value": "Vector2",
+          "key": 1
+        },
+        {
+          "name": "size",
+          "value": "Vector2",
+          "key": 2
+        }
+      ],
+      "propCount": 2,
+      "apiTargetV2": "both",
+      "version": 45,
+      "key": "signal_69610108"
+    }
+  },
+  "customName": {
+    "wutdehel": "signal_68600453",
+    "NoTeamWinException": "signal_76192606",
+    "CombatEnd": "signal_86504563",
+    "PlaySoundInClient": "signal_86426040",
+    "OnUpdateShopButton": "signal_69610108"
+  },
+  "children": []
+}
+//"{FE:{"v":"1.14.3883376","c":{"FF":5001},"s":100}

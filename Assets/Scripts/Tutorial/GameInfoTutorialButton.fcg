@@ -1,0 +1,27 @@
+import "StdLibrary.fcc" as StdLib
+import "EditorGenLib.fcc" as EditorLib
+import "Hud.fcc" as Hud
+import "../Global/GlobalData/PlayersTutorial.fcg" as PlayersTutorial
+import "Workflow.fcc" as Workflow
+graph GameInfoTutorialButton {
+    event OnPressed(player entity<Player>) {
+        globalEntity<PlayersTutorial>.ActivateTutorial(player)
+        // LogInfo("he. he.")
+    }
+
+    // Disable button when combat begins
+    event OnPhaseStart(phase entity<Phase>) {
+        if phase<Phase>.Index == EPhase.Preparation{
+            var duration = phase<Phase>.Duration
+            start DisableTutorialButton(duration - 5000)
+        }
+        // if phase<Phase>.Index == EPhase.__Before6Combat__{
+        //     thisEntity<UIWidget>.Active = false
+        // }
+    }
+
+    async func DisableTutorialButton(delay int){
+        WaitForMillisecond(delay)
+        thisEntity<UIWidget>.Active = false
+    }
+}

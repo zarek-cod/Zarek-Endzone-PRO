@@ -1,0 +1,209 @@
+/*
+Player Controller
+Handles player-related functionalities and interactions.
+*/
+import "../Global/GlobalData/PlayerData.fcg" as PlayerData
+import "StdLibrary.fcc" as StdLib
+import "EditorGenLib.fcc" as EditorLib
+import "Hud.fcc" as Hud
+import "Economy.fcc" as Economy
+import "Player.fcc" as Player
+import "Combat.fcc" as Combat
+import "../Global/GlobalManager/GlobalCurrencyManager.fcg" as GlobalCurrencyManager
+import "Items.fcc" as Items
+import "Strings.fcc" as Strings
+import "List.fcc" as List
+import "./PlayerUtils.fcg" as PlayerUtils
+import "../Global/GlobalData/CombatRoundCounter.fcg" as CombatRoundCounter
+import "LevelObject.fcc" as LevelObject
+import "../Global/GlobalManager/GlobalPreparationPhaseManager.fcg" as GlobalPreparationPhaseManager
+import "../Global/GlobalManager/GlobalCombatManager.fcg" as GlobalCombatManager
+import "Workflow.fcc" as Workflow
+import "../Global/GlobalData/PlayersShopIcon.fcg" as PlayersShopIcon
+graph PlayerController {
+    playerShopHUD entity<BuiltInUI>; // Variable to hold the player's shop HUD
+
+    //Executed when entity is created
+    event OnAwake() {
+        SetDropStatus(thisEntity as entity<Player>, false)
+        thisEntity<Player>.IsDropOnEliminated = false
+    }
+
+    event OnUpdateShopButton(position Vector2, size Vector2) {
+        // LogWarning("<PlayerController.fcg>: Receive shop button update for player: " + thisEntity<Player>.NickName + " with position: " + position.X + ", " + position.Y + " and size: " + size.X + ", " + size.Y) // Debug Info
+        globalEntity<PlayersShopIcon>.RegisterShopIcon(thisEntity as entity<Player>)
+        if position.X == 0 && position.Y == 0 && size.X == 0 && size.Y == 0 {
+            // LogWarning("<PlayerController.fcg>: Position and size are 0,0,0,0, skipping shop icon registration") // Debug Info
+            return
+        }
+        globalEntity<PlayersShopIcon>.RegisterClientShopIconDimension(thisEntity as entity<Player>, position, size)
+    }
+
+    /* When a player is eliminated:
+       - Remove all drop items
+       - As SetDropStatus is true in order to keep player's weapons, items other than weapons are manually deleted using RemoveAllDropItems()
+    */
+    event OnEliminated(attacker entity<Entity>, damageType DamageType, damagedBodyPart DamagedBodyPartType) {
+        if damagedBodyPart == DamagedBodyPartType.Head && attacker != thisEntity {
+            globalEntity<PlayerData>.IncreaseHeadshot(attacker as entity<Player>)
+        }
+        thisEntity<PlayerUtils>.RemoveAllDropItems(thisEntity as entity<Player>)
+    }
+
+    // event OnPlayerBeEliminated(player entity<Player>) {
+    //     if(player == thisEntity) {
+    //         player<PlayerUtils>.RemoveAllDropItems(player);
+    //     }
+    // }
+
+    /*
+    For newly bought weapon from shop, set the ammo to max ammo
+    @param weapon: The weapon entity to equip
+    */
+    event OnEquipWeapon(weapon entity<Weapon>) {
+        weapon<Weapon>.CurrentAmmo = 100
+    }
+
+    // Moved to GlobalCombatManager.fcg
+    // event OnPlayerEliminate(player entity<Player>, eliminatedPlayer entity<Player>, damageType DamageType) {
+    //     // globalEntity<PlayerData>.IncreaseKill(player)
+    //     // globalEntity<PlayerData>.IncreaseDeath(eliminatedPlayer)
+    // }
+    
+    // event OnPlayerDealDamage(attacker entity<Player>, target entity<Player>, damageType DamageType, value int, damagedBodyPart DamagedBodyPartType) {
+    //     globalEntity<PlayerData>.IncreaseDamage(attacker, value)
+    //     LogError("<PlayerController.fcg>: " + attacker<Player>.NickName + " dealt " + value + " damage to " + target<Player>.NickName)
+    // }
+    // Two events below are used when player drop a item (weapon or attachments or other healing tools), when they buy weapons in the shop or drop them directly from their backpacks
+    /*
+         When a player drops a weapon:
+         - Destroy the weapon entity
+         - As there are attachments in the weapon, they are deleted also
+         - This is used when a player drops a weapon from their inventory or shop
+    */
+    event OnDropWeapon(weapon entity<Weapon>) {
+        Destroy(weapon)
+        // globalEntity<GlobalPreparationPhaseManager>.ReaddAttachment(thisEntity as entity<Player>); // Re-add attachments to the player
+    }
+    /*
+    When a player drops a consumable item:
+    - Destroy the consumable item entity
+    - This is used when a player drops a consumable item from their inventory or shop
+    */
+    event OnDropConsumable(consumableID ItemIDType, item entity<Entity>) {
+        if item == EResItem.UpgradeChip {
+            Destroy(item)
+        }
+        if consumableID == 534 as ItemIDType || consumableID == 535 as ItemIDType || item<ItemBase>.ItemID == ItemIDType.Muzzle3 || item<ItemBase>.ItemID == ItemIDType.Foregrip3 || item<ItemBase>.ItemID == ItemIDType.Magazine3 || item<ItemBase>.ItemID == ItemIDType.Stock3 || item<ItemBase>.ItemID == ItemIDType.STOCK_S || item<ItemBase>.ItemID == LootScopeType.Scope4x {
+            Destroy(item)
+        } else {
+            // globalEntity<GlobalCombatManager>.AddItemToList(item as entity<ItemBase>) (Use ClearResidualLevelObject function instead)
+        }
+    }
+
+    // event OnEquipWeapon(weapon entity<Weapon>) {
+    //     // LogError(weapon<Weapon>.AmmoMagSize)
+    // }
+    event OnPhaseStart(phase entity<Phase>) {
+        // if phase<Phase>.Index == EPhase.Combat {
+        //     var backpack = thisEntity<Player>.Backpack
+        //     var count int = 0
+        //     LogError(List.Length(backpack as List<object>))
+        //     for index, item in backpack<PlayerBackpack>.AllItems {
+        //         if item == 535 as ItemIDType || item == ItemIDType.Muzzle3 || item == ItemIDType.Foregrip3 || item == ItemIDType.Magazine3 || item == ItemIDType.Stock3 || item == ItemIDType.STOCK_S || item == LootScopeType.Scope4x {
+        //             count = count + 1
+        //             // Destroy(item)
+        //         } else {
+        //             globalEntity<GlobalCombatManager>.AddItemToList(item as entity<ItemBase>)
+        //         }
+        //     }
+            // LogError(count)
+            // var count int = 0
+            // for index, item in backpack<PlayerBackpack>.AllItems {
+            //     if item == EResItem.Muzzle {
+            //         DestroyItem(thisEntity as entity<Player>, item, 1)
+            //     }
+            //     if item == EResItem.Foregrip {
+            //         DestroyItem(thisEntity as entity<Player>, item, 1)
+            //     }
+            //     if item == EResItem.Scope {
+            //         DestroyItem(thisEntity as entity<Player>, item, 1)
+            //     }
+            //     if item == EResItem.Mag{
+            //         DestroyItem(thisEntity as entity<Player>, item, 1)
+            //     }
+            //     if item == EResItem.Stock {
+            //         DestroyItem(thisEntity as entity<Player>, item, 1)
+            //     }
+            //     if item == EResItem.ShotgunStock{
+            //         DestroyItem(thisEntity as entity<Player>, item, 1)
+            //     }
+            // }
+        // }
+    }
+
+    /* 
+    Deprecated, no use
+     When a player eliminates another player:
+    - If it is headshot, reward the player with extra currency (1500)
+    - Else, reward 1000
+    */
+    // event OnEliminate(target entity<Entity>, damagedBodyPart DamagedBodyPartType) {
+    //     // globalEntity<GlobalCurrencyManager>.AddCurrencyWhenEliminate(thisEntity as entity<Player>, damagedBodyPart) // Add currency when a player eliminates another player    
+    // }
+
+    /*
+    Sets the player's shop HUD.
+    @param shop: The shop HUD entity to set
+    */
+    func SetPlayerShopHUD(shop entity<BuiltInUI>) {
+        playerShopHUD = shop; // Store the shop HUD in the global variable
+    }
+
+    /* Debug function for testing */
+    func hehe(){
+        LogInfo("Hehe");
+    }
+
+    // PLAYER FUNCTIONS
+    /*
+    This function sets the player's gravity to zero so that the terrains can be loaded properly.
+    @param player: The player entity to modify
+    */
+    func SetZeroGravityStatus(player entity<Player>, status bool) {
+        if (status) {
+            player<Player>.Gravity = 0.0 // Set gravity to zero
+            // LogInfo("<GlobalGameManager.fcg>: Zero gravity set for player: " + player<Entity>.Name) // Debug Info
+        } else {
+            player<Player>.Gravity = -9.81 // Reset gravity to default
+            // LogInfo("<GlobalGameManager.fcg>: Gravity reset for player: " + player<Entity>.Name) // Debug Info
+        }
+    }
+    /*
+    This function adds an item to the player's inventory, and logs the action.
+    @param player: The player entity to which the item will be added
+    @param item: The item to be added, specified by its ID
+    */
+    func AddItemToPlayer(player entity<Player>, item EResItem, amount int) List<entity<Entity>> {
+        if(item == EResItem.HelmetLv3) {
+            DestroyEquipment(player, EquipmentType.Helmet, 1, out var destroyedHelmet) // Destroy the existing helmet if it is level 3
+        }
+        if(item == EResItem.VestLv3) {
+            DestroyEquipment(player, EquipmentType.Vest, 1, out var destroyedVest) // Destroy the existing vest if it is level 3
+        }
+        AddItem(player, item as ItemIDType, amount, out var newItem) // Adds the specified amount of items to the player
+        return newItem
+    }
+
+    
+    // event OnEliminated(attacker entity<Entity>, damageType DamageType, damagedBodyPart DamagedBodyPartType) {
+        
+    // }
+    // MOVED TO GlobalPreparationPhaseManager.fcg in InitPlayerWeapons() also
+    // func AddMedKitEachRound(player entity<Player>) {
+    //     if GetItemCount(player, EResItem.MedKit as ItemIDType) != 0 {
+    //         DestroyItem(player, EResItem.MedKit as ItemIDType, GetItemCount(player, EResItem.MedKit as ItemIDType)) // Destroy the item when added
+    //     }
+    //     AddItem(player, EResItem.MedKit as ItemIDType, 2, out var newItem) // Add the item to the player
+    // }
+}

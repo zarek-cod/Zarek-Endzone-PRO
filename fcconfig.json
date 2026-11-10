@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "includes": [
+    {
+      "path": "Assets"
+    }
+  ],
+  "CorePath": "C:\\Program Files\\Craftland Studio\\resources\\LocalData\\Utilities\\UGCLanguage\\release",
+  "CompilerExecutable": "C:\\Program Files\\Craftland Studio\\resources\\LocalData\\Utilities\\UGCLanguage\\release\\fccompile.exe"
+}

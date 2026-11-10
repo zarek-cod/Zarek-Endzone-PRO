@@ -1,0 +1,62 @@
+/* GlobalCurrencyManager.fcg
+   Description: This script manages the global currency system.
+   It is responsible for tracking currency types, exchange rates, and global currency-related events.
+   This is the replacement for GlobalPlayerCurrency.eca
+   (DEPRECATED, AS THE CURRENCY FUNCTION IS NOT USED ANYMORE) */
+import "StdLibrary.fcc" as StdLib
+import "EditorGenLib.fcc" as EditorLib
+import "../GlobalData/PlayersWallets.fcg" as PlayersWallets
+import "Player.fcc" as Player
+import "Combat.fcc" as Combat
+graph GlobalCurrencyManager {
+
+    /* When a player joins the game: 
+       - Register a wallet for the player
+       - Give the player an initial amount of currency
+    */
+    event OnPlayerJoin(player entity<Player>) {
+        globalEntity<PlayersWallets>.RegisterWallet(player) // Register a wallet for the player when they join
+        if (globalEntity<PlayersWallets>.GetWallet(player) != nil) {
+            LogInfo("<GlobalCurrencyManager>: Player wallet registered successfully.")
+        }
+        globalEntity<PlayersWallets>.ChangeWalletMoney(player, 2000) // Give the player an initial amount of currency
+    }
+
+    /* 
+    When the round is ended
+    - For winning team, reward each teammate with 2000
+    - For losing team, reward each teammate with 1500
+    */
+    event CombatEnd(winningTeam entity<Team>) {
+        LogInfo("<GlobalCurrencyManager.fcg>: Combat ended, rewarding players") // Debug Info
+        for index, player in winningTeam<Team>.AllTeammates {
+            if (globalEntity<PlayersWallets>.GetWallet(player) != nil) {
+                globalEntity<PlayersWallets>.ChangeWalletMoney(player, 2000) // Reward each teammate with 2000 at the end of the round
+            }
+        }
+        for index, team in GetAllTeams() {
+            if (team != winningTeam) {
+                for index, player in team<Team>.AllTeammates {
+                    if (globalEntity<PlayersWallets>.GetWallet(player) != nil) {
+                        globalEntity<PlayersWallets>.ChangeWalletMoney(player, 1500) // Reward each non-winning teammate with 1000 at the end of the round
+                    }
+                }
+            }
+        }
+    }
+
+    // =========== UTILITIES ===========
+    /* Add currency for player when eliminating another player
+    @param target The player being eliminated
+    @param damagedBodyPart The body part that was damaged
+    */
+    func AddCurrencyWhenEliminate(target entity<Player>, damagedBodyPart DamagedBodyPartType){
+        if (globalEntity<PlayersWallets>.GetWallet(target as entity<Player>) != nil) {
+            if (damagedBodyPart == DamagedBodyPartType.Head) {
+                globalEntity<PlayersWallets>.ChangeWalletMoney(target as entity<Player>, 1500) // Reward player for headshot
+            } else {
+                globalEntity<PlayersWallets>.ChangeWalletMoney(target as entity<Player>, 1000) // Reward player for regular elimination
+            }
+        }
+    }
+}

@@ -1,0 +1,16 @@
+import "StdLibrary.fcc" as StdLib
+import "EditorGenLib.fcc" as EditorLib
+
+static graph GlobalConfig {
+    scoringType SCORING_TYPE = SCORING_TYPE.ESPORT
+
+    // ZAREK ENDZONE PRO v0.1 - settings ready for in-editor validation.
+    // NOTE: the official Last Safe Zone template only supports up to 7 rounds out-of-the-box.
+    esportMaxRound int = 3 // Stability test: workflow is currently configured for three rounds
+    glooWallsPerRound int = 20
+    grenadesPerRound int = 2
+    medkitsPerRound int = 3
+    inhalersPerRound int = 2
+    firstRoundPrepSeconds int = 30
+    nextRoundPrepSeconds int = 30 // Match the fixed 30s workflow phase duration
+}

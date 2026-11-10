@@ -1,0 +1,138 @@
+/* Script: SpawnPoints.fcg
+   Description: This script manages the spawn points in the game.
+   It is responsible for getting and returning spawn points for all entities.
+*/
+import "StdLibrary.fcc" as StdLib
+import "EditorGenLib.fcc" as EditorLib
+import "LevelObject.fcc" as LevelObject
+import "Player.fcc" as Player
+import "List.fcc" as List
+import "Scene.fcc" as Scene
+import "Map.fcc" as Map
+import "Math.fcc" as Math
+graph SpawnPoints {
+    spawnDict Map<int, List<entity<SpawnPosition>>> // Map to store spawn points with round IDs, goes with the Safe Zone ID
+    spawnPoints List<object>  // List to keep track of all spawn points
+    spawnPositions List<Vector3> // Initialize a list to store spawn positions
+
+    // Spawn patterns for each round. The spawn patterns are used to ensure that teams are not spawned in the same position in consecutive rounds.
+    spawnPatterns List<List<int>> = List<List<int>>{List<int>{0, 1, 2}, List<int>{1, 2, 0}, List<int>{2, 0, 1}}
+    currentPattern int = 0 // Current pattern index
+
+    // Initialize the list of spawn names
+    spawnNames List<string> = List<string>{LocString{"STAGE_1", List<string>{}}, LocString{"STAGE_2", List<string>{}}, LocString{"STAGE_3", List<string>{}}, LocString{"STAGE_4", List<string>{}}, LocString{"STAGE_5", List<string>{}}, LocString{"STAGE_6", List<string>{}}, LocString{"STAGE_7", List<string>{}}, LocString{"STAGE_8", List<string>{}}, LocString{"STAGE_9", List<string>{}}, LocString{"STAGE_10", List<string>{}}, LocString{"STAGE_11", List<string>{}}} // List to keep track of spawn point names
+
+    // Initialize the spawn points and positions
+    event OnGameStart() {
+        spawnPoints = List<object>{} // Initialize the list of spawn points at the start of the game
+        spawnPositions = List<Vector3>{} // Initialize the list of spawn positions
+        spawnDict = Map<int, List<entity<SpawnPosition>>>{} // Initialize the map of spawn points
+        spawnDict[0] = GetChildren(EResSceneNewScene.SpawnGroup1 as entity<Entity>) as List<entity<SpawnPosition>>
+        spawnDict[1] = GetChildren(EResSceneNewScene.SpawnGroup2 as entity<Entity>) as List<entity<SpawnPosition>>
+        spawnDict[2] = GetChildren(EResSceneNewScene.SpawnGroup3 as entity<Entity>) as List<entity<SpawnPosition>>
+        spawnDict[3] = GetChildren(EResSceneNewScene.SpawnGroup4 as entity<Entity>) as List<entity<SpawnPosition>>
+        spawnDict[4] = GetChildren(EResSceneNewScene.SpawnGroup5 as entity<Entity>) as List<entity<SpawnPosition>> 
+        spawnDict[5] = GetChildren(EResSceneNewScene.SpawnGroup6 as entity<Entity>) as List<entity<SpawnPosition>> // Register the spawn points for each round
+        spawnDict[6] = GetChildren(EResSceneNewScene.SpawnGroup7 as entity<Entity>) as List<entity<SpawnPosition>> // Register the spawn points for the seventh round
+        spawnDict[7] = GetChildren(EResSceneNewScene.SpawnGroup8 as entity<Entity>) as List<entity<SpawnPosition>> // Register the spawn points for the eighth round
+        spawnDict[8] = GetChildren(EResSceneNewScene.SpawnGroup9 as entity<Entity>) as List<entity<SpawnPosition>> // Register the spawn points for the ninth round
+        spawnDict[9] = GetChildren(EResSceneNewScene.SpawnGroup10 as entity<Entity>) as List<entity<SpawnPosition>> // Register the spawn points for the tenth round
+        spawnDict[10] = GetChildren(EResSceneNewScene.SpawnGroup11 as entity<Entity>) as List<entity<SpawnPosition>> // Register the spawn points for the eleventh round
+    }
+
+    /*
+    Get the spawn positions for a specific round
+    @param: round The round ID to get spawn positions for
+    @return: A list of Vector3 representing the spawn positions for the specified round
+    */
+    func GetSpawnPositionForRound(round int) List<Vector3> {
+        if !ContainKey(spawnDict, round) {
+            return List<Vector3>{}
+        }
+        var positions = List<Vector3>{}
+        for index, spawnPoint in spawnDict[round] {
+            Append(positions, spawnPoint<SpawnPosition>.AvailablePoint)
+        }
+        return positions
+    }
+
+    /*
+    Get a random spawn pattern
+    @return: A list of int representing the spawn pattern
+    */
+    func GetRandomSpawnPattern(spawnCount int) List<int> {
+        var pattern = List<int>{}
+        if spawnCount <= 0 {
+            return pattern
+        }
+        // ZAREK: rotate team slots; works for 2, 3 ... 7+ registered locations.
+        // This prevents the index-out-of-range error from fixed 3-team permutations.
+        var offset = Math.RandomInt(0, spawnCount)
+        if spawnCount > 1 && offset == currentPattern {
+            offset = (offset + 1) % spawnCount
+        }
+        currentPattern = offset
+        for i = 0, spawnCount, 1 {
+            Append(pattern, (i + offset) % spawnCount)
+        }
+        return pattern
+    }
+
+    /* Get the name of the stage for a specific round
+    @param: round The round ID to get the stage name for
+    @return: The name of the stage for the specified round
+    */
+    func GetNameForStage(round int) string {
+        if round < 0 || round >= List.Length(spawnNames) {
+            LogError("Invalid round index: " + round)
+            return ""
+        }
+        return spawnNames[round] // Return the name of the stage for the given round
+    }
+
+    /*
+    Get the spawn points for a specific round
+    @param: round The round ID to get spawn points for
+    @return: A list of entity<SpawnPosition> representing the spawn points for the specified round
+    */
+    func SetSpawnPointsActiveStatusForRound (round int, status bool) {
+        if !ContainKey(spawnDict, round) {
+            return
+        }
+        for index, spawnPoint in spawnDict[round] {
+            SetActive(spawnPoint as entity<Entity>, status)
+        }
+    }
+}
+
+// DEPRECATED FUNCTIONS
+    /* This function retrieves spawn points from the scene and stores them in the spawnPositions list.
+    It filters the level objects of type SpawnPos and extracts their positions.
+    This function should be called at the start of the game or when needed.
+    NOTE: This function returns a List<object> of spawn points, not their available positions. To get the positions,
+    use GetSpawnPositionsFromScene() below.
+    @return: A list of object representing the spawn points
+    */
+    // func GetSpawnPointsFromScene() List<object> {
+    //     spawnPoints = FilterLevelObjects(LevelObjectType.SpawnPos)
+    //     // LogInfo("<SpawnPoints.fcg<GetSpawnPointsFromScene()>>: Found spawn points: " + spawnPoints)
+    //     return spawnPoints // Return the list of spawn points
+    // }
+
+    /* This function retrieves the available spawn positions from the spawn points in the scene.
+    It iterates through the spawn points and extracts their available positions.
+    This function should be called when you need to get the actual spawn positions for entities.
+    @return: A list of Vector3 representing the available spawn positions
+    */
+    // func GetSpawnPositionsFromScene() List<Vector3> {
+    //     var spawnPoints = GetSpawnPointsFromScene() // Get spawn points from the scene
+    //     for index, spawnPoint in spawnPoints {
+    //         if spawnPositions == nil {
+    //             spawnPositions = List<Vector3>{}
+    //         }
+    //         var spawnEntity = spawnPoint as entity<SpawnPosition>
+    //         Append(spawnPositions, spawnEntity<SpawnPosition>.AvailablePoint)
+    //     }
+    //     // LogInfo("<SpawnPoints.fcg<GetSpawnPositionsFromScene()>>: Spawn positions retrieved: " + spawnPositions) // Debug Info
+    //     return spawnPositions // Return the list of spawn positions
+    // }
