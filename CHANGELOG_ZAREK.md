@@ -2,6 +2,30 @@
 
 Todos los cambios relevantes del proyecto se registran aquí. El proyecto aún no usa versionado semántico formal.
 
+## 2026-11-10 — Diseño visual premium ZAREK
+
+### Añadido
+
+- `DISENO_ZAREK.md` con identidad visual, plan de integración y pruebas de aceptación.
+- Fuentes originales para emblema Z, letrero celeste, marcador, pantalla final y ZAREK ARMORY en `Design/ZarekBrand/`, fuera de los activos del editor.
+
+### Modificado
+
+- La presentación inicial se reduce de 8 a 3 segundos.
+- Minimarcador y filas propias usan la paleta `#008CFF` / `#00D9FF` en lugar del dorado anterior.
+- El tooltip ESPORT muestra la marca `ZAREK ENDZONE PRO` junto con la ronda actual.
+
+### Limitaciones
+
+- Las imágenes son conceptos no registrados; no se afirma que estén integradas en el juego.
+- Sin cambios directos de `.ui`, escenas, prefabs, localización, Workflow, attachments o configuraciones del editor.
+- Letrero celeste, logo real en interfaces, pantalla final y ZAREK ARMORY requieren Craftland Studio MCP.
+
+### Validación
+
+- `fccompile.exe -i Assets`: código de salida `0`, sin errores y 67 advertencias heredadas.
+- Pruebas visuales/runtime pendientes porque el MCP no está expuesto a esta sesión.
+
 ## 2026-11-09 — Auditoría y preparación de repositorio
 
 ### Añadido

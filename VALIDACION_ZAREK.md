@@ -1,6 +1,6 @@
 # Validación — ZAREK ENDZONE PRO
 
-Última actualización: 2026-11-09.
+Última actualización: 2026-11-10.
 
 ## Entorno
 
@@ -13,6 +13,50 @@
 - Modelo reportado al compilador: `unknown-model`, porque el runtime no expone un identificador de modelo exacto reutilizable.
 
 ## Validaciones ejecutadas
+
+### Rama `feature/zarek-visual-premium`
+
+Archivos de código modificados:
+
+- `Assets/Scripts/Global/GlobalManager/GlobalUIManager.fcg`.
+
+Fuentes de diseño añadidas fuera de `Assets/`:
+
+- `Design/ZarekBrand/zarek-z-logo-source.png`;
+- `Design/ZarekBrand/zarek-sky-sign-concept.png`;
+- `Design/ZarekBrand/zarek-scoreboard-concept.png`;
+- `Design/ZarekBrand/zarek-final-screen-concept.png`;
+- `Design/ZarekBrand/zarek-armory-concept.png`;
+- `DISENO_ZAREK.md`.
+
+Comprobaciones:
+
+- se reutilizan únicamente `UIOpeningBanner`, `UIWidgetImage`, `UIWidgetLabel`, `TooltipText` y propiedades ya presentes en el proyecto;
+- no se inventaron asset IDs, widgets, componentes ni APIs;
+- no se cambió puntuación, Workflow, rondas, paredes gloo, zonas ni cantidad de equipos;
+- ninguna imagen se copió a `Assets/` ni se registró manualmente;
+- Craftland Studio está abierto con este `main.gproj`, pero su MCP no está expuesto y no se pudo leer `instructions://index`.
+
+Compilación:
+
+```text
+"C:\Program Files\Craftland Studio\resources\LocalData\Utilities\UGCLanguage\release\fccompile.exe" -i Assets
+```
+
+Resultado:
+
+- código de salida: `0`;
+- errores: ninguno;
+- advertencias: 67 encabezados de las familias heredadas (`ClearResidualLevelObjects()`, `UIWidget.Active`, Database/Leaderboard, comparación `entity<Entity>`/`EResItem` y sombreado de variables);
+- diagnósticos nuevos en `GlobalUIManager.fcg`: ninguno.
+
+Pendiente en Craftland Studio:
+
+1. Registrar el emblema e integrarlo a las interfaces.
+2. Construir y colocar el letrero celeste sin colisión ni interferencia jugable.
+3. Verificar clipping del tooltip, colores, contraste y apertura de 3 segundos.
+4. Integrar pantalla final y ZAREK ARMORY mediante recursos del editor.
+5. Ejecutar build, consola y pruebas runtime; no se declaran aprobadas en esta sesión.
 
 ### Inventario y dependencias
 

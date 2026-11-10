@@ -104,7 +104,7 @@ graph GlobalUIManager {
             createdHUD<UIOpeningBanner>.Title = LocString{"GAME_NAME", List<string>{}}
             createdHUD<UIOpeningBanner>.Description = LocString{"GAME_DESCRIPTION", List<string>{}}
             createdHUD<UIOpeningBanner>.Icon = EResSprite.logo
-            WaitForMillisecond(8000)
+            WaitForMillisecond(3000) // ZAREK: keep the premium opening concise
             DestroyBuiltInUI(createdHUD)
         }
     }
@@ -150,10 +150,10 @@ graph GlobalUIManager {
             }
             var aliveWidgetList = GetChildren(aliveWidget)
             // LogError(aliveWidgetList)
-            w<UIWidgetImage>.Color = #FFB400
-            // scoreW<UIWidgetImage>.Color = #FFB400
+            w<UIWidgetImage>.Color = #008CFF
+            // scoreW<UIWidgetImage>.Color = #008CFF
             for index, widget in aliveWidgetList {
-                widget<UIWidgetImage>.Color = #FFB400
+                widget<UIWidgetImage>.Color = #00D9FF
                 // widget<UIWidget>.Active = false
             }
             // LogInfo("<GlobalUIManager.fcg>: Registered mini scoreboard for player: " + player<Entity>.Name) // Debug Info
@@ -314,14 +314,14 @@ graph GlobalUIManager {
                             }
                         }
                         if team == player<Player>.HostTeam {
-                            if rankBgWidget<UIWidgetImage>.Color != #FFB400{
-                                start globalEntity<GlobalAnimationManager>.DOChangeColor(rankBgWidget, #9C9C9C, #D68E00, 500)
+                            if rankBgWidget<UIWidgetImage>.Color != #008CFF{
+                                start globalEntity<GlobalAnimationManager>.DOChangeColor(rankBgWidget, #9C9C9C, #008CFF, 500)
                             }
-                            if nameBgWidget<UIWidgetImage>.Color != #FFB400{
-                                start globalEntity<GlobalAnimationManager>.DOChangeColor(nameBgWidget, #363636, #D68E00, 500)
+                            if nameBgWidget<UIWidgetImage>.Color != #008CFF{
+                                start globalEntity<GlobalAnimationManager>.DOChangeColor(nameBgWidget, #363636, #008CFF, 500)
                             }
-                            if pointBgWidget<UIWidgetImage>.Color != #FFB400 {
-                                start globalEntity<GlobalAnimationManager>.DOChangeColor(pointBgWidget, #9C9C9C, #D68E00, 500)
+                            if pointBgWidget<UIWidgetImage>.Color != #008CFF {
+                                start globalEntity<GlobalAnimationManager>.DOChangeColor(pointBgWidget, #9C9C9C, #008CFF, 500)
                             }
                         } else {
                             rankBgWidget<UIWidgetImage>.Color = #9C9C9C// Set other teams to white
@@ -415,12 +415,12 @@ graph GlobalUIManager {
                     }
                     nameWidget<UIWidgetLabel>.Content = LocString{"TEAM", List<string>{ToString(team<Team>.TeamSeq)}} // Use localization for team names
                     if team == player<Player>.HostTeam {
-                        start globalEntity<GlobalAnimationManager>.DOChangeColor(rankBgWidget, #9C9C9C, #D68E00, 500)
-                        start globalEntity<GlobalAnimationManager>.DOChangeColor(nameBgWidget, #363636, #D68E00, 500)
-                        start globalEntity<GlobalAnimationManager>.DOChangeColor(booyahBgWidget, #9C9C9C, #D68E00, 500)
-                        start globalEntity<GlobalAnimationManager>.DOChangeColor(killBgWidget, #9C9C9C, #D68E00, 500)
-                        start globalEntity<GlobalAnimationManager>.DOChangeColor(totalPointBgWidget, #363636, #D68E00, 500)
-                        start globalEntity<GlobalAnimationManager>.DOChangeColor(placementBgWidget, #9C9C9C, #D68E00, 500)
+                        start globalEntity<GlobalAnimationManager>.DOChangeColor(rankBgWidget, #9C9C9C, #008CFF, 500)
+                        start globalEntity<GlobalAnimationManager>.DOChangeColor(nameBgWidget, #363636, #008CFF, 500)
+                        start globalEntity<GlobalAnimationManager>.DOChangeColor(booyahBgWidget, #9C9C9C, #008CFF, 500)
+                        start globalEntity<GlobalAnimationManager>.DOChangeColor(killBgWidget, #9C9C9C, #008CFF, 500)
+                        start globalEntity<GlobalAnimationManager>.DOChangeColor(totalPointBgWidget, #363636, #008CFF, 500)
+                        start globalEntity<GlobalAnimationManager>.DOChangeColor(placementBgWidget, #9C9C9C, #008CFF, 500)
                         start globalEntity<GlobalAnimationManager>.DOChangeIncreaseAlpha(increaseKillWidget, team<TeamCurrentRoundData>.GetKillThisRound(), 2000, killWidget, killsPoints)
                         
                         if team == wonTeam {
@@ -452,7 +452,7 @@ graph GlobalUIManager {
                     // Update tooltips
                     var tooltipWidget entity<UIWidget>
                     tooltipWidget = GetWidgetFromCustomUI(player, ui, EResUIEsportFullScoreBoard.TooltipText)
-                    tooltipWidget<UIWidgetLabel>.Content = LocString{"FULL_SCBOARD_ROUND_COUNT", List<string>{ToString(globalEntity<CombatRoundCounter>.GetCount()), ToString(GlobalConfig.esportMaxRound)}} 
+                    tooltipWidget<UIWidgetLabel>.Content = "ZAREK ENDZONE PRO | RONDA " + ToString(globalEntity<CombatRoundCounter>.GetCount()) + "/" + ToString(GlobalConfig.esportMaxRound)
                     // if team == player<Player>.HostTeam {
                     //     start globalEntity<GlobalAnimationManager>.DOChangeIncreaseAlpha(increaseKillWidget, team<TeamCurrentRoundData>.GetKillThisRound(), 2000, killWidget, kills)
                     //     // start globalEntity<GlobalAnimationManager>.DOChangeIncreaseAlpha(increaseBooyahWidget, team<TeamCurrentRoundData>.GetBooyahThisRound(), 2000, booyahWidget, globalEntity<TeamData>.GetTeamWinningTimes(team))
