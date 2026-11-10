@@ -2,6 +2,30 @@
 
 Todos los cambios relevantes del proyecto se registran aquí. El proyecto aún no usa versionado semántico formal.
 
+## 2026-11-10 — Validación final del cierre de combate del PR #1
+
+### Corregido
+
+- `OnPlayerQuit` conserva la fase en la que ocurrió la salida y ya no puede resolver una ronda por un abandono iniciado fuera del combate.
+- La lectura de equipos tras una desconexión se difiere dos frames: primero se aplica `EliminateAtNextFrame` y después se permite que se estabilicen `Team.IsAced` y `OnACE`.
+- La resolución de ronda queda limitada a `FirstShrinkPrep`, `Combat`, `MovingSafeZone`, `LastSafeZone` y `SuddenDeath`; `Preparation`, `__Before6Combat__` y las fases de cierre quedan excluidas.
+- Los eventos `OnACE` del mismo frame se agrupan en una única comprobación diferida e idempotente, evitando que una eliminación simultánea declare vencedor antes de registrar el último equipo eliminado.
+- `teamRanking` ya no acepta equipos duplicados ni eliminaciones producidas fuera de las fases activas.
+- La ruta sin supervivientes marca la ronda como terminada durante su procesamiento, sin cambiar la puntuación, persistencia ni presentación sin ganador ya aprobadas.
+- La animación de posición del marcador ESPORT usa ahora los mismos puntos competitivos que la puntuación real (`12/9/8/7/6/5/4`) en vez de mostrar el índice de eliminación.
+
+### Conservado
+
+- El atajo de última escuadra conectada continúa limitado a BOOYAH_COUNT y ahora comparte el mismo cierre idempotente.
+- Se mantienen 3 rondas, 20 paredes gloo y la lógica existente de zonas.
+- No se modificaron escenas, Workflow, attachments, recursos binarios ni configuraciones del editor.
+
+### Validación
+
+- `git diff --check`: aprobado.
+- `fccompile.exe -i Assets`: código de salida `0`, sin errores y 66 advertencias heredadas.
+- Craftland Studio estaba abierto con este proyecto, pero su servidor MCP no estuvo expuesto a la sesión: Workflow, attachments, configuración de equipos y pruebas runtime permanecen pendientes y no se marcaron como aprobados.
+
 ## 2026-11-10 — Correcciones de revisión del PR #1
 
 ### Corregido

@@ -143,24 +143,30 @@ graph GlobalGameManager {
         LogError("<GlobalGameManager.fcg>: Player " + player<Player>.NickName + " has quit the game") // Debug Info
         globalEntity<GlobalUIManager>.UnregisterAllUIs(player)
         globalEntity<PlayerData>.UnregisterPlayer(player) // Unregister the player from player data tracking
+        var quitDuringCombat = globalEntity<GlobalCombatManager>.IsCombatResolutionPhase()
         EliminateAtNextFrame(player)
+        start ResolvePlayerQuitAfterStateUpdate(quitDuringCombat)
+    }
+
+    // EliminateAtNextFrame updates combat state on the following frame. Wait one
+    // additional frame before inspecting teams so IsAced and OnACE have settled.
+    async func ResolvePlayerQuitAfterStateUpdate(quitDuringCombat bool) {
+        WaitForNextFrame()
+        WaitForNextFrame()
         if isRoundEnded == false {
             globalEntity<GlobalUIManager>.UpdateMiniScoreboard() // Update the mini scoreboard UI after a player is eliminated to update current alives
         }
-        var activeTeams = GetActiveTeams()
-        if isMatchEnded == false {
-            if List.Length(activeTeams) == 1 {
-                if GlobalConfig.scoringType == SCORING_TYPE.BOOYAH_COUNT {
-                    MatchEndHandler(activeTeams[0])
-                } else {
-                    globalEntity<GlobalCombatManager>.CheckEndCombatCondition()
-                }
-            } else if List.Length(activeTeams) > 1 {
-                globalEntity<GlobalCombatManager>.CheckEndCombatCondition()
-            } else {
-                LogWarning("<Zarek Endzone>: Match has no active teams after player quit")
-            }
+        if !quitDuringCombat || isMatchEnded == true || isRoundEnded == true || !globalEntity<GlobalCombatManager>.IsCombatResolutionPhase() {
+            return
         }
+        var activeTeams = GetActiveTeams()
+        if GlobalConfig.scoringType == SCORING_TYPE.BOOYAH_COUNT && List.Length(activeTeams) == 1 {
+            if globalEntity<GlobalCombatManager>.TryClaimCombatResolution() {
+                MatchEndHandler(activeTeams[0])
+            }
+            return
+        }
+        globalEntity<GlobalCombatManager>.RequestEndCombatCheck()
     }
 
     /*
@@ -276,6 +282,7 @@ graph GlobalGameManager {
 
     // Custom event, used to handle the case where no team wins
     event NoTeamWinException() {
+        isRoundEnded = true
         ClearResidualLevelObjects()
         if GlobalConfig.scoringType == SCORING_TYPE.ESPORT {
             var teamRanking = globalEntity<GlobalCombatManager>.teamRanking
@@ -304,19 +311,13 @@ graph GlobalGameManager {
             SwitchPhase(EPhase.EndCombat)
         }
         LogWarning("<GlobalGameManager.fcg>: No team won this round; preserved eliminated-team scores without awarding Booyah") // Debug Info
+        isRoundEnded = false
     }
 
     // ZAREK competitive points: winner 12, 2nd 9, 3rd 8, 4th 7,
     // 5th 6, 6th 5, 7th 4. A round with fewer teams uses the top ranks.
     func GetZarekPlacementPoints(position int) int {
-        if position == 1 { return 12 }
-        if position == 2 { return 9 }
-        if position == 3 { return 8 }
-        if position == 4 { return 7 }
-        if position == 5 { return 6 }
-        if position == 6 { return 5 }
-        if position == 7 { return 4 }
-        return 0
+        return globalEntity<TeamData>.GetPlacementPointsForPosition(position)
     }
 
     // =========== UTILS FUNCTIONS ================

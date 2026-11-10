@@ -14,6 +14,61 @@
 
 ## Validaciones ejecutadas
 
+### Validación final del orden de abandono y cierre del PR #1
+
+Archivos FC modificados en esta revisión:
+
+- `Assets/Scripts/Global/GlobalManager/GlobalGameManager.fcg`;
+- `Assets/Scripts/Global/GlobalManager/GlobalCombatManager.fcg`;
+- `Assets/Scripts/Global/GlobalManager/GlobalUIManager.fcg`;
+- `Assets/Scripts/Global/GlobalData/TeamData.fcg`;
+- `Assets/Scripts/Team/Team.fcg`.
+
+Evidencia estática y del SDK oficial instalado:
+
+- `Workflow.fcc` expone `globalEntity<Global>.CurrentPhaseIndex` como propiedad de solo lectura; no se inventó una API de fase.
+- `Combat.fcc` documenta que `EliminateAtNextFrame` elimina en el siguiente frame. La implementación espera dos frames antes de leer equipos: el frame objetivo y un frame adicional para estabilizar `IsAced`/`OnACE`.
+- Se registra si la salida comenzó durante combate y se vuelve a comprobar la fase tras la espera. Un abandono iniciado en `Preparation` no entra en `MatchEndHandler` ni solicita `CombatEnd`.
+- La lista permitida se deriva del enum generado y de los scripts FC actuales: `FirstShrinkPrep`, `Combat`, `MovingSafeZone`, `LastSafeZone` y `SuddenDeath`. `FirstShrinkPrep` se incluye porque el flujo actual quita la invencibilidad en esa fase; `SuddenDeath` aplica la zona final.
+- `CheckEndCombatCondition` aplica el guard de fase centralmente, por lo que también protege llamadas originadas en `Team.OnACE`.
+- `OnACE` registra el equipo de forma deduplicada y solicita una comprobación agrupada. Dos esperas de frame permiten acumular eliminaciones simultáneas antes de decidir entre `CombatEnd` y `NoTeamWinException`.
+- `isChecked` se fija antes de despachar cualquiera de los dos eventos y `isCheckScheduled` agrupa solicitudes; las llamadas posteriores no pueden volver a despachar el cierre.
+- BOOYAH_COUNT conserva el final por única escuadra conectada, pero primero reclama el mismo cierre idempotente. ESPORT sigue resolviendo la ronda y el campeón final mediante su clasificación acumulada.
+- `NoTeamWinException` mantiene `isRoundEnded = true` durante el procesamiento. Su ruta continúa usando `UpdateFullScoreBoardNoWinner`, que no ejecuta animaciones de vencedor cuando `wonTeam == nil`.
+- La animación de posición y la asignación de puntos comparten `TeamData.GetPlacementPointsForPosition`; ganador y eliminados muestran exactamente el incremento que se añadió al acumulado, también en la ruta sin supervivientes.
+- No se cambiaron los valores de puntuación, persistencia ni desempates implementados en `f22e4ca`; solo se alineó la animación del marcador con esos valores existentes.
+- Se confirmaron `esportMaxRound = 3`, `glooWallsPerRound = 20` y ausencia de cambios en scripts de zonas.
+
+Comprobaciones ejecutadas:
+
+```text
+git diff --check
+"C:\Program Files\Craftland Studio\resources\LocalData\Utilities\UGCLanguage\release\fccompile.exe" -i Assets
+```
+
+Resultado:
+
+- `git diff --check`: aprobado;
+- compilación FC: código de salida `0`;
+- errores: ninguno;
+- advertencias: 66 encabezados, todos de familias heredadas por `ClearResidualLevelObjects()`, `UIWidget.Active`, APIs antiguas de Database/Leaderboard, comparación `entity<Entity>`/`EResItem` y sombreado de variables en `GlobalLeaderboard.fcg`;
+- no aparecieron diagnósticos nuevos en los cinco archivos modificados.
+
+Limitación del editor:
+
+- Craftland Studio está abierto y su proceso confirma este mismo `main.gproj` (`Zarek Endzone Base`). Sin embargo, Craftland Studio MCP no está expuesto a esta sesión, por lo que no fue posible leer `instructions://index` ni inspeccionar el Workflow, attachments o configuración de equipos desde el editor.
+- `ProjectSettings/Workflow.wfl` y los recursos serializados no se leyeron ni modificaron directamente.
+- No se ejecutaron build del editor, consola ni pruebas en partida. El resultado runtime no se declara aprobado.
+
+Escenarios runtime pendientes en Craftland Studio:
+
+1. Abandono durante `Preparation`: confirmar que no termina ronda ni partida.
+2. Abandono durante cada fase activa, incluido `FirstShrinkPrep` y `SuddenDeath`: confirmar una sola resolución después de actualizar `IsAced`.
+3. Eliminación simultánea de todos los equipos: confirmar `NoTeamWinException`, marcador completo sin animación de vencedor ni Booyah y una sola aplicación de puntos.
+4. Tercer cierre sin ganador: confirmar campeón por acumulado, persistencia única y transición a `End`.
+5. Una sola escuadra conectada: confirmar comportamiento BOOYAH_COUNT y, en ESPORT, campeón por clasificación acumulada.
+6. Desempate y final normal: confirmar una sola llamada final, orden de desempate y ausencia de escrituras duplicadas.
+
 ### Correcciones posteriores a la revisión del PR #1
 
 Archivos FC modificados en esta revisión:

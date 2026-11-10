@@ -98,6 +98,19 @@ graph TeamData {
         // LogInfo("<TeamData.fcg>: Added " + placementPoints + " placement points, " + kills + " kills points, and " + teamBooyahCount[team] + " seconds of booyah time points to team: " + team<Entity>.Name)
     }
 
+    // Shared competitive placement table used by scoring and scoreboard
+    // animations so both paths always display the same awarded value.
+    func GetPlacementPointsForPosition(position int) int {
+        if position == 1 { return 12 }
+        if position == 2 { return 9 }
+        if position == 3 { return 8 }
+        if position == 4 { return 7 }
+        if position == 5 { return 6 }
+        if position == 6 { return 5 }
+        if position == 7 { return 4 }
+        return 0
+    }
+
     /* Add booyah time to a specific team. Which team wins win +1 point.
        @param team: The team entity to which booyah time will be added
     */
