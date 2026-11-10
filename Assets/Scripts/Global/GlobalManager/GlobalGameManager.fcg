@@ -213,6 +213,7 @@ graph GlobalGameManager {
             LogError("There is no team winning this round")
             isRoundEnded = false
             SwitchPhase(EPhase.EndCombat)
+            return
         }
         for index, teammate in winningTeam<Team>.AllTeammates {
             if teammate<Player>.HP > 0 {
@@ -276,11 +277,9 @@ graph GlobalGameManager {
     // Custom event, used to handle the case where no team wins
     event NoTeamWinException() {
         ClearResidualLevelObjects()
-        var team entity<Team> = GetAllTeams()[0]
         if GlobalConfig.scoringType == SCORING_TYPE.ESPORT {
             var teamRanking = globalEntity<GlobalCombatManager>.teamRanking
             WaitForNextFrame()
-            globalEntity<TeamData>.AddBooyahToTeam(team)
             for index, team in teamRanking {
                 team<TeamFCG>.SetLastRoundPoint(globalEntity<TeamData>.GetTeamPoint(team))            
                 WaitForNextFrame()
@@ -288,32 +287,22 @@ graph GlobalGameManager {
             }
         }
         DisableSafeZone()
-        if CheckWinningCondition(team) {
-            // ==========================================================
-            // The booyah case cannot be ended if there is no team winning, so we only handle the esport case
-            // ==========================================================
-            if GlobalConfig.scoringType == SCORING_TYPE.ESPORT {
-                isMatchEnded = true
-                wait globalEntity<GlobalUIManager>.CreateEndRoundHUD(team); // Create the end round HUD for all players
-                start globalEntity<GlobalUIManager>.UpdateFullScoreBoardWinTeam(team);
-                SwitchPhase(EPhase.EndCombat)
-                WaitForMillisecond(7000)
-                for index, player in GetAllPlayers() {
-                    globalEntity<GlobalUIManager>.UnregisterAllUIs(player) // Unregister all UIs for the player
-                    start globalEntity<GlobalUIManager>.CreateLastRoundHUD(List<entity<Team>>{team}, player)
-                    globalEntity<GlobalSoundManager>.PlayEndMatchSound(player)
-                }
-                WaitForMillisecond(5000)
-                SwitchPhase(EPhase.End)
+        if GlobalConfig.scoringType == SCORING_TYPE.ESPORT && globalEntity<CombatRoundCounter>.GetCount() >= GlobalConfig.esportMaxRound {
+            isMatchEnded = true
+            SwitchPhase(EPhase.EndCombat)
+            WaitForMillisecond(7000)
+            var allWinningTeams = GetAllWinningTeams()
+            for index, player in GetAllPlayers() {
+                globalEntity<GlobalUIManager>.UnregisterAllUIs(player) // Unregister all UIs for the player
+                start globalEntity<GlobalUIManager>.CreateLastRoundHUD(allWinningTeams, player)
+                globalEntity<GlobalSoundManager>.PlayEndMatchSound(player)
             }
-            // WaitForMillisecond(5000)
+            WaitForMillisecond(5000)
+            SwitchPhase(EPhase.End)
         } else {
-            wait globalEntity<GlobalUIManager>.CreateEndRoundHUD(team); // Create the end round HUD for all players
-            start globalEntity<GlobalUIManager>.UpdateFullScoreBoardWinTeam(team);
-            ClearResidualLevelObjects()
             SwitchPhase(EPhase.EndCombat)
         }
-        LogError("<GlobalGameManager.fcg>: No team won this round, skipping to the next round") // Debug Info
+        LogWarning("<GlobalGameManager.fcg>: No team won this round; preserved eliminated-team scores without awarding Booyah") // Debug Info
     }
 
     // ZAREK competitive points: winner 12, 2nd 9, 3rd 8, 4th 7,

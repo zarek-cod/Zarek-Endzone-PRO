@@ -14,6 +14,7 @@ graph PlayersShopIcon {
     event OnGameStart() {
         shopIcon = Map<entity<Player>, entity<CustomUI>>{} // Initialize the map of players' shop icons at the start of the game
         shopIconPosition = Map<entity<Player>, Vector2>{} // Initialize the map of players' shop icon positions at the start of the game
+        shopIconSize = Map<entity<Player>, Vector2>{} // Initialize the map of players' shop icon sizes at the start of the game
         // LogInfo("<PlayersShopIcon.fcg>: Game started, players' shop icons initialized") // Debug Info
     }
 
@@ -48,6 +49,9 @@ graph PlayersShopIcon {
     func RegisterClientShopIconDimension(player entity<Player>, clientPosition Vector2, clientSize Vector2) bool {
         if (shopIconPosition == nil) {
             shopIconPosition = Map<entity<Player>, Vector2>{} // Initialize the map if it is null
+        }
+        if (shopIconSize == nil) {
+            shopIconSize = Map<entity<Player>, Vector2>{} // Initialize the map if it is null
         }
         shopIconPosition[player] = clientPosition // Associate the player with their shop icon position
         shopIconSize[player] = clientSize // Associate the player with their shop icon size

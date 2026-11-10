@@ -14,6 +14,43 @@
 
 ## Validaciones ejecutadas
 
+### Corrección `fix/estabilidad-combate`
+
+Archivos FC modificados:
+
+- `Assets/Scripts/Global/GlobalManager/GlobalGameManager.fcg`;
+- `Assets/Scripts/Global/GlobalData/PlayersShopIcon.fcg`;
+- `Assets/Scripts/Shop/ShopIconHUD.fcg`.
+
+Comprobaciones estáticas:
+
+- `CombatEnd` contiene una salida inmediata antes de cualquier acceso a un `winningTeam` nulo.
+- No quedan coincidencias directas de `GetAllTeams()[0]` ni `GetAllShops()[0]` en los scripts FC.
+- `NoTeamWinException` itera `teamRanking` sin indexarla: una lista vacía no produce accesos fuera de rango.
+- `GetAllWinningTeams` conserva su protección `List.Length(...) <= 1` antes del primer acceso `[0]`.
+- `shopIconSize` se inicializa tanto en `OnGameStart` como defensivamente en `RegisterClientShopIconDimension`.
+- `git diff --check`: aprobado.
+- Se confirmó `esportMaxRound = 3`, `glooWallsPerRound = 20` y ausencia de cambios en archivos de zona.
+
+Compilación completa desde la raíz del proyecto:
+
+```text
+"C:\Program Files\Craftland Studio\resources\LocalData\Utilities\UGCLanguage\release\fccompile.exe" -i Assets -agent unknown-model -session 2176be10-916b-4600-aa2f-e8e98ba1971e
+```
+
+Resultado:
+
+- código de salida: `0`;
+- errores: ninguno;
+- advertencias: permanecen las familias ya presentes en la línea base —`ClearResidualLevelObjects()`, `UIWidget.Active`, APIs antiguas de Database/Leaderboard, comparación `entity<Entity>`/`EResItem` y sombreado de variables en `GlobalLeaderboard.fcg`—;
+- no aparecieron diagnósticos en `PlayersShopIcon.fcg` ni `ShopIconHUD.fcg`.
+
+Validación de editor pendiente:
+
+- Craftland Studio MCP no está disponible para esta sesión, por lo que no se ejecutaron `game-build` ni `game-console-get-logs`.
+- No se modificaron recursos binarios, escenas, UI, workflows, attachments ni configuraciones del editor.
+- Deben probarse en Craftland: final simultáneo sin supervivientes, tercera ronda sin ganador, actualización visual de la clasificación, apertura de tienda configurada y comportamiento cuando no existe una tienda.
+
 ### Inventario y dependencias
 
 - 35 archivos `.fcg` y 1 `.fcc` localizados.
@@ -84,7 +121,7 @@ No hubo diagnósticos de tipo error.
 - Auditoría estática: realizada con limitaciones documentadas.
 - Compilación completa: aprobada con advertencias, código de salida `0`.
 - Prueba en juego: no realizada.
-- Cambios FC: ninguno.
+- Cambios FC: corrección de estabilidad preparada en `fix/estabilidad-combate` y pendiente de revisión mediante Pull Request.
 - Cambio de zona: no aplicado, porque aún no puede validarse con seguridad.
 
 ## Requisitos para cerrar la validación

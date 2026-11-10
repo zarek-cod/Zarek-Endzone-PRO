@@ -12,8 +12,13 @@ graph ShopIconHUD {
 
     }
     event OnPressed(player entity<Player>) {
+        var shops = GetAllShops()
+        if List.Length(shops) == 0 {
+            LogError("<ShopIconHUD.fcg>: Cannot open shop because no shop is configured")
+            return
+        }
         CreateBuiltInUI(out var newShopUI, player, EResInternalHud.ShopHUD as BuiltInUIType)
-        newShopUI<UIStore>.Store = GetAllShops()[0]
+        newShopUI<UIStore>.Store = shops[0]
         Append(uiList, newShopUI)
     }
 
@@ -26,8 +31,13 @@ graph ShopIconHUD {
     }
 
     func OpenShopExternal(player entity<Player>) {
+        var shops = GetAllShops()
+        if List.Length(shops) == 0 {
+            LogError("<ShopIconHUD.fcg>: Cannot open shop because no shop is configured")
+            return
+        }
         CreateBuiltInUI(out var newShopUI, player, EResInternalHud.ShopHUD as BuiltInUIType)
-        newShopUI<UIStore>.Store = GetAllShops()[0]
+        newShopUI<UIStore>.Store = shops[0]
         Append(uiList, newShopUI)
     }
 }
