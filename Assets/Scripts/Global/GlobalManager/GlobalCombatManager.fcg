@@ -23,6 +23,7 @@ import "../GlobalData/GlobalSafeZones.fcg" as GlobalSafeZones
 import "../GlobalManager/GlobalPreparationPhaseManager.fcg" as GlobalPreparationPhaseManager
 graph GlobalCombatManager {
     isChecked bool = false // A flag to check if the combat phase has been initialized
+    isCheckScheduled bool = false // Coalesce eliminations from the same frame into one resolution check
 
     teamsAlive List<Team> = List<Team>{} // List of teams that are still alive in the combat phase
     // allDroppedItems List<entity<ItemBase>> = List<entity<ItemBase>>{} // List of all dropped items on ground in each round
@@ -48,6 +49,7 @@ graph GlobalCombatManager {
     // When a new round starts, reset the timer and other relevant data
     event OnRoundStart(roundIndex int) {
         isChecked = false // Reset the isChecked flag at the start of each round
+        isCheckScheduled = false
         if (roundIndex == 0) {
             teamsAlive = globalEntity<TeamsAlive>.GetAliveTeams() // Get the list of alive teams
             // LogInfo("<GlobalCombatManager.fcg>: Round started, teams alive initialized") // Debug Info
@@ -96,7 +98,7 @@ graph GlobalCombatManager {
        This function checks the current state of the teams and determines if the combat phase should end.
     */
     func CheckEndCombatCondition() {
-        if isChecked == true {
+        if !IsCombatResolutionPhase() || isChecked == true {
             return
         }
         // ZAREK: only count squads that actually have participants, and never
@@ -129,8 +131,50 @@ graph GlobalCombatManager {
         }
     }
 
+    // Only active combat phases may resolve a round. Preparation and transition
+    // phases can eliminate or respawn players without producing a winner.
+    func IsCombatResolutionPhase() bool {
+        var currentPhaseIndex = globalEntity<Global>.CurrentPhaseIndex
+        return currentPhaseIndex == EPhase.FirstShrinkPrep ||
+            currentPhaseIndex == EPhase.Combat ||
+            currentPhaseIndex == EPhase.MovingSafeZone ||
+            currentPhaseIndex == EPhase.LastSafeZone ||
+            currentPhaseIndex == EPhase.SuddenDeath
+    }
+
+    // ACE events can arrive more than once in the same frame. Schedule one
+    // delayed check so every Team.IsAced value and ranking entry has settled
+    // before choosing CombatEnd or NoTeamWinException.
+    func RequestEndCombatCheck() {
+        if !IsCombatResolutionPhase() || isChecked == true || isCheckScheduled == true {
+            return
+        }
+        isCheckScheduled = true
+        start CheckEndCombatConditionAfterStateUpdate()
+    }
+
+    async func CheckEndCombatConditionAfterStateUpdate() {
+        WaitForNextFrame()
+        WaitForNextFrame()
+        isCheckScheduled = false
+        CheckEndCombatCondition()
+    }
+
+    // BOOYAH_COUNT keeps its existing last-connected-team shortcut, while using
+    // the same idempotent gate as normal combat resolution.
+    func TryClaimCombatResolution() bool {
+        if !IsCombatResolutionPhase() || isChecked == true {
+            return false
+        }
+        isChecked = true
+        isCheckScheduled = false
+        return true
+    }
+
     func AddAcedTeam(team entity<Team>) {
-        List.Append(teamRanking, team)
+        if IsCombatResolutionPhase() && team != nil && !List.Contain(teamRanking, team) {
+            List.Append(teamRanking, team)
+        }
     }
 
     func GetTeamRanking() List<entity<Team>> {

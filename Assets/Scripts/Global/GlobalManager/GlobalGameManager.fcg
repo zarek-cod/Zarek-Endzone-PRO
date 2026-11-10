@@ -44,11 +44,13 @@ graph GlobalGameManager {
     prepPhaseDuration int = 30 // Initial buying phase duration; adjusted by preparation manager
     isMatchEnded bool = false // Flag to check if the match has ended
     isRoundEnded bool = false // Flag to check if the round has ended
+    finalStatisticsStored bool = false // Prevent duplicate final database writes
     /* 
     When the game starts:
     - If a player goes into the game to soon, a gravity delay is added to wait until the terrain is loaded.
     */
     event OnGameStart() {
+        finalStatisticsStored = false
         LogInfo("<GlobalGameManager.fcg>: Game has started") // Debug Info
     }
 
@@ -97,16 +99,18 @@ graph GlobalGameManager {
         }
         if phase<Phase>.Index == EPhase.End {
             var aliveTeams = GetActiveTeams()
-            if List.Length(aliveTeams) == 1 {
+            if GlobalConfig.scoringType == SCORING_TYPE.BOOYAH_COUNT && List.Length(aliveTeams) == 1 {
+                StoreFinalPlayerData(aliveTeams)
                 for index, player in GetAllPlayers(){
                     globalEntity<GlobalUIManager>.CreateEndGameHUD(player, aliveTeams[0], 1, aliveTeams)
                 }
             } else {
                 var teamSortedList = globalEntity<TeamData>.GetSortedTeamList()
                 var winningTeams = GetAllWinningTeams()
+                StoreFinalPlayerData(winningTeams)
                 for index, player in GetAllPlayers(){
                     var team entity<Team> = player<Player>.HostTeam
-                    if List.Contain(winningTeams, team) {
+                    if team != nil && List.Contain(winningTeams, team) {
                         globalEntity<GlobalUIManager>.CreateEndGameHUD(player, team, 1, teamSortedList)
                     } else {
                         globalEntity<GlobalUIManager>.CreateEndGameHUD(player, team, 2, teamSortedList)
@@ -139,20 +143,30 @@ graph GlobalGameManager {
         LogError("<GlobalGameManager.fcg>: Player " + player<Player>.NickName + " has quit the game") // Debug Info
         globalEntity<GlobalUIManager>.UnregisterAllUIs(player)
         globalEntity<PlayerData>.UnregisterPlayer(player) // Unregister the player from player data tracking
+        var quitDuringCombat = globalEntity<GlobalCombatManager>.IsCombatResolutionPhase()
         EliminateAtNextFrame(player)
+        start ResolvePlayerQuitAfterStateUpdate(quitDuringCombat)
+    }
+
+    // EliminateAtNextFrame updates combat state on the following frame. Wait one
+    // additional frame before inspecting teams so IsAced and OnACE have settled.
+    async func ResolvePlayerQuitAfterStateUpdate(quitDuringCombat bool) {
+        WaitForNextFrame()
+        WaitForNextFrame()
         if isRoundEnded == false {
             globalEntity<GlobalUIManager>.UpdateMiniScoreboard() // Update the mini scoreboard UI after a player is eliminated to update current alives
         }
-        var activeTeams = GetActiveTeams()
-        if isMatchEnded == false {
-            if List.Length(activeTeams) == 1 {
-                MatchEndHandler(activeTeams[0])
-            } else if List.Length(activeTeams) > 1 {
-                globalEntity<GlobalCombatManager>.CheckEndCombatCondition()
-            } else {
-                LogWarning("<Zarek Endzone>: Match has no active teams after player quit")
-            }
+        if !quitDuringCombat || isMatchEnded == true || isRoundEnded == true || !globalEntity<GlobalCombatManager>.IsCombatResolutionPhase() {
+            return
         }
+        var activeTeams = GetActiveTeams()
+        if GlobalConfig.scoringType == SCORING_TYPE.BOOYAH_COUNT && List.Length(activeTeams) == 1 {
+            if globalEntity<GlobalCombatManager>.TryClaimCombatResolution() {
+                MatchEndHandler(activeTeams[0])
+            }
+            return
+        }
+        globalEntity<GlobalCombatManager>.RequestEndCombatCheck()
     }
 
     /*
@@ -190,8 +204,6 @@ graph GlobalGameManager {
         DisableSafeZone()
         LogInfo("<GlobalGameManager.fcg>: Team " + winningTeam<Entity> + " has won the game!") // Debug Info
         for index, player in GetAllPlayers() {
-            // start globalEntity<GlobalLeaderboard>.SetLeaderboardDataForPlayer(player, globalEntity<TeamData>.GetTeamPlacementPoints(player<Player>.HostTeam) + globalEntity<PlayerData>.GetPlayerData(player)[0], 1)
-            start globalEntity<GlobalLeaderboard>.StorePlayerDataToDatabase(player, globalEntity<PlayerData>.GetPlayerData(player)[0], globalEntity<PlayerData>.GetPlayerData(player)[1], 1, true)
             globalEntity<GlobalUIManager>.UnregisterAllUIs(player) // Unregister all UIs for the player
             start globalEntity<GlobalUIManager>.CreateLastRoundHUD(List<entity<Team>>{winningTeam}, player) // Create the last round HUD for all players
             globalEntity<GlobalSoundManager>.PlayEndMatchSound(player)            
@@ -213,6 +225,7 @@ graph GlobalGameManager {
             LogError("There is no team winning this round")
             isRoundEnded = false
             SwitchPhase(EPhase.EndCombat)
+            return
         }
         for index, teammate in winningTeam<Team>.AllTeammates {
             if teammate<Player>.HP > 0 {
@@ -250,12 +263,6 @@ graph GlobalGameManager {
                 WaitForMillisecond(7000)
                 var allWinningTeams = GetAllWinningTeams()
                 for index, player in GetAllPlayers() {
-                    // start globalEntity<GlobalLeaderboard>.SetLeaderboardDataForPlayer(player, globalEntity<TeamData>.GetTeamPlacementPoints(player<Player>.HostTeam) + globalEntity<PlayerData>.GetPlayerData(player)[0], 1)
-                    if List.Contain(allWinningTeams, player<Player>.HostTeam) {
-                        start globalEntity<GlobalLeaderboard>.StorePlayerDataToDatabase(player, globalEntity<PlayerData>.GetPlayerData(player)[0], globalEntity<PlayerData>.GetPlayerData(player)[1], 1, true)
-                    } else {
-                        start globalEntity<GlobalLeaderboard>.StorePlayerDataToDatabase(player, globalEntity<PlayerData>.GetPlayerData(player)[0], globalEntity<PlayerData>.GetPlayerData(player)[1], 1, false)
-                    }
                     globalEntity<GlobalUIManager>.UnregisterAllUIs(player) // Unregister all UIs for the player
                     start globalEntity<GlobalUIManager>.CreateLastRoundHUD(allWinningTeams, player)
                     globalEntity<GlobalSoundManager>.PlayEndMatchSound(player)
@@ -275,58 +282,42 @@ graph GlobalGameManager {
 
     // Custom event, used to handle the case where no team wins
     event NoTeamWinException() {
+        isRoundEnded = true
         ClearResidualLevelObjects()
-        var team entity<Team> = GetAllTeams()[0]
         if GlobalConfig.scoringType == SCORING_TYPE.ESPORT {
             var teamRanking = globalEntity<GlobalCombatManager>.teamRanking
             WaitForNextFrame()
-            globalEntity<TeamData>.AddBooyahToTeam(team)
             for index, team in teamRanking {
                 team<TeamFCG>.SetLastRoundPoint(globalEntity<TeamData>.GetTeamPoint(team))            
                 WaitForNextFrame()
                 globalEntity<TeamData>.AddEsportPointsToTeam(team, team<TeamCurrentRoundData>.GetKillThisRound(), GetZarekPlacementPoints(List.Length(teamRanking) - index))
             }
         }
+        start globalEntity<GlobalUIManager>.UpdateFullScoreBoardNoWinner()
         DisableSafeZone()
-        if CheckWinningCondition(team) {
-            // ==========================================================
-            // The booyah case cannot be ended if there is no team winning, so we only handle the esport case
-            // ==========================================================
-            if GlobalConfig.scoringType == SCORING_TYPE.ESPORT {
-                isMatchEnded = true
-                wait globalEntity<GlobalUIManager>.CreateEndRoundHUD(team); // Create the end round HUD for all players
-                start globalEntity<GlobalUIManager>.UpdateFullScoreBoardWinTeam(team);
-                SwitchPhase(EPhase.EndCombat)
-                WaitForMillisecond(7000)
-                for index, player in GetAllPlayers() {
-                    globalEntity<GlobalUIManager>.UnregisterAllUIs(player) // Unregister all UIs for the player
-                    start globalEntity<GlobalUIManager>.CreateLastRoundHUD(List<entity<Team>>{team}, player)
-                    globalEntity<GlobalSoundManager>.PlayEndMatchSound(player)
-                }
-                WaitForMillisecond(5000)
-                SwitchPhase(EPhase.End)
+        if GlobalConfig.scoringType == SCORING_TYPE.ESPORT && globalEntity<CombatRoundCounter>.GetCount() >= GlobalConfig.esportMaxRound {
+            isMatchEnded = true
+            SwitchPhase(EPhase.EndCombat)
+            WaitForMillisecond(7000)
+            var allWinningTeams = GetAllWinningTeams()
+            for index, player in GetAllPlayers() {
+                globalEntity<GlobalUIManager>.UnregisterAllUIs(player) // Unregister all UIs for the player
+                start globalEntity<GlobalUIManager>.CreateLastRoundHUD(allWinningTeams, player)
+                globalEntity<GlobalSoundManager>.PlayEndMatchSound(player)
             }
-            // WaitForMillisecond(5000)
+            WaitForMillisecond(5000)
+            SwitchPhase(EPhase.End)
         } else {
-            wait globalEntity<GlobalUIManager>.CreateEndRoundHUD(team); // Create the end round HUD for all players
-            start globalEntity<GlobalUIManager>.UpdateFullScoreBoardWinTeam(team);
-            ClearResidualLevelObjects()
             SwitchPhase(EPhase.EndCombat)
         }
-        LogError("<GlobalGameManager.fcg>: No team won this round, skipping to the next round") // Debug Info
+        LogWarning("<GlobalGameManager.fcg>: No team won this round; preserved eliminated-team scores without awarding Booyah") // Debug Info
+        isRoundEnded = false
     }
 
     // ZAREK competitive points: winner 12, 2nd 9, 3rd 8, 4th 7,
     // 5th 6, 6th 5, 7th 4. A round with fewer teams uses the top ranks.
     func GetZarekPlacementPoints(position int) int {
-        if position == 1 { return 12 }
-        if position == 2 { return 9 }
-        if position == 3 { return 8 }
-        if position == 4 { return 7 }
-        if position == 5 { return 6 }
-        if position == 6 { return 5 }
-        if position == 7 { return 4 }
-        return 0
+        return globalEntity<TeamData>.GetPlacementPointsForPosition(position)
     }
 
     // =========== UTILS FUNCTIONS ================
@@ -338,25 +329,49 @@ graph GlobalGameManager {
             return winningTeams
         }
         Append(returnList, winningTeams[0])
+        if GlobalConfig.scoringType != SCORING_TYPE.ESPORT {
+            return returnList
+        }
         for index, team in winningTeams {
-            if globalEntity<TeamData>.GetTeamEsportPoints(team) < globalEntity<TeamData>.GetTeamEsportPoints(winningTeams[0]) || team == winningTeams[0] {
+            if team == winningTeams[0] {
                 continue
-            } else {
-                if globalEntity<TeamData>.GetTeamBooyahCount(team) < globalEntity<TeamData>.GetTeamBooyahCount(winningTeams[0]) {
-                    continue
-                } else {
-                    if globalEntity<TeamData>.GetTeamKillsPoints(team) < globalEntity<TeamData>.GetTeamKillsPoints(winningTeams[0]) {
-                        continue
-                    } else {
-                        if globalEntity<TeamData>.GetTeamPlacementPoints(team) < globalEntity<TeamData>.GetTeamPlacementPoints(winningTeams[0]) {
-                            continue
-                        } 
-                    }
-                }
+            }
+            if globalEntity<TeamData>.GetTeamEsportPoints(team) != globalEntity<TeamData>.GetTeamEsportPoints(winningTeams[0]) {
+                continue
+            }
+            if globalEntity<TeamData>.GetTeamBooyahCount(team) != globalEntity<TeamData>.GetTeamBooyahCount(winningTeams[0]) {
+                continue
+            }
+            if globalEntity<TeamData>.GetTeamKillsPoints(team) != globalEntity<TeamData>.GetTeamKillsPoints(winningTeams[0]) {
+                continue
+            }
+            if globalEntity<TeamData>.GetTeamPlacementPoints(team) != globalEntity<TeamData>.GetTeamPlacementPoints(winningTeams[0]) {
+                continue
             }
             Append(returnList, team)
         }
         return returnList
+    }
+
+    // Persist final per-player statistics once, after the final classification is known.
+    func StoreFinalPlayerData(winningTeams List<entity<Team>>) {
+        if finalStatisticsStored {
+            LogWarning("<GlobalGameManager.fcg>: Final player statistics already stored; skipping duplicate write")
+            return
+        }
+        finalStatisticsStored = true
+        for index, player in GetAllPlayers() {
+            var playerData = globalEntity<PlayerData>.GetPlayerData(player)
+            if List.Length(playerData) < 2 {
+                LogWarning("<GlobalGameManager.fcg>: Player data is incomplete; skipping final database write")
+                continue
+            }
+            var isWinningPlayer bool = false
+            if player<Player>.HostTeam != nil {
+                isWinningPlayer = List.Contain(winningTeams, player<Player>.HostTeam)
+            }
+            start globalEntity<GlobalLeaderboard>.StorePlayerDataToDatabase(player, playerData[0], playerData[1], 1, isWinningPlayer)
+        }
     }
     /* 
     Check if a team satisfies the winning condition

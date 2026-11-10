@@ -28,6 +28,10 @@ graph GlobalCurrencyManager {
     - For losing team, reward each teammate with 1500
     */
     event CombatEnd(winningTeam entity<Team>) {
+        if winningTeam == nil {
+            LogWarning("<GlobalCurrencyManager.fcg>: Combat ended without a winning team; skipping currency rewards")
+            return
+        }
         LogInfo("<GlobalCurrencyManager.fcg>: Combat ended, rewarding players") // Debug Info
         for index, player in winningTeam<Team>.AllTeammates {
             if (globalEntity<PlayersWallets>.GetWallet(player) != nil) {

@@ -10,7 +10,7 @@ graph Team {
     lastRoundPoint int = 0
     event OnACE() {
         globalEntity<GlobalCombatManager>.AddAcedTeam(thisEntity as entity<Team>)
-        globalEntity<GlobalCombatManager>.CheckEndCombatCondition() // Check if the combat should end when a team is aced 
+        globalEntity<GlobalCombatManager>.RequestEndCombatCheck() // Coalesce all ACE events before resolving the round
     }
 
     func GetLastRoundPoint() int {
