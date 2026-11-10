@@ -268,6 +268,10 @@ graph GlobalUIManager {
     Update full scoreboard when the round ends, together with an animation
     @param wonTeam: The team that won the round
     */
+    async func UpdateFullScoreBoardNoWinner() {
+        wait UpdateFullScoreBoardWinTeam(nil)
+    }
+
     async func UpdateFullScoreBoardWinTeam(wonTeam entity<Team>) {
         WaitForMillisecond(2000)
         if GlobalConfig.scoringType == SCORING_TYPE.BOOYAH_COUNT {
@@ -291,7 +295,7 @@ graph GlobalUIManager {
                             scoreWidget = GetWidgetFromCustomUI(player, ui, EResUIFullScoreBoard.FirstRankTeamBooyah)
                             nameBgWidget = GetWidgetFromCustomUI(player, ui, EResUIFullScoreBoard.Rank1NameBg) 
                             pointBgWidget = GetWidgetFromCustomUI(player, ui, EResUIFullScoreBoard.Rank1BooyahBg)
-                            if team == wonTeam {
+                            if wonTeam != nil && team == wonTeam {
                                 increaseWidget = GetWidgetFromCustomUI(player, ui, EResUIFullScoreBoard.Increase1)
                             }
                         } else if(rankCount == 2) {
@@ -300,7 +304,7 @@ graph GlobalUIManager {
                             scoreWidget = GetWidgetFromCustomUI(player, ui, EResUIFullScoreBoard.SecondRankTeamBooyah)
                             nameBgWidget = GetWidgetFromCustomUI(player, ui, EResUIFullScoreBoard.Rank2NameBg)
                             pointBgWidget = GetWidgetFromCustomUI(player, ui, EResUIFullScoreBoard.Rank2BooyahBg)
-                            if team == wonTeam {
+                            if wonTeam != nil && team == wonTeam {
                                 increaseWidget = GetWidgetFromCustomUI(player, ui, EResUIFullScoreBoard.Increase2)
                             }
                         } else if(rankCount == 3) {
@@ -309,7 +313,7 @@ graph GlobalUIManager {
                             scoreWidget = GetWidgetFromCustomUI(player, ui, EResUIFullScoreBoard.ThirdRankTeamBooyah)
                             nameBgWidget = GetWidgetFromCustomUI(player, ui, EResUIFullScoreBoard.Rank3NameBg)
                             pointBgWidget = GetWidgetFromCustomUI(player, ui, EResUIFullScoreBoard.Rank3BooyahBg)
-                            if team == wonTeam {
+                            if wonTeam != nil && team == wonTeam {
                                 increaseWidget = GetWidgetFromCustomUI(player, ui, EResUIFullScoreBoard.Increase3)
                             }
                         }
@@ -329,7 +333,7 @@ graph GlobalUIManager {
                             pointBgWidget<UIWidgetImage>.Color = #9C9C9C
                         }
                         nameWidget<UIWidgetLabel>.Content = LocString{"TEAM", List<string>{ToString(team<Team>.TeamSeq)}} // Use localization for team names
-                        if team == wonTeam {
+                        if wonTeam != nil && team == wonTeam {
                             start globalEntity<GlobalAnimationManager>.DOIncreaseTweenFullScoreBoard(scoreWidget, increaseWidget, scores)
                         } else {
                             scoreWidget<UIWidgetLabel>.Content = ToString(scores)
@@ -423,7 +427,7 @@ graph GlobalUIManager {
                         start globalEntity<GlobalAnimationManager>.DOChangeColor(placementBgWidget, #9C9C9C, #D68E00, 500)
                         start globalEntity<GlobalAnimationManager>.DOChangeIncreaseAlpha(increaseKillWidget, team<TeamCurrentRoundData>.GetKillThisRound(), 2000, killWidget, killsPoints)
                         
-                        if team == wonTeam {
+                        if wonTeam != nil && team == wonTeam {
                             start globalEntity<GlobalAnimationManager>.DOChangeIncreaseAlpha(increaseBooyahWidget, 1, 2000, booyahWidget, booyahCount)
                         } else {
                             start globalEntity<GlobalAnimationManager>.DOChangeIncreaseAlpha(increaseBooyahWidget, 0, 2000, booyahWidget, booyahCount)

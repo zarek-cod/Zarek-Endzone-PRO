@@ -1,6 +1,6 @@
 # Validación — ZAREK ENDZONE PRO
 
-Última actualización: 2026-11-09.
+Última actualización: 2026-11-10.
 
 ## Entorno
 
@@ -13,6 +13,60 @@
 - Modelo reportado al compilador: `unknown-model`, porque el runtime no expone un identificador de modelo exacto reutilizable.
 
 ## Validaciones ejecutadas
+
+### Correcciones posteriores a la revisión del PR #1
+
+Archivos FC modificados en esta revisión:
+
+- `Assets/Scripts/Global/GlobalManager/GlobalGameManager.fcg`;
+- `Assets/Scripts/Global/GlobalManager/GlobalUIManager.fcg`;
+- `Assets/Scripts/Global/GlobalManager/GlobalCurrencyManager.fcg`;
+- `Assets/Scripts/Global/GlobalData/TeamData.fcg`.
+
+Comprobaciones estáticas:
+
+- `NoTeamWinException` inicia `UpdateFullScoreBoardNoWinner` después de aplicar kills y puntos de posición y antes de pasar a `EndCombat`.
+- Todas las ramas de animación específicas del vencedor requieren `wonTeam != nil`; una ronda sin ganador actualiza el total y aplica incremento de Booyah igual a cero.
+- En ESPORT, `OnPhaseStart(EPhase.End)` siempre usa `GetSortedTeamList` y `GetAllWinningTeams`, sin declarar campeón al único equipo conectado.
+- En ESPORT, `OnPlayerQuit` con una sola escuadra conectada llama a `CheckEndCombatCondition` y no a `MatchEndHandler`; el atajo de fin inmediato queda limitado a BOOYAH_COUNT.
+- BOOYAH_COUNT conserva el caso especial de una única escuadra activa.
+- El orden ESPORT es puntos totales → Booyahs → kills → puntos de posición; la conexión dejó de formar parte del desempate.
+- `GetAllWinningTeams` solo devuelve varios campeones cuando esos cuatro valores son exactamente iguales.
+- Las llamadas finales a `StorePlayerDataToDatabase` se centralizaron en `StoreFinalPlayerData` y el flag `finalStatisticsStored` se activa antes de lanzar escrituras asíncronas.
+- La API activa guarda kills, muertes, partidas y victoria. No existe un parámetro confirmado para persistir puntos de equipo, por lo que no se inventó una escritura adicional; los puntos permanecen en `TeamData` para clasificación y desempate.
+- `GlobalCurrencyManager.CombatEnd` retorna ante `winningTeam == nil`, antes de repartir moneda a vencedores o perdedores.
+- `git diff --check`: aprobado.
+- Se confirmaron `esportMaxRound = 3`, `glooWallsPerRound = 20` y ausencia de cambios en scripts de zona.
+
+Compilación completa:
+
+```text
+"C:\Program Files\Craftland Studio\resources\LocalData\Utilities\UGCLanguage\release\fccompile.exe" -i Assets -agent unknown-model -session 2176be10-916b-4600-aa2f-e8e98ba1971e
+```
+
+Resultado de la última ejecución:
+
+- código de salida: `0`;
+- errores: ninguno;
+- advertencias: las mismas familias heredadas —`ClearResidualLevelObjects()`, `UIWidget.Active`, APIs antiguas de Database/Leaderboard, comparación `entity<Entity>`/`EResItem` y sombreado de variables—;
+- no aparecieron diagnósticos nuevos en los cuatro archivos modificados.
+
+Comprobación de attachment:
+
+- Craftland Studio MCP no está disponible en esta sesión; no fue posible leer `instructions://index`, `asset-entity-search` ni `asset-entity-get`.
+- `EditorGenLib.fcc` confirma que `GlobalCurrencyManager` está registrado como recurso FC, pero eso no demuestra que esté adjunto a una entidad.
+- El script y `PlayersWallets.fcg` se describen como obsoletos, y su única llamada textual desde `PlayerController.fcg` está comentada.
+- No se inspeccionaron ni modificaron `.eca`, escenas, attachments o configuraciones serializadas.
+
+Escenarios runtime pendientes en Craftland Studio:
+
+1. Eliminación simultánea: confirmar que no aparece Booyah y que kills, posición y total se actualizan una sola vez.
+2. Tercer cierre sin ganador: confirmar campeón por acumulado, persistencia única y transición completa a `End`.
+3. Una sola escuadra conectada en ESPORT: confirmar que pierde si otra escuadra desconectada tiene mejor clasificación acumulada.
+4. Desempate: comprobar total → Booyahs → kills → posición y empate múltiple solo con igualdad exacta.
+5. Final normal: comprobar una sola actualización de marcador, recompensas de moneda solo con ganador real y una sola escritura de estadísticas por jugador.
+
+También queda pendiente verificar con MCP si `GlobalCurrencyManager` está adjunto y si existe más de un attachment, lo que podría duplicar listeners de moneda.
 
 ### Corrección `fix/estabilidad-combate`
 

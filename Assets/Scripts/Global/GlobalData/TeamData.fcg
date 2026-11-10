@@ -9,7 +9,6 @@ import "List.fcc" as List
 import "../GlobalData/PlayerData.fcg" as PlayerData
 import "../GlobalConfig.fcg" as GlobalConfig
 import "Workflow.fcc" as Workflow
-import "../GlobalManager/GlobalGameManager.fcg" as GlobalGameManager
 graph TeamData {
     // For both normal booyah mode and esport mode
     teamPoints Map<entity<Team>, int>  // Map to keep track of points for each team
@@ -203,7 +202,6 @@ graph TeamData {
     func GetSortedTeamList() List<entity<Team>>{
         var sortedTeams List<entity<Team>> = List<entity<Team>>{}
         var teamCopyDict Map<entity<Team>, int> = Map<entity<Team>, int>{} 
-        var currentActiveTeams List<entity<Team>> = globalEntity<GlobalGameManager>.GetActiveTeams()
         for team, point in teamPoints {
             teamCopyDict[team] = point
         }
@@ -238,16 +236,15 @@ graph TeamData {
                     if teamCopyDict[team as entity<Team>] > teamCopyDict[currentMaxTeam as entity<Team>] {
                         currentMaxTeam = team
                     } else if teamCopyDict[team as entity<Team>] == teamCopyDict[currentMaxTeam as entity<Team>] {
-                        if !List.Contain(currentActiveTeams, currentMaxTeam) && !List.Contain(currentActiveTeams, team) {
-                            continue
-                        } else if !List.Contain(currentActiveTeams, currentMaxTeam) {
-                            currentMaxTeam = team
-                        } 
                         if teamBooyahCount[team as entity<Team>] > teamBooyahCount[currentMaxTeam as entity<Team>] {
                             currentMaxTeam = team
                         } else if teamBooyahCount[team as entity<Team>] == teamBooyahCount[currentMaxTeam as entity<Team>] {
                             if teamKillsPoints[team as entity<Team>] > teamKillsPoints[currentMaxTeam as entity<Team>] {
                                 currentMaxTeam = team
+                            } else if teamKillsPoints[team as entity<Team>] == teamKillsPoints[currentMaxTeam as entity<Team>] {
+                                if teamPlacementPoints[team as entity<Team>] > teamPlacementPoints[currentMaxTeam as entity<Team>] {
+                                    currentMaxTeam = team
+                                }
                             }
                         }
                     }
