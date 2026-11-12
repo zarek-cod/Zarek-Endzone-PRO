@@ -1,6 +1,6 @@
 # Validación — ZAREK ENDZONE PRO
 
-Última actualización: 2026-11-10.
+Última actualización: 2026-11-11.
 
 ## Entorno
 
@@ -14,7 +14,50 @@
 
 ## Validaciones ejecutadas
 
-### Rama `feature/zarek-visual-premium`
+### Integración visual ZAREK — 2026-11-11
+
+Craftland Studio MCP:
+
+- conexión real confirmada mediante una lectura de solo lectura de `instructions://index`;
+- proyecto correcto abierto en Craftland Studio;
+- emblema importado a `Assets/Resources/zarek-z-logo-source.png` y registrado oficialmente como sprite `ZarekLogo`;
+- símbolos generados `EResSprite.ZarekLogo` y `EResKeySprite.ZarekLogo` comprobados como referencias de solo lectura;
+- activos `.ui` y escena guardados exclusivamente mediante herramientas oficiales del editor.
+
+Activos integrados:
+
+- apertura: espera inicial de 2 segundos y luego `ZAREK ENDZONE PRO`, `DOMINA LA ÚLTIMA ZONA` y `EResSprite.ZarekLogo` durante 3 segundos;
+- marcadores `MiniScoreBoard.ui`, `FullScoreBoard.ui` y `EsportFullScoreBoard.ui`: 43 sustituciones de color azul/cian, sin eliminar widgets, columnas ni bindings;
+- `ShopIcon.ui`: sprite `ZarekLogo`, estados azul/cian, texto visible `ZAREK ARMORY` y un único handler `OnPress` conservado;
+- `New Scene.scene`: una sola entidad `ZAREK Sky Sign`, texto `ZAREK ENDZONE PRO`, color `#00D9FF`, profundidad `1.1`, ancho `42`, a más de 30 metros sobre el límite vertical medido y sin componentes de colisión;
+- pantalla final: título y subtítulo ZAREK asignados a los campos existentes del HUD.
+
+Validación técnica:
+
+```text
+fccompile.exe -i Assets -agent unknown-model -session 2176be10-916b-4600-aa2f-e8e98ba1971e
+```
+
+- código de salida: `0`;
+- errores: `0`;
+- advertencias: `67`, de familias heredadas (APIs obsoletas, sombras en `GlobalLeaderboard` y comparación `entity<Entity>`/`EResItem`);
+- `game-build` release final: completado correctamente; salida generada en `Temp/Build/FEUserLevelData.bytes`;
+- consola posterior: un diagnóstico de sistema no fatal del editor para el preset oficial `TextEntity` (`Find no ecaItem for id:-125000`); no hay error FC ni fallo de empaquetado;
+- cliente de prueba anterior: cargó el escenario y mostró HUD operativo con `Ronda 0 - 3`;
+- último intento tras el acabado final: detenido en la carga al 0 %, por lo que no se considera una prueba runtime aprobada.
+
+Estado de las pruebas visuales:
+
+- **implementado y comprobado en editor:** registro del logo, paleta de los activos UI y rótulo cian `ZAREK ENDZONE PRO` visible sin colisión;
+- **implementado y comprobado técnicamente:** compilación FC y build release;
+- **comprobado en una ejecución anterior:** carga del cliente y HUD de tres rondas;
+- **implementado, pendiente de comprobación visual runtime final:** apertura, letrero actualizado, pantalla final, botón de tienda y marcadores completo/ESPORT;
+- **recurso creado, no integrado:** los cuatro mockups de cielo, marcador, pantalla final y armory siguen siendo referencias conceptuales;
+- **limitación:** `key.csv` no se editó porque el MCP disponible no ofrece una operación segura de edición de filas; se usaron textos directos en los widgets existentes.
+
+### Registro histórico — inicio de la rama `feature/zarek-visual-premium`
+
+Esta subsección conserva el estado de la primera etapa, antes de habilitar el MCP; sus pendientes quedaron superados por la integración del 2026-11-11 descrita arriba.
 
 Archivos de código modificados:
 
@@ -35,7 +78,7 @@ Comprobaciones:
 - no se inventaron asset IDs, widgets, componentes ni APIs;
 - no se cambió puntuación, Workflow, rondas, paredes gloo, zonas ni cantidad de equipos;
 - ninguna imagen se copió a `Assets/` ni se registró manualmente;
-- Craftland Studio está abierto con este `main.gproj`, pero su MCP no está expuesto y no se pudo leer `instructions://index`.
+- en esa primera etapa, Craftland Studio estaba abierto con este `main.gproj`, pero su MCP aún no estaba expuesto y no se pudo leer `instructions://index`.
 
 Compilación:
 
@@ -50,7 +93,7 @@ Resultado:
 - advertencias: 67 encabezados de las familias heredadas (`ClearResidualLevelObjects()`, `UIWidget.Active`, Database/Leaderboard, comparación `entity<Entity>`/`EResItem` y sombreado de variables);
 - diagnósticos nuevos en `GlobalUIManager.fcg`: ninguno.
 
-Pendiente en Craftland Studio:
+Pendiente documentado en esa primera etapa:
 
 1. Registrar el emblema e integrarlo a las interfaces.
 2. Construir y colocar el letrero celeste sin colisión ni interferencia jugable.
@@ -118,22 +161,24 @@ No hubo diagnósticos de tipo error.
 
 ### Validación de activos del editor
 
-- Craftland Studio MCP: no disponible en la sesión.
-- `instructions://index`: no se pudo leer.
-- Build del editor y consola: no ejecutados.
-- `.eca`, escenas, UI, Workflow, ProjectSettings, attachments y registros: no verificados.
+- Craftland Studio MCP: disponible y con respuesta oficial comprobada.
+- `instructions://index`: leído antes de las operaciones de editor.
+- Build del editor: aprobado en modo release.
+- Consola posterior al build: diagnóstico no fatal `Find no ecaItem` del preset `TextEntity`; sin error FC ni fallo de empaquetado.
+- Escena, recursos UI y registro de sprite: modificados y consultados mediante el MCP; no se editaron formatos serializados a mano.
 
 ## Estado de entrega
 
-- Auditoría estática: realizada con limitaciones documentadas.
-- Compilación completa: aprobada con advertencias, código de salida `0`.
-- Prueba en juego: no realizada.
-- Cambios FC: ninguno.
-- Cambio de zona: no aplicado, porque aún no puede validarse con seguridad.
+- Auditoría estática y de recursos: realizada.
+- Compilación completa: aprobada con 67 advertencias heredadas, código de salida `0`.
+- Build release: aprobado.
+- Prueba de carga en juego: realizada; HUD básico y tres rondas visibles.
+- Flujo completo de partida y pantallas temporales/finales: pendiente, sin marcar como aprobado.
+- Rondas, 20 paredes gloo, zonas, puntuación y cantidad de equipos: sin cambios.
 
 ## Requisitos para cerrar la validación
 
-1. Abrir y guardar el proyecto en Craftland Studio.
-2. Conectar Craftland Studio MCP.
-3. Verificar geometría, Workflow, ajustes, attachments y registro actual desde el editor.
-4. Ejecutar `game-build` y revisar `game-console-get-logs` si se modifican activos o attachments.
+1. Reiniciar una ejecución y capturar la apertura antes de que expire a los 3 segundos.
+2. Probar visualmente el marcador completo/ESPORT y abrir `ZAREK ARMORY`.
+3. Completar tres rondas para validar la pantalla final ZAREK.
+4. Comprobar el letrero desde la cámara jugable y repetir con varios clientes/resoluciones.

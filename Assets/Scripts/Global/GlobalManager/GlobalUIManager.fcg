@@ -99,11 +99,13 @@ graph GlobalUIManager {
     @param player: The player entity to create the HUD for
     */
     async func CreateGlobalOpeningHUD(player entity<Player>){
+        WaitForMillisecond(2000) // Let the client finish loading before showing the ZAREK opening
         if globalEntity<Global>.CurrentPhaseIndex == EPhase.Preparation || globalEntity<Global>.CurrentPhaseIndex == EPhase.Start{
             CreateBuiltInUI(out var createdHUD, player, EResInternalHud.OpeningBannerHud as BuiltInUIType)
-            createdHUD<UIOpeningBanner>.Title = LocString{"GAME_NAME", List<string>{}}
-            createdHUD<UIOpeningBanner>.Description = LocString{"GAME_DESCRIPTION", List<string>{}}
-            createdHUD<UIOpeningBanner>.Icon = EResSprite.logo
+            createdHUD<UIOpeningBanner>.EnableLocalization = false
+            createdHUD<UIOpeningBanner>.Title = "ZAREK ENDZONE PRO"
+            createdHUD<UIOpeningBanner>.Description = "DOMINA LA ÚLTIMA ZONA"
+            createdHUD<UIOpeningBanner>.Icon = EResSprite.ZarekLogo
             WaitForMillisecond(3000) // ZAREK: keep the premium opening concise
             DestroyBuiltInUI(createdHUD)
         }
@@ -626,6 +628,8 @@ graph GlobalUIManager {
     */
     func CreateEndGameHUD(player entity<Player>, playerTeam entity<Team>, resultStatus int, teamSorted List<entity<Team>>){
         CreateBuiltInUI(out var createdUI2, player, EResInternalHud.MultiTeamMatchResultHud as BuiltInUIType)
+        createdUI2<UIMultiTeamResultPanel>.MatchTitleLeft = "ZAREK ENDZONE PRO"
+        createdUI2<UIMultiTeamResultPanel>.MatchTitleRight = "DOMINA LA ÚLTIMA ZONA"
         var teamNameList = List<string>{}
         var pointList = List<int>{}
         for index, team in teamSorted {

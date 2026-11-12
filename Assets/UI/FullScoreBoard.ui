@@ -59,7 +59,7 @@
             },
             "fileType": "texture"
           },
-          "color": "#000000",
+          "color": "#080D18",
           "reverse": {
             "x": false,
             "y": false
@@ -94,7 +94,11 @@
             "g": 255,
             "b": 255,
             "a": 1
-          }
+          },
+          "isApplyAnimation": false,
+          "animationAtlasID": null,
+          "animationFrameRate": 30,
+          "animationLoop": true
         }
       },
       "ecaScripts": [],
@@ -178,7 +182,7 @@
                     },
                     "fileType": "texture"
                   },
-                  "color": "#9C9C9C",
+                  "color": "#008CFF",
                   "reverse": {
                     "x": false,
                     "y": false
@@ -213,7 +217,11 @@
                     "g": 255,
                     "b": 255,
                     "a": 1
-                  }
+                  },
+                  "isApplyAnimation": false,
+                  "animationAtlasID": null,
+                  "animationFrameRate": 30,
+                  "animationLoop": true
                 }
               },
               "ecaScripts": [],
@@ -281,7 +289,7 @@
                     },
                     "fileType": "texture"
                   },
-                  "color": "#363636",
+                  "color": "#071B3A",
                   "reverse": {
                     "x": false,
                     "y": false
@@ -316,7 +324,11 @@
                     "g": 255,
                     "b": 255,
                     "a": 1
-                  }
+                  },
+                  "isApplyAnimation": false,
+                  "animationAtlasID": null,
+                  "animationFrameRate": 30,
+                  "animationLoop": true
                 }
               },
               "ecaScripts": [],
@@ -386,7 +398,7 @@
                     },
                     "fileType": "texture"
                   },
-                  "color": "#9C9C9C",
+                  "color": "#008CFF",
                   "reverse": {
                     "x": false,
                     "y": false
@@ -421,7 +433,11 @@
                     "g": 255,
                     "b": 255,
                     "a": 1
-                  }
+                  },
+                  "isApplyAnimation": false,
+                  "animationAtlasID": null,
+                  "animationFrameRate": 30,
+                  "animationLoop": true
                 }
               },
               "ecaScripts": [],
@@ -551,7 +567,7 @@
                     },
                     "fileType": "texture"
                   },
-                  "color": "#9C9C9C",
+                  "color": "#008CFF",
                   "reverse": {
                     "x": false,
                     "y": false
@@ -586,7 +602,11 @@
                     "g": 255,
                     "b": 255,
                     "a": 1
-                  }
+                  },
+                  "isApplyAnimation": false,
+                  "animationAtlasID": null,
+                  "animationFrameRate": 30,
+                  "animationLoop": true
                 }
               },
               "ecaScripts": [],
@@ -656,7 +676,7 @@
                     },
                     "fileType": "texture"
                   },
-                  "color": "#363636",
+                  "color": "#071B3A",
                   "reverse": {
                     "x": false,
                     "y": false
@@ -691,7 +711,11 @@
                     "g": 255,
                     "b": 255,
                     "a": 1
-                  }
+                  },
+                  "isApplyAnimation": false,
+                  "animationAtlasID": null,
+                  "animationFrameRate": 30,
+                  "animationLoop": true
                 }
               },
               "ecaScripts": [],
@@ -761,7 +785,7 @@
                     },
                     "fileType": "texture"
                   },
-                  "color": "#9C9C9C",
+                  "color": "#008CFF",
                   "reverse": {
                     "x": false,
                     "y": false
@@ -796,7 +820,11 @@
                     "g": 255,
                     "b": 255,
                     "a": 1
-                  }
+                  },
+                  "isApplyAnimation": false,
+                  "animationAtlasID": null,
+                  "animationFrameRate": 30,
+                  "animationLoop": true
                 }
               },
               "ecaScripts": [],
@@ -926,7 +954,7 @@
                     },
                     "fileType": "texture"
                   },
-                  "color": "#9C9C9C",
+                  "color": "#008CFF",
                   "reverse": {
                     "x": false,
                     "y": false
@@ -961,7 +989,11 @@
                     "g": 255,
                     "b": 255,
                     "a": 1
-                  }
+                  },
+                  "isApplyAnimation": false,
+                  "animationAtlasID": null,
+                  "animationFrameRate": 30,
+                  "animationLoop": true
                 }
               },
               "ecaScripts": [],
@@ -1031,7 +1063,7 @@
                     },
                     "fileType": "texture"
                   },
-                  "color": "#363636",
+                  "color": "#071B3A",
                   "reverse": {
                     "x": false,
                     "y": false
@@ -1066,7 +1098,11 @@
                     "g": 255,
                     "b": 255,
                     "a": 1
-                  }
+                  },
+                  "isApplyAnimation": false,
+                  "animationAtlasID": null,
+                  "animationFrameRate": 30,
+                  "animationLoop": true
                 }
               },
               "ecaScripts": [],
@@ -1136,7 +1172,7 @@
                     },
                     "fileType": "texture"
                   },
-                  "color": "#9C9C9C",
+                  "color": "#008CFF",
                   "reverse": {
                     "x": false,
                     "y": false
@@ -1171,7 +1207,11 @@
                     "g": 255,
                     "b": 255,
                     "a": 1
-                  }
+                  },
+                  "isApplyAnimation": false,
+                  "animationAtlasID": null,
+                  "animationFrameRate": 30,
+                  "animationLoop": true
                 }
               },
               "ecaScripts": [],
@@ -1349,7 +1389,7 @@
             },
             "fileType": "texture"
           },
-          "color": "#000000",
+          "color": "#080D18",
           "reverse": {
             "x": false,
             "y": false
@@ -1384,7 +1424,11 @@
             "g": 255,
             "b": 255,
             "a": 1
-          }
+          },
+          "isApplyAnimation": false,
+          "animationAtlasID": null,
+          "animationFrameRate": 30,
+          "animationLoop": true
         }
       },
       "ecaScripts": [],
@@ -1489,7 +1533,11 @@
             "g": 255,
             "b": 255,
             "a": 1
-          }
+          },
+          "isApplyAnimation": false,
+          "animationAtlasID": null,
+          "animationFrameRate": 30,
+          "animationLoop": true
         }
       },
       "ecaScripts": [],
@@ -1592,7 +1640,25 @@
                   "shadowOffset": {
                     "x": 1,
                     "y": 1
-                  }
+                  },
+                  "shadowAlpha": 1,
+                  "gradient": 0,
+                  "gradientTop": {
+                    "r": 255,
+                    "g": 255,
+                    "b": 255,
+                    "a": 1
+                  },
+                  "gradientBottom": {
+                    "r": 255,
+                    "g": 255,
+                    "b": 255,
+                    "a": 1
+                  },
+                  "outline": false,
+                  "outlineColor": "#000000",
+                  "outlineAlpha": 1,
+                  "outlineOffset": 1
                 }
               },
               "ecaScripts": [],
@@ -1691,7 +1757,11 @@
                 "g": 145,
                 "b": 2,
                 "a": 1
-              }
+              },
+              "isApplyAnimation": false,
+              "animationAtlasID": null,
+              "animationFrameRate": 30,
+              "animationLoop": true
             }
           },
           "ecaScripts": [],
@@ -1805,7 +1875,11 @@
                     "g": 255,
                     "b": 255,
                     "a": 1
-                  }
+                  },
+                  "isApplyAnimation": false,
+                  "animationAtlasID": null,
+                  "animationFrameRate": 30,
+                  "animationLoop": true
                 }
               },
               "ecaScripts": [],
@@ -1902,7 +1976,11 @@
                 "g": 93,
                 "b": 0,
                 "a": 1
-              }
+              },
+              "isApplyAnimation": false,
+              "animationAtlasID": null,
+              "animationFrameRate": 30,
+              "animationLoop": true
             }
           },
           "ecaScripts": [],
@@ -2002,7 +2080,25 @@
                   "shadowOffset": {
                     "x": 1,
                     "y": 1
-                  }
+                  },
+                  "shadowAlpha": 1,
+                  "gradient": 0,
+                  "gradientTop": {
+                    "r": 255,
+                    "g": 255,
+                    "b": 255,
+                    "a": 1
+                  },
+                  "gradientBottom": {
+                    "r": 255,
+                    "g": 255,
+                    "b": 255,
+                    "a": 1
+                  },
+                  "outline": false,
+                  "outlineColor": "#000000",
+                  "outlineAlpha": 1,
+                  "outlineOffset": 1
                 }
               },
               "ecaScripts": [],
@@ -2066,7 +2162,7 @@
                 },
                 "fileType": "texture"
               },
-              "color": "#FF6100",
+              "color": "#00D9FF",
               "reverse": {
                 "x": false,
                 "y": false
@@ -2101,7 +2197,11 @@
                 "g": 255,
                 "b": 255,
                 "a": 1
-              }
+              },
+              "isApplyAnimation": false,
+              "animationAtlasID": null,
+              "animationFrameRate": 30,
+              "animationLoop": true
             }
           },
           "ecaScripts": [],
@@ -2673,7 +2773,25 @@
                   "shadowOffset": {
                     "x": 1,
                     "y": 1
-                  }
+                  },
+                  "shadowAlpha": 1,
+                  "gradient": 0,
+                  "gradientTop": {
+                    "r": 255,
+                    "g": 255,
+                    "b": 255,
+                    "a": 1
+                  },
+                  "gradientBottom": {
+                    "r": 255,
+                    "g": 255,
+                    "b": 255,
+                    "a": 1
+                  },
+                  "outline": false,
+                  "outlineColor": "#000000",
+                  "outlineAlpha": 1,
+                  "outlineOffset": 1
                 }
               },
               "ecaScripts": [],
@@ -2763,7 +2881,25 @@
                   "shadowOffset": {
                     "x": 1,
                     "y": 1
-                  }
+                  },
+                  "shadowAlpha": 1,
+                  "gradient": 0,
+                  "gradientTop": {
+                    "r": 255,
+                    "g": 255,
+                    "b": 255,
+                    "a": 1
+                  },
+                  "gradientBottom": {
+                    "r": 255,
+                    "g": 255,
+                    "b": 255,
+                    "a": 1
+                  },
+                  "outline": false,
+                  "outlineColor": "#000000",
+                  "outlineAlpha": 1,
+                  "outlineOffset": 1
                 }
               },
               "ecaScripts": [],
@@ -2851,7 +2987,25 @@
                   "shadowOffset": {
                     "x": 1,
                     "y": 1
-                  }
+                  },
+                  "shadowAlpha": 1,
+                  "gradient": 0,
+                  "gradientTop": {
+                    "r": 255,
+                    "g": 255,
+                    "b": 255,
+                    "a": 1
+                  },
+                  "gradientBottom": {
+                    "r": 255,
+                    "g": 255,
+                    "b": 255,
+                    "a": 1
+                  },
+                  "outline": false,
+                  "outlineColor": "#000000",
+                  "outlineAlpha": 1,
+                  "outlineOffset": 1
                 }
               },
               "ecaScripts": [],
@@ -3405,7 +3559,25 @@
                   "shadowOffset": {
                     "x": 1,
                     "y": 1
-                  }
+                  },
+                  "shadowAlpha": 1,
+                  "gradient": 0,
+                  "gradientTop": {
+                    "r": 255,
+                    "g": 255,
+                    "b": 255,
+                    "a": 1
+                  },
+                  "gradientBottom": {
+                    "r": 255,
+                    "g": 255,
+                    "b": 255,
+                    "a": 1
+                  },
+                  "outline": false,
+                  "outlineColor": "#000000",
+                  "outlineAlpha": 1,
+                  "outlineOffset": 1
                 }
               },
               "ecaScripts": [],
@@ -3496,7 +3668,25 @@
                   "shadowOffset": {
                     "x": 1,
                     "y": 1
-                  }
+                  },
+                  "shadowAlpha": 1,
+                  "gradient": 0,
+                  "gradientTop": {
+                    "r": 255,
+                    "g": 255,
+                    "b": 255,
+                    "a": 1
+                  },
+                  "gradientBottom": {
+                    "r": 255,
+                    "g": 255,
+                    "b": 255,
+                    "a": 1
+                  },
+                  "outline": false,
+                  "outlineColor": "#000000",
+                  "outlineAlpha": 1,
+                  "outlineOffset": 1
                 }
               },
               "ecaScripts": [],
@@ -3586,7 +3776,25 @@
                   "shadowOffset": {
                     "x": 1,
                     "y": 1
-                  }
+                  },
+                  "shadowAlpha": 1,
+                  "gradient": 0,
+                  "gradientTop": {
+                    "r": 255,
+                    "g": 255,
+                    "b": 255,
+                    "a": 1
+                  },
+                  "gradientBottom": {
+                    "r": 255,
+                    "g": 255,
+                    "b": 255,
+                    "a": 1
+                  },
+                  "outline": false,
+                  "outlineColor": "#000000",
+                  "outlineAlpha": 1,
+                  "outlineOffset": 1
                 }
               },
               "ecaScripts": [],
@@ -3737,7 +3945,25 @@
                   "shadowOffset": {
                     "x": 1,
                     "y": 1
-                  }
+                  },
+                  "shadowAlpha": 1,
+                  "gradient": 0,
+                  "gradientTop": {
+                    "r": 255,
+                    "g": 255,
+                    "b": 255,
+                    "a": 1
+                  },
+                  "gradientBottom": {
+                    "r": 255,
+                    "g": 255,
+                    "b": 255,
+                    "a": 1
+                  },
+                  "outline": false,
+                  "outlineColor": "#000000",
+                  "outlineAlpha": 1,
+                  "outlineOffset": 1
                 }
               },
               "ecaScripts": [],
@@ -3828,7 +4054,25 @@
                   "shadowOffset": {
                     "x": 1,
                     "y": 1
-                  }
+                  },
+                  "shadowAlpha": 1,
+                  "gradient": 0,
+                  "gradientTop": {
+                    "r": 255,
+                    "g": 255,
+                    "b": 255,
+                    "a": 1
+                  },
+                  "gradientBottom": {
+                    "r": 255,
+                    "g": 255,
+                    "b": 255,
+                    "a": 1
+                  },
+                  "outline": false,
+                  "outlineColor": "#000000",
+                  "outlineAlpha": 1,
+                  "outlineOffset": 1
                 }
               },
               "ecaScripts": [],
@@ -3918,7 +4162,25 @@
                   "shadowOffset": {
                     "x": 1,
                     "y": 1
-                  }
+                  },
+                  "shadowAlpha": 1,
+                  "gradient": 0,
+                  "gradientTop": {
+                    "r": 255,
+                    "g": 255,
+                    "b": 255,
+                    "a": 1
+                  },
+                  "gradientBottom": {
+                    "r": 255,
+                    "g": 255,
+                    "b": 255,
+                    "a": 1
+                  },
+                  "outline": false,
+                  "outlineColor": "#000000",
+                  "outlineAlpha": 1,
+                  "outlineOffset": 1
                 }
               },
               "ecaScripts": [],
@@ -4057,7 +4319,8 @@
             "right": 0
           },
           "tableSpace": 0,
-          "sortType": 0
+          "sortType": 0,
+          "ignoreInactive": false
         }
       },
       "ecaScripts": [],
@@ -4155,7 +4418,25 @@
               "shadowOffset": {
                 "x": 1,
                 "y": 1
-              }
+              },
+              "shadowAlpha": 1,
+              "gradient": 0,
+              "gradientTop": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 1
+              },
+              "gradientBottom": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 1
+              },
+              "outline": false,
+              "outlineColor": "#000000",
+              "outlineAlpha": 1,
+              "outlineOffset": 1
             }
           },
           "ecaScripts": [],
@@ -4220,7 +4501,7 @@
             "fileType": "texture"
           },
           "normal": "#FF0000",
-          "highlight": "#e2a222",
+          "highlight": "#00D9FF",
           "pressed": "#C5C5C5",
           "disabled": "#494949",
           "onClicks": [],
@@ -4368,7 +4649,25 @@
               "shadowOffset": {
                 "x": 1,
                 "y": 1
-              }
+              },
+              "shadowAlpha": 1,
+              "gradient": 0,
+              "gradientTop": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 1
+              },
+              "gradientBottom": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 1
+              },
+              "outline": false,
+              "outlineColor": "#000000",
+              "outlineAlpha": 1,
+              "outlineOffset": 1
             }
           },
           "ecaScripts": [],
@@ -4467,7 +4766,11 @@
             "g": 255,
             "b": 255,
             "a": 1
-          }
+          },
+          "isApplyAnimation": false,
+          "animationAtlasID": null,
+          "animationFrameRate": 30,
+          "animationLoop": true
         }
       },
       "ecaScripts": [],
@@ -4565,7 +4868,25 @@
               "shadowOffset": {
                 "x": 1,
                 "y": 1
-              }
+              },
+              "shadowAlpha": 1,
+              "gradient": 0,
+              "gradientTop": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 1
+              },
+              "gradientBottom": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 1
+              },
+              "outline": false,
+              "outlineColor": "#000000",
+              "outlineAlpha": 1,
+              "outlineOffset": 1
             }
           },
           "ecaScripts": [],
@@ -4654,7 +4975,25 @@
               "shadowOffset": {
                 "x": 1,
                 "y": 1
-              }
+              },
+              "shadowAlpha": 1,
+              "gradient": 0,
+              "gradientTop": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 1
+              },
+              "gradientBottom": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 1
+              },
+              "outline": false,
+              "outlineColor": "#000000",
+              "outlineAlpha": 1,
+              "outlineOffset": 1
             }
           },
           "ecaScripts": [],
@@ -4745,7 +5084,25 @@
               "shadowOffset": {
                 "x": 1,
                 "y": 1
-              }
+              },
+              "shadowAlpha": 1,
+              "gradient": 0,
+              "gradientTop": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 1
+              },
+              "gradientBottom": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 1
+              },
+              "outline": false,
+              "outlineColor": "#000000",
+              "outlineAlpha": 1,
+              "outlineOffset": 1
             }
           },
           "ecaScripts": [],
@@ -4845,11 +5202,11 @@
         "y": 0.5
       },
       "anchoredPosition": {
-        "x": 667,
+        "x": 750,
         "y": 375
       },
       "sizeDelta": {
-        "x": 1334,
+        "x": 1500,
         "y": 750
       }
     },
@@ -4871,4 +5228,4 @@
   "discriminator": "ISceneLike",
   "version": 3
 }
-//"{FE:{"v":"1.14.3883376","c":{"FF":5001},"s":100}
+//"{FE:{"v":"1.19.4689915","c":{"FF":5001},"s":100}

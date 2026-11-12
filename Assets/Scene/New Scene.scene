@@ -149,7 +149,10 @@
         "selfValue": true,
         "valueTag": "activeValue"
       },
-      "unlockedValue": null,
+      "unlockedValue": {
+        "selfValue": true,
+        "valueTag": "unlockedValue"
+      },
       "editorLockValue": false,
       "editorVisibleValue": true,
       "position": {
@@ -19488,6 +19491,169 @@
       },
       "propsData": {},
       "entityVersion": 3
+    },
+    {
+      "_entityName": "ZAREK Sky Sign",
+      "_tag": {
+        "type": "SceneEditEntity",
+        "resourceId": "Primitive/Empty"
+      },
+      "_entityId": "icCB6agq",
+      "children": [],
+      "prefabVariant": null,
+      "activeValue": {
+        "selfValue": true,
+        "valueTag": "activeValue"
+      },
+      "unlockedValue": {
+        "selfValue": true,
+        "valueTag": "unlockedValue"
+      },
+      "editorLockValue": false,
+      "editorVisibleValue": true,
+      "position": {
+        "x": 588.087,
+        "y": 130,
+        "z": 326.61
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "BTPath": [
+        null
+      ],
+      "visible": true,
+      "VisibilityLayer": 0,
+      "modelOptimization": 0,
+      "streamingLayer": "",
+      "attributes": [
+        2,
+        4
+      ],
+      "isTrigger": false,
+      "collidable": true,
+      "physicalLayer": 0,
+      "aoiSetting": 0,
+      "initialTypes": {},
+      "componentList": [],
+      "entityTagData": {
+        "tagPointers": []
+      },
+      "tempIndex": 69,
+      "itemID": 222,
+      "seParent": null,
+      "ecaScripts": [
+        null
+      ],
+      "ecaProps": {
+        "TextEntity": {},
+        "LevelObject": {},
+        "Transform": {},
+        "Entity": {},
+        "Visibility": {}
+      },
+      "propsData": {
+        "TextKey": "ZAREK ENDZONE PRO",
+        "fontColor": {
+          "r": 0,
+          "g": 217,
+          "b": 255,
+          "a": 1
+        },
+        "IsBillboard": true,
+        "fontStyleRef": {
+          "bold": false,
+          "italic": false,
+          "underline": false
+        },
+        "FontSize": 150,
+        "IgnoreDepth": false,
+        "AlwaysInScreen": false,
+        "Depth": 1.1,
+        "Width": 42,
+        "Height": 7,
+        "FondOverFlowMod": 2,
+        "fontType": "UIFONT_LATIN",
+        "fontStyle": 0,
+        "_levelObjectID": 1,
+        "TextDisplay": "ZAREK ENDZONE PRO",
+        "alignment": 2,
+        "alignmentVertical": 2,
+        "lineSpacing": 1,
+        "shadow": false,
+        "shadowColor": {
+          "r": 255,
+          "g": 255,
+          "b": 255,
+          "a": 1
+        },
+        "shadowOffset": {
+          "x": 1,
+          "y": 1
+        },
+        "shadowAlpha": 1,
+        "outline": false,
+        "outlineColor": {
+          "r": 255,
+          "g": 255,
+          "b": 255,
+          "a": 1
+        },
+        "outlineAlpha": 1,
+        "outlineOffset": 0,
+        "gradient": 0,
+        "gradientTop": {
+          "r": 255,
+          "g": 255,
+          "b": 255,
+          "a": 1
+        },
+        "gradientBottom": {
+          "r": 255,
+          "g": 255,
+          "b": 255,
+          "a": 1
+        },
+        "fontTypeRef": "UIFONT_LATIN",
+        "alignmentRef": {
+          "h": "center",
+          "v": "middle"
+        }
+      },
+      "_performanceConfigData": {
+        "ItemID": 222,
+        "MeshCount": 0,
+        "ColliderMeshCount": 0,
+        "MaterialCount": 0,
+        "AnimationCount": 0,
+        "BoneCount": 0,
+        "ParticleEmitterCount": 0,
+        "ParticleCount": 0,
+        "TextureMemory": 0,
+        "ModelMemory": 0,
+        "AudioMemory": 0
+      },
+      "objColor": {
+        "surfaceColor": {
+          "r": 0,
+          "g": 217,
+          "b": 255,
+          "a": 1
+        }
+      },
+      "surfaceColor": {
+        "r": 0,
+        "g": 217,
+        "b": 255,
+        "a": 1
+      }
     }
   ],
   "prefabVariant": null,
@@ -19517,4 +19683,4 @@
     ]
   }
 }
-//"{FE:{"v":"0.2.4448847","c":{"FF":5001},"s":100}
+//"{FE:{"v":"1.19.4689915","c":{"FF":5001},"s":100}

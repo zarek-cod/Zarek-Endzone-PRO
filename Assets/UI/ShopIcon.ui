@@ -58,8 +58,8 @@
             "alpha": 100,
             "priority": 0,
             "text": {
-              "value": "Shop",
-              "key": "SHOP_ICON_CONTENT",
+              "value": "ZAREK ARMORY",
+              "key": "",
               "font": "Default",
               "fontSize": 24,
               "fontStyle": {
@@ -87,7 +87,25 @@
               "shadowOffset": {
                 "x": 1,
                 "y": 1
-              }
+              },
+              "shadowAlpha": 1,
+              "gradient": 0,
+              "gradientTop": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 1
+              },
+              "gradientBottom": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 1
+              },
+              "outline": false,
+              "outlineColor": "#000000",
+              "outlineAlpha": 1,
+              "outlineOffset": 1
             }
           },
           "ecaScripts": [],
@@ -226,16 +244,16 @@
         "priority": 0,
         "button": {
           "spriteName": {
-            "fileId": "ea89a8fe33e831ff0a9f5b4d9af14c18",
-            "filePath": "lib://fftextures/WorkshopIconLibrary/T_34_M_WS_ICON_CIRCULAR.png",
+            "fileId": "ghbahqlsd7-mwbowxmz-gly3kdc49ql",
+            "filePath": "Assets\\Resources\\zarek-z-logo-source.png",
             "_tag": {
               "type": "GFileRefer"
             },
             "fileType": "texture"
           },
-          "normal": "#000000",
-          "highlight": "#e2a222",
-          "pressed": "#C5C5C5",
+          "normal": "#080D18",
+          "highlight": "#00D9FF",
+          "pressed": "#008CFF",
           "disabled": "#494949",
           "onClicks": [],
           "enableBorderImage": true,
@@ -336,11 +354,11 @@
         "y": 0.5
       },
       "anchoredPosition": {
-        "x": 667,
+        "x": 750,
         "y": 375
       },
       "sizeDelta": {
-        "x": 1334,
+        "x": 1500,
         "y": 750
       }
     },
@@ -362,4 +380,4 @@
   "discriminator": "ISceneLike",
   "version": 3
 }
-//"{FE:{"v":"1.14.3883376","c":{"FF":5001},"s":100}
+//"{FE:{"v":"1.19.4689915","c":{"FF":5001},"s":100}

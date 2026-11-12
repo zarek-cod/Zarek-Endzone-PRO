@@ -2,6 +2,42 @@
 
 Todos los cambios relevantes del proyecto se registran aquí. El proyecto aún no usa versionado semántico formal.
 
+## 2026-11-11 — Integración real de identidad ZAREK
+
+### Añadido
+
+- Emblema canónico importado a `Assets/Resources/zarek-z-logo-source.png` y registrado oficialmente como sprite `ZarekLogo`.
+- Entidad tridimensional `ZAREK Sky Sign` en `New Scene.scene`, elevada sobre el área jugable y sin colisión.
+- Marca visible `ZAREK ARMORY` en el acceso existente a la tienda.
+
+### Modificado
+
+- La apertura espera 2 segundos a que el cliente termine de cargar y luego muestra `ZAREK ENDZONE PRO`, `DOMINA LA ÚLTIMA ZONA` y el emblema registrado durante 3 segundos.
+- `MiniScoreBoard.ui`, `FullScoreBoard.ui` y `EsportFullScoreBoard.ui` aplican fondos oscuros y acentos azul/cian sin sustituir datos, widgets ni lógica.
+- `ShopIcon.ui` usa el emblema ZAREK, estados azul/cian y conserva su callback `OnPress`.
+- La pantalla final usa los campos existentes para presentar el nombre y lema ZAREK.
+- El rótulo celeste ahora presenta `ZAREK ENDZONE PRO` en `#00D9FF`, con mayor ancho y profundidad 3D; se descartaron capas de texto duplicadas para conservar una sola entidad estable.
+
+### Conservado
+
+- Tres rondas, 20 paredes gloo, zonas, puntuación, equipos y flujo competitivo.
+- Los cuatro mockups restantes continúan como referencias y no sustituyen interfaces interactivas.
+
+### Validación
+
+- Craftland Studio MCP respondió a `instructions://index`; importación, registro, UI y escena se realizaron con sus herramientas oficiales.
+- `fccompile.exe -i Assets`: código de salida `0`, sin errores y 67 advertencias heredadas.
+- `game-build` release final: completado correctamente y con salida generada.
+- La consola final contiene un diagnóstico no fatal del editor para el preset oficial `TextEntity` (`Find no ecaItem`); la compilación y el empaquetado terminan correctamente.
+- Una ejecución previa cargó el HUD operativo con `Ronda 0 - 3`; el acabado cian final del letrero se inspeccionó visualmente y se guardó en Craftland Studio.
+
+### Pendiente
+
+- Verificación visual runtime de apertura, tienda, marcadores completo/ESPORT y pantalla final tras tres rondas.
+- Validación del letrero desde la cámara de jugador y en varias resoluciones/clientes.
+- Repetir la carga runtime del acabado final: el último intento quedó detenido al 0 % y no se marca como aprobado.
+- `key.csv` conserva sus textos originales porque el MCP disponible no expone edición segura de filas; no se editó el CSV serializado a mano.
+
 ## 2026-11-10 — Diseño visual premium ZAREK
 
 ### Añadido

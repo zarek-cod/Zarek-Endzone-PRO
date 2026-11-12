@@ -2,9 +2,9 @@
 
 ## Estado
 
-Esta rama contiene una primera capa segura de branding en FC y cinco fuentes visuales originales. Las imágenes están deliberadamente fuera de `Assets/`: son referencias de diseño y **todavía no están registradas ni visibles dentro del juego**.
+La identidad ZAREK ya está integrada en recursos reales de Craftland Studio mediante su MCP oficial. El emblema canónico fue importado y registrado, los marcadores y el acceso a la tienda recibieron la paleta azul/cian, y el escenario contiene un letrero tridimensional `ZAREK ENDZONE PRO` en cian, sin colisión.
 
-Craftland Studio está abierto con este proyecto, pero su servidor MCP no está expuesto a la sesión. Por esa razón no se editaron `.ui`, escenas, prefabs, localización, Workflow, attachments ni otros recursos serializados.
+Las imágenes de concepto permanecen como referencias. No sustituyen widgets interactivos ni datos reales: la integración conserva los controles, callbacks, columnas y lógica existentes.
 
 ## Sistema visual
 
@@ -22,38 +22,47 @@ La identidad usa una `Z` angular de lectura inmediata. El marcador prioriza dato
 
 | Archivo | Dimensiones | Propósito | Estado |
 | --- | ---: | --- | --- |
-| `Design/ZarekBrand/zarek-z-logo-source.png` | 1536×1024, ARGB | emblema Z con transparencia | fuente sin registrar |
+| `Design/ZarekBrand/zarek-z-logo-source.png` | 1536×1024, ARGB | emblema Z con transparencia | fuente canónica importada y registrada como `ZarekLogo` |
 | `Design/ZarekBrand/zarek-sky-sign-concept.png` | 1672×941 | referencia del letrero celeste `ZAREK` | concepto, no integrado |
 | `Design/ZarekBrand/zarek-scoreboard-concept.png` | 1672×941 | referencia del marcador de tres filas | concepto, no integrado |
 | `Design/ZarekBrand/zarek-final-screen-concept.png` | 1672×941 | referencia de pantalla de campeones | concepto, no integrado |
 | `Design/ZarekBrand/zarek-armory-concept.png` | 1672×941 | referencia de tienda `ZAREK ARMORY` | concepto, no integrado |
 
-Las cinco imágenes se generaron con la herramienta integrada de generación de imágenes. No se usaron imágenes de terceros como referencia. Deben pasar por revisión visual y registro oficial en Craftland Studio antes de convertirse en activos del juego.
-
-Los mockups exploran variantes del símbolo Z. Antes de registrar recursos debe elegirse un único emblema canónico. Para UI pequeña también se necesita una exportación plana, compacta y con menos halo que la fuente actual.
+Las cinco imágenes se generaron con la herramienta integrada de generación de imágenes. No se usaron imágenes de terceros como referencia. Solo el emblema canónico se convirtió en activo del juego; los otros cuatro archivos siguen siendo mockups de dirección visual.
 
 ## Cambios FC aplicados
 
 En `GlobalUIManager.fcg`:
 
 - la presentación inicial dura 3 segundos en vez de 8;
+- la creación del banner espera 2 segundos después de `OnPlayerJoin` para no consumirse detrás de la pantalla de carga;
+- la apertura usa el título `ZAREK ENDZONE PRO`, la descripción `DOMINA LA ÚLTIMA ZONA` y el sprite registrado `EResSprite.ZarekLogo`;
 - la escuadra local usa azul eléctrico y cian en el minimarcador;
 - la fila local de los marcadores BOOYAH y ESPORT cambia del dorado anterior a `#008CFF`;
-- el tooltip del marcador ESPORT muestra `ZAREK ENDZONE PRO | RONDA n/3` usando un widget ya registrado.
+- el tooltip del marcador ESPORT muestra `ZAREK ENDZONE PRO | RONDA n/3` usando un widget ya registrado;
+- la pantalla final muestra `ZAREK ENDZONE PRO` y `DOMINA LA ÚLTIMA ZONA` sin sustituir el marcador ni su lógica.
 
 Estos cambios reutilizan propiedades y widgets confirmados por los símbolos actuales. No crean asset IDs, widgets ni APIs nuevos.
 
-## Integración pendiente en Craftland Studio
+## Integración realizada en Craftland Studio
 
-Cuando MCP esté disponible, el orden seguro es:
+- El MCP oficial respondió y se leyó `instructions://index` antes de modificar activos.
+- `Assets/Resources/zarek-z-logo-source.png` fue importado y registrado como sprite `ZarekLogo`; el símbolo generado `EResSprite.ZarekLogo` fue verificado sin editar archivos generados.
+- `MiniScoreBoard.ui`, `FullScoreBoard.ui` y `EsportFullScoreBoard.ui` conservan sus widgets y datos, con fondos `#080D18` / `#071B3A` y acentos `#008CFF` / `#00D9FF`.
+- `ShopIcon.ui` conserva su único callback `OnPress`, usa el emblema registrado y muestra `ZAREK ARMORY`.
+- `New Scene.scene` contiene una sola entidad de texto `ZAREK Sky Sign`, con contenido `ZAREK ENDZONE PRO`, color `#00D9FF`, profundidad `1.1`, ancho `42` y tamaño de fuente `150`.
+- El rótulo permanece por encima del área jugable, sin collider ni obstrucción de spawns o zonas. El acabado cian fue inspeccionado visualmente y guardado en el editor.
+- Una ejecución anterior cargó el HUD y las tres rondas; el intento posterior al acabado final quedó detenido al 0 %, por lo que esa comprobación runtime sigue pendiente.
 
-1. Leer `instructions://index`.
-2. Revisar Workflow, attachments, recursos UI y configuración de equipos.
-3. Importar y registrar el emblema con las herramientas oficiales de asset registration.
-4. Añadir en el editor un header y un widget de logo a `MiniScoreBoardUI`, `FullScoreBoard` y `EsportFullScoreBoard`, conservando todas las columnas existentes.
-5. Crear el letrero `ZAREK` como entidad de escena sin colisión, lejos de spawns y trayectorias, y validar legibilidad desde cada zona activa.
-6. Aplicar marca a la pantalla final y a la tienda solo mediante sus recursos registrados; no reemplazar archivos `.ui` o localización manualmente.
-7. Ejecutar build del editor, revisar consola y probar rendimiento, clipping, escalado y contraste.
+`key.csv` conserva los textos originales porque el MCP disponible no expone edición segura de filas de localización. La apertura y la pantalla final usan textos directos confirmados por FC; no se modificó el CSV serializado a mano.
+
+## Verificación visual pendiente
+
+1. Capturar la apertura de 3 segundos y comprobar título, descripción y emblema en una ejecución nueva.
+2. Abrir `ZAREK ARMORY`, comprobar el botón `OnPress` y validar el emblema en preparación.
+3. Mostrar los marcadores completo y ESPORT en varias resoluciones y revisar clipping, contraste y encabezado.
+4. Completar una partida de tres rondas para inspeccionar la pantalla final real.
+5. Repetir la carga del cliente y confirmar desde la cámara del jugador la legibilidad y no obstrucción del letrero celeste.
 
 ## Criterios de aceptación runtime
 
@@ -63,7 +72,7 @@ Cuando MCP esté disponible, el orden seguro es:
 - `ZAREK ENDZONE PRO | RONDA n/3` no se recorta en resoluciones 16:9 y 16:10.
 - La fila propia se distingue sin reducir la legibilidad del texto.
 - La apertura desaparece a los 3 segundos y no bloquea controles.
-- No aparecen errores de asset, script, attachment ni widget en consola.
+- No aparecen errores nuevos de asset, script, attachment ni widget; el diagnóstico del editor `Find no ecaItem` asociado al preset `TextEntity` debe revisarse por separado.
 
 ## Prompts finales de las fuentes
 
