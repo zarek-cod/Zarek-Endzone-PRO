@@ -1,6 +1,6 @@
 # Validación — ZAREK ENDZONE PRO
 
-Última actualización: 2026-11-12.
+Última actualización: 2026-11-13.
 
 ## Entorno
 
@@ -13,6 +13,77 @@
 - Modelo reportado al compilador: `unknown-model`, porque el runtime no expone un identificador de modelo exacto reutilizable.
 
 ## Validaciones ejecutadas
+
+### Zonas XL + ZAREK GLOO STORM — 2026-11-13
+
+#### Zonas XL
+
+`GlobalSafeZones.fcg` conserva preparación, primera contracción, movimiento y cierre final de 60 segundos. `Combat` y `MovingSafeZone` mantienen 65 segundos de fase, de modo que la operación de zona dispone de los 60 segundos completos y el margen ya existente de 5 segundos. No se modificó `WorkflowMod.asset`.
+
+| Escenario | Antes (inicio/cierre/mov.) | XL (inicio/cierre/mov.) | Final |
+| --- | ---: | ---: | ---: |
+| STAGE_1 | 48 / 28 / 20 | 90 / 58 / 40 | 0 |
+| STAGE_2 | 50 / 29 / 21 | 90 / 58 / 40 | 0 |
+| STAGE_3 | 58 / 33 / 25 | 95 / 63 / 44 | 0 |
+| STAGE_4 | 55 / 32 / 24 | 90 / 60 / 42 | 0 |
+| STAGE_5 | 54 / 31 / 23 | 85 / 58 / 40 | 0 |
+| STAGE_6 | 56 / 32 / 24 | 80 / 55 / 38 | 0 |
+| STAGE_7 | 60 / 33 / 25 | 75 / 50 / 35 | 0 |
+| STAGE_8 | 55 / 31 / 23 | 90 / 62 / 43 | 0 |
+| STAGE_9 | 48 / 28 / 20 | 85 / 58 / 40 | 0 |
+| STAGE_10 | 48 / 28 / 20 | 80 / 55 / 38 | 0 |
+| STAGE_11 | 52 / 30 / 22 | 80 / 55 / 38 | 0 |
+
+Medición realizada con `scene-ground-height` en la escena real:
+
+- 176 muestras radiales de los 11 centros a 75 y 100 m: 176 con terreno, 0 mar, 0 sin suelo;
+- 440 muestras alrededor de los 55 endpoints con el radio posterior al movimiento: 440 con terreno, 0 mar, 0 sin suelo;
+- mayor variación vertical detectada en STAGE_6, STAGE_7 y STAGE_11; por eso usan radios más conservadores dentro del rango pedido;
+- los 11 centros y los 55 endpoints existentes se conservaron.
+
+#### Mecanismo Gloo verificado
+
+- `IceWall` admite `WeaponSkinID` y prioridad de skin del jugador.
+- El catálogo disponible contiene 187 `weaponskin`, todas oficiales `lib://` y de solo lectura.
+- El MCP no permite crear una `WeaponSkinID` desde una textura importada; ZAREK GLOO STORM no se declara como skin oficial.
+- Se creó una alternativa compatible: un prefab visual de dos caras, sin componentes de colisión, parentado a la entidad generada por `OnUseConsumable` cuando el item es `EResItem.GlooWall`.
+- `PlayerController.fcg` está adjunto a la configuración real de `PlayerEntity`.
+- `EResPrefab.ZarekGlooStormOverlay` fue generado mediante el registro oficial y no está obsoleto.
+- `GlobalConfig.glooWallsPerRound` sigue en `20` y `esportMaxRound` sigue en `3`.
+
+#### Compilación y build
+
+Comando FC final:
+
+```text
+fccompile.exe -i Assets -agent unknown-model -session 2176be10-916b-4600-aa2f-e8e98ba1971e
+```
+
+- salida: `0`;
+- errores FC: `0`;
+- advertencias: `67`, las mismas familias heredadas (APIs obsoletas, sombras en `GlobalLeaderboard` y comparación `entity<Entity>`/`EResItem` preexistente);
+- diagnósticos nuevos atribuibles a `GlobalSafeZones.fcg` o al evento Gloo: `0`;
+- `game-build debug`: aprobado;
+- `game-build release`: aprobado;
+- salida de ambos builds: `Temp/Build/FEUserLevelData.bytes`;
+- error de consola restante: `Find no ecaItem ... TextEntity`, diagnóstico previo del monumento ZAREK, no del overlay ni de las zonas.
+
+#### Estado de prueba
+
+- **Implementado y probado técnicamente:** valores XL, cobertura de terreno de centros/endpoints, guardas de datos, registro del prefab, ausencia de collider en el overlay, compilación FC y builds debug/release.
+- **Implementado, pendiente de prueba runtime:** aspecto frontal/posterior, orientación, escala, desaparición con la pared, colisión real, resistencia/destrucción, cronómetros de las cuatro fases y cierre de ronda.
+- **Recurso creado, no integrado como skin:** `ZarekGlooStorm_Preview.png`; es una referencia y permanece fuera de `Assets/`.
+- **Bloqueado:** prueba multicliente, móvil y capturas reales. La conexión MCP funciona, pero la automatización de Windows devolvió `native pipe unavailable` y el MCP no expone Play/Run.
+
+Casos pendientes en Craftland:
+
+1. Desplegar al menos cinco Gloo consecutivas, incluidas unidades adquiridas después de las 20 iniciales.
+2. Verificar frente, reverso y ángulos; caminar y disparar contra la pared.
+3. Destruirla y confirmar que el overlay desaparece sin residuos.
+4. Repetir con dos clientes/equipos para comprobar replicación.
+5. Cronometrar preparación, primera contracción, movimiento y cierre final en 60 s reales.
+6. Recorrer los 11 escenarios y completar las tres rondas.
+7. Medir rendimiento móvil y revisar `maxSize = 2048`, que el MCP no redujo a 1024.
 
 ### Evolución visual y competitiva 2.0 — 2026-11-12
 

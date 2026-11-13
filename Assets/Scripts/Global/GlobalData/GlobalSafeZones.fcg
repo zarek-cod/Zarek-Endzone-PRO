@@ -27,36 +27,47 @@ graph GlobalSafeZones {
     safeZoneStartShrinkTimes Map<int, int> = Map<int, int>{}
     safeZonesShrinkDuration Map<int, int> = Map<int, int>{}
     safeZonesEndRadius Map<int, float> = Map<int, float>{}
+    safeZonesMovingEndRadius Map<int, float> = Map<int, float>{}
     lastSafeZoneDuration int = 60
-    reduceRadiusWhenMoving float = 8.0
     currentEndPoint entity<Transform> = nil
     // Init data when game starts
     event OnGameStart() {
-        // ZAREK 2.0: competitive radii tuned per scenario geometry.
-        // Each initial zone is 45-60m; the first close is 28-33m and the
-        // moving close subtracts 8m, leaving a 20-25m final combat area.
-        safeZoneInitRadius[0] = 48.0
-        safeZoneInitRadius[1] = 50.0
-        safeZoneInitRadius[2] = 58.0
-        safeZoneInitRadius[3] = 55.0
-        safeZoneInitRadius[4] = 54.0
-        safeZoneInitRadius[5] = 56.0
-        safeZoneInitRadius[6] = 60.0
-        safeZoneInitRadius[7] = 55.0
-        safeZoneInitRadius[8] = 48.0
-        safeZoneInitRadius[9] = 48.0
-        safeZoneInitRadius[10] = 52.0
-        safeZonesEndRadius[0] = 28.0
-        safeZonesEndRadius[1] = 29.0
-        safeZonesEndRadius[2] = 33.0
-        safeZonesEndRadius[3] = 32.0
-        safeZonesEndRadius[4] = 31.0
-        safeZonesEndRadius[5] = 32.0
-        safeZonesEndRadius[6] = 33.0
-        safeZonesEndRadius[7] = 31.0
-        safeZonesEndRadius[8] = 28.0
-        safeZonesEndRadius[9] = 28.0
-        safeZonesEndRadius[10] = 30.0
+        // ZAREK XL: radii measured against the real terrain and all 55
+        // configured moving endpoints. High-relief stages use the lower end
+        // of the requested range; flatter stages keep the larger footprint.
+        safeZoneInitRadius[0] = 90.0
+        safeZoneInitRadius[1] = 90.0
+        safeZoneInitRadius[2] = 95.0
+        safeZoneInitRadius[3] = 90.0
+        safeZoneInitRadius[4] = 85.0
+        safeZoneInitRadius[5] = 80.0
+        safeZoneInitRadius[6] = 75.0
+        safeZoneInitRadius[7] = 90.0
+        safeZoneInitRadius[8] = 85.0
+        safeZoneInitRadius[9] = 80.0
+        safeZoneInitRadius[10] = 80.0
+        safeZonesEndRadius[0] = 58.0
+        safeZonesEndRadius[1] = 58.0
+        safeZonesEndRadius[2] = 63.0
+        safeZonesEndRadius[3] = 60.0
+        safeZonesEndRadius[4] = 58.0
+        safeZonesEndRadius[5] = 55.0
+        safeZonesEndRadius[6] = 50.0
+        safeZonesEndRadius[7] = 62.0
+        safeZonesEndRadius[8] = 58.0
+        safeZonesEndRadius[9] = 55.0
+        safeZonesEndRadius[10] = 55.0
+        safeZonesMovingEndRadius[0] = 40.0
+        safeZonesMovingEndRadius[1] = 40.0
+        safeZonesMovingEndRadius[2] = 44.0
+        safeZonesMovingEndRadius[3] = 42.0
+        safeZonesMovingEndRadius[4] = 40.0
+        safeZonesMovingEndRadius[5] = 38.0
+        safeZonesMovingEndRadius[6] = 35.0
+        safeZonesMovingEndRadius[7] = 43.0
+        safeZonesMovingEndRadius[8] = 40.0
+        safeZonesMovingEndRadius[9] = 38.0
+        safeZonesMovingEndRadius[10] = 38.0
         SetStartShrinkTime(globalEntity<GlobalGameManager>.prepPhaseDuration)
         safeZonesShrinkDuration[0] = 60
         safeZonesShrinkDuration[1] = 60 
@@ -160,7 +171,7 @@ graph GlobalSafeZones {
     @param index The index of the safe zone to activate, which goes with the respective spawn point id
     */
     async func ActivateSafeZone(index int, phase entity<Phase>){
-        if !Map.ContainKey(safeZoneStartPoints, index) || !Map.ContainKey(safeZoneInitRadius, index) || !Map.ContainKey(safeZonesEndRadius, index) || !Map.ContainKey(safeZonesShrinkDuration, index) {
+        if !Map.ContainKey(safeZoneStartPoints, index) || !Map.ContainKey(safeZoneInitRadius, index) || !Map.ContainKey(safeZonesEndRadius, index) || !Map.ContainKey(safeZonesMovingEndRadius, index) || !Map.ContainKey(safeZonesShrinkDuration, index) {
             LogError("<GlobalSafeZones.fcg>: Missing safe-zone data for stage " + index)
             return
         }
@@ -187,18 +198,18 @@ graph GlobalSafeZones {
             }
             currentEndPoint = endPointPosition
             DisableSafeZone()
-            EnableMovingSafeZone(safeZoneStartPoints[index], endPointPosition<Transform>.Position, safeZonesEndRadius[index], safeZonesEndRadius[index] - reduceRadiusWhenMoving, safeZonesShrinkDuration[index], safeZonePhase2Dmg)
+            EnableMovingSafeZone(safeZoneStartPoints[index], endPointPosition<Transform>.Position, safeZonesEndRadius[index], safeZonesMovingEndRadius[index], safeZonesShrinkDuration[index], safeZonePhase2Dmg)
             globalEntity<GlobalUIManager>.ActivateBorderMovingNotification()
-            LogWarning("Safe Zone phase 2: " + safeZoneStartPoints[index] + " to " + endPointPosition<Transform>.Position + " with radius from " + safeZonesEndRadius[index] + " to " + (safeZonesEndRadius[index] - reduceRadiusWhenMoving) + " in duration " + safeZonesShrinkDuration[index])
+            LogWarning("Safe Zone phase 2: " + safeZoneStartPoints[index] + " to " + endPointPosition<Transform>.Position + " with radius from " + safeZonesEndRadius[index] + " to " + safeZonesMovingEndRadius[index] + " in duration " + safeZonesShrinkDuration[index])
         } else if phase<Phase>.Index == EPhase.LastSafeZone {
             if currentEndPoint == nil {
                 LogError("<GlobalSafeZones.fcg>: Cannot close the final zone without a valid endpoint")
                 return
             }
             DisableSafeZone()
-            EnableMovingSafeZone(currentEndPoint<Transform>.Position, currentEndPoint<Transform>.Position, safeZonesEndRadius[index] - reduceRadiusWhenMoving, 0, lastSafeZoneDuration, safeZonePhase3Dmg)
+            EnableMovingSafeZone(currentEndPoint<Transform>.Position, currentEndPoint<Transform>.Position, safeZonesMovingEndRadius[index], 0, lastSafeZoneDuration, safeZonePhase3Dmg)
             globalEntity<GlobalUIManager>.ActivateBorderShrinkingNotification()
-            LogWarning("Safe Zone phase 3: " + currentEndPoint<Transform>.Position + " to " + currentEndPoint<Transform>.Position + " with radius from " + (safeZonesEndRadius[index] - reduceRadiusWhenMoving) + " to " + 0 + " in duration " + lastSafeZoneDuration)
+            LogWarning("Safe Zone phase 3: " + currentEndPoint<Transform>.Position + " to " + currentEndPoint<Transform>.Position + " with radius from " + safeZonesMovingEndRadius[index] + " to " + 0 + " in duration " + lastSafeZoneDuration)
         } else if phase<Phase>.Index == EPhase.SuddenDeath {
             if currentEndPoint == nil {
                 LogError("<GlobalSafeZones.fcg>: Cannot activate sudden death without a valid endpoint")

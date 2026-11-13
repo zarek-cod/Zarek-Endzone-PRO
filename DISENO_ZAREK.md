@@ -22,23 +22,35 @@ La entidad oficial `TextEntity` se llama `ZAREK Sky Monument`, está a `y = 130`
 
 ## Zonas competitivas por escenario
 
-Las tres operaciones jugables duran 60 segundos: contracción inicial, desplazamiento y cierre final a cero. El Workflow conserva un margen de 5 segundos en `Combat` y `MovingSafeZone` (65 segundos por fase) y una preparación de 60 segundos. La selección evita repetir escenario durante las tres rondas.
+Las tres operaciones jugables duran 60 segundos: contracción inicial, desplazamiento y cierre final a cero. El Workflow conserva un margen de 5 segundos en `Combat` y `MovingSafeZone` (65 segundos por fase) y una preparación de 60 segundos. La selección evita repetir escenario durante las tres rondas. No se añadió una pausa nueva porque ese margen ya evita que la fase corte una operación de 60 segundos.
 
-| # | Escenario (`STAGE_n`) | Radio inicial | 1.er cierre | Tras movimiento | Cierre final |
-| ---: | --- | ---: | ---: | ---: | ---: |
-| 1 | Torre del Reloj | 48 m | 28 m | 20 m | 0 m |
-| 2 | Cementerio | 50 m | 29 m | 21 m | 0 m |
-| 3 | Cima | 58 m | 33 m | 25 m | 0 m |
-| 4 | Hangar | 55 m | 32 m | 24 m | 0 m |
-| 5 | Katulistiwa | 54 m | 31 m | 23 m | 0 m |
-| 6 | Observatorio | 56 m | 32 m | 24 m | 0 m |
-| 7 | Molino | 60 m | 33 m | 25 m | 0 m |
-| 8 | Astillero | 55 m | 31 m | 23 m | 0 m |
-| 9 | Ciudad del Cabo | 48 m | 28 m | 20 m | 0 m |
-| 10 | Ciudad del Cabo | 48 m | 28 m | 20 m | 0 m |
-| 11 | Franja Bimasakti | 52 m | 30 m | 22 m | 0 m |
+| # | Escenario (`STAGE_n`) | Antes (inicio/1.er cierre/mov.) | XL (inicio/1.er cierre/mov.) | Final |
+| ---: | --- | ---: | ---: | ---: |
+| 1 | Torre del Reloj | 48 / 28 / 20 m | 90 / 58 / 40 m | 0 m |
+| 2 | Cementerio | 50 / 29 / 21 m | 90 / 58 / 40 m | 0 m |
+| 3 | Cima | 58 / 33 / 25 m | 95 / 63 / 44 m | 0 m |
+| 4 | Hangar | 55 / 32 / 24 m | 90 / 60 / 42 m | 0 m |
+| 5 | Katulistiwa | 54 / 31 / 23 m | 85 / 58 / 40 m | 0 m |
+| 6 | Observatorio | 56 / 32 / 24 m | 80 / 55 / 38 m | 0 m |
+| 7 | Molino | 60 / 33 / 25 m | 75 / 50 / 35 m | 0 m |
+| 8 | Astillero | 55 / 31 / 23 m | 90 / 62 / 43 m | 0 m |
+| 9 | Ciudad del Cabo | 48 / 28 / 20 m | 85 / 58 / 40 m | 0 m |
+| 10 | Ciudad del Cabo | 48 / 28 / 20 m | 80 / 55 / 38 m | 0 m |
+| 11 | Franja Bimasakti | 52 / 30 / 22 m | 80 / 55 / 38 m | 0 m |
+
+Se muestrearon 176 puntos radiales a 75 y 100 metros y 440 puntos alrededor de los 55 endpoints de movimiento. Todos devolvieron terreno válido; no hubo muestras de mar ni raycasts sin suelo. Los escenarios 6, 7 y 11 usan el extremo bajo del rango por su mayor desnivel. Los centros y endpoints existentes se conservaron porque la medición no justificó alterar escena ni Workflow.
 
 El HUD publica los estados `ZONA: PREPARADA`, `ZONA: CONTRAYENDO`, `ZONA: EN MOVIMIENTO`, `ZONA FINAL: CERRANDO` y `MUERTE SUBITA` mediante widgets ya registrados.
+
+## ZAREK GLOO STORM
+
+La dirección final usa azul eléctrico dominante, hielo azul profundo, grietas cian controladas y una `Z` central de gran tamaño. No contiene animales, caras, mascotas ni personajes. Las fuentes originales frontal, posterior, logotipo y preview están en `Design/ZarekGlooStorm/`.
+
+Craftland expone en `IceWall` una `WeaponSkinID` (`Skin`) y la prioridad de configuración del jugador, pero el catálogo de 187 `weaponskin` accesible al proyecto es exclusivamente oficial y de solo lectura. El MCP no ofrece una operación compatible para convertir una textura importada en `WeaponSkinID`; por eso no se presenta el recurso como una skin oficial personalizada.
+
+La alternativa soportada es `ZarekGlooStorm_Overlay.prefab`: dos planos visuales, frontal y posterior, con materiales móviles `BRMobile/UGC/AlphaBlendColor`, sin `Collider`, `ColliderShape` ni `Rigidbody`. `PlayerController.OnUseConsumable` crea el prefab al desplegar `EResItem.GlooWall` y lo parenta a la pared real. Así se conserva la entidad oficial responsable de salud, dimensiones, colisión, daño, destrucción, colocación y cantidad de inventario.
+
+Estado: integrado y compilado; pendiente de prueba visual runtime y multicliente. La automatización nativa de Windows no estuvo disponible en la sesión final, por lo que no se afirma que la sincronización visual o la orientación frontal/posterior estén aprobadas en cliente.
 
 ## Sistema visual
 
@@ -61,8 +73,12 @@ La identidad usa una `Z` angular de lectura inmediata. El marcador prioriza dato
 | `Design/ZarekBrand/zarek-scoreboard-concept.png` | 1672×941 | referencia del marcador de tres filas | concepto, no integrado |
 | `Design/ZarekBrand/zarek-final-screen-concept.png` | 1672×941 | referencia de pantalla de campeones | concepto, no integrado |
 | `Design/ZarekBrand/zarek-armory-concept.png` | 1672×941 | referencia de tienda `ZAREK ARMORY` | concepto, no integrado |
+| `Design/ZarekGlooStorm/ZarekGlooStorm_Front.png` | 1774×887, ARGB | arte original frontal | importado como textura funcional del overlay |
+| `Design/ZarekGlooStorm/ZarekGlooStorm_Back.png` | 1773×887, ARGB | arte original posterior | importado como textura funcional del overlay |
+| `Design/ZarekGlooStorm/ZarekGlooStorm_Logo.png` | 1536×1024, ARGB | emblema canónico Z | fuente de diseño |
+| `Design/ZarekGlooStorm/ZarekGlooStorm_Preview.png` | 1672×941 | presentación conceptual | referencia, no usada como skin funcional |
 
-Las cinco imágenes se generaron con la herramienta integrada de generación de imágenes. No se usaron imágenes de terceros como referencia. Solo el emblema canónico se convirtió en activo del juego; los otros cuatro archivos siguen siendo mockups de dirección visual.
+Las fuentes visuales se generaron con la herramienta integrada de generación de imágenes y no reutilizan arte de terceros. En el bloque de marca general, solo el emblema canónico se convirtió en activo del juego; los otros cuatro archivos siguen siendo mockups. En el bloque Gloo, únicamente las caras frontal y posterior se importaron como texturas del overlay; el preview permanece fuera de `Assets/`.
 
 ## Cambios FC aplicados
 

@@ -2,6 +2,44 @@
 
 Todos los cambios relevantes del proyecto se registran aquí. El proyecto aún no usa versionado semántico formal.
 
+## 2026-11-13 — Zonas XL + ZAREK GLOO STORM
+
+### Añadido
+
+- Matriz de radios XL por escenario: 75–95 m iniciales, 50–63 m en la primera contracción y 35–44 m después del movimiento.
+- Mapa independiente `safeZonesMovingEndRadius` para evitar una resta genérica que producía finales demasiado pequeños.
+- Arte original frontal/posterior ZAREK GLOO STORM, predominantemente azul, con gran Z central y grietas cian.
+- Dos materiales móviles y prefab visual de dos caras, creados y guardados mediante Craftland Studio MCP.
+- Registro oficial `EResPrefab.ZarekGlooStormOverlay`.
+- Listener `OnUseConsumable` que adjunta el overlay a cada pared Gloo creada y valida valores `nil`.
+- `ZAREK_GLOO_STORM.md` con el mecanismo real, límites del motor e inventario de recursos.
+
+### Investigación
+
+- Confirmado que `IceWall.Skin` recibe `WeaponSkinID` y permite prioridad de configuración del jugador.
+- Confirmado que las 187 `weaponskin` disponibles son recursos oficiales `lib://` de solo lectura.
+- No existe en el MCP disponible una ruta oficial para crear `WeaponSkinID` desde PNG/material/prefab importado; el recurso ZAREK se integra como overlay y no se presenta como skin oficial.
+
+### Conservado
+
+- Tres rondas, 20 paredes Gloo por ronda, Workflow, puntuación, persistencia, tienda y protecciones de combate existentes.
+- Entidad oficial Gloo, su salud, colisión, dimensiones, daño, colocación y destrucción.
+- HUD y branding ZAREK ya integrados.
+
+### Validación
+
+- 176 muestras radiales y 440 muestras de endpoints: todas sobre terreno válido, sin mar ni raycasts vacíos.
+- Prefab verificado con `MeshRender` únicamente en sus dos caras y sin collider.
+- `fccompile.exe -i Assets`: salida `0`, 0 errores y 67 advertencias heredadas.
+- `game-build` debug y release: aprobados; `FEUserLevelData.bytes` generado.
+- Permanece el diagnóstico previo del `TextEntity` del monumento; no se detectaron errores nuevos del overlay o de las zonas durante build.
+
+### Pendiente
+
+- Prueba jugable de orientación, escala, colisión, destrucción, cronómetros y tres rondas.
+- Validación multicliente y móvil de replicación/rendimiento.
+- La automatización nativa de Windows no estuvo disponible (`native pipe unavailable`); estas pruebas no se marcaron como aprobadas.
+
 ## 2026-11-12 — Evolución visual y competitiva 2.0
 
 ### Añadido
