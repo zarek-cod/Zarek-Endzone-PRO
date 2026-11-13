@@ -2,6 +2,44 @@
 
 Todos los cambios relevantes del proyecto se registran aquí. El proyecto aún no usa versionado semántico formal.
 
+## 2026-11-12 — Evolución visual y competitiva 2.0
+
+### Añadido
+
+- Cabecera persistente ZAREK en `GameInfo.ui` con emblema registrado, placa oscura, acento cian, título y lema.
+- Estados de zona en el HUD real: preparada, contrayendo, en movimiento, cierre final y muerte súbita.
+- Temporizador visible también durante los 60 segundos de preparación.
+- Tabla competitiva de radios para los 11 escenarios.
+- Guardas de seguridad para datos de escenario ausentes, listas de endpoints vacías, endpoints `nil` y selección de escenario no inicializada.
+
+### Modificado
+
+- El monumento celeste ahora usa tres líneas (`ZAREK`, `ENDZONE PRO`, `DOMINA LA ULTIMA ZONA`), tamaño más legible y posición elevada sin colisión.
+- Preparación sincronizada a 60 s en FC y Workflow.
+- Contracción, movimiento y cierre final sincronizados a 60 s efectivos; `Combat` y `MovingSafeZone` conservan 5 s de margen de fase.
+- Radios iniciales ajustados a 48–60 m, primer cierre a 28–33 m y segundo cierre a 20–25 m.
+- Las tres rondas seleccionan escenarios distintos, con fallback determinista.
+- Retirada la invocación al grafo obsoleto y no montado `PlayersTimerUI`.
+
+### Conservado
+
+- Tres rondas y 20 paredes gloo.
+- Puntuación, persistencia, tienda interactiva, cantidad actual de equipos y protecciones de combate del PR #1.
+
+### Validación
+
+- `fccompile.exe -i Assets`: salida `0`, 0 errores y 67 advertencias heredadas.
+- `git diff --check`: aprobado.
+- `game-build` debug y build release final: aprobados; `FEUserLevelData.bytes` generado.
+- Dos cargas reales superaron el antiguo bloqueo del 0 % y entraron al mapa.
+- HUD ZAREK, marcador, `Ronda 1–3`, escenario y tienda real comprobados visualmente.
+- Eliminado el error runtime de `PlayersTimerUI`; permanece el diagnóstico no bloqueante del preset oficial `TextEntity` y el mensaje asociado de propiedad desconocida al cargar.
+
+### Pendiente
+
+- Partida completa de tres rondas, cronometraje de las zonas, pantalla final y validación multicliente/resolución.
+- Inspección del monumento celeste desde la cámara del jugador en los 11 escenarios.
+
 ## 2026-11-11 — Integración real de identidad ZAREK
 
 ### Añadido

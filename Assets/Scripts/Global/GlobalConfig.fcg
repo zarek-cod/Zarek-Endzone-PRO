@@ -11,6 +11,6 @@ static graph GlobalConfig {
     grenadesPerRound int = 2
     medkitsPerRound int = 3
     inhalersPerRound int = 2
-    firstRoundPrepSeconds int = 30
-    nextRoundPrepSeconds int = 30 // Match the fixed 30s workflow phase duration
+    firstRoundPrepSeconds int = 60
+    nextRoundPrepSeconds int = 60 // Matches the editor-authoritative Before Combat phase
 }

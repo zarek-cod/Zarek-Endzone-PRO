@@ -7,7 +7,6 @@ import "StdLibrary.fcc" as StdLib
 import "EditorGenLib.fcc" as EditorLib
 import "Player.fcc" as Player
 import "Workflow.fcc" as Workflow
-import "../GlobalData/PlayersTimerUI.fcg" as PlayersTimerUI
 import "Collection.fcc" as Collection
 import "../GlobalData/SpawnPoints.fcg" as SpawnPoints
 import "Math.fcc" as Math
@@ -31,6 +30,7 @@ import "../../Player/PlayerUtils.fcg" as PlayerUtils
 import "Economy.fcc" as Economy
 import "../GlobalData/TargetAndCombatTimer.fcg" as TargetAndCombatTimer
 import "Hud.fcc" as Hud
+import "Map.fcc" as Map
 import "../GlobalConfig.fcg" as GlobalConfig
 graph GlobalPreparationPhaseManager {
     // Script variable storing the old stage index
@@ -59,14 +59,22 @@ graph GlobalPreparationPhaseManager {
             // Initialize data before combat
             wait InitDataBeforeCombat(globalEntity<GlobalGameManager>.prepPhaseDuration * 1000, oldStagesList[List.Length(oldStagesList) - 1], phase);
         } else if phase<Phase>.Index == EPhase.Combat {
-            start globalEntity<GlobalSafeZones>.ActivateSafeZone(oldStagesList[List.Length(oldStagesList) - 1], phase)
+            ActivateCurrentSafeZone(phase)
         } else if phase<Phase>.Index == EPhase.MovingSafeZone {
-            start globalEntity<GlobalSafeZones>.ActivateSafeZone(oldStagesList[List.Length(oldStagesList) - 1], phase)
+            ActivateCurrentSafeZone(phase)
         } else if phase<Phase>.Index == EPhase.LastSafeZone {
-            start globalEntity<GlobalSafeZones>.ActivateSafeZone(oldStagesList[List.Length(oldStagesList) - 1], phase)
+            ActivateCurrentSafeZone(phase)
         } else if phase<Phase>.Index == EPhase.SuddenDeath {
-            start globalEntity<GlobalSafeZones>.ActivateSafeZone(oldStagesList[List.Length(oldStagesList) - 1], phase)
+            ActivateCurrentSafeZone(phase)
         }
+    }
+
+    func ActivateCurrentSafeZone(phase entity<Phase>) {
+        if List.Length(oldStagesList) == 0 {
+            LogError("<GlobalPreparationPhaseManager.fcg>: Cannot activate a safe zone before a stage is selected")
+            return
+        }
+        start globalEntity<GlobalSafeZones>.ActivateSafeZone(oldStagesList[List.Length(oldStagesList) - 1], phase)
     }
 
     event OnPhaseEnd(phase entity<Phase>) {
@@ -99,6 +107,7 @@ graph GlobalPreparationPhaseManager {
         start globalEntity<GlobalSafeZones>.ActivateSafeZone(randomStageIndex, phase)  // Activate the safe zone
         globalEntity<CombatRoundCounter>.IncreaseCount(); // Increment the round counter
         globalEntity<TargetAndCombatTimer>.ResetTimer()
+        globalEntity<TargetAndCombatTimer>.StartTimer(duration)
 
         // Initialize player states
         for index, player in GetAllPlayers() {
@@ -136,7 +145,7 @@ graph GlobalPreparationPhaseManager {
         var spawnPattern = globalEntity<SpawnPoints>.GetRandomSpawnPattern(List.Length(spawnPositions))
         globalEntity<SpawnPoints>.SetSpawnPointsActiveStatusForRound(randomStageIndex, true); // Activate spawn points of the current stage
         var endPointPosition = Vector3{0,0,0}
-        if globalEntity<GlobalSafeZones>.safeZoneEndPoints != nil && globalEntity<GlobalSafeZones>.safeZoneEndPoints[randomStageIndex] != nil {
+        if Map.ContainKey(globalEntity<GlobalSafeZones>.safeZoneEndPoints, randomStageIndex) && globalEntity<GlobalSafeZones>.safeZoneEndPoints[randomStageIndex] != nil && List.Length(globalEntity<GlobalSafeZones>.safeZoneEndPoints[randomStageIndex]) > 0 {
             endPointPosition = globalEntity<GlobalSafeZones>.safeZoneEndPoints[randomStageIndex][0]<Transform>.Position
             // LogError("endPointPosition: " + endPointPosition)
         }
@@ -158,7 +167,7 @@ graph GlobalPreparationPhaseManager {
         WaitForMillisecond(duration) // Wait for the specified duration
 
         ////////////////////////
-        // The workflow can automatically leave Before Combat at the 30s boundary.
+        // The workflow can automatically leave Before Combat at its configured boundary.
         // Avoid a duplicate phase switch if it has already advanced.
         if globalEntity<Global>.CurrentPhaseIndex == EPhase.__Before6Combat__ {
             SwitchPhase(EPhase.FirstShrinkPrep)
@@ -287,7 +296,16 @@ graph GlobalPreparationPhaseManager {
             }
             attempts++
         }
-        return oldValue // After 20 attempts, return the old value if no new value is found
+        // Deterministic fallback: preserve the no-repeat rule even if the random
+        // generator returns used stages in all attempts.
+        var fallbackStage = 0
+        while fallbackStage < globalEntity<GlobalGameManager>.availableStages {
+            if !List.Contain(oldStagesList, fallbackStage) {
+                return fallbackStage
+            }
+            fallbackStage++
+        }
+        return oldValue // All configured stages have already been used.
     }
 
     /*

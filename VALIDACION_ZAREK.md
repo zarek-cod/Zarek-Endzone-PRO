@@ -1,6 +1,6 @@
 # Validación — ZAREK ENDZONE PRO
 
-Última actualización: 2026-11-11.
+Última actualización: 2026-11-12.
 
 ## Entorno
 
@@ -13,6 +13,65 @@
 - Modelo reportado al compilador: `unknown-model`, porque el runtime no expone un identificador de modelo exacto reutilizable.
 
 ## Validaciones ejecutadas
+
+### Evolución visual y competitiva 2.0 — 2026-11-12
+
+Cambios verificados:
+
+- `GameInfo.ui` muestra una cabecera ZAREK persistente con emblema registrado, título, lema y paleta azul/cian; los widgets reales de ronda, tiempo y marcador siguen funcionando;
+- `New Scene.scene` contiene `ZAREK Sky Monument` a `y = 130`, con tres líneas, billboard y sin collider;
+- Workflow confirmado en el editor con `3` rondas y duraciones `Before Combat = 60`, `FirstShrinkPrep = 5`, `Combat = 65`, `MovingSafeZone = 65`, `LastSafeZone = 60`;
+- `GlobalSafeZones.fcg` usa radios iniciales de 48–60 m, primer cierre de 28–33 m, segundo cierre de 20–25 m y cierre final a 0 m, todos con 60 segundos efectivos;
+- se añadieron guardas para mapa de zona incompleto, lista de puntos finales vacía, endpoint `nil` y lista de escenarios vacía;
+- el temporizador persistente se inicia también durante los 60 segundos de preparación;
+- las tres rondas eligen escenarios distintos; se conserva el fallback determinista si el generador aleatorio repite índices;
+- se eliminó la llamada runtime a `PlayersTimerUI`, grafo obsoleto no montado que generaba `No hay script ... PlayersTimerUI ... en Entidad`;
+- se conservaron `esportMaxRound = 3` y `glooWallsPerRound = 20`; no se cambió puntuación, persistencia ni lógica de final de combate del PR #1.
+
+Matriz de radios validada estáticamente:
+
+| Escenario | Inicial | 1.er cierre | Tras movimiento | Final | Duración por cierre |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| STAGE_1 | 48 | 28 | 20 | 0 | 60 s |
+| STAGE_2 | 50 | 29 | 21 | 0 | 60 s |
+| STAGE_3 | 58 | 33 | 25 | 0 | 60 s |
+| STAGE_4 | 55 | 32 | 24 | 0 | 60 s |
+| STAGE_5 | 54 | 31 | 23 | 0 | 60 s |
+| STAGE_6 | 56 | 32 | 24 | 0 | 60 s |
+| STAGE_7 | 60 | 33 | 25 | 0 | 60 s |
+| STAGE_8 | 55 | 31 | 23 | 0 | 60 s |
+| STAGE_9 | 48 | 28 | 20 | 0 | 60 s |
+| STAGE_10 | 48 | 28 | 20 | 0 | 60 s |
+| STAGE_11 | 52 | 30 | 22 | 0 | 60 s |
+
+Validación técnica final:
+
+```text
+fccompile.exe -i Assets -agent unknown-model -session 2176be10-916b-4600-aa2f-e8e98ba1971e
+```
+
+- código de salida: `0`;
+- errores FC: `0`;
+- advertencias: `67`, heredadas de las mismas familias ya registradas;
+- `git diff --check`: aprobado;
+- `game-build` debug y build release final: aprobados, con `Temp/Build/FEUserLevelData.bytes` generado;
+- prueba runtime: el cliente superó 0 %, entró al mapa y mostró dos escenarios seleccionados en ejecuciones independientes (`Torre del Reloj` y `Ciudad del Cabo`), `Ronda 1–3`, cabecera ZAREK, marcador funcional y tienda real abierta;
+- la segunda ejecución ya no presentó el error del script obsoleto `PlayersTimerUI`.
+
+Estado por categoría:
+
+- **Implementado y probado:** carga del cliente, HUD ZAREK persistente, marcador real, contador de tres rondas, nombre de escenario y apertura de la tienda real.
+- **Implementado, pendiente de prueba completa:** temporizador de preparación, progresión temporal de los tres cierres, no repetición a lo largo de las tres rondas, letrero visto desde la cámara jugable, apertura de 3 segundos y pantalla final.
+- **Recurso creado, no integrado:** los cuatro mockups de cielo, marcador, pantalla final y armory continúan solo como referencias; la UI interactiva usa recursos reales.
+- **Diagnóstico pendiente:** el preset oficial `TextEntity` sigue emitiendo `Find no ecaItem for id:-125000` y el cliente registra `No hay propiedad -97000 en Entidad` al cargar; no impiden entrar al mapa ni usar HUD/tienda.
+
+Pruebas Craftland pendientes:
+
+1. Jugar las tres rondas y cronometrar cada transición de zona hasta 0 m.
+2. Confirmar visualmente tres escenarios distintos en una misma partida.
+3. Ver el monumento celeste desde cada escenario y revisar oclusión/distancia.
+4. Capturar la apertura de 3 segundos y la pantalla final real.
+5. Repetir con varios clientes y resoluciones 16:9/16:10.
 
 ### Integración visual ZAREK — 2026-11-11
 

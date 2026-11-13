@@ -6,6 +6,40 @@ La identidad ZAREK ya está integrada en recursos reales de Craftland Studio med
 
 Las imágenes de concepto permanecen como referencias. No sustituyen widgets interactivos ni datos reales: la integración conserva los controles, callbacks, columnas y lógica existentes.
 
+## Evolución 2.0 — integración jugable
+
+La marca persistente ya forma parte de `GameInfo.ui`, no de una captura conceptual. El encabezado superior izquierdo combina el sprite registrado `ZarekLogo`, una placa `#080D18`, acento eléctrico `#00D9FF`, título `ZAREK` y subtítulo `ENDZONE PRO • DOMINA LA ÚLTIMA ZONA`. El HUD real conserva el temporizador, la ronda, el escenario y el marcador competitivo.
+
+El monumento de escena fue refinado como una composición vertical legible:
+
+```text
+ZAREK
+ENDZONE PRO
+DOMINA LA ULTIMA ZONA
+```
+
+La entidad oficial `TextEntity` se llama `ZAREK Sky Monument`, está a `y = 130`, usa billboard, no tiene collider y no reemplaza ningún elemento jugable. Craftland Studio continúa mostrando un diagnóstico de editor para ese preset (`Find no ecaItem ... TextEntity`); el cliente sí supera la carga y entra al mapa, por lo que el diagnóstico está documentado como no bloqueante y pendiente de corrección del preset/editor.
+
+## Zonas competitivas por escenario
+
+Las tres operaciones jugables duran 60 segundos: contracción inicial, desplazamiento y cierre final a cero. El Workflow conserva un margen de 5 segundos en `Combat` y `MovingSafeZone` (65 segundos por fase) y una preparación de 60 segundos. La selección evita repetir escenario durante las tres rondas.
+
+| # | Escenario (`STAGE_n`) | Radio inicial | 1.er cierre | Tras movimiento | Cierre final |
+| ---: | --- | ---: | ---: | ---: | ---: |
+| 1 | Torre del Reloj | 48 m | 28 m | 20 m | 0 m |
+| 2 | Cementerio | 50 m | 29 m | 21 m | 0 m |
+| 3 | Cima | 58 m | 33 m | 25 m | 0 m |
+| 4 | Hangar | 55 m | 32 m | 24 m | 0 m |
+| 5 | Katulistiwa | 54 m | 31 m | 23 m | 0 m |
+| 6 | Observatorio | 56 m | 32 m | 24 m | 0 m |
+| 7 | Molino | 60 m | 33 m | 25 m | 0 m |
+| 8 | Astillero | 55 m | 31 m | 23 m | 0 m |
+| 9 | Ciudad del Cabo | 48 m | 28 m | 20 m | 0 m |
+| 10 | Ciudad del Cabo | 48 m | 28 m | 20 m | 0 m |
+| 11 | Franja Bimasakti | 52 m | 30 m | 22 m | 0 m |
+
+El HUD publica los estados `ZONA: PREPARADA`, `ZONA: CONTRAYENDO`, `ZONA: EN MOVIMIENTO`, `ZONA FINAL: CERRANDO` y `MUERTE SUBITA` mediante widgets ya registrados.
+
 ## Sistema visual
 
 | Rol | Color | Uso propuesto |

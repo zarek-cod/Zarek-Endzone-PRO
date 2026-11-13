@@ -19493,7 +19493,7 @@
       "entityVersion": 3
     },
     {
-      "_entityName": "ZAREK Sky Sign",
+      "_entityName": "ZAREK Sky Monument",
       "_tag": {
         "type": "SceneEditEntity",
         "resourceId": "Primitive/Empty"
@@ -19560,7 +19560,7 @@
         "Visibility": {}
       },
       "propsData": {
-        "TextKey": "ZAREK ENDZONE PRO",
+        "TextKey": "ZAREK\nENDZONE PRO\nDOMINA LA ULTIMA ZONA",
         "fontColor": {
           "r": 0,
           "g": 217,
@@ -19573,17 +19573,17 @@
           "italic": false,
           "underline": false
         },
-        "FontSize": 150,
+        "FontSize": 82,
         "IgnoreDepth": false,
         "AlwaysInScreen": false,
-        "Depth": 1.1,
-        "Width": 42,
-        "Height": 7,
+        "Depth": 1.15,
+        "Width": 36,
+        "Height": 16,
         "FondOverFlowMod": 2,
         "fontType": "UIFONT_LATIN",
         "fontStyle": 0,
         "_levelObjectID": 1,
-        "TextDisplay": "ZAREK ENDZONE PRO",
+        "TextDisplay": "ZAREK\nENDZONE PRO\nDOMINA LA ULTIMA ZONA",
         "alignment": 2,
         "alignmentVertical": 2,
         "lineSpacing": 1,
@@ -19642,8 +19642,8 @@
       },
       "objColor": {
         "surfaceColor": {
-          "r": 0,
-          "g": 217,
+          "r": 244,
+          "g": 250,
           "b": 255,
           "a": 1
         }
@@ -19653,7 +19653,8 @@
         "g": 217,
         "b": 255,
         "a": 1
-      }
+      },
+      "aiPrompt": "Premium ZAREK sky wordmark; non-collidable billboard above the arena"
     }
   ],
   "prefabVariant": null,

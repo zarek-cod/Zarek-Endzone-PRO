@@ -26,7 +26,6 @@ import "../GlobalData/CombatRoundCounter.fcg" as CombatRoundCounter
 import "../GlobalData/SpawnPoints.fcg" as SpawnPoints
 import "../GlobalManager/GlobalPreparationPhaseManager.fcg" as GlobalPreparationPhaseManager
 import "../GlobalData/TargetAndCombatTimer.fcg" as TargetAndCombatTimer
-import "../GlobalData/PlayersTimerUI.fcg" as PlayersTimerUI
 import "../GlobalData/PlayersTutorial.fcg" as PlayersTutorial
 import "../GlobalData/PlayersShopIcon.fcg" as PlayersShopIcon
 import Res from "EditorGenLib.fcc"
@@ -538,6 +537,10 @@ graph GlobalUIManager {
     */
     async func CreateRoundInfoHUD(player entity<Player>){
         var currentCount = globalEntity<CombatRoundCounter>.GetCount() // Get the current round count
+        if List.Length(globalEntity<GlobalPreparationPhaseManager>.oldStagesList) == 0 {
+            LogError("<GlobalUIManager.fcg>: Cannot create round info before a stage is selected")
+            return
+        }
         var currentStageName = globalEntity<SpawnPoints>.GetNameForStage(globalEntity<GlobalPreparationPhaseManager>.oldStagesList[List.Length(globalEntity<GlobalPreparationPhaseManager>.oldStagesList) - 1]) // Get the name of the current stage
         if !Map.ContainKey(roundInfoUIDitct, player) {
             CreateBuiltInUI(out var createdUI, player, EResInternalHud.RoundInfoHud as BuiltInUIType)
