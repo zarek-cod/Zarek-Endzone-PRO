@@ -13,7 +13,6 @@ import "Hostility.fcc" as Hostility
 import "Workflow.fcc" as Workflow
 import "Items.fcc" as Items
 // import "../../Libraries/CustomEvent.fcc" as CustomEvent
-import "../GlobalData/PlayersTimerUI.fcg" as PlayersTimerUI
 import "../GlobalData/PlayersShopIcon.fcg" as PlayersShopIcon
 import "./GlobalUIManager.fcg" as GlobalUIManager
 import "../GlobalData/TeamData.fcg" as TeamData
@@ -39,9 +38,9 @@ import "../GlobalData/CombatRoundCounter.fcg" as CombatRoundCounter
 import "../GlobalManager/GlobalLeaderboard.fcg" as GlobalLeaderboard
 graph GlobalGameManager {
     winPoints int = 3 // Number of points required to win the game
-    maxRoundLock int = 2 // Change to another map after a certain round
+    maxRoundLock int = 1 // ZAREK 2.0: use a different scenario in each of the three rounds
     availableStages int = 11 // Number of available stages in the game, goes together with the number of safe zones and spawn point groups in GlobalSafeZones.cfg and SpawnPoints.cfg
-    prepPhaseDuration int = 30 // Initial buying phase duration; adjusted by preparation manager
+    prepPhaseDuration int = 60 // Initial buying phase duration; synchronized with Workflow
     isMatchEnded bool = false // Flag to check if the match has ended
     isRoundEnded bool = false // Flag to check if the round has ended
     /* 
@@ -162,7 +161,6 @@ graph GlobalGameManager {
     */
     async func PreparationPhaseUIHandler(phaseDuration int) {
         WaitForMillisecond(phaseDuration - 5000)
-        globalEntity<PlayersTimerUI>.SetTimerVisibility(false)
         for index, player in GetAllPlayers() {
             start globalEntity<GlobalUIManager>.Enable5sCountdownHUD(player)
         }

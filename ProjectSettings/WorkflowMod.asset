@@ -86,7 +86,7 @@
           },
           "editorLockValue": false,
           "editorVisibleValue": true,
-          "gameDuration": 30,
+          "gameDuration": 60,
           "ecaScripts": [],
           "ecaProps": {
             "Phase": {},
@@ -142,7 +142,7 @@
           },
           "editorLockValue": false,
           "editorVisibleValue": true,
-          "gameDuration": 38,
+          "gameDuration": 65,
           "ecaScripts": [],
           "ecaProps": {
             "Phase": {},
@@ -198,7 +198,7 @@
           },
           "editorLockValue": false,
           "editorVisibleValue": true,
-          "gameDuration": 30,
+          "gameDuration": 60,
           "ecaScripts": [],
           "ecaProps": {
             "Phase": {},
@@ -360,208 +360,11 @@
   "modOpen": true,
   "curActiveEntity": {
     "_tag": {
-      "type": "ff.RoundEntity1",
-      "resourceId": "Round"
+      "type": "ff.PhaseEntity1",
+      "resourceId": "Phase"
     },
-    "_entityId": "hHHN98oD",
-    "children": [
-      {
-        "_tag": {
-          "type": "ff.PhaseEntity1",
-          "resourceId": "Phase"
-        },
-        "_entityId": "SB3CG21V",
-        "children": [],
-        "prefabVariant": null,
-        "activeValue": {
-          "selfValue": true,
-          "valueTag": "activeValue"
-        },
-        "unlockedValue": {
-          "selfValue": true,
-          "valueTag": "unlockedValue"
-        },
-        "editorLockValue": false,
-        "editorVisibleValue": true,
-        "gameDuration": 30,
-        "ecaScripts": [],
-        "ecaProps": {
-          "Phase": {},
-          "Entity": {}
-        },
-        "modId": 18,
-        "_entityName": "Before Combat",
-        "phaseIndex": 4457
-      },
-      {
-        "_tag": {
-          "type": "ff.PhaseEntity1",
-          "resourceId": "Phase"
-        },
-        "_entityId": "32KI2tkg",
-        "children": [],
-        "prefabVariant": null,
-        "activeValue": {
-          "selfValue": true,
-          "valueTag": "activeValue"
-        },
-        "unlockedValue": {
-          "selfValue": true,
-          "valueTag": "unlockedValue"
-        },
-        "editorLockValue": false,
-        "editorVisibleValue": true,
-        "gameDuration": 5,
-        "ecaScripts": [],
-        "ecaProps": {
-          "Phase": {},
-          "Entity": {}
-        },
-        "modId": 18,
-        "_entityName": "FirstShrinkPrep",
-        "phaseIndex": 7700
-      },
-      {
-        "_tag": {
-          "type": "ff.PhaseEntity1",
-          "resourceId": "RoundPrepare"
-        },
-        "_entityId": "abxyGeX2",
-        "children": [],
-        "prefabVariant": null,
-        "activeValue": {
-          "selfValue": true,
-          "valueTag": "activeValue"
-        },
-        "unlockedValue": {
-          "selfValue": true,
-          "valueTag": "unlockedValue"
-        },
-        "editorLockValue": false,
-        "editorVisibleValue": true,
-        "gameDuration": 38,
-        "ecaScripts": [],
-        "ecaProps": {
-          "Phase": {},
-          "Entity": {}
-        },
-        "modId": 18,
-        "_entityName": "Combat",
-        "phaseIndex": 2976
-      },
-      {
-        "_tag": {
-          "type": "ff.PhaseEntity1",
-          "resourceId": "Phase"
-        },
-        "_entityId": "0GPADSfD",
-        "children": [],
-        "prefabVariant": null,
-        "activeValue": {
-          "selfValue": true,
-          "valueTag": "activeValue"
-        },
-        "unlockedValue": {
-          "selfValue": true,
-          "valueTag": "unlockedValue"
-        },
-        "editorLockValue": false,
-        "editorVisibleValue": true,
-        "gameDuration": 65,
-        "ecaScripts": [],
-        "ecaProps": {
-          "Phase": {},
-          "Entity": {}
-        },
-        "modId": 18,
-        "_entityName": "MovingSafeZone",
-        "phaseIndex": 1659
-      },
-      {
-        "_tag": {
-          "type": "ff.PhaseEntity1",
-          "resourceId": "Phase"
-        },
-        "_entityId": "jPcm3Hny",
-        "children": [],
-        "prefabVariant": null,
-        "activeValue": {
-          "selfValue": true,
-          "valueTag": "activeValue"
-        },
-        "unlockedValue": {
-          "selfValue": true,
-          "valueTag": "unlockedValue"
-        },
-        "editorLockValue": false,
-        "editorVisibleValue": true,
-        "gameDuration": 30,
-        "ecaScripts": [],
-        "ecaProps": {
-          "Phase": {},
-          "Entity": {}
-        },
-        "modId": 18,
-        "_entityName": "LastSafeZone",
-        "phaseIndex": 1124
-      },
-      {
-        "_tag": {
-          "type": "ff.PhaseEntity1",
-          "resourceId": "Phase"
-        },
-        "_entityId": "Bmqspfwl",
-        "children": [],
-        "prefabVariant": null,
-        "activeValue": {
-          "selfValue": true,
-          "valueTag": "activeValue"
-        },
-        "unlockedValue": {
-          "selfValue": true,
-          "valueTag": "unlockedValue"
-        },
-        "editorLockValue": false,
-        "editorVisibleValue": true,
-        "gameDuration": 900,
-        "ecaScripts": [],
-        "ecaProps": {
-          "Phase": {},
-          "Entity": {}
-        },
-        "modId": 18,
-        "_entityName": "SuddenDeath",
-        "phaseIndex": 882
-      },
-      {
-        "_tag": {
-          "type": "ff.PhaseEntity1",
-          "resourceId": "Phase"
-        },
-        "_entityId": "k9ZGiCvw",
-        "children": [],
-        "prefabVariant": null,
-        "activeValue": {
-          "selfValue": true,
-          "valueTag": "activeValue"
-        },
-        "unlockedValue": {
-          "selfValue": true,
-          "valueTag": "unlockedValue"
-        },
-        "editorLockValue": false,
-        "editorVisibleValue": true,
-        "gameDuration": 8,
-        "ecaScripts": [],
-        "ecaProps": {
-          "Phase": {},
-          "Entity": {}
-        },
-        "modId": 18,
-        "_entityName": "EndCombat",
-        "phaseIndex": 5474
-      }
-    ],
+    "_entityId": "jPcm3Hny",
+    "children": [],
     "prefabVariant": null,
     "activeValue": {
       "selfValue": true,
@@ -573,19 +376,19 @@
     },
     "editorLockValue": false,
     "editorVisibleValue": true,
-    "roundCount": 3,
-    "modId": 18,
+    "gameDuration": 60,
     "ecaScripts": [],
     "ecaProps": {
-      "Round": {},
+      "Phase": {},
       "Entity": {}
     },
-    "_entityName": "FE_0_HW_GAME_EDITOR_FLOW_ROUND",
-    "phaseIndex": 998
+    "modId": 18,
+    "_entityName": "LastSafeZone",
+    "phaseIndex": 1124
   },
   "roundCount": 4,
   "discriminator": "ISceneLike",
   "_entityName": "T_43_YU_WS_MODULE_WORKFLOW",
   "showSwitch": false
 }
-//"{FE:{"v":"1.16.4170774","c":{"FF":5001},"s":100}
+//"{FE:{"v":"1.19.4689915","c":{"FF":5001},"s":100}

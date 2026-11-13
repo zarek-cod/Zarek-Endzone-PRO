@@ -64,6 +64,31 @@ graph PlayerController {
         weapon<Weapon>.CurrentAmmo = 100
     }
 
+    /*
+    Craftland exposes Gloo Wall appearance through an official WeaponSkinID,
+    but imported textures cannot be registered as a custom weapon skin. This
+    non-collidable overlay is therefore attached to the spawned wall without
+    changing the wall entity, its health, collision or deployment behaviour.
+    */
+    event OnUseConsumable(consumableID ItemIDType, item entity<Entity>, spawnedItem entity<Entity>) {
+        if consumableID != EResItem.GlooWall as ItemIDType {
+            return
+        }
+        if spawnedItem == nil {
+            LogError("<PlayerController.fcg>: Gloo Wall use did not return a spawned entity")
+            return
+        }
+        CreateFromPrefab(out var zarekGlooOverlay, EResPrefab.ZarekGlooStormOverlay)
+        if zarekGlooOverlay == nil {
+            LogError("<PlayerController.fcg>: Could not create ZAREK GLOO STORM overlay")
+            return
+        }
+        SetParent(spawnedItem as entity<Transform>, zarekGlooOverlay as entity<Transform>, false)
+        zarekGlooOverlay<Transform>.LocalPosition = Vector3{0, 0, 0}
+        zarekGlooOverlay<Transform>.LocalRotation = Vector3{0, 0, 0}
+        zarekGlooOverlay<Transform>.LocalScale = Vector3{1, 1, 1}
+    }
+
     // Moved to GlobalCombatManager.fcg
     // event OnPlayerEliminate(player entity<Player>, eliminatedPlayer entity<Player>, damageType DamageType) {
     //     // globalEntity<PlayerData>.IncreaseKill(player)

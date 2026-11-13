@@ -67,7 +67,7 @@
                 "italic": false,
                 "underline": false
               },
-              "color": "#ffffff",
+              "color": "#00D9FF",
               "alignment": {
                 "h": "center",
                 "v": "middle"
@@ -82,12 +82,30 @@
                 "b": 0,
                 "a": 0
               },
-              "shadow": false,
-              "shadowColor": "#000000",
+              "shadow": true,
+              "shadowColor": "#008CFF",
               "shadowOffset": {
                 "x": 1,
                 "y": 1
-              }
+              },
+              "shadowAlpha": 1,
+              "gradient": 0,
+              "gradientTop": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 1
+              },
+              "gradientBottom": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 1
+              },
+              "outline": false,
+              "outlineColor": "#000000",
+              "outlineAlpha": 1,
+              "outlineOffset": 1
             }
           },
           "ecaScripts": [],
@@ -140,7 +158,7 @@
             "y": 30
           }
         },
-        "alpha": 80,
+        "alpha": 92,
         "priority": 0,
         "image": {
           "source": {
@@ -151,7 +169,7 @@
             },
             "fileType": "texture"
           },
-          "color": "#000000",
+          "color": "#080D18",
           "reverse": {
             "x": false,
             "y": false
@@ -186,7 +204,11 @@
             "g": 255,
             "b": 255,
             "a": 1
-          }
+          },
+          "isApplyAnimation": false,
+          "animationAtlasID": null,
+          "animationFrameRate": 30,
+          "animationLoop": true
         }
       },
       "ecaScripts": [],
@@ -262,7 +284,7 @@
                 "italic": false,
                 "underline": false
               },
-              "color": "#ffffff",
+              "color": "#F4FAFF",
               "alignment": {
                 "h": "left",
                 "v": "middle"
@@ -282,7 +304,25 @@
               "shadowOffset": {
                 "x": 1,
                 "y": 1
-              }
+              },
+              "shadowAlpha": 1,
+              "gradient": 0,
+              "gradientTop": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 1
+              },
+              "gradientBottom": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 1
+              },
+              "outline": false,
+              "outlineColor": "#000000",
+              "outlineAlpha": 1,
+              "outlineOffset": 1
             }
           },
           "ecaScripts": [],
@@ -335,7 +375,7 @@
             "y": 30
           }
         },
-        "alpha": 80,
+        "alpha": 92,
         "priority": 0,
         "image": {
           "source": {
@@ -346,7 +386,7 @@
             },
             "fileType": "texture"
           },
-          "color": "#000000",
+          "color": "#080D18",
           "reverse": {
             "x": false,
             "y": false
@@ -381,7 +421,11 @@
             "g": 255,
             "b": 255,
             "a": 1
-          }
+          },
+          "isApplyAnimation": false,
+          "animationAtlasID": null,
+          "animationFrameRate": 30,
+          "animationLoop": true
         }
       },
       "ecaScripts": [],
@@ -459,7 +503,7 @@
                 "italic": false,
                 "underline": false
               },
-              "color": "#ffffff",
+              "color": "#00D9FF",
               "alignment": {
                 "h": "center",
                 "v": "middle"
@@ -474,12 +518,30 @@
                 "b": 0,
                 "a": 0
               },
-              "shadow": false,
-              "shadowColor": "#000000",
+              "shadow": true,
+              "shadowColor": "#008CFF",
               "shadowOffset": {
                 "x": 1,
                 "y": 1
-              }
+              },
+              "shadowAlpha": 1,
+              "gradient": 0,
+              "gradientTop": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 1
+              },
+              "gradientBottom": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 1
+              },
+              "outline": false,
+              "outlineColor": "#000000",
+              "outlineAlpha": 1,
+              "outlineOffset": 1
             }
           },
           "ecaScripts": [],
@@ -532,7 +594,7 @@
             "y": 30
           }
         },
-        "alpha": 80,
+        "alpha": 92,
         "priority": 1,
         "image": {
           "source": {
@@ -543,7 +605,7 @@
             },
             "fileType": "texture"
           },
-          "color": "#000000",
+          "color": "#080D18",
           "reverse": {
             "x": false,
             "y": false
@@ -578,7 +640,11 @@
             "g": 255,
             "b": 255,
             "a": 1
-          }
+          },
+          "isApplyAnimation": false,
+          "animationAtlasID": null,
+          "animationFrameRate": 30,
+          "animationLoop": true
         }
       },
       "ecaScripts": [],
@@ -678,7 +744,25 @@
               "shadowOffset": {
                 "x": 1,
                 "y": 1
-              }
+              },
+              "shadowAlpha": 1,
+              "gradient": 0,
+              "gradientTop": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 1
+              },
+              "gradientBottom": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 1
+              },
+              "outline": false,
+              "outlineColor": "#000000",
+              "outlineAlpha": 1,
+              "outlineOffset": 1
             }
           },
           "ecaScripts": [],
@@ -884,7 +968,25 @@
           "shadowOffset": {
             "x": 1,
             "y": 1
-          }
+          },
+          "shadowAlpha": 1,
+          "gradient": 0,
+          "gradientTop": {
+            "r": 255,
+            "g": 255,
+            "b": 255,
+            "a": 1
+          },
+          "gradientBottom": {
+            "r": 255,
+            "g": 255,
+            "b": 255,
+            "a": 1
+          },
+          "outline": false,
+          "outlineColor": "#000000",
+          "outlineAlpha": 1,
+          "outlineOffset": 1
         }
       },
       "ecaScripts": [],
@@ -1019,6 +1121,567 @@
       "entityTagData": {
         "tagPointers": []
       }
+    },
+    {
+      "_entityName": "ZAREK Persistent Brand",
+      "_tag": {
+        "type": "UIEmptyEntity",
+        "resourceId": ""
+      },
+      "_entityId": "qlYXzojP",
+      "children": [
+        {
+          "_entityName": "Brand Backplate",
+          "_tag": {
+            "type": "UIImageEntity",
+            "resourceId": ""
+          },
+          "_entityId": "daOOzVvc",
+          "children": [],
+          "prefabVariant": null,
+          "activeValue": {
+            "selfValue": true,
+            "valueTag": "activeValue"
+          },
+          "unlockedValue": null,
+          "editorLockValue": false,
+          "editorVisibleValue": true,
+          "propsData": {
+            "activeSelf": true,
+            "transform": {
+              "rotate": 0,
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 0,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 370,
+                "y": 56
+              }
+            },
+            "alpha": 92,
+            "priority": 0,
+            "image": {
+              "source": {
+                "fileId": "b063b0439839b3d97a8fd2aa6a57ef8b",
+                "filePath": "lib://fftextures/WorkshopIconLibrary/T_34_M_WS_ICON_SQUARE.png",
+                "_tag": {
+                  "type": "GFileRefer"
+                },
+                "fileType": "texture"
+              },
+              "color": "#080D18",
+              "reverse": {
+                "x": false,
+                "y": false
+              },
+              "isApplyAnimation": false,
+              "animationAtlasID": null,
+              "animationFrameRate": 30,
+              "animationLoop": true,
+              "fillType": 1,
+              "slicedBorder": {
+                "left": 0,
+                "right": 0,
+                "top": 0,
+                "bottom": 0
+              },
+              "tiledBorder": {
+                "left": 0,
+                "right": 0,
+                "top": 0,
+                "bottom": 0
+              },
+              "centerInvisible": false,
+              "fillDir": 0,
+              "fillAmount": 0,
+              "invertFill": false,
+              "flip": 0,
+              "gradient": 0,
+              "gradientTop": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 1
+              },
+              "gradientBottom": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 1
+              }
+            }
+          },
+          "ecaScripts": [],
+          "ecaProps": {},
+          "componentList": [],
+          "entityTagData": {
+            "tagPointers": []
+          },
+          "m_ApplyingPreviewAnimation": false
+        },
+        {
+          "_entityName": "Electric Accent",
+          "_tag": {
+            "type": "UIImageEntity",
+            "resourceId": ""
+          },
+          "_entityId": "tsgiLJ7z",
+          "children": [],
+          "prefabVariant": null,
+          "activeValue": {
+            "selfValue": true,
+            "valueTag": "activeValue"
+          },
+          "unlockedValue": null,
+          "editorLockValue": false,
+          "editorVisibleValue": true,
+          "propsData": {
+            "activeSelf": true,
+            "transform": {
+              "rotate": 0,
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": -182,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 6,
+                "y": 56
+              }
+            },
+            "alpha": 100,
+            "priority": 2,
+            "image": {
+              "source": {
+                "fileId": "b063b0439839b3d97a8fd2aa6a57ef8b",
+                "filePath": "lib://fftextures/WorkshopIconLibrary/T_34_M_WS_ICON_SQUARE.png",
+                "_tag": {
+                  "type": "GFileRefer"
+                },
+                "fileType": "texture"
+              },
+              "color": "#00D9FF",
+              "reverse": {
+                "x": false,
+                "y": false
+              },
+              "isApplyAnimation": false,
+              "animationAtlasID": null,
+              "animationFrameRate": 30,
+              "animationLoop": true,
+              "fillType": 1,
+              "slicedBorder": {
+                "left": 0,
+                "right": 0,
+                "top": 0,
+                "bottom": 0
+              },
+              "tiledBorder": {
+                "left": 0,
+                "right": 0,
+                "top": 0,
+                "bottom": 0
+              },
+              "centerInvisible": false,
+              "fillDir": 0,
+              "fillAmount": 0,
+              "invertFill": false,
+              "flip": 0,
+              "gradient": 0,
+              "gradientTop": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 1
+              },
+              "gradientBottom": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 1
+              }
+            }
+          },
+          "ecaScripts": [],
+          "ecaProps": {},
+          "componentList": [],
+          "entityTagData": {
+            "tagPointers": []
+          },
+          "m_ApplyingPreviewAnimation": false
+        },
+        {
+          "_entityName": "ZAREK Emblem",
+          "_tag": {
+            "type": "UIImageEntity",
+            "resourceId": ""
+          },
+          "_entityId": "Yl3QtMma",
+          "children": [],
+          "prefabVariant": null,
+          "activeValue": {
+            "selfValue": true,
+            "valueTag": "activeValue"
+          },
+          "unlockedValue": null,
+          "editorLockValue": false,
+          "editorVisibleValue": true,
+          "propsData": {
+            "activeSelf": true,
+            "transform": {
+              "rotate": 0,
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": -145,
+                "y": 0
+              },
+              "sizeDelta": {
+                "x": 46,
+                "y": 46
+              }
+            },
+            "alpha": 100,
+            "priority": 3,
+            "image": {
+              "source": {
+                "fileId": "ghbahqlsd7-mwbowxmz-gly3kdc49ql",
+                "filePath": "Assets\\Resources\\zarek-z-logo-source.png",
+                "_tag": {
+                  "type": "GFileRefer"
+                },
+                "fileType": "texture"
+              },
+              "color": "#FFFFFF",
+              "reverse": {
+                "x": false,
+                "y": false
+              },
+              "isApplyAnimation": false,
+              "animationAtlasID": null,
+              "animationFrameRate": 30,
+              "animationLoop": true,
+              "fillType": 0,
+              "slicedBorder": {
+                "left": 0,
+                "right": 0,
+                "top": 0,
+                "bottom": 0
+              },
+              "tiledBorder": {
+                "left": 0,
+                "right": 0,
+                "top": 0,
+                "bottom": 0
+              },
+              "centerInvisible": false,
+              "fillDir": 0,
+              "fillAmount": 0,
+              "invertFill": false,
+              "flip": 0,
+              "gradient": 0,
+              "gradientTop": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 1
+              },
+              "gradientBottom": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 1
+              }
+            }
+          },
+          "ecaScripts": [],
+          "ecaProps": {},
+          "componentList": [],
+          "entityTagData": {
+            "tagPointers": []
+          },
+          "m_ApplyingPreviewAnimation": false
+        },
+        {
+          "_entityName": "ZAREK Title",
+          "_tag": {
+            "type": "UITextEntity",
+            "resourceId": ""
+          },
+          "_entityId": "HNuGn7pl",
+          "children": [],
+          "prefabVariant": null,
+          "activeValue": {
+            "selfValue": true,
+            "valueTag": "activeValue"
+          },
+          "unlockedValue": null,
+          "editorLockValue": false,
+          "editorVisibleValue": true,
+          "propsData": {
+            "activeSelf": true,
+            "transform": {
+              "rotate": 0,
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 34,
+                "y": 10
+              },
+              "sizeDelta": {
+                "x": 270,
+                "y": 28
+              }
+            },
+            "alpha": 100,
+            "priority": 4,
+            "text": {
+              "value": "ZAREK",
+              "key": "",
+              "font": "Default",
+              "fontSize": 25,
+              "fontStyle": {
+                "bold": false,
+                "italic": false,
+                "underline": false
+              },
+              "color": "#F4FAFF",
+              "alignment": {
+                "h": "left",
+                "v": "middle"
+              },
+              "lineSpacing": 0,
+              "background": false,
+              "backgroundColor": "#e7b200",
+              "overflow": 0,
+              "backgroundRGBA": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              },
+              "shadow": true,
+              "shadowColor": "#008CFF",
+              "shadowOffset": {
+                "x": 1,
+                "y": 1
+              },
+              "shadowAlpha": 1,
+              "gradient": 0,
+              "gradientTop": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 1
+              },
+              "gradientBottom": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 1
+              },
+              "outline": false,
+              "outlineColor": "#000000",
+              "outlineAlpha": 1,
+              "outlineOffset": 1
+            }
+          },
+          "ecaScripts": [],
+          "ecaProps": {},
+          "componentList": [],
+          "entityTagData": {
+            "tagPointers": []
+          }
+        },
+        {
+          "_entityName": "ENDZONE PRO Subtitle",
+          "_tag": {
+            "type": "UITextEntity",
+            "resourceId": ""
+          },
+          "_entityId": "kqnG8ZVj",
+          "children": [],
+          "prefabVariant": null,
+          "activeValue": {
+            "selfValue": true,
+            "valueTag": "activeValue"
+          },
+          "unlockedValue": null,
+          "editorLockValue": false,
+          "editorVisibleValue": true,
+          "propsData": {
+            "activeSelf": true,
+            "transform": {
+              "rotate": 0,
+              "anchorMin": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchorMax": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "pivot": {
+                "x": 0.5,
+                "y": 0.5
+              },
+              "anchoredPosition": {
+                "x": 34,
+                "y": -14
+              },
+              "sizeDelta": {
+                "x": 270,
+                "y": 20
+              }
+            },
+            "alpha": 100,
+            "priority": 4,
+            "text": {
+              "value": "ENDZONE PRO  •  DOMINA LA ÚLTIMA ZONA",
+              "key": "",
+              "font": "Default",
+              "fontSize": 13,
+              "fontStyle": {
+                "bold": false,
+                "italic": false,
+                "underline": false
+              },
+              "color": "#00D9FF",
+              "alignment": {
+                "h": "left",
+                "v": "middle"
+              },
+              "lineSpacing": 0,
+              "background": false,
+              "backgroundColor": "#e7b200",
+              "overflow": 0,
+              "backgroundRGBA": {
+                "r": 0,
+                "g": 0,
+                "b": 0,
+                "a": 0
+              },
+              "shadow": false,
+              "shadowColor": "#000000",
+              "shadowOffset": {
+                "x": 1,
+                "y": 1
+              },
+              "shadowAlpha": 1,
+              "gradient": 0,
+              "gradientTop": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 1
+              },
+              "gradientBottom": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 1
+              },
+              "outline": false,
+              "outlineColor": "#000000",
+              "outlineAlpha": 1,
+              "outlineOffset": 1
+            }
+          },
+          "ecaScripts": [],
+          "ecaProps": {},
+          "componentList": [],
+          "entityTagData": {
+            "tagPointers": []
+          }
+        }
+      ],
+      "prefabVariant": null,
+      "activeValue": {
+        "selfValue": true,
+        "valueTag": "activeValue"
+      },
+      "unlockedValue": null,
+      "editorLockValue": false,
+      "editorVisibleValue": true,
+      "propsData": {
+        "activeSelf": true,
+        "transform": {
+          "rotate": 0,
+          "anchorMin": {
+            "x": 0,
+            "y": 1
+          },
+          "anchorMax": {
+            "x": 0,
+            "y": 1
+          },
+          "pivot": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "anchoredPosition": {
+            "x": 195,
+            "y": -40
+          },
+          "sizeDelta": {
+            "x": 370,
+            "y": 56
+          }
+        },
+        "alpha": 100,
+        "priority": 5
+      },
+      "ecaScripts": [],
+      "ecaProps": {},
+      "componentList": [],
+      "entityTagData": {
+        "tagPointers": []
+      },
+      "aiPrompt": "Persistent ZAREK Endzone Pro gameplay brand header"
     }
   ],
   "prefabVariant": null,
@@ -1049,11 +1712,11 @@
         "y": 0.5
       },
       "anchoredPosition": {
-        "x": 667,
+        "x": 750,
         "y": 375
       },
       "sizeDelta": {
-        "x": 1334,
+        "x": 1500,
         "y": 750
       }
     },
@@ -1075,4 +1738,4 @@
   "discriminator": "ISceneLike",
   "version": 3
 }
-//"{FE:{"v":"1.15.3997714","c":{"FF":5001},"s":100}
+//"{FE:{"v":"1.19.4689915","c":{"FF":5001},"s":100}

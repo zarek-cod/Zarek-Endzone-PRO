@@ -26,7 +26,6 @@ import "../GlobalData/CombatRoundCounter.fcg" as CombatRoundCounter
 import "../GlobalData/SpawnPoints.fcg" as SpawnPoints
 import "../GlobalManager/GlobalPreparationPhaseManager.fcg" as GlobalPreparationPhaseManager
 import "../GlobalData/TargetAndCombatTimer.fcg" as TargetAndCombatTimer
-import "../GlobalData/PlayersTimerUI.fcg" as PlayersTimerUI
 import "../GlobalData/PlayersTutorial.fcg" as PlayersTutorial
 import "../GlobalData/PlayersShopIcon.fcg" as PlayersShopIcon
 import Res from "EditorGenLib.fcc"
@@ -99,12 +98,14 @@ graph GlobalUIManager {
     @param player: The player entity to create the HUD for
     */
     async func CreateGlobalOpeningHUD(player entity<Player>){
+        WaitForMillisecond(2000) // Let the client finish loading before showing the ZAREK opening
         if globalEntity<Global>.CurrentPhaseIndex == EPhase.Preparation || globalEntity<Global>.CurrentPhaseIndex == EPhase.Start{
             CreateBuiltInUI(out var createdHUD, player, EResInternalHud.OpeningBannerHud as BuiltInUIType)
-            createdHUD<UIOpeningBanner>.Title = LocString{"GAME_NAME", List<string>{}}
-            createdHUD<UIOpeningBanner>.Description = LocString{"GAME_DESCRIPTION", List<string>{}}
-            createdHUD<UIOpeningBanner>.Icon = EResSprite.logo
-            WaitForMillisecond(8000)
+            createdHUD<UIOpeningBanner>.EnableLocalization = false
+            createdHUD<UIOpeningBanner>.Title = "ZAREK ENDZONE PRO"
+            createdHUD<UIOpeningBanner>.Description = "DOMINA LA ÚLTIMA ZONA"
+            createdHUD<UIOpeningBanner>.Icon = EResSprite.ZarekLogo
+            WaitForMillisecond(3000) // ZAREK: keep the premium opening concise
             DestroyBuiltInUI(createdHUD)
         }
     }
@@ -150,10 +151,10 @@ graph GlobalUIManager {
             }
             var aliveWidgetList = GetChildren(aliveWidget)
             // LogError(aliveWidgetList)
-            w<UIWidgetImage>.Color = #FFB400
-            // scoreW<UIWidgetImage>.Color = #FFB400
+            w<UIWidgetImage>.Color = #008CFF
+            // scoreW<UIWidgetImage>.Color = #008CFF
             for index, widget in aliveWidgetList {
-                widget<UIWidgetImage>.Color = #FFB400
+                widget<UIWidgetImage>.Color = #00D9FF
                 // widget<UIWidget>.Active = false
             }
             // LogInfo("<GlobalUIManager.fcg>: Registered mini scoreboard for player: " + player<Entity>.Name) // Debug Info
@@ -314,14 +315,14 @@ graph GlobalUIManager {
                             }
                         }
                         if team == player<Player>.HostTeam {
-                            if rankBgWidget<UIWidgetImage>.Color != #FFB400{
-                                start globalEntity<GlobalAnimationManager>.DOChangeColor(rankBgWidget, #9C9C9C, #D68E00, 500)
+                            if rankBgWidget<UIWidgetImage>.Color != #008CFF{
+                                start globalEntity<GlobalAnimationManager>.DOChangeColor(rankBgWidget, #9C9C9C, #008CFF, 500)
                             }
-                            if nameBgWidget<UIWidgetImage>.Color != #FFB400{
-                                start globalEntity<GlobalAnimationManager>.DOChangeColor(nameBgWidget, #363636, #D68E00, 500)
+                            if nameBgWidget<UIWidgetImage>.Color != #008CFF{
+                                start globalEntity<GlobalAnimationManager>.DOChangeColor(nameBgWidget, #363636, #008CFF, 500)
                             }
-                            if pointBgWidget<UIWidgetImage>.Color != #FFB400 {
-                                start globalEntity<GlobalAnimationManager>.DOChangeColor(pointBgWidget, #9C9C9C, #D68E00, 500)
+                            if pointBgWidget<UIWidgetImage>.Color != #008CFF {
+                                start globalEntity<GlobalAnimationManager>.DOChangeColor(pointBgWidget, #9C9C9C, #008CFF, 500)
                             }
                         } else {
                             rankBgWidget<UIWidgetImage>.Color = #9C9C9C// Set other teams to white
@@ -415,12 +416,12 @@ graph GlobalUIManager {
                     }
                     nameWidget<UIWidgetLabel>.Content = LocString{"TEAM", List<string>{ToString(team<Team>.TeamSeq)}} // Use localization for team names
                     if team == player<Player>.HostTeam {
-                        start globalEntity<GlobalAnimationManager>.DOChangeColor(rankBgWidget, #9C9C9C, #D68E00, 500)
-                        start globalEntity<GlobalAnimationManager>.DOChangeColor(nameBgWidget, #363636, #D68E00, 500)
-                        start globalEntity<GlobalAnimationManager>.DOChangeColor(booyahBgWidget, #9C9C9C, #D68E00, 500)
-                        start globalEntity<GlobalAnimationManager>.DOChangeColor(killBgWidget, #9C9C9C, #D68E00, 500)
-                        start globalEntity<GlobalAnimationManager>.DOChangeColor(totalPointBgWidget, #363636, #D68E00, 500)
-                        start globalEntity<GlobalAnimationManager>.DOChangeColor(placementBgWidget, #9C9C9C, #D68E00, 500)
+                        start globalEntity<GlobalAnimationManager>.DOChangeColor(rankBgWidget, #9C9C9C, #008CFF, 500)
+                        start globalEntity<GlobalAnimationManager>.DOChangeColor(nameBgWidget, #363636, #008CFF, 500)
+                        start globalEntity<GlobalAnimationManager>.DOChangeColor(booyahBgWidget, #9C9C9C, #008CFF, 500)
+                        start globalEntity<GlobalAnimationManager>.DOChangeColor(killBgWidget, #9C9C9C, #008CFF, 500)
+                        start globalEntity<GlobalAnimationManager>.DOChangeColor(totalPointBgWidget, #363636, #008CFF, 500)
+                        start globalEntity<GlobalAnimationManager>.DOChangeColor(placementBgWidget, #9C9C9C, #008CFF, 500)
                         start globalEntity<GlobalAnimationManager>.DOChangeIncreaseAlpha(increaseKillWidget, team<TeamCurrentRoundData>.GetKillThisRound(), 2000, killWidget, killsPoints)
                         
                         if team == wonTeam {
@@ -452,7 +453,7 @@ graph GlobalUIManager {
                     // Update tooltips
                     var tooltipWidget entity<UIWidget>
                     tooltipWidget = GetWidgetFromCustomUI(player, ui, EResUIEsportFullScoreBoard.TooltipText)
-                    tooltipWidget<UIWidgetLabel>.Content = LocString{"FULL_SCBOARD_ROUND_COUNT", List<string>{ToString(globalEntity<CombatRoundCounter>.GetCount()), ToString(GlobalConfig.esportMaxRound)}} 
+                    tooltipWidget<UIWidgetLabel>.Content = "ZAREK ENDZONE PRO | RONDA " + ToString(globalEntity<CombatRoundCounter>.GetCount()) + "/" + ToString(GlobalConfig.esportMaxRound)
                     // if team == player<Player>.HostTeam {
                     //     start globalEntity<GlobalAnimationManager>.DOChangeIncreaseAlpha(increaseKillWidget, team<TeamCurrentRoundData>.GetKillThisRound(), 2000, killWidget, kills)
                     //     // start globalEntity<GlobalAnimationManager>.DOChangeIncreaseAlpha(increaseBooyahWidget, team<TeamCurrentRoundData>.GetBooyahThisRound(), 2000, booyahWidget, globalEntity<TeamData>.GetTeamWinningTimes(team))
@@ -536,6 +537,10 @@ graph GlobalUIManager {
     */
     async func CreateRoundInfoHUD(player entity<Player>){
         var currentCount = globalEntity<CombatRoundCounter>.GetCount() // Get the current round count
+        if List.Length(globalEntity<GlobalPreparationPhaseManager>.oldStagesList) == 0 {
+            LogError("<GlobalUIManager.fcg>: Cannot create round info before a stage is selected")
+            return
+        }
         var currentStageName = globalEntity<SpawnPoints>.GetNameForStage(globalEntity<GlobalPreparationPhaseManager>.oldStagesList[List.Length(globalEntity<GlobalPreparationPhaseManager>.oldStagesList) - 1]) // Get the name of the current stage
         if !Map.ContainKey(roundInfoUIDitct, player) {
             CreateBuiltInUI(out var createdUI, player, EResInternalHud.RoundInfoHud as BuiltInUIType)
@@ -626,6 +631,8 @@ graph GlobalUIManager {
     */
     func CreateEndGameHUD(player entity<Player>, playerTeam entity<Team>, resultStatus int, teamSorted List<entity<Team>>){
         CreateBuiltInUI(out var createdUI2, player, EResInternalHud.MultiTeamMatchResultHud as BuiltInUIType)
+        createdUI2<UIMultiTeamResultPanel>.MatchTitleLeft = "ZAREK ENDZONE PRO"
+        createdUI2<UIMultiTeamResultPanel>.MatchTitleRight = "DOMINA LA ÚLTIMA ZONA"
         var teamNameList = List<string>{}
         var pointList = List<int>{}
         for index, team in teamSorted {

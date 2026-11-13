@@ -1,0 +1,147 @@
+# Diseño visual — ZAREK ENDZONE PRO
+
+## Estado
+
+La identidad ZAREK ya está integrada en recursos reales de Craftland Studio mediante su MCP oficial. El emblema canónico fue importado y registrado, los marcadores y el acceso a la tienda recibieron la paleta azul/cian, y el escenario contiene un letrero tridimensional `ZAREK ENDZONE PRO` en cian, sin colisión.
+
+Las imágenes de concepto permanecen como referencias. No sustituyen widgets interactivos ni datos reales: la integración conserva los controles, callbacks, columnas y lógica existentes.
+
+## Evolución 2.0 — integración jugable
+
+La marca persistente ya forma parte de `GameInfo.ui`, no de una captura conceptual. El encabezado superior izquierdo combina el sprite registrado `ZarekLogo`, una placa `#080D18`, acento eléctrico `#00D9FF`, título `ZAREK` y subtítulo `ENDZONE PRO • DOMINA LA ÚLTIMA ZONA`. El HUD real conserva el temporizador, la ronda, el escenario y el marcador competitivo.
+
+El monumento de escena fue refinado como una composición vertical legible:
+
+```text
+ZAREK
+ENDZONE PRO
+DOMINA LA ULTIMA ZONA
+```
+
+La entidad oficial `TextEntity` se llama `ZAREK Sky Monument`, está a `y = 130`, usa billboard, no tiene collider y no reemplaza ningún elemento jugable. Craftland Studio continúa mostrando un diagnóstico de editor para ese preset (`Find no ecaItem ... TextEntity`); el cliente sí supera la carga y entra al mapa, por lo que el diagnóstico está documentado como no bloqueante y pendiente de corrección del preset/editor.
+
+## Zonas competitivas por escenario
+
+Las tres operaciones jugables duran 60 segundos: contracción inicial, desplazamiento y cierre final a cero. El Workflow conserva un margen de 5 segundos en `Combat` y `MovingSafeZone` (65 segundos por fase) y una preparación de 60 segundos. La selección evita repetir escenario durante las tres rondas. No se añadió una pausa nueva porque ese margen ya evita que la fase corte una operación de 60 segundos.
+
+| # | Escenario (`STAGE_n`) | Antes (inicio/1.er cierre/mov.) | XL (inicio/1.er cierre/mov.) | Final |
+| ---: | --- | ---: | ---: | ---: |
+| 1 | Torre del Reloj | 48 / 28 / 20 m | 90 / 58 / 40 m | 0 m |
+| 2 | Cementerio | 50 / 29 / 21 m | 90 / 58 / 40 m | 0 m |
+| 3 | Cima | 58 / 33 / 25 m | 95 / 63 / 44 m | 0 m |
+| 4 | Hangar | 55 / 32 / 24 m | 90 / 60 / 42 m | 0 m |
+| 5 | Katulistiwa | 54 / 31 / 23 m | 85 / 58 / 40 m | 0 m |
+| 6 | Observatorio | 56 / 32 / 24 m | 80 / 55 / 38 m | 0 m |
+| 7 | Molino | 60 / 33 / 25 m | 75 / 50 / 35 m | 0 m |
+| 8 | Astillero | 55 / 31 / 23 m | 90 / 62 / 43 m | 0 m |
+| 9 | Ciudad del Cabo | 48 / 28 / 20 m | 85 / 58 / 40 m | 0 m |
+| 10 | Ciudad del Cabo | 48 / 28 / 20 m | 80 / 55 / 38 m | 0 m |
+| 11 | Franja Bimasakti | 52 / 30 / 22 m | 80 / 55 / 38 m | 0 m |
+
+Se muestrearon 176 puntos radiales a 75 y 100 metros y 440 puntos alrededor de los 55 endpoints de movimiento. Todos devolvieron terreno válido; no hubo muestras de mar ni raycasts sin suelo. Los escenarios 6, 7 y 11 usan el extremo bajo del rango por su mayor desnivel. Los centros y endpoints existentes se conservaron porque la medición no justificó alterar escena ni Workflow.
+
+El HUD publica los estados `ZONA: PREPARADA`, `ZONA: CONTRAYENDO`, `ZONA: EN MOVIMIENTO`, `ZONA FINAL: CERRANDO` y `MUERTE SUBITA` mediante widgets ya registrados.
+
+## ZAREK GLOO STORM
+
+La dirección final usa azul eléctrico dominante, hielo azul profundo, grietas cian controladas y una `Z` central de gran tamaño. No contiene animales, caras, mascotas ni personajes. Las fuentes originales frontal, posterior, logotipo y preview están en `Design/ZarekGlooStorm/`.
+
+Craftland expone en `IceWall` una `WeaponSkinID` (`Skin`) y la prioridad de configuración del jugador, pero el catálogo de 187 `weaponskin` accesible al proyecto es exclusivamente oficial y de solo lectura. El MCP no ofrece una operación compatible para convertir una textura importada en `WeaponSkinID`; por eso no se presenta el recurso como una skin oficial personalizada.
+
+La alternativa soportada es `ZarekGlooStorm_Overlay.prefab`: dos planos visuales, frontal y posterior, con materiales móviles `BRMobile/UGC/AlphaBlendColor`, sin `Collider`, `ColliderShape` ni `Rigidbody`. `PlayerController.OnUseConsumable` crea el prefab al desplegar `EResItem.GlooWall` y lo parenta a la pared real. Así se conserva la entidad oficial responsable de salud, dimensiones, colisión, daño, destrucción, colocación y cantidad de inventario.
+
+Estado: integrado y compilado; pendiente de prueba visual runtime y multicliente. La automatización nativa de Windows no estuvo disponible en la sesión final, por lo que no se afirma que la sincronización visual o la orientación frontal/posterior estén aprobadas en cliente.
+
+## Sistema visual
+
+| Rol | Color | Uso propuesto |
+| --- | --- | --- |
+| Fondo principal | `#080D18` | paneles y superficies profundas |
+| Fondo secundario | `#071B3A` | filas, contenedores y contraste |
+| Azul ZAREK | `#008CFF` | selección, bordes y marca principal |
+| Cian de energía | `#00D9FF` | vivos, acentos y luz secundaria |
+| Blanco frío | `#F4FAFF` | datos y títulos |
+
+La identidad usa una `Z` angular de lectura inmediata. El marcador prioriza datos competitivos y mantiene las tres filas que existen actualmente en los recursos UI registrados. No se alteran puntuación, rondas, equipos ni lógica de juego.
+
+## Fuentes preparadas
+
+| Archivo | Dimensiones | Propósito | Estado |
+| --- | ---: | --- | --- |
+| `Design/ZarekBrand/zarek-z-logo-source.png` | 1536×1024, ARGB | emblema Z con transparencia | fuente canónica importada y registrada como `ZarekLogo` |
+| `Design/ZarekBrand/zarek-sky-sign-concept.png` | 1672×941 | referencia del letrero celeste `ZAREK` | concepto, no integrado |
+| `Design/ZarekBrand/zarek-scoreboard-concept.png` | 1672×941 | referencia del marcador de tres filas | concepto, no integrado |
+| `Design/ZarekBrand/zarek-final-screen-concept.png` | 1672×941 | referencia de pantalla de campeones | concepto, no integrado |
+| `Design/ZarekBrand/zarek-armory-concept.png` | 1672×941 | referencia de tienda `ZAREK ARMORY` | concepto, no integrado |
+| `Design/ZarekGlooStorm/ZarekGlooStorm_Front.png` | 1774×887, ARGB | arte original frontal | importado como textura funcional del overlay |
+| `Design/ZarekGlooStorm/ZarekGlooStorm_Back.png` | 1773×887, ARGB | arte original posterior | importado como textura funcional del overlay |
+| `Design/ZarekGlooStorm/ZarekGlooStorm_Logo.png` | 1536×1024, ARGB | emblema canónico Z | fuente de diseño |
+| `Design/ZarekGlooStorm/ZarekGlooStorm_Preview.png` | 1672×941 | presentación conceptual | referencia, no usada como skin funcional |
+
+Las fuentes visuales se generaron con la herramienta integrada de generación de imágenes y no reutilizan arte de terceros. En el bloque de marca general, solo el emblema canónico se convirtió en activo del juego; los otros cuatro archivos siguen siendo mockups. En el bloque Gloo, únicamente las caras frontal y posterior se importaron como texturas del overlay; el preview permanece fuera de `Assets/`.
+
+## Cambios FC aplicados
+
+En `GlobalUIManager.fcg`:
+
+- la presentación inicial dura 3 segundos en vez de 8;
+- la creación del banner espera 2 segundos después de `OnPlayerJoin` para no consumirse detrás de la pantalla de carga;
+- la apertura usa el título `ZAREK ENDZONE PRO`, la descripción `DOMINA LA ÚLTIMA ZONA` y el sprite registrado `EResSprite.ZarekLogo`;
+- la escuadra local usa azul eléctrico y cian en el minimarcador;
+- la fila local de los marcadores BOOYAH y ESPORT cambia del dorado anterior a `#008CFF`;
+- el tooltip del marcador ESPORT muestra `ZAREK ENDZONE PRO | RONDA n/3` usando un widget ya registrado;
+- la pantalla final muestra `ZAREK ENDZONE PRO` y `DOMINA LA ÚLTIMA ZONA` sin sustituir el marcador ni su lógica.
+
+Estos cambios reutilizan propiedades y widgets confirmados por los símbolos actuales. No crean asset IDs, widgets ni APIs nuevos.
+
+## Integración realizada en Craftland Studio
+
+- El MCP oficial respondió y se leyó `instructions://index` antes de modificar activos.
+- `Assets/Resources/zarek-z-logo-source.png` fue importado y registrado como sprite `ZarekLogo`; el símbolo generado `EResSprite.ZarekLogo` fue verificado sin editar archivos generados.
+- `MiniScoreBoard.ui`, `FullScoreBoard.ui` y `EsportFullScoreBoard.ui` conservan sus widgets y datos, con fondos `#080D18` / `#071B3A` y acentos `#008CFF` / `#00D9FF`.
+- `ShopIcon.ui` conserva su único callback `OnPress`, usa el emblema registrado y muestra `ZAREK ARMORY`.
+- `New Scene.scene` contiene una sola entidad de texto `ZAREK Sky Sign`, con contenido `ZAREK ENDZONE PRO`, color `#00D9FF`, profundidad `1.1`, ancho `42` y tamaño de fuente `150`.
+- El rótulo permanece por encima del área jugable, sin collider ni obstrucción de spawns o zonas. El acabado cian fue inspeccionado visualmente y guardado en el editor.
+- Una ejecución anterior cargó el HUD y las tres rondas; el intento posterior al acabado final quedó detenido al 0 %, por lo que esa comprobación runtime sigue pendiente.
+
+`key.csv` conserva los textos originales porque el MCP disponible no expone edición segura de filas de localización. La apertura y la pantalla final usan textos directos confirmados por FC; no se modificó el CSV serializado a mano.
+
+## Verificación visual pendiente
+
+1. Capturar la apertura de 3 segundos y comprobar título, descripción y emblema en una ejecución nueva.
+2. Abrir `ZAREK ARMORY`, comprobar el botón `OnPress` y validar el emblema en preparación.
+3. Mostrar los marcadores completo y ESPORT en varias resoluciones y revisar clipping, contraste y encabezado.
+4. Completar una partida de tres rondas para inspeccionar la pantalla final real.
+5. Repetir la carga del cliente y confirmar desde la cámara del jugador la legibilidad y no obstrucción del letrero celeste.
+
+## Criterios de aceptación runtime
+
+- El letrero es visible desde la arena sin tapar enemigos, zona ni HUD.
+- El emblema no se deforma y mantiene margen transparente.
+- El marcador sigue mostrando correctamente posición, escuadra, Booyah, kills y puntos.
+- `ZAREK ENDZONE PRO | RONDA n/3` no se recorta en resoluciones 16:9 y 16:10.
+- La fila propia se distingue sin reducir la legibilidad del texto.
+- La apertura desaparece a los 3 segundos y no bloquea controles.
+- No aparecen errores nuevos de asset, script, attachment ni widget; el diagnóstico del editor `Find no ecaItem` asociado al preset `TextEntity` debe revisarse por separado.
+
+## Prompts finales de las fuentes
+
+### Emblema
+
+`Monograma Z angular original para ZAREK ENDZONE PRO, vectorial, azul eléctrico y cian, silueta fuerte, fondo realmente transparente, sin armas, escudos, marcas ajenas ni watermark.`
+
+### Letrero celeste
+
+`Concepto 16:9 de arena competitiva al anochecer con un gran letrero flotante que diga exactamente ZAREK una sola vez, emblema Z integrado, geometría modular realizable y paleta azul/cian.`
+
+### Marcador
+
+`Mockup 16:9 de marcador premium ZAREK ENDZONE PRO con exactamente tres filas, RONDA 2/3 y columnas POS, ESCUADRA, BOOYAH, KILLS y PTS, alto contraste y paleta azul/cian.`
+
+### Pantalla final
+
+`Mockup 16:9 de pantalla final ZAREK ENDZONE PRO con CAMPEONES, EQUIPO 1, POSICIÓN #1, 32 PTS y 8 KILLS, diseño geométrico azul/cian y sin marcas ajenas.`
+
+### ZAREK ARMORY
+
+`Mockup 16:9 de tienda ZAREK ARMORY con pestañas ARMAS, EQUIPO y UTILIDAD, cuatro tarjetas, panel SELECCIONADO y botón COMPRAR, interfaz práctica azul/cian.`

@@ -762,6 +762,18 @@
           },
           "scriptName": "Mini_Tatsuya",
           "children": []
+        },
+        {
+          "refer": {
+            "fileId": "g42604hro3-mwep6rp0-spem5p30wbq",
+            "filePath": "Assets\\ZarekGlooStorm\\ZarekGlooStorm_Overlay.prefab",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "prefab"
+          },
+          "scriptName": "ZarekGlooStormOverlay",
+          "children": []
         }
       ]
     },
@@ -979,6 +991,18 @@
             "fileType": "texture"
           },
           "scriptName": "SmallWindow",
+          "children": []
+        },
+        {
+          "refer": {
+            "fileId": "ghbahqlsd7-mwbowxmz-gly3kdc49ql",
+            "filePath": "Assets\\Resources\\zarek-z-logo-source.png",
+            "_tag": {
+              "type": "GFileRefer"
+            },
+            "fileType": "texture"
+          },
+          "scriptName": "ZarekLogo",
           "children": []
         }
       ]
@@ -1623,4 +1647,4 @@
   },
   "children": []
 }
-//"{FE:{"v":"0.2.4448847","c":{"FF":5001},"s":100}
+//"{FE:{"v":"1.19.4689915","c":{"FF":5001},"s":100}

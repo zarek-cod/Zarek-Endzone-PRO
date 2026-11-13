@@ -120,6 +120,15 @@ graph TargetAndCombatTimer {
         }
     }
 
+    // Keep the live HUD explicit about the current zone operation.
+    func UpdateZoneStateForAll(zoneState string) {
+        for player, ui in combatStageDict {
+            if ui != nil {
+                ui<UIWidgetLabel>.Content = zoneState
+            }
+        }
+    }
+
     /*
     Update the round count info for the player.
     USE IN ESPORT MODE ONLY

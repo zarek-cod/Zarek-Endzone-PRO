@@ -34,13 +34,23 @@ graph GlobalCombatManager {
         if phase<Phase>.Index == EPhase.__Before6Combat__ {
             List.Clear(teamRanking)
         }
+        if phase<Phase>.Index == EPhase.FirstShrinkPrep {
+            globalEntity<TargetAndCombatTimer>.UpdateZoneStateForAll("ZONA: PREPARADA")
+        }
         if phase<Phase>.Index == EPhase.Combat {
+            globalEntity<TargetAndCombatTimer>.UpdateZoneStateForAll("ZONA: CONTRAYENDO")
             globalEntity<TargetAndCombatTimer>.StartTimer(phase<Phase>.Duration)
         }
         if phase<Phase>.Index == EPhase.MovingSafeZone {
+            globalEntity<TargetAndCombatTimer>.UpdateZoneStateForAll("ZONA: EN MOVIMIENTO")
             globalEntity<TargetAndCombatTimer>.StartTimer(phase<Phase>.Duration)
         }
         if phase<Phase>.Index == EPhase.LastSafeZone {
+            globalEntity<TargetAndCombatTimer>.UpdateZoneStateForAll("ZONA FINAL: CERRANDO")
+            globalEntity<TargetAndCombatTimer>.StartTimer(phase<Phase>.Duration)
+        }
+        if phase<Phase>.Index == EPhase.SuddenDeath {
+            globalEntity<TargetAndCombatTimer>.UpdateZoneStateForAll("MUERTE SUBITA")
             globalEntity<TargetAndCombatTimer>.StartTimer(phase<Phase>.Duration)
         }
     }
